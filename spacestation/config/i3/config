@@ -213,7 +213,7 @@ exec --no-startup-id "pulseaudio --start"
 # start wal and set themes
 #exec wal -i "$(< "${HOME}/.cache/wal/wal")"
 # USE WPG INSTEAD OF WAL
-exec wpg -s happy_place.png
+exec wpg -r -s floating_gnu.png
 # nextcloud
 exec --no-startup-id nextcloud
 # Start Telegram
@@ -224,5 +224,3 @@ exec --no-startup-id keepassxc
 exec mpd
 # Start MPDscribble
 exec mpdscribble
-# Start dunst
-exec dunst
