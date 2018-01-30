@@ -16,13 +16,13 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " use color scheme
-Plugin 'morhetz/gruvbox'
+" Plugin 'morhetz/gruvbox'
 
 " use nice airline plugin
-Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline'
 
 " use airline themes
-Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'vim-airline/vim-airline-themes'
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -59,9 +59,9 @@ filetype plugin indent on    " required
 " Enable syntax based on contents file-type + set colorscheme
 " set termguicolors
 syntax enable
-let g:airline_powerline_fonts = 1
-let g:gruvbox_termcolors=16
-colorscheme gruvbox
+"let g:airline_powerline_fonts = 1
+"let g:gruvbox_termcolors=16
+"colorscheme gruvbox
  
 " Work better on i3 for lots of files open 
 set hidden

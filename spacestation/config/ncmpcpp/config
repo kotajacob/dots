@@ -180,7 +180,7 @@ song_list_format = "{{%a - %t}|{%f}}{$R%l}"
 song_status_format = "{{%a{ $2//$9 %b{, %y}} $2//$9 }{%t$/b}}|{$b%f$/b}"
 #
 #song_library_format = {{{%t} - %a{ "%b"{ (%y)}}}}|{%f}
-song_library_format = {{%a - %t} (%b)}|{%f}
+song_library_format = {%n - {%t}}
 #
 #
 #alternative_header_first_line_format = $b$1$aqqu$/a$9 {%t}|{%f} $1$atqq$/a$9$/b
@@ -418,7 +418,8 @@ follow_now_playing_lyrics = no
 #
 #mouse_support = yes
 #
-#mouse_list_scroll_whole_page = yes
+mouse_list_scroll_whole_page = no 
+lines_scrolled = "1"
 #
 #empty_tag_marker = <empty>
 #

@@ -1,5 +1,4 @@
-# i3 config file kota 1.1
-
+# i3 config file kota 1.3
 
 set $mod Mod4
 set $altmod Mod1
@@ -20,7 +19,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show run -modi run
 
 # take a screenshot
-bindsym $mod+s exec ~/bin/stpb
+bindsym $mod+s exec /home/kota/bin/stpb
 
 # switch to urgent window
 bindsym $mod+a [urgent=latest] focus
@@ -214,7 +213,7 @@ exec --no-startup-id "pulseaudio --start"
 # start wal and set themes
 #exec wal -i "$(< "${HOME}/.cache/wal/wal")"
 # USE WPG INSTEAD OF WAL
-exec bash ~/.wallpapers/wp_init.sh
+exec wpg -r -s floating_gnu.png
 # nextcloud
 exec --no-startup-id nextcloud
 # Start Telegram

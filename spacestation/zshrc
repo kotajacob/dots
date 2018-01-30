@@ -84,20 +84,20 @@ export EDITOR='vim'
 # For a full list of active aliases, run `alias`.
 #
 
-# Aliases
+### Aliases
 alias zr="vim ~/.zshrc" # edit this file
 alias cr="cat ~/.zshrc" # print this file
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
 
-# Changed commands
+### Changed commands
 alias wget='wget -c'
 alias mkdir='mkdir -pv'
 alias ping='ping -c 5'
 alias shutdown='shutdown -P -h now' # shutdown turns off computer
 
 
-# Short cuts
+### Short cuts
 alias rc='rsync'
 alias ..='cd ..'
 alias c='clear'
@@ -113,7 +113,7 @@ alias nc='ncdu' # show disk space stuff
 alias please='sudo $(history -p !!)' # fancy last command as sudo
 
 
-# New commands
+### New commands
 alias pb='curl -F c=@- https://ptpb.pw < ' # pb a file and print url
 alias pbv='vim tmp.txt && curl -F c=@- https://ptpb.pw < tmp.txt && rm tmp.txt' # open a tmp file in vim, upload to pb + print url, remove file
 alias path='echo -e ${PATH//:/\\n}' # print path variable
@@ -135,7 +135,7 @@ alias weather2='curl -s wttr.in/Jonestown | head -17 | tail -10' # print weather
 alias gtfo='find . -mindepth 2 -type f -print -exec mv {} . \;' # WARNING: search into each subdir and copy all files to the dir you're currently in
 
 
-# Launch Games
+### Launch Games
 alias te_minecraft="java -jar /home/kota/bin/te_minecraft.jar"
 alias winsteam="wine '/home/kota/.wine/drive_c/Program Files (x86)/Steam/Steam.exe'"
 alias steam="steam-native"
@@ -145,7 +145,7 @@ alias bird="love '/home/kota/bin/bird.love'"
 alias sims3="wine '/home/kota/.wine/drive_c/Program Files (x86)/Electronic Arts/The Sims 3/Game/Bin/TS3.exe'"
 alias rollercoaster="wine '/home/kota/.wine/drive_c/GOG Games/RollerCoaster Tycoon 3 Platinum/RCT3plus.exe'"
 
-# Launch Programs
+### Launch Programs
 alias pcgen="java -jar '/home/kota/bin/pcgen/pcgen.jar'" # must be in the pcgen folder
 alias magicavoxel="wine '/home/kota/.wine/drive_c/Program Files/magicavoxel/MagicaVoxel.exe'"
 alias ali="python /home/kota/bin/ali.py"
