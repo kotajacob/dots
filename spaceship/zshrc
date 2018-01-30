@@ -91,7 +91,9 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 alias wget='wget -c'
 alias mkdir='mkdir -pv'
 alias ping='ping -c 5'
-alias shutdown='shutdown -P -h now' # shutdown turns off computer
+alias shitdown='sudo shutdown -P -h now' # shutdown turns off computer
+alias getfucked='sudo shutdown -P -h now' # shutdown turns off computer
+alias df='pydf -gh'
 
 
 ### Short cuts
