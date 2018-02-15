@@ -13,3 +13,5 @@ spacestation/config/mpd/log
 spacestation/config/mpd/pid
 spacestation/config/mpd/state
 
+# swap files
+*.swp

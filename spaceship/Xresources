@@ -13,6 +13,7 @@ URxvt.scrollBar: false
 ! Set terminal padding
 URxvt.internalBorder: 15
 
-! Set font to Terminess
+! Set font to Tewi
 URxvt.font: xft:tewi:style=Regular:pixelsize=11
 URxvt.boldFont: xft:tewi:style=Bold:pixelsize=11
+rofi.font: tewi 9
