@@ -26,11 +26,19 @@ type    = alias
 install = wine
 type    = alias
 
-## pychess ##
+## xboard ##
 install = package
 type    = package
 
 ## gnome-mines ##
+install = package
+type    = package
+
+## rogue ##
+install = package
+type    = package
+
+## nethack ##
 install = package
 type    = package
 

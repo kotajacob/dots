@@ -114,6 +114,7 @@ alias please='sudo $(history -p !!)' # fancy last command as sudo
 
 
 ### New commands
+alias pconf="firefox http://localhost:631"
 alias pb='curl -F c=@- https://ptpb.pw < ' # pb a file and print url
 alias pbv='vim tmp.txt && curl -F c=@- https://ptpb.pw < tmp.txt && rm tmp.txt' # open a tmp file in vim, upload to pb + print url, remove file
 alias path='echo -e ${PATH//:/\\n}' # print path variable
