@@ -21,7 +21,7 @@
 
 ## Spacestation  
 
-![1](https://ptpb.pw/mnSV.png)
+![1](https://ptpb.pw/x552.png)
 
 ( Name of my desktop )  
 
