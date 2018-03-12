@@ -1,10 +1,27 @@
 # `dots`
 
+## Spaceship
+
+![5](https://ptpb.pw/1-sf.png)
+
+( Name of my thinkpad t410s laptop )  
+
+`OS:    Debian Testing`  
+
+`CPU:   Intel i5 520M`  
+
+`WM:    i3`  
+
+`Term:  urxvt`  
+
+`Font:  tewi`  
+
+`Color: Nord`  
 
 
 ## Spacestation  
 
-![1](https://ptpb.pw/mnSV.png)
+![1](https://ptpb.pw/x552.png)
 
 ( Name of my desktop )  
 
@@ -20,26 +37,7 @@
 
 `Font:  Terminus`  
 
-`Color: Gruvbox`  
-
-
-## Spaceship
-
-![5](https://ptpb.pw/Um1E.png)
-
-( Name of my thinkpad t410s laptop )  
-
-`OS:    Debian Testing`  
-
-`CPU:   Intel i5 520M`  
-
-`WM:    i3`  
-
-`Term:  urxvt`  
-
-`Font:  tewi`  
-
-`Color: Dracula`  
+`Color: Modified Gruvbox`  
 
 
 ## Obscure
@@ -73,8 +71,7 @@
 `Font: FiraSans`  
 
 ## More Scrots
-https://ptpb.pw/nUI2.png
-![2](https://ptpb.pw/8MXN.png)
-![3](https://ptpb.pw/Isfw.png)
-![4](https://ptpb.pw/freh.png)
+![2](https://ptpb.pw/oIHy.png)
+![3](https://ptpb.pw/ljjH.png)
+![4](https://ptpb.pw/KweZ.png)
 
