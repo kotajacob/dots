@@ -20,6 +20,7 @@ bindsym $mod+d exec rofi -show run -modi run
 
 # take a screenshot
 bindsym $mod+s exec /home/kota/bin/stpb
+bindsym $mod+Shift+s exec scrot -q 100
 
 # switch to urgent window
 bindsym $mod+a [urgent=latest] focus
