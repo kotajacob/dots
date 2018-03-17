@@ -1,0 +1,223 @@
+# i3 config file kota 1.3
+
+set $mod Mod4
+set $altmod Mod1
+
+# font (i3bar will try to use this too btw)
+font pango:tewi 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec urxvt
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start rofi (a program launcher)
+bindsym $mod+d exec rofi -show run -modi run
+
+# take a screenshot
+bindsym $mod+s exec /home/kota/bin/stpb
+bindsym $mod+Shift+s exec scrot -q 100
+
+# switch to urgent window
+bindsym $mod+a [urgent=latest] focus
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# borders
+hide_edge_borders both
+new_window pixel 0
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+q layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+#bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# control mpd
+bindsym $mod+comma exec mpc prev
+bindsym $mod+period exec mpc next
+bindsym $mod+slash exec mpc toggle
+bindsym $mod+minus exec mpc volume -5
+bindsym $mod+equal exec mpc volume +5
+
+# variables for the workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# Set colors from Xresources
+set_from_resource $bg  i3wm.color0  #f0f0f0
+set_from_resource $fg  i3wm.color15 #f0f0f0
+set_from_resource $bg2 i3wm.color4  #f0f0f0
+set_from_resource $fg2 i3wm.color7  #f0f0f0
+set_from_resource $bg3 i3wm.color3  #f0f0f0
+set_from_resource $bg4 i3wm.color1  #f0f0f0
+
+# class                 border  backgr. text indicator child_border
+client.focused          $bg      $bg    $fg  $bg   $bg
+client.focused_inactive $bg      $bg    $fg  $bg   $bg
+client.unfocused        $bg      $bg    $fg  $bg   $bg
+client.urgent           $bg      $bg    $fg  $bg   $bg
+client.placeholder      $bg      $bg    $fg  $bg   $bg
+client.background       $bg
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Would you like to exit i3wm?' -b 'Yes dammit' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" 
+{
+		# distance variable bindings
+		set $distance 10
+
+		# resize bindings
+        bindsym Left resize shrink width $distance px or $distance ppt
+        bindsym Down resize grow height $distance px or $distance ppt
+        bindsym Up resize shrink height $distance px or $distance ppt
+        bindsym Right resize grow width $distance px or $distance ppt
+
+		# move bindings
+        bindsym a move left $distance px
+        bindsym s move down $distance px
+        bindsym w move up $distance px
+        bindsym d move right $distance px
+		bindsym x move absolute position center
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+ # bar 
+ # {
+ # 		# disable tray output
+ # 		tray_output none
+
+ #         colors
+ #         {
+ #                 background $bg
+ #                 statusline $fg
+ #                 separator $bg
+
+ #                 # class            border  backgr.  text
+ #                 focused_workspace  $bg2    $bg2     $fg
+ #                 active_workspace   $bg     $bg      $fg
+ #                 inactive_workspace $bg     $bg      $fg
+ #                 urgent_workspace   $bg4    $bg4     $fg
+ #         }
+
+ #         status_command i3status -c ~/.config/i3/i3status.conf
+ # }
+
+# exec bar
+
+# slowly fixing programs that open wrong
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [class="^Steam$" title="^Friends$"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event started"] floating enable
+for_window [class="^Steam$" title=".* CD key"] floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+for_window [class="Viewnior"] floating enable
+for_window [class="love"] floating enable
+for_window [class="Galculator"] floating enable
+
+# bind programs to workspaces
+assign [class="Keepassx"]  $ws10
+assign [class="Wire"]      $ws9
+assign [class="Mumble"]    $ws9
+assign [class="Nextcloud"] $ws8
+assign [class="Firefox"]   $ws1
+
+# start some programs
+# polybar
+exec polybar normal
+# pulseaudio
+exec --no-startup-id "pulseaudio --start"
+# start wal and set themes
+exec_always wal -i /home/kota/git/wallpapers/noisy_sunset.png 
+# restart dunst with colors
+exec_always /home/kota/bin/wal_post.sh
+# Start keepass
+exec --no-startup-id keepassx

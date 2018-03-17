@@ -1,0 +1,154 @@
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+  export ZSH=/home/kota/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="simple"
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git sudo)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+
+### Aliases
+alias zr="vim ~/.zshrc" # edit this file
+alias cr="cat ~/.zshrc" # print this file
+alias ohmyzsh="vim ~/.oh-my-zsh"
+
+
+### Changed commands
+alias wget='wget -c'
+alias mkdir='mkdir -pv'
+alias ping='ping -c 5'
+alias shitdown='sudo shutdown -P -h now' # shutdown turns off computer
+alias df='pydf -gh'
+
+
+### Short cuts
+alias lua="lua5.3"
+alias updoot="sudo apt update && sudo apt upgrade"
+alias rc='rsync'
+alias ..='cd ..'
+alias c='clear'
+alias vi='vim'
+alias calc='bc -i'
+alias data='vnstat -q' # print data usage if using vnstat
+alias power='sudo powertop'
+alias wifi='nmtui'
+alias mixer='pulsemixer' # change audio
+alias vn='viewnior'
+alias nc='ncdu' # show disk space stuff
+
+
+### New commands
+alias pconf="firefox http://localhost:631"
+alias wal-homepage="cp /home/kota/.cache/wal/colors.css /var/www/html/colors.css"
+alias pb='curl -F c=@- https://ptpb.pw < ' # pb a file and print url
+alias pbv='vim tmp.txt && curl -F c=@- https://ptpb.pw < tmp.txt && rm tmp.txt' # open a tmp file in vim, upload to pb + print url, remove file
+alias path='echo -e ${PATH//:/\\n}' # print path variable
+alias own='sudo chown -R kota:kota' # make yourself own a dir or file
+alias mod='sudo chmod -R 775' # give the dir or file some permissions
+alias si='du -sm * | sort -nr' # print directories by file size
+alias sir='du -sm .[!.]* * | sort -nr' # same but with hidden stuff too
+alias record='ffmpeg -f x11grab -video_size 1440x900 -r 25 -i $DISPLAY -f alsa -i default -c:v ffvhuff -c:a flac record.mkv' # screen record with ffmpeg to a file called record.mkv
+alias hlocate='find . -name ' # search for stuff
+alias free='df -h' # free hard drive space
+alias myip='curl http://ipecho.net/plain; echo' # print ip address
+alias weather='curl -s wttr.in/Jonestown | head -7' # print weather
+alias weather2='curl -s wttr.in/Jonestown | head -17 | tail -10' # print weather differently
+alias gtfo='find . -mindepth 2 -type f -print -exec mv {} . \;' # WARNING: search into each subdir and copy all files to the dir you're currently in
+
+
+### Launch Games
+alias bird="love '/home/kota/bin/bird.love'"
+alias minecraft="java -jar /home/kota/bin/minecraft.jar"
+alias te_minecraft="java -jar /home/kota/bin/te_minecraft.jar"
+alias doom="/home/kota/bin/gzdoom"
+alias rct2="openrct2"
+alias rct3="wine '/home/kota/.wine/drive_c/GOG Games/RollerCoaster Tycoon 3 Platinum/RCT3plus.exe'"
+alias cavestory="wine '/home/kota/.wine/drive_c/Program Files (x86)/Cave Story Deluxe/CaveStory/Doukutsu.exe'"
+alias dfs="/home/kota/bin/dfs/startlnp"
+
+### Launch Programs
+alias stpb="/home/kota/bin/stpb"
+alias ali="python /home/kota/bin/ali.py"
+alias pipes="bash /home/kota/bin/pipes.sh"
+alias color="bash /home/kota/bin/color.sh"
+alias kota="cat /home/kota/bin/kota"
+alias alarm="python3 /home/kota/bin/alarm.py"
+alias bat="python3 /home/kota/bin/bat.py"
+alias bright="sudo /home/kota/bin/bright.py"
+alias games="cat /home/kota/bin/games"
+alias vgames="vim /home/kota/bin/games"
+# alias pcgen="java -jar '/home/kota/bin/pcgen/pcgen.jar'" # must be in the pcgen folder

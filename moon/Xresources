@@ -1,0 +1,19 @@
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+
+! disable the motherfucking scrollbar
+URxvt.scrollBar: false
+
+! Set terminal padding
+URxvt.internalBorder: 15
+
+! Set font to Tewi
+URxvt.font: xft:tewi:style=Regular:pixelsize=11
+URxvt.boldFont: xft:tewi:style=Bold:pixelsize=11
+rofi.font: tewi 9

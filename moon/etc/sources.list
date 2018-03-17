@@ -1,0 +1,40 @@
+#------------------------------------------------------------------------------#
+#                   OFFICIAL DEBIAN REPOS                    
+#------------------------------------------------------------------------------#
+
+###### Debian Testing Repos
+deb http://ftp.us.debian.org/debian/ testing main contrib non-free
+deb http://security.debian.org/ testing/updates main
+
+###### Debian Unstable Repos
+deb http://ftp.us.debian.org/debian/ unstable main contrib non-free
+
+###### Debian Stable Repos
+deb http://ftp.us.debian.org/debian/ stable main contrib non-free
+
+
+#------------------------------------------------------------------------------#
+#                      UNOFFICIAL  REPOS                       
+#------------------------------------------------------------------------------#
+
+###### 3rd Party Binary Repos
+###Debian Multimedia
+deb [arch=amd64,i386] http://www.deb-multimedia.org testing main non-free
+
+###Papirus Icons
+deb http://ppa.launchpad.net/papirus/papirus/ubuntu xenial main
+
+###Bitmap Fonts
+deb [trusted=yes] https://helvetie.github.io/dpkgs stable/
+
+###Emojione Font
+deb http://ppa.launchpad.net/eosrei/fonts/ubuntu xenial main
+
+###Wire Messenger
+deb https://wire-app.wire.com/linux/debian stable main
+
+###Steam
+deb [arch=i386,amd64] http://repo.steampowered.com/steam/ precise steam
+
+###Love
+deb http://ppa.launchpad.net/bartbes/love-stable/ubuntu xenial main
