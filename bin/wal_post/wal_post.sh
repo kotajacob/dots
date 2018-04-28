@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 # Source generated colors.
 source "${HOME}/.cache/wal/colors.sh"
 
@@ -18,6 +19,13 @@ reload_dunst() {
 }
 
 main() {
+	# Run wal
+	wal -i /home/kota/git/wallpapers/frozen_river.png
+
+	# Run polybar
+	polybar normal
+
+	# Run dunst with new colors
     reload_dunst &
 }
 

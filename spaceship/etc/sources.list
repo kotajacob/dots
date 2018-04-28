@@ -4,13 +4,17 @@
 
 ###### Debian Testing Repos
 deb http://ftp.us.debian.org/debian/ testing main contrib non-free
-deb http://security.debian.org/ testing/updates main
+deb http://security.debian.org/ testing/updates main contrib
+deb-src http://ftp.us.debian.org/debian/ testing main contrib non-free
+deb-src http://security.debian.org/ testing/updates main contrib
 
 ###### Debian Unstable Repos
 deb http://ftp.us.debian.org/debian/ unstable main contrib non-free
+deb-src http://ftp.us.debian.org/debian/ unstable main contrib non-free
 
 ###### Debian Stable Repos
 deb http://ftp.us.debian.org/debian/ stable main contrib non-free
+deb-src http://ftp.us.debian.org/debian/ stable main contrib non-free
 
 
 #------------------------------------------------------------------------------#
@@ -38,3 +42,9 @@ deb [arch=i386,amd64] http://repo.steampowered.com/steam/ precise steam
 
 ###Love
 deb http://ppa.launchpad.net/bartbes/love-stable/ubuntu xenial main
+
+###Yarn
+deb https://dl.yarnpkg.com/debian/ stable main
+
+###Google Chrome
+deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main

@@ -135,6 +135,10 @@ set pastetoggle=<F11>
 set shiftwidth=4
 set tabstop=4
 
+" Show hidden symbols
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+set list
+
 " Multiline indenting
 set breakindent
 

@@ -79,13 +79,9 @@ export EDITOR='vim'
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
 
-### Aliases
-alias zr="vim ~/.zshrc" # edit this file
-alias cr="cat ~/.zshrc" # print this file
-alias ohmyzsh="vim ~/.oh-my-zsh"
-
+# Include ~/.local/bin in path
+export PATH=$PATH:/home/kota/.local/bin
 
 ### Changed commands
 alias wget='wget -c'
@@ -112,6 +108,8 @@ alias nc='ncdu' # show disk space stuff
 
 
 ### New commands
+alias pre-vnc="ssh -L 5902:192.168.0.80:5900 kota@nilsu.org"
+alias vnc="vncviewer -compresslevel 7 -quality 3 -encodings \"tight\" localhost::5902"
 alias pconf="firefox http://localhost:631"
 alias wal-homepage="cp /home/kota/.cache/wal/colors.css /var/www/html/colors.css"
 alias pb='curl -F c=@- https://ptpb.pw < ' # pb a file and print url
@@ -134,21 +132,13 @@ alias gtfo='find . -mindepth 2 -type f -print -exec mv {} . \;' # WARNING: searc
 alias bird="love '/home/kota/bin/bird.love'"
 alias minecraft="java -jar /home/kota/bin/minecraft.jar"
 alias te_minecraft="java -jar /home/kota/bin/te_minecraft.jar"
-alias doom="/home/kota/bin/gzdoom"
+alias doom="gzdoom"
 alias rct2="openrct2"
 alias rct3="wine '/home/kota/.wine/drive_c/GOG Games/RollerCoaster Tycoon 3 Platinum/RCT3plus.exe'"
 alias cavestory="wine '/home/kota/.wine/drive_c/Program Files (x86)/Cave Story Deluxe/CaveStory/Doukutsu.exe'"
-alias dfs="/home/kota/bin/dfs/startlnp"
 
 ### Launch Programs
-alias stpb="/home/kota/bin/stpb"
-alias ali="python /home/kota/bin/ali.py"
-alias pipes="bash /home/kota/bin/pipes.sh"
-alias color="bash /home/kota/bin/color.sh"
 alias kota="cat /home/kota/bin/kota"
-alias alarm="python3 /home/kota/bin/alarm.py"
-alias bat="python3 /home/kota/bin/bat.py"
-alias bright="sudo /home/kota/bin/bright.py"
 alias games="cat /home/kota/bin/games"
 alias vgames="vim /home/kota/bin/games"
 # alias pcgen="java -jar '/home/kota/bin/pcgen/pcgen.jar'" # must be in the pcgen folder

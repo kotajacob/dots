@@ -1,22 +1,19 @@
 #!/bin/sh
-if [ "${TERM:-none}" = "linux" ]; then
-    printf "%b" "\\e]P03B4252"
-    printf "%b" "\\e]P1BF616A"
-    printf "%b" "\\e]P2A3BE8C"
-    printf "%b" "\\e]P3EBCB8B"
-    printf "%b" "\\e]P481A1C1"
-    printf "%b" "\\e]P5B48EAD"
-    printf "%b" "\\e]P688C0D0"
-    printf "%b" "\\e]P7E5E9F0"
-    printf "%b" "\\e]P84C566A"
-    printf "%b" "\\e]P9BF616A"
-    printf "%b" "\\e]PAA3BE8C"
-    printf "%b" "\\e]PBEBCB8B"
-    printf "%b" "\\e]PC81A1C1"
-    printf "%b" "\\e]PDB48EAD"
-    printf "%b" "\\e]PE8FBCBB"
-    printf "%b" "\\e]PFECEFF4"
-
-    # Fix artifacting.
-    clear
-fi
+[ "${TERM:-none}" = "linux" ] && \
+    printf '%b' '\e]P03B4252
+                 \e]P1BF616A
+                 \e]P2A3BE8C
+                 \e]P3EBCB8B
+                 \e]P481A1C1
+                 \e]P5B48EAD
+                 \e]P688C0D0
+                 \e]P7E5E9F0
+                 \e]P84C566A
+                 \e]P9BF616A
+                 \e]PAA3BE8C
+                 \e]PBEBCB8B
+                 \e]PC81A1C1
+                 \e]PDB48EAD
+                 \e]PE8FBCBB
+                 \e]PFECEFF4
+                 \ec'

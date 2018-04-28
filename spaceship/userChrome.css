@@ -54,17 +54,17 @@
 
 /* make url bar borderless */
 #urlbar {
-  background-color: var(--color0) !important;
+  background-color: var(--background) !important;
   text-align: center;
   border: none !important;
-  color: var(--color15) !important;
+  color: var(--foreground) !important;
   padding: 0px !important;
   padding-bottom: 0px !important;
   margin: 0px !important;
 }
 #nav-bar{
   border: none !important;
-  background-color: var(--color0) !important;
+  background-color: var(--background) !important;
   padding: 0px !important;
   margin-left: -2px !important;
   margin-right: -2px !important;
@@ -72,24 +72,24 @@
   margin-bottom: -1px !important;
 }
 #reload-button{
-  background-color: var(--color0) !important;
-  color: var(--color15) !important;
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
   padding: 0px !important;
   margin: 0px !important;
 }
 #stop-button{
-  background-color: var(--color0) !important;
+  background-color: var(--background) !important;
   padding: 0px !important;
   margin: 0px !important;
 }
 #PanelUI-menu-button{
-  background-color: var(--color0) !important;
-  color: var(--color15) !important;
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
   padding: 0px !important;
   margin: 0px !important;
 }
 #urlbar-container {
-  background-color: var(--color0) !important;
+  background-color: var(--background) !important;
 }
 #urlbar-container: hover {
   background-color: var(--color10) !important;
@@ -197,7 +197,7 @@ display:none !important;
 /*fix 1px margin on right side and set color of tab bar*/
 #TabsToolbar{
   margin-right: -1px !important;
-  background-color: var(--color0) !important;
+  background-color: var(--background) !important;
 }
 
 /* make favicons fit better */
@@ -215,7 +215,7 @@ display:none !important;
 /* remove tiny space between tabs*/
 .tabbrowser-tab{
   margin-left: -1px !important;
-  background-color: var(--color0) !important;
+  background-color: var(--background) !important;
 }
 
 /* Hide separators between background tabs */
@@ -226,14 +226,14 @@ display:none !important;
 /* Color current tab */
 }
 .tab-content[selected="true"]{
-  background-color: var(--color0) !important;
-  color: var(--color15) !important;
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
 }
 
 /* Color unselected tab */
 .tab-content{
-  background-color: var(--color8) !important;
-  color: var(--color15) !important;
+  background-color: var(--color0) !important;
+  color: var(--foreground) !important;
 }
 
 
@@ -277,31 +277,31 @@ display:none !important;
 }
 
 #sidebar-search-container {
-  background-color: var(--color0) !important;
+  background-color: var(--background) !important;
 }
 
 #viewButton {
-  color: var(--color15) !important;
+  color: var(--foreground) !important;
 }
 
 .popup-internal-box {
-  background-color: var(--color0) !important;
+  background-color: var(--background) !important;
   margin: -1px !important;
 }
 
 #search-box {
-  background-color: var(--color0) !important;
-  color: var(--color15) !important;
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
 }
 
 .sidebar-splitter {
-  background-color: var(--color0) !important;
+  background-color: var(--background) !important;
   border: none !important;
 }
 
 .sidebar-placesTreechildren {
-  background-color: var(--color0) !important;
-  color: var(--color15) !important;
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
   margin-left: -15px !important;
 }
 
@@ -319,28 +319,28 @@ display:none !important;
 
 /* change color of findbar */
 .browserContainer > findbar {
-  background-color: var(--color0) !important
+  background-color: var(--background) !important
 }
 
 /* color the text of the findbar */
 .findbar-container {
-  color: var(--color15) !important;
+  color: var(--foreground) !important;
 }
 
 .findbar-find-status {
-  color: var(--color15) !important;
+  color: var(--foreground) !important;
 }
 
 /* color the close button */
 .findbar-closebutton {
-  color: var(--color15) !important;
+  color: var(--foreground) !important;
 }
 
 /* color search textbox */
 .findbar-textbox {
   border: none !important;
-  background-color: var(--color0) !important;
-  color: var(--color15) !important;
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
 }
 
 /* remove weird background of next/previous buttons*/
@@ -368,8 +368,8 @@ display:none !important;
 
 /* Color hamburger menu */
 #appMenu-mainView {
-  background-color: var(--color15) !important;
-  color: var(--color0)
+  background-color: var(--foreground) !important;
+  color: var(--background)
 }
 
 /* Remove the "Sign in to sync" from top of photon hamburger menu. */
@@ -436,7 +436,7 @@ display:none !important;
 
 /* Make loading background when opening new tab not be bright white*/
 .tabbrowser-tabbox {
-    background-color:  var(--color0) !important;
+    background-color:  var(--background) !important;
 }
 
 /*remove Scrollbars */
@@ -450,7 +450,7 @@ display:none !important;
 /* remove overflow button */
 #nav-bar-overflow-button {
   display: none !important;
-  background-color: var(--color0) !important;
+  background-color: var(--background) !important;
 }
 
 /* fix weird grey block */
@@ -464,3 +464,9 @@ display:none !important;
 #context_sendTabToDevice, #context_sendTabToDevice_separator {
   display: none !important;
 }
+
+/* Change the right click menu colors */
+.scrollbox-innerbox {
+	background-color: var(--foreground)
+}
+
