@@ -1,0 +1,4 @@
+export PATH HOME TERM
+ENV=$HOME/.kshrc
+HISTFILE=$HOME/.history
+HISTSIZE=10000
