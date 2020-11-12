@@ -28,3 +28,5 @@
 	ra = log --oneline
 [merge]
 	tool = vimdiff
+[pull]
+	rebase = false
