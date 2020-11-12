@@ -21,6 +21,13 @@ Plugin 'VundleVim/Vundle.vim'
 " big fat autocompletion engine
 Plugin 'Shougo/deoplete.nvim'
 
+" fancy source code search tool
+Plugin 'mileszs/ack.vim'
+
+" fancy bar at the bottom
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
 " Syntax Checking
 Plugin 'vim-syntastic/syntastic'
 
@@ -33,6 +40,9 @@ Plugin 'fatih/vim-go'
 " Easy quoting and tagging
 Plugin 'tpope/vim-surround'
 
+" Auto complete close brackets
+Plugin 'spf13/vim-autoclose'
+
 " Use tabular to align things easily
 Plugin 'godlygeek/tabular'
 
@@ -43,7 +53,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'junegunn/fzf.vim'
 
 " Visual undo tree with :MundoToggle
-Plugin 'simnalamburt/vim-mundo'
+Plugin 'mbbill/undotree'
 
 " Use git gutter for a nice display
 Plugin 'airblade/vim-gitgutter'
@@ -56,6 +66,9 @@ Plugin 'nelstrom/vim-visual-star-search'
 
 " Vim tmux navigate
 Plugin 'christoomey/vim-tmux-navigator'
+
+" Black Pastel Theme
+Plugin 'https://git.sr.ht/~kota/black-pastel'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -76,13 +89,15 @@ set encoding=utf-8
 set cursorline
 set colorcolumn=80
 set background=dark
+colorscheme black-pastel
+let g:airline_theme='base16'
+set termguicolors
 
 let g:gitgutter_sign_added='┃'
 let g:gitgutter_sign_modified='┃'
 let g:gitgutter_sign_removed='┃'
 let g:gitgutter_sign_removed_first_line='┃'
 let g:gitgutter_sign_modified_removed='┃'
-
 
 " ===========
 " General Use
@@ -180,17 +195,11 @@ set breakindent
 " FZF for file switching
 nmap <leader><leader> :FZF<CR>
 
+" Vim stock explorer for file switching
+nmap <leader>e :Explore<CR>
+
 " Run go
-nmap <leader>g :!go run %<CR>
-
-" Run python
-nmap <leader>p :!python3 %<CR>
-
-" Run shell script
-nmap <leader>z :!zsh %<CR>
-
-" Open in qutebrowser
-nmap <leader>q :!qutebrowser %<CR>
+" nmap <leader>g :!go run %<CR>
 
 " Traverse back with arrows
 set whichwrap=b,s,<,>,[,]
@@ -201,14 +210,15 @@ nmap <leader>n :noh<CR>
 set hlsearch
 
 " Run tabular with \t
-nmap <leader>t :Tabularize /=<CR>
+nmap <leader>t :Tabularize /
 
 " Pandoc the current file
 nmap <leader>m :w<CR>:!pandoc % -o %:t:r.pdf<CR>
 nmap <leader>M :!zathura %:t:r.pdf &<CR>
 
-" Set f5 as hotkey to show Undo Tree
-nnoremap <F5> :MundoToggle<CR>
+" Set f5 and \u as hotkeys to show Undo Tree
+nnoremap <F5> :UndotreeToggle<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
 
 " Set f3 as hotkey to show Hidden characters
 nnoremap <F3> :set list!<CR> 
