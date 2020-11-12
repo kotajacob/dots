@@ -20,6 +20,12 @@ Plugin 'VundleVim/Vundle.vim'
 
 " big fat autocompletion engine
 Plugin 'Shougo/deoplete.nvim'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
+
+" big fat snippets completion for deoplete
+Plugin 'Shougo/neosnippet.vim'
+Plugin 'Shougo/neosnippet-snippets'
 
 " fancy source code search tool
 Plugin 'mileszs/ack.vim'
