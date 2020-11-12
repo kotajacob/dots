@@ -1,18 +1,25 @@
 # basic settings
-PS1='\w '
-PATH=$HOME/bin:$PATH
-EDITOR='nvim'
-VISUAL='nvim'
-TERM='xterm-256color'
+export HISTFILE=$HOME/.history
+export HISTSIZE=10000
+export PS1='\w '
+export TERM='xterm-256color'
+export EDITOR='/bin/nvim'
+export VISUAL='/bin/nvim'
+export PAGER='/bin/less'
+export GOPATH="$HOME/go"
+export PATH=$GOPATH/bin:$HOME/.yarn/bin:$HOME/bin:$PATH
 set -o vi
 set -o vi-tabcomplete
 
 ## aliases
 alias rsync='rsync -avP'
 alias hist='cat .history|less'
+alias ncm='ncmpcpp'
 alias m='make all'
 alias mc='make clean'
 alias c='clear'
+alias vi='nvim'
+alias vim='nvim'
 alias ls='ls --color=auto'
 alias la='ls -lAh --color=auto'
 alias l='ls -1F --color=auto'
@@ -26,7 +33,8 @@ alias xs='xbps-query -Rs'
 alias xr='sudo xbps-pkgdb -m auto'
 alias xrm='sudo xbps-remove -R'
 alias xc='sudo xbps-remove -Oo && sudo vkpurge rm all'
-alias xfs='xbps-query -R -o'
+alias xfs='xbps-query -R -f'
+alias xinfo='xbps-query -R -S'
 alias xlist='xbps-query -m'
 alias todo='$EDITOR $HOME/TODO'
 alias log='$EDITOR $HOME/LOG'
