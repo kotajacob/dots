@@ -39,6 +39,9 @@ alias xinfo='xbps-query -R -S'
 alias xlist='xbps-query -m'
 alias todo='$EDITOR $HOME/TODO'
 alias log='$EDITOR $HOME/LOG'
+record() {
+	ffmpeg -f x11grab -video_size 2560x1440 -r 30 -i $DISPLAY -f alsa -i default -c:v ffvhuff -an ~/tmp/record.mkv
+}
 cf() {
         cd $(find . -mindepth 1 -type d | fzf)
 }
