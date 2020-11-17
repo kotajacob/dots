@@ -1,0 +1,5 @@
+# Backlight
+urgency,low
+txt,l = 
+cmd,backlight
+txt,\n

@@ -1,0 +1,5 @@
+# Weather
+urgency,normal
+txt,w = 
+cmd,curl,wttr.in/?format=1
+txt,\n

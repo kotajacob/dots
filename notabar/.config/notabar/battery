@@ -1,0 +1,6 @@
+# Battery
+urgency,normal
+txt,b = 
+cmd,battery
+cmd,battery,+,-
+txt,\n

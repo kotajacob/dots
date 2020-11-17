@@ -1,0 +1,39 @@
+urgency,low
+
+# Time
+txt,t = 
+cmd,date,+%H:%M
+txt, 
+cmd,date,+%m/%d
+txt,\n
+
+# Battery
+txt,b = 
+cmd,battery
+cmd,battery,+,-
+txt,\n
+
+# Backlight
+txt,l = 
+cmd,backlight
+txt,\n
+
+# Volume
+txt,v = 
+cmd,pamixer,--get-volume-human
+txt,\n
+
+# Networking
+txt,n = 
+cmd,netprint
+txt,\n
+
+# Disk
+txt,d = 
+cmd,freespace
+txt,\n
+
+# Weather
+txt,w = 
+cmd,curl,wttr.in/?format=1
+txt,\n
