@@ -2,8 +2,7 @@
 
 Collection of all my configurations (dot files). They are organized into
 subdirectories for each program. The vast majority of the configs are meant to
-be installed/managed with GNU Stow. See LIST.md for information about the
-dependencies of each config and installation instructions.
+be installed/managed with GNU Stow some however, use make.
 
 
 ![1](https://paste.cf/b570d7fe35aeeed55f038060cd0750e1934e1e92.png)
