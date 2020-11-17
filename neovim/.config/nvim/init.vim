@@ -40,9 +40,6 @@ Plugin 'lambdalisue/battery.vim'
 " Syntax Checking
 Plugin 'vim-syntastic/syntastic'
 
-" Markdown folds
-Plugin 'masukomi/vim-markdown-folding'
-
 " Use git from inside vim :D
 Plugin 'tpope/vim-fugitive'
 
@@ -119,9 +116,6 @@ let g:deoplete#enable_at_startup = 1
 " ===========
 " General Use
 " ===========
-
-" Set fold method to expression
-set foldmethod=expr
 
 " Enable autowrite (automatically write when :make or :GoBuild are called)
 set autowrite
