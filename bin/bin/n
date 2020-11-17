@@ -1,4 +1,0 @@
-#!/bin/sh
-
-PWD=$(pwd)
-st -e "$SHELL" -c "cd $PWD; $SHELL" > /dev/null 2>&1 &
