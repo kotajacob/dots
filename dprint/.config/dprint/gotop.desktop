@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Gotop
+GenericName=Task Manager
+Exec=st -e gotop
+Terminal=false
+Type=Application
+Version=1.0

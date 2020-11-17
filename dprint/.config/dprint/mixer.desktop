@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=PulseMixer
+GenericName=Volume controller
+Exec=st -e pulsemixer
+Terminal=false
+Type=Application
+Version=1.0

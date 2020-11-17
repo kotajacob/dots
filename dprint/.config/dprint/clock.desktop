@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Clock
+GenericName=Clock
+Exec=st -e tty-clock
+Terminal=false
+Type=Application
+Version=1.0

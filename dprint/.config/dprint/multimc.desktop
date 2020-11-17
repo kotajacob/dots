@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1
+Type=Application
+Name=Minecraft
+GenericName=Minecraft
+Comment=Game
+Exec=/home/kota/.local/share/MultiMC/MultiMC
+Actions=
+Categories=Game;
