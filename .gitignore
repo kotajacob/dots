@@ -6,6 +6,7 @@ st/st
 st/config.h
 st/st.o
 st/x.o
+st/boxdraw.o 
 tabbed/tabbed
 tabbed/tabbed.o
 vimb/.config/vimb/cookies.db
