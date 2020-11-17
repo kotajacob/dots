@@ -1,0 +1,11 @@
+directory: ~/music
+library: ~/.local/share/beet/library.db
+import:
+  copy: yes
+  write: yes
+art_filename: albumart
+paths:
+  default: $albumartist/$album%aunique{}/$track $title
+  singleton: $artist/Singles/$title
+  comp: Compilations/$album%aunique{}/$track $title
+  albumtype:soundtrack: Soundtracks/$album/$track $title
