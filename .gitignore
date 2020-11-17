@@ -1,4 +1,6 @@
 *.uuid
+beets/.local/share/beet/library.db
+beets/.config/beets/state.pickle
 neovim/.config/nvim/bundle*
 neovim/.config/nvim/undo*
 neovim/.config/nvim/.netrwhist
