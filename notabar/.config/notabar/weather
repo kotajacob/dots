@@ -1,5 +1,5 @@
 # Weather
 urgency,normal
 txt,w = 
-cmd,curl,wttr.in/?format=1
+cmd,temperature
 txt,\n

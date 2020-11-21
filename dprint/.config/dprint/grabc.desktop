@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=grabc
+GenericName=clock
+Exec=grabc | xclip -selection clipboard
+Terminal=false
+Type=Application
+Version=1.0
