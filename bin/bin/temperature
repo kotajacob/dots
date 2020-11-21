@@ -1,0 +1,3 @@
+#!/bin/sh
+
+weather fips4232800 -q -m --headers=temperature|awk '{ print $2 $3 }'
