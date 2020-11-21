@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Gotop
+Name=gotop
 GenericName=Task Manager
 Exec=st -e gotop
 Terminal=false

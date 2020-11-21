@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1
 Type=Application
-Name=Minecraft
+Name=minecraft
 GenericName=Minecraft
 Comment=Game
 Exec=/home/kota/.local/share/MultiMC/MultiMC

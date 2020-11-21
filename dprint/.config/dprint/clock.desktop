@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Clock
+Name=clock
 GenericName=Clock
 Exec=st -c st-float -e tty-clock
 Terminal=false
