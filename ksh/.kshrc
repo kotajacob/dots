@@ -19,6 +19,7 @@ alias ncm='ncmpcpp'
 alias m='make all'
 alias mc='make clean'
 alias mixer='pulsemixer'
+alias clip='xclip -selection clipboard'
 alias c='clear'
 alias vi='nvim'
 alias vim='nvim'
@@ -41,18 +42,22 @@ alias xlist='xbps-query -m'
 alias todo='$EDITOR $HOME/TODO'
 alias log='$EDITOR $HOME/LOG'
 record() {
-	ffmpeg -f x11grab -video_size 2560x1440 -r 30 -i $DISPLAY -f alsa -i default -c:v ffvhuff -an ~/tmp/record.mkv
+	ffmpeg -f x11grab -video_size 2560x1440 -r 30 -i "$DISPLAY" -f alsa -i default -c:v ffvhuff -an ~/tmp/record.mkv
 }
 cf() {
-        cd $(find . -mindepth 1 -type d | fzf)
+        cd "$(fd -H --type d | fzf)" || exit
+}
+of() {
+	SELECTION=$(fd --type f | fzf)
+	xdg-open "$SELECTION" >/dev/null 2>&1 &
 }
 vf() {
-        $EDITOR $(find . -mindepth 1 -type f | fzf)
+        "$EDITOR" "$(fd -H --type f | fzf)"
 }
 vff() {
-        SELECTION=$(find . -mindepth 1 -type f | fzf)
-	cd $(dirname $SELECTION)
-	$EDITOR $(basename $SELECTION)
+        SELECTION=$(fd -H --type f | fzf)
+	cd "$(dirname "$SELECTION")" || exit
+	"$EDITOR" "$(basename "$SELECTION")"
 }
 d () {
 	PWD=$(pwd)
