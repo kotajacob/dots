@@ -28,6 +28,12 @@ txt,n =
 cmd,netprint
 txt,\n
 
+# Mullvad VPN
+urgency,low
+txt,m = 
+cmd,mullcheck
+txt,\n
+
 # Disk
 txt,d = 
 cmd,freespace

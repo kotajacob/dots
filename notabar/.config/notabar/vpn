@@ -1,0 +1,5 @@
+# Mullvad VPN
+urgency,low
+txt,m = 
+cmd,mullcheck
+txt,\n
