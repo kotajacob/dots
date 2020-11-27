@@ -219,6 +219,7 @@ nmap <leader>e :Explore<CR>
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
+autocmd FileType go nmap <leader>l :GoMetaLinter<CR>
 autocmd FileType markdown nmap <leader>b :w<CR>:!pandoc % -o %:t:r.pdf<CR>
 autocmd FileType markdown nmap <leader>r :!zathura %:t:r.pdf &<CR>
 autocmd FileType python nmap <leader>r  :!python %<CR>
