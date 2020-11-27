@@ -1,0 +1,4 @@
+#!/bin/sh
+
+fd --type d . '/home/kota' > "$HOME/.cache/search-cache-dirs"
+fd --type f . '/home/kota' > "$HOME/.cache/search-cache-files"

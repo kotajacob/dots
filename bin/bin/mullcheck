@@ -1,3 +1,11 @@
 #!/bin/sh
 
-curl -s https://am.i.mullvad.net/connected|awk '{ print $7 }'|sed 's/).//'
+S=$(curl -s https://am.i.mullvad.net/connected)
+
+NOT=$(echo "$S" | awk '{ print $3 }')
+
+if [ "$NOT" != "not" ]; then
+	echo "$S" |awk '{ print $7 }'|sed 's/).//'
+else
+	echo "not connected"
+fi
