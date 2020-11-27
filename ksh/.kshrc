@@ -46,16 +46,23 @@ record() {
 	ffmpeg -f x11grab -video_size 2560x1440 -r 30 -i "$DISPLAY" -f alsa -i default -c:v ffvhuff -an ~/tmp/record.mkv
 }
 cf() {
+        cd "$(fzf < "$HOME/.cache/search-cache-dirs")" || exit
+}
+cfh() {
         cd "$(fd -H --type d | fzf)" || exit
 }
 of() {
+	SELECTION=$(fzf < "$HOME/.cache/search-cache-files")
+	xdg-open "$SELECTION" >/dev/null 2>&1 &
+}
+ofh() {
 	SELECTION=$(fd --type f | fzf)
 	xdg-open "$SELECTION" >/dev/null 2>&1 &
 }
 vf() {
         "$EDITOR" "$(fd -H --type f | fzf)"
 }
-vff() {
+vcf() {
         SELECTION=$(fd -H --type f | fzf)
 	cd "$(dirname "$SELECTION")" || exit
 	"$EDITOR" "$(basename "$SELECTION")"
