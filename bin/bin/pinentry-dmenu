@@ -1,0 +1,21 @@
+#!/bin/sh
+
+echo "OK Pleased to meet you"
+while read command; do
+	command=$(echo "$command" | tr '[:lower:]' '[:upper:]')
+	case $command in
+		"BYE")
+			echo "OK closing connection"
+			break
+		;;
+		"GETPIN")
+			echo "D $(DISPLAY=:0 dmenu -P -p "pass")"
+			echo "OK"
+		;;
+		*)
+			echo "OK"
+		;;
+	esac
+done
+
+return 0
