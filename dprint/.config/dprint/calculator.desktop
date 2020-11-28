@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=calculator
 GenericName=Python Calculator
-Exec=st -t st-float -e python
+Exec=st -t st-float -g 76x30 -e python
 Terminal=false
 Type=Application
 Version=1.0

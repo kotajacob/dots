@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=clock
 GenericName=Clock
-Exec=st -c st-float -e tty-clock
+Exec=st -t st-float -g 39x8 -e tty-clock -c -D -C 7
 Terminal=false
 Type=Application
 Version=1.0

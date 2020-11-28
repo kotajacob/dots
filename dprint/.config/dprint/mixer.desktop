@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=mixer
 GenericName=Volume controller
-Exec=st -t st-float -e pulsemixer
+Exec=st -t st-float -g 80x16 -e pulsemixer
 Terminal=false
 Type=Application
 Version=1.0
