@@ -4,7 +4,7 @@ Collection of all my configurations (dot files). They are organized into
 subdirectories for each program. The vast majority of the configs are meant to
 be installed/managed with GNU Stow some however, use make.
 
-Discussion can be found [here](https://lists.sr.ht/~kota/modget).
+Discussion can be found [here](https://lists.sr.ht/~kota/public-inbox).
 
 ![1](https://paste.cf/b570d7fe35aeeed55f038060cd0750e1934e1e92.png)
 
