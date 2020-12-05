@@ -269,10 +269,13 @@ assign [class="^Steam$"]       $ws3
 exec --no-startup-id feh --bg-center /home/kota/pics/walls/rose_1440.png
 
 # set backlight
-exec --no-startup-id xbacklight -set 20
+exec --no-startup-id backlight 35
 
 # start mpd
 exec --no-startup-id mpd
 
 # start dunst
 exec --no-startup-id dunst
+
+# start netwatch to show notifications on network change
+exec --no-startup-id netwatch
