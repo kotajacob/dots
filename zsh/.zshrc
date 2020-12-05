@@ -59,19 +59,27 @@ readme() {
 	fi
 	touch "$NAME" && "$EDITOR" "$NAME"
 }
+
 record() {
 	ffmpeg -f x11grab -video_size 2560x1440 -r 30 -i "$DISPLAY" -f alsa -i default -c:v ffvhuff -an ~/tmp/record.mkv
 }
+
 cf() {
 	if [ "$PWD" = "$HOME" ]; then
 		cd "$(fzf < "$HOME/.cache/search-cache-dirs")" || exit
 	else
+		cd "$(fd --type d | fzf)" || exit
+	fi
+}
+
+cfh() {
+	if [ "$PWD" = "$HOME" ]; then
+		cd "$(fzf < "$HOME/.cache/search-cache-dirs-hidden")" || exit
+	else
 		cd "$(fd -H --type d | fzf)" || exit
 	fi
 }
-cfh() {
-	cd "$(fd -H --type d | fzf)" || exit
-}
+
 of() {
 	if [ "$PWD" = "$HOME" ]; then
 		SELECTION=$(fzf < "$HOME/.cache/search-cache-files")
@@ -80,6 +88,7 @@ of() {
 	fi
 	xdg-open "$SELECTION" >/dev/null 2>&1 &
 }
+
 ofh() {
 	if [ "$PWD" = "$HOME" ]; then
 		SELECTION=$(fzf < "$HOME/.cache/search-cache-files-hidden")
@@ -88,6 +97,7 @@ ofh() {
 	fi
 	xdg-open "$SELECTION" >/dev/null 2>&1 &
 }
+
 vf() {
 	if [ "$PWD" = "$HOME" ]; then
 		SELECTION=$(fzf < "$HOME/.cache/search-cache-files-hidden")
@@ -96,15 +106,22 @@ vf() {
 	fi
 	"$EDITOR" "$SELECTION"
 }
+
 vcf() {
-	SELECTION=$(fd -H --type f | fzf)
+	if [ "$PWD" = "$HOME" ]; then
+		SELECTION=$(fzf < "$HOME/.cache/search-cache-files-hidden")
+	else
+		SELECTION=$(fd -H --type f | fzf)
+	fi
 	cd "$(dirname "$SELECTION")" || exit
 	"$EDITOR" "$(basename "$SELECTION")"
 }
+
 d () {
 	PWD=$(pwd)
 	st -e "$SHELL" -c "cd $PWD; $SHELL" > /dev/null &
 }
+
 n () {
 	# Block nesting of nnn in subshells
 	if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then

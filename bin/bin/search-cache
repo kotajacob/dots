@@ -1,5 +1,6 @@
 #!/bin/sh
 
 fd --type d . '/home/kota' > "$HOME/.cache/search-cache-dirs"
+fd -H --type d . '/home/kota' > "$HOME/.cache/search-cache-dirs-hidden"
 fd --type f . '/home/kota' > "$HOME/.cache/search-cache-files"
-fd --type f . '/home/kota' > "$HOME/.cache/search-cache-files-hidden"
+fd -H --type f . '/home/kota' > "$HOME/.cache/search-cache-files-hidden"
