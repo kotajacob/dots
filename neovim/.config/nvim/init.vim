@@ -46,6 +46,9 @@ Plugin 'tpope/vim-fugitive'
 " Good go language support
 Plugin 'fatih/vim-go'
 
+" Java Gradle support
+Plugin 'tfnico/vim-gradle'
+
 " CSV support
 Plugin 'chrisbra/csv.vim'
 
