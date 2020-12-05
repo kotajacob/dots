@@ -8,6 +8,7 @@ export EDITOR='/bin/nvim'
 export VISUAL='/bin/nvim'
 export PAGER='/bin/less'
 export NNN_OPTS='cC'
+export AART_VIEWER='sxiv -b -g 640x640'
 export GOPATH="$HOME/go"
 export PATH=$GOPATH/bin:$HOME/.yarn/bin:$HOME/bin:$PATH
 unsetopt beep nomatch menu_complete flowcontrol
@@ -45,7 +46,6 @@ alias xr='sudo xbps-pkgdb -m auto'
 alias xrm='sudo xbps-remove -R'
 alias xc='sudo xbps-remove -Oo && sudo vkpurge rm all'
 alias xinfo='xbps-query -R -S'
-alias xlist='xbps-query -m'
 alias todo='$EDITOR $HOME/TODO'
 alias log='$EDITOR $HOME/LOG'
 
@@ -80,11 +80,20 @@ of() {
 	xdg-open "$SELECTION" >/dev/null 2>&1 &
 }
 ofh() {
-	SELECTION=$(fd --type f | fzf)
+	if [ "$PWD" = "$HOME" ]; then
+		SELECTION=$(fzf < "$HOME/.cache/search-cache-files-hidden")
+	else
+		SELECTION=$(fd -H --type f | fzf)
+	fi
 	xdg-open "$SELECTION" >/dev/null 2>&1 &
 }
 vf() {
-	"$EDITOR" "$(fd -H --type f | fzf)"
+	if [ "$PWD" = "$HOME" ]; then
+		SELECTION=$(fzf < "$HOME/.cache/search-cache-files-hidden")
+	else
+		SELECTION=$(fd -H --type f | fzf)
+	fi
+	"$EDITOR" "$SELECTION"
 }
 vcf() {
 	SELECTION=$(fd -H --type f | fzf)
