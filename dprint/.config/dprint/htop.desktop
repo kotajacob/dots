@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=gotop
+Name=htop
 GenericName=Task Manager
-Exec=st -t st-float -g 160x36 -e gotop
+Exec=st -t st-float -g 160x36 -e htop
 Terminal=false
 Type=Application
 Version=1.0
