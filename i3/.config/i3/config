@@ -27,9 +27,6 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # start dpass (password selector script)
 bindsym $mod+p exec --no-startup-id dpass
 
-# run osync
-bindsym $mod+o exec --no-startup-id osync /home/kota/.config/osync/notes.conf
-
 # dump clipboard into CLIP file or back
 bindsym $mod+v exec --no-startup-id xclip -o -selection clipboard > /home/kota/docs/notes/CLIP
 bindsym $mod+c exec --no-startup-id xclip -selection clipboard /home/kota/docs/notes/CLIP
@@ -53,11 +50,11 @@ bindsym Shift+XF86MonBrightnessUp exec --no-startup-id backlight +10
 bindsym Shift+XF86MonBrightnessDown exec --no-startup-id backlight -10
 
 # sound
-bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5
-bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5
-bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id pamixer -i 10
-bindsym Shift+XF86AudioLowerVolume exec --no-startup-id pamixer -d 10
-bindsym XF86AudioMute exec --no-startup-id pamixer -t
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && notabar < /home/kota/.config/notabar/volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 && notabar < /home/kota/.config/notabar/volume
+bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id pamixer -i 10 && notabar < /home/kota/.config/notabar/volume
+bindsym Shift+XF86AudioLowerVolume exec --no-startup-id pamixer -d 10 && notabar < /home/kota/.config/notabar/volume
+bindsym XF86AudioMute exec --no-startup-id pamixer -t && notabar < /home/kota/.config/notabar/volume
 
 ##
 ## Bindings (i3)
@@ -230,7 +227,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 ##
-## Change how some programs open
+## Change how some programs open - gather info with xprop
 ##
 
 for_window [window_role="pop-up"] floating enable
@@ -255,6 +252,8 @@ for_window [class="Galculator"] resize set 600 px 800 px
 for_window [class="Sxiv"] floating enable
 for_window [class="Tor Browser"] floating enable
 for_window [title="st-float"] floating enable
+for_window [title="Zathura"] floating enable
+for_window [class="Zathura"] resize set 1306 px 1344 px
 
 assign [class="Virt-manager"]  $ws8
 assign [class="Wire"]          $ws9
