@@ -81,6 +81,7 @@ bindsym $mod+Control+h resize shrink width $distance px or $distance ppt
 bindsym $mod+Control+j resize grow height $distance px or $distance ppt
 bindsym $mod+Control+k resize shrink height $distance px or $distance ppt
 bindsym $mod+Control+l resize grow width $distance px or $distance ppt
+bindsym $mod+Control+7 resize set 1920 1080
 bindsym $mod+Control+8 resize set 2028 1344
 bindsym $mod+Control+9 resize set 1306 1344
 bindsym $mod+Control+0 resize set 1072 800
@@ -234,7 +235,7 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [class="Lxappearance"] floating enable
 for_window [class="mpv"] floating enable
-for_window [class="mpv"] resize set 960 px 600 px
+for_window [class="mpv"] resize set 1920 px 1080 px
 for_window [class="mpv"] move absolute position center
 for_window [class="^Steam$" title="^Friends$"] floating enable
 for_window [class="^Steam$" title="Steam - News"] floating enable
@@ -254,6 +255,8 @@ for_window [class="Tor Browser"] floating enable
 for_window [title="st-float"] floating enable
 for_window [title="Zathura"] floating enable
 for_window [class="Zathura"] resize set 1306 px 1344 px
+for_window [title="Minecraft"] floating enable
+for_window [class="Minecraft"] resize set 1280 px 720 px
 
 assign [class="Virt-manager"]  $ws8
 assign [class="Wire"]          $ws9
