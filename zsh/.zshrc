@@ -10,7 +10,7 @@ export PAGER='/bin/less'
 export NNN_OPTS='cC'
 export AART_VIEWER='sxiv -b -g 640x640'
 export GOPATH="$HOME/go"
-export PATH=$GOPATH/bin:$HOME/.yarn/bin:$HOME/bin:$PATH
+export PATH=$GOPATH/bin:$HOME/.yarn/bin:$HOME/bin:$HOME/.local/bin:$PATH
 unsetopt beep nomatch menu_complete flowcontrol
 setopt appendhistory autocd extendedglob auto_menu complete_in_word always_to_end notify
 bindkey -v
