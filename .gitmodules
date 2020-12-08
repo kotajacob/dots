@@ -13,3 +13,45 @@
 [submodule "neovim/.config/nvim/pack/plugins/start/vim-vinegar"]
 	path = neovim/.config/nvim/pack/plugins/start/vim-vinegar
 	url = https://github.com/tpope/vim-vinegar
+[submodule "neovim/.config/nvim/pack/plugins/start/visual-star-search"]
+	path = neovim/.config/nvim/pack/plugins/start/visual-star-search
+	url = https://github.com/bronson/vim-visual-star-search
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-tmux-navigator"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-gitgutter"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter
+[submodule "neovim/.config/nvim/pack/plugins/start/undotree"]
+	path = neovim/.config/nvim/pack/plugins/start/undotree
+	url = https://github.com/mbbill/undotree
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-commentary"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary
+[submodule "neovim/.config/nvim/pack/plugins/start/tabular"]
+	path = neovim/.config/nvim/pack/plugins/start/tabular
+	url = https://github.com/godlygeek/tabular
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-surround"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule "neovim/.config/nvim/pack/plugins/start/splitjoin"]
+	path = neovim/.config/nvim/pack/plugins/start/splitjoin
+	url = https://github.com/AndrewRadev/splitjoin.vim
+[submodule "neovim/.config/nvim/pack/plugins/start/ack"]
+	path = neovim/.config/nvim/pack/plugins/start/ack
+	url = https://github.com/mileszs/ack.vim
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-airline"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-airline
+	url = https://github.com/vim-airline/vim-airline
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-airline-themes"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes
+[submodule "neovim/.config/nvim/pack/plugins/start/battery"]
+	path = neovim/.config/nvim/pack/plugins/start/battery
+	url = https://github.com/lambdalisue/battery.vim
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-fugitive"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-highlightedyank"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-highlightedyank
+	url = https://github.com/machakann/vim-highlightedyank
