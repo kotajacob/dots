@@ -1,3 +1,6 @@
 [submodule "zsh/.local/share/zsh/plugins/kota-prompt"]
 	path = zsh/.local/share/zsh/plugins/kota-prompt
 	url = https://git.sr.ht/~kota/kota-prompt
+[submodule "neovim/.config/nvim/pack/themes/start/black-pastel"]
+	path = neovim/.config/nvim/pack/themes/start/black-pastel
+	url = https://git.sr.ht/~kota/black-pastel

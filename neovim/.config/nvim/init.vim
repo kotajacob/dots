@@ -1,121 +1,11 @@
-" =============
-"  Kota VIMrc
-" =============
-"
-" =================
-"    Use Vundle
-" =================
-" Make vim the same on any os
-set nocompatible
-
-" Needed for Vundle
-filetype off
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#begin('~/.config/nvim/bundle')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" big fat autocompletion engine
-Plugin 'Shougo/deoplete.nvim'
-
-" big fat snippets completion for deoplete
-Plugin 'Shougo/neosnippet.vim'
-Plugin 'Shougo/neosnippet-snippets'
-
-" Split/Join lets you split and join long lines correctly like struct
-" definitions
-Plugin 'AndrewRadev/splitjoin.vim'
-
-" fancy source code search tool
-Plugin 'mileszs/ack.vim'
-
-" fancy bar at the bottom
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'lambdalisue/battery.vim'
-
-" Syntax Checking
-Plugin 'vim-syntastic/syntastic'
-
-" Use git from inside vim :D
-Plugin 'tpope/vim-fugitive'
-
-" Good go language support
-Plugin 'fatih/vim-go'
-
-" CSV support
-Plugin 'chrisbra/csv.vim'
-
-" Easy quoting and tagging
-Plugin 'tpope/vim-surround'
-
-" Use tabular to align things easily
-Plugin 'godlygeek/tabular'
-
-" Good commenting plugin
-Plugin 'tpope/vim-commentary'
-
-" FZF quick file switching
-Plugin 'junegunn/fzf.vim'
-
-" Visual undo tree with
-Plugin 'mbbill/undotree'
-
-" Use git gutter for a nice display
-Plugin 'airblade/vim-gitgutter'
-
-" Make <C-a> and <C-x> work with dates
-Plugin 'tpope/vim-speeddating'
-
-" Vim file manager tweaks
-Plugin 'tpope/vim-vinegar'
-
-" Make tpope's plugins work with .
-Plugin 'tpope/vim-repeat'
-
-" Fix * search when in visual mode :D
-Plugin 'nelstrom/vim-visual-star-search'
-
-" Highlight yanked text
-Plugin 'machakann/vim-highlightedyank'
-
-" Vim tmux navigate
-Plugin 'christoomey/vim-tmux-navigator'
-
-" Black Pastel Theme
-Plugin 'https://git.sr.ht/~kota/black-pastel'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" Manual System Plugins
-set rtp+=/usr/share/vim/vimfiles
-
-" ================
-" Graphical Tweaks
-" ================
-
 syntax enable
 set number
-set ruler
 set encoding=utf-8
 set cursorline
 set colorcolumn=80
-set background=dark
 colorscheme black-pastel
 let g:airline_theme='base16'
 set termguicolors
-
-" Enable deoplete
-let g:deoplete#enable_at_startup = 1
-
-" ===========
-" General Use
-" ===========
 
 " Enable autowrite (automatically write when :make or :GoBuild are called)
 set autowrite
@@ -134,22 +24,9 @@ set magic
 " Allow hidden buffers to be opened without a bang.
 set hidden
 
-" Good command line completion.
-set wildmenu
-
-" Show partial commands in the last line of the screen.
-set showcmd
-
 " Use case insensitive search, except when using capital letters.
 set ignorecase
 set smartcase
-
-" Allow backspacing over autoindent, line breaks and start of insert action.
-set backspace=indent,eol,start
-
-" When opening a new line and no filetype-specific indenting is enabled, keep
-" the same indent as the line you're currently on.
-set autoindent
 
 " Stop certain movements from always going to the first character of a line.
 set nostartofline
@@ -163,11 +40,6 @@ set confirm
 
 " Set spellcheck language
 set spelllang=en
-
-" Use visual bell instead of beeping when doing something wrong
-" And reset the terminal code for the visual bell.
-set visualbell
-set t_vb=
 
 " Enable use of the mouse for all modes
 set mouse=a
@@ -184,14 +56,10 @@ set linebreak
 set scrolloff=6
 
 " Quickly time out on keycodes, but never time out on mappings
-set notimeout ttimeout ttimeoutlen=200
+set notimeout ttimeout ttimeoutlen=50
 
 " Live substitution
 set inccommand=nosplit
-
-" ==========
-" Formatting
-" ==========
 
 " Indentation settings for using hard tabs for indent.
 set softtabstop=8
@@ -200,20 +68,35 @@ set tabstop=8
 set noexpandtab
 
 " Auto indent differently per file
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType c setlocal noet ts=8 sw=8 tw=80
+autocmd FileType h setlocal noet ts=8 sw=8 tw=80
+autocmd FileType cpp setlocal noet ts=8 sw=8 tw=80
+autocmd FileType s setlocal noet ts=8 sw=8
+autocmd FileType go setlocal noet ts=4 sw=4
+autocmd FileType hy setlocal filetype=lisp
+autocmd FileType sh setlocal noet ts=4 sw=4
+autocmd BufRead,BufNewFile *.js setlocal et ts=2 sw=2
+autocmd FileType html setlocal et ts=2 sw=2
+autocmd FileType htmldjango setlocal et ts=2 sw=2
+autocmd FileType ruby setlocal et ts=2 sw=2
+autocmd FileType scss setlocal et ts=2 sw=2
+autocmd FileType yaml setlocal et ts=2 sw=2
+autocmd FileType markdown setlocal tw=80 et ts=2 sw=2
+autocmd FileType text setlocal tw=80
+autocmd FileType meson setlocal noet ts=2 sw=2
+autocmd FileType bzl setlocal et ts=2 sw=2
+autocmd FileType typescript setlocal et ts=2 sw=2
+autocmd FileType python setlocal et ts=4 sw=4
+autocmd BufNewFile,BufRead *.ms set syntax=python ts=4 sw=4 noet
+autocmd FileType tex hi Error ctermbg=NONE
+autocmd FileType mail setlocal noautoindent
+autocmd FileType gmi set wrap linebreak
 
 " Multiline indenting
 set breakindent
 
-" ========
-" Bindings
-" ========
-
 " FZF for file switching
 nmap <leader><leader> :FZF<CR>
-
-" Vim stock explorer for file switching
-nmap <leader>e :Explore<CR>
 
 " Run, Build, Test
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
@@ -230,7 +113,6 @@ set whichwrap=b,s,<,>,[,]
 " Highlight searches
 " \s to temp hide the search results
 nmap <leader>n :noh<CR>
-set hlsearch
 
 " Run tabular with \t
 nmap <leader>T :Tabularize /
@@ -253,30 +135,6 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 " Space to toggle folds.
 nnoremap <Space> za
 vnoremap <Space> za
-
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-
-" ====================
-" Misc Plugin Settings
-" ====================
 
 " Git symbol response time
 set updatetime=100
