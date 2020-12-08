@@ -13,3 +13,6 @@
 [submodule "neovim/.config/nvim/pack/plugins/vim-tmux-navigator"]
 	path = neovim/.config/nvim/pack/plugins/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-repeat"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-repeat
+	url = https://github.com/tpope/vim-repeat
