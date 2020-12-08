@@ -4,3 +4,6 @@
 [submodule "neovim/.config/nvim/pack/themes/start/black-pastel"]
 	path = neovim/.config/nvim/pack/themes/start/black-pastel
 	url = https://git.sr.ht/~kota/black-pastel
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-speeddating"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-speeddating
+	url = https://github.com/tpope/vim-speeddating
