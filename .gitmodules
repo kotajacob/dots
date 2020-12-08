@@ -16,3 +16,6 @@
 [submodule "neovim/.config/nvim/pack/plugins/start/vim-repeat"]
 	path = neovim/.config/nvim/pack/plugins/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-vinegar"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-vinegar
+	url = https://github.com/tpope/vim-vinegar
