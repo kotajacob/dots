@@ -7,3 +7,6 @@
 [submodule "neovim/.config/nvim/pack/plugins/start/vim-speeddating"]
 	path = neovim/.config/nvim/pack/plugins/start/vim-speeddating
 	url = https://github.com/tpope/vim-speeddating
+[submodule "neovim/.config/nvim/pack/plugins/vim-visual-star-search"]
+	path = neovim/.config/nvim/pack/plugins/vim-visual-star-search
+	url = https://github.com/bronson/vim-visual-star-search
