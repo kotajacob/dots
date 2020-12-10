@@ -7,6 +7,9 @@ colorscheme black-pastel
 let g:airline_theme='base16'
 set termguicolors
 
+" Coc Extensions
+let g:coc_global_extensions = ['coc-vimlsp', 'coc-tsserver', 'coc-snippets', 'coc-sh', 'coc-python', 'coc-json', 'coc-java', 'coc-html', 'coc-highlight', 'coc-godot', 'coc-go', 'coc-fzf-preview', 'coc-css']
+
 " Enable autowrite (automatically write when :make or :GoBuild are called)
 set autowrite
 
