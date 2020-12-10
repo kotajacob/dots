@@ -55,3 +55,6 @@
 [submodule "neovim/.config/nvim/pack/plugins/start/vim-highlightedyank"]
 	path = neovim/.config/nvim/pack/plugins/start/vim-highlightedyank
 	url = https://github.com/machakann/vim-highlightedyank
+[submodule "neovim/.config/nvim/pack/plugins/start/coc"]
+	path = neovim/.config/nvim/pack/plugins/start/coc
+	url = https://github.com/neoclide/coc.nvim
