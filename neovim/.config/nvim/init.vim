@@ -8,7 +8,7 @@ let g:airline_theme='base16'
 set termguicolors
 
 " Coc Extensions
-let g:coc_global_extensions = ['coc-vimlsp', 'coc-tsserver', 'coc-snippets', 'coc-sh', 'coc-python', 'coc-json', 'coc-java', 'coc-html', 'coc-highlight', 'coc-godot', 'coc-go', 'coc-fzf-preview', 'coc-css']
+let g:coc_global_extensions = ['coc-vimlsp', 'coc-tsserver', 'coc-snippets', 'coc-sh', 'coc-python', 'coc-json', 'coc-java', 'coc-html', 'coc-highlight', 'coc-godot', 'coc-go', 'coc-css']
 
 " Enable autowrite (automatically write when :make or :GoBuild are called)
 set autowrite
@@ -231,7 +231,7 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " FZF for file switching
-nmap <leader><leader> :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+nmap <leader><leader> :FZF<CR>
 
 " Traverse back with arrows
 set whichwrap=b,s,<,>,[,]
