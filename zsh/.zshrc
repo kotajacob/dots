@@ -8,6 +8,7 @@ export EDITOR='/bin/nvim'
 export VISUAL='/bin/nvim'
 export PAGER='/bin/less'
 export NNN_OPTS='cC'
+export FZF_DEFAULT_COMMAND='rg --files'
 export AART_VIEWER='sxiv -b -g 640x640'
 export GOPATH="$HOME/go"
 export PATH=$GOPATH/bin:$HOME/.yarn/bin:$HOME/bin:$HOME/.local/bin:$PATH
