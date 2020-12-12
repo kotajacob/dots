@@ -58,3 +58,6 @@
 [submodule "neovim/.config/nvim/pack/plugins/start/coc"]
 	path = neovim/.config/nvim/pack/plugins/start/coc
 	url = https://github.com/neoclide/coc.nvim
+[submodule "neovim/.config/nvim/pack/plugins/start/nnn"]
+	path = neovim/.config/nvim/pack/plugins/start/nnn
+	url = https://github.com/mcchrish/nnn.vim
