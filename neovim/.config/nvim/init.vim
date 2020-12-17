@@ -86,6 +86,7 @@ autocmd FileType html setlocal et ts=2 sw=2
 autocmd FileType htmldjango setlocal et ts=2 sw=2
 autocmd FileType ruby setlocal et ts=2 sw=2
 autocmd FileType scss setlocal et ts=2 sw=2
+autocmd FileType css setlocal et ts=2 sw=2
 autocmd FileType yaml setlocal et ts=2 sw=2
 autocmd FileType markdown setlocal tw=80 et ts=2 sw=2
 autocmd FileType text setlocal tw=80
