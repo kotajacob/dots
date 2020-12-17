@@ -56,6 +56,11 @@ bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id pamixer -i 10 && notabar
 bindsym Shift+XF86AudioLowerVolume exec --no-startup-id pamixer -d 10 && notabar < /home/kota/.config/notabar/volume
 bindsym XF86AudioMute exec --no-startup-id pamixer -t && notabar < /home/kota/.config/notabar/volume
 
+# music
+bindsym $mod+m exec --no-startup-id mpc toggle
+bindsym $mod+comma exec --no-startup-id mpc prev
+bindsym $mod+period exec --no-startup-id mpc next
+
 ##
 ## Bindings (i3)
 ##
