@@ -61,3 +61,6 @@
 [submodule "neovim/.config/nvim/pack/plugins/start/nnn"]
 	path = neovim/.config/nvim/pack/plugins/start/nnn
 	url = https://github.com/mcchrish/nnn.vim
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-hugo-helper"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-hugo-helper
+	url = https://github.com/robertbasic/vim-hugo-helper
