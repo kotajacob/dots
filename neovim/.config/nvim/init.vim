@@ -232,12 +232,12 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " FZF for file switching
-let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 0.8 } }
-nmap <leader><leader> :FZF<CR>
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
+nmap <leader><leader> :Files<CR>
 
 " Use nnn for file picker
 let g:nnn#set_default_mappings = 0
-let g:nnn#layout = { 'window': { 'width': 0.5, 'height': 0.8 } }
+let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 nnoremap <silent><nowait>- :NnnPicker %:p:h<CR>
 let g:nnn#action = {
       \ '<c-t>': 'tab split',
