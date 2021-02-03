@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=cava
+Exec=st -t st-float -g 80x8 -e cava
+Terminal=false
+Type=Application
+Version=1.0
