@@ -30,3 +30,4 @@ ncmpcpp/.config/ncmpcpp/error.log
 bin/bin/godot
 bin/bin/osync
 bin/bin/pmbootstrap
+neomutt/*
