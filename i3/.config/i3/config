@@ -261,7 +261,8 @@ for_window [title="st-float"] floating enable
 for_window [title="Zathura"] floating enable
 for_window [class="Zathura"] resize set 1306 px 1344 px
 for_window [title="Minecraft"] floating enable
-for_window [class="Minecraft"] resize set 1280 px 720 px
+for_window [class="Fceux"] floating enable
+for_window [class="Fceux"] resize set 1280 px 1200 px
 
 assign [class="Virt-manager"]  $ws8
 assign [class="Wire"]          $ws9
