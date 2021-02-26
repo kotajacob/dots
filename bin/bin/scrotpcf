@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+	maim -u -m 10  | cwebp -lossless -o /tmp/scrot.webp -- - && pcf /tmp/scrot.webp | xclip -selection clipboard; notify-send "screenshot uploaded"
+else
+	maim -s -u -m 10 | cwebp -lossless -o /tmp/scrot.webp -- - && pcf /tmp/scrot.webp | xclip -selection clipboard; notify-send "screenshot uploaded"
+fi

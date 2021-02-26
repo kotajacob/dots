@@ -67,3 +67,12 @@
 [submodule "neovim/.config/nvim/pack/plugins/start/fzf"]
 	path = neovim/.config/nvim/pack/plugins/start/fzf
 	url = https://github.com/junegunn/fzf.vim
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-toml"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-toml
+	url = https://github.com/cespare/vim-toml
+[submodule "neovim/neovim/.config/nvim/pack/plugins/start/vim-godot"]
+	path = neovim/neovim/.config/nvim/pack/plugins/start/vim-godot
+	url = https://github.com/habamax/vim-godot
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-godot"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-godot
+	url = https://github.com/habamax/vim-godot

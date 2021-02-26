@@ -50,6 +50,8 @@ alias xc='sudo xbps-remove -Oo && sudo vkpurge rm all'
 alias xinfo='xbps-query -R -S'
 alias todo='$EDITOR $HOME/TODO'
 alias log='$EDITOR $HOME/LOG'
+alias mnt='udisksctl mount -b'
+alias umnt='udisksctl unmount -b'
 
 ## functions
 readme() {

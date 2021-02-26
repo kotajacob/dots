@@ -68,9 +68,9 @@ set notimeout ttimeout ttimeoutlen=50
 set inccommand=nosplit
 
 " Indentation settings for using hard tabs for indent.
-set softtabstop=8
-set shiftwidth=8
-set tabstop=8
+set softtabstop=2
+set shiftwidth=2
+set tabstop=2
 set noexpandtab
 
 " Auto indent differently per file
@@ -88,6 +88,7 @@ autocmd FileType ruby setlocal et ts=2 sw=2
 autocmd FileType scss setlocal et ts=2 sw=2
 autocmd FileType css setlocal et ts=2 sw=2
 autocmd FileType yaml setlocal et ts=2 sw=2
+autocmd FileType toml setlocal et ts=2 sw=2
 autocmd FileType markdown setlocal tw=80 et ts=2 sw=2
 autocmd FileType text setlocal tw=80
 autocmd FileType meson setlocal noet ts=2 sw=2

@@ -26,6 +26,8 @@ mpd/.config/mpd/mpdstate
 mpd/.config/mpd/mpd.db
 mpd/.config/mpd/mpd.pid
 mpd/.config/mpd/playlists*
+ncmpcpp/.config/ncmpcpp/error.log
 bin/bin/godot
 bin/bin/osync
 bin/bin/pmbootstrap
+neomutt/*

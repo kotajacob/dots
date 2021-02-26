@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=calendar
+Exec=notabar < .config/notabar/cal
+Terminal=false
+Type=Application
+Version=1.0

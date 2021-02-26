@@ -7,4 +7,4 @@ fi
 
 export ENV=$HOME/.kshrc
 
-exec i3
+exec dbus-launch --exit-with-session /bin/i3

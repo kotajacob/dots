@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# List files in /usr/share/applications
+SELECTION=$(fd --type f . '/usr/share/applications' | fzf)
+cp "$SELECTION" "$HOME"/.config/dprint/
