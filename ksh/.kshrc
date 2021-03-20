@@ -3,48 +3,43 @@ export HISTFILE=$HOME/.history
 export HISTSIZE=10000
 export PS1='\w '
 export TERM='xterm-256color'
-export EDITOR='/bin/nvim'
-export VISUAL='/bin/nvim'
-export PAGER='/bin/less'
+export EDITOR='/usr/local/bin/nvim'
+export VISUAL='/usr/local/bin/nvim'
+export PAGER='/usr/bin/less'
 export NNN_OPTS='cC'
-export GOPATH="$HOME/go"
-export PATH=$GOPATH/bin:$HOME/.yarn/bin:$HOME/bin:$PATH
+export PATH=$HOME/bin:$PATH
 set -o vi
 set -o vi-tabcomplete
 
 ## aliases
+alias sudo='doas'
 alias rsync='rsync -avP'
 alias hist='cat .history|less'
-alias ncm='ncmpcpp'
 alias m='make all'
 alias mc='make clean'
-alias mixer='pulsemixer'
-alias clip='xclip -selection clipboard'
 alias c='clear'
 alias vi='nvim'
-alias vim='nvim'
-alias ls='ls --color=auto'
-alias la='ls -lAh --color=auto'
-alias l='ls -1F --color=auto'
+alias ls='ls'
+alias la='ls -lAh'
+alias l='ls -1F'
 alias t='tmux'
 alias tn='tmux new -s'
 alias ta='tmux attach -t'
 alias tls='tmux ls'
-alias xi='sudo xbps-install -S'
-alias xu='sudo xbps-install -Su'
-alias xs='xbps-query -Rs'
-alias xr='sudo xbps-pkgdb -m auto'
-alias xrm='sudo xbps-remove -R'
-alias xc='sudo xbps-remove -Oo && sudo vkpurge rm all'
-alias xinfo='xbps-query -R -S'
-alias xlist='xbps-query -m'
+alias xi='doas pkg_add'
+alias xu='doas pkg_add -u'
+alias xs='pkg_info -Q'
+alias xr='doas pkg_add -aa'
+alias xrm='doas pkg_delete'
+alias xc='doas pkg_delete -a'
+alias xinfo='pkg_info'
+alias xlist='pkg_info -m'
 alias todo='$EDITOR $HOME/TODO'
-alias log='$EDITOR $HOME/LOG'
+log() {
+	zcat /var/www/logs/access.log.*.gz | cat /var/www/logs/access.log - | grep -v syslog | goaccess --no-global-config
+}
 
 ## functions
-record() {
-	ffmpeg -f x11grab -video_size 2560x1440 -r 30 -i "$DISPLAY" -f alsa -i default -c:v ffvhuff -an ~/tmp/record.mkv
-}
 cf() {
 	if [ "$PWD" = "$HOME" ]; then
 		cd "$(fzf < "$HOME/.cache/search-cache-dirs")" || exit
@@ -74,10 +69,6 @@ vcf() {
         SELECTION=$(fd -H --type f | fzf)
 	cd "$(dirname "$SELECTION")" || exit
 	"$EDITOR" "$(basename "$SELECTION")"
-}
-d () {
-	PWD=$(pwd)
-	st -e "$SHELL" -c "cd $PWD; $SHELL" > /dev/null &
 }
 n () {
 	# Block nesting of nnn in subshells
