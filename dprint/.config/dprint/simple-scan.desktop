@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=simplescan
+Exec=simple-scan
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+Icon=org.gnome.SimpleScan
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=GNOME;GTK;Graphics;Scanning;
