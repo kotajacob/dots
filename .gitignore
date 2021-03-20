@@ -1,8 +1,8 @@
 *.uuid
 beets/.local/share/beet/library.db
 beets/.config/beets/state.pickle
-neovim/.config/nvim/undo*
-neovim/.config/nvim/.netrwhist
+neovim*/.config/nvim/undo*
+neovim*/.config/nvim/.netrwhist
 st/st
 st/config.h
 st/st.o
