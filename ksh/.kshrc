@@ -35,6 +35,7 @@ alias xc='doas pkg_delete -a'
 alias xinfo='pkg_info'
 alias xlist='pkg_info -m'
 alias todo='$EDITOR $HOME/TODO'
+alias disks='sysctl hw.disknames'
 log() {
 	zcat /var/www/logs/access.log.*.gz | cat /var/www/logs/access.log - | grep -v syslog | goaccess --no-global-config
 }
