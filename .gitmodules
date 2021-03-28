@@ -124,3 +124,9 @@
 [submodule "neovim-minimal/.config/nvim/pack/plugins/start/vim-godot"]
 	path = neovim-minimal/.config/nvim/pack/plugins/start/vim-godot
 	url = https://github.com/habamax/vim-godot
+[submodule "neovim/.config/nvim/pack/plugins/start/gemini-vim-syntax"]
+	path = neovim/.config/nvim/pack/plugins/start/gemini-vim-syntax
+	url = https://tildegit.org/sloum/gemini-vim-syntax
+[submodule "neovim-minimal/.config/nvim/pack/plugins/start/gemini-vim-syntax"]
+	path = neovim-minimal/.config/nvim/pack/plugins/start/gemini-vim-syntax
+	url = https://tildegit.org/sloum/gemini-vim-syntax
