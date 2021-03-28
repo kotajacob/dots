@@ -23,7 +23,7 @@ compinit
 source /home/kota/.local/share/zsh/plugins/kota-prompt/kota-prompt.zsh
 
 ## aliases
-alias tun='ssh kota@192.168.0.185'
+alias tun='ssh pi@192.168.0.109'
 alias rsync='rsync -avP'
 alias hist='cat .history|less'
 alias ncm='ncmpcpp'
