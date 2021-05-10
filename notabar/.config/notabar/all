@@ -38,8 +38,3 @@ txt,\n
 txt,d = 
 cmd,freespace
 txt,\n
-
-# Weather
-txt,w = 
-cmd,temperature
-txt,\n
