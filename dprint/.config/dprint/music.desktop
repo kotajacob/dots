@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=music
-Exec=st -t st-float -e ncmpcpp
+Exec=st -t st-float -g 86x22 -e ncmpcpp
 Terminal=false
 Type=Application
 Version=1.0
