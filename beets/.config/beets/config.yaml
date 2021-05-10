@@ -10,5 +10,4 @@ paths:
   albumtype:soundtrack: Soundtracks/$album/$track $title
 convert:
   never_convert_lossy_files: yes
-  command: /home/kota/bin/gapless
   extension: mp3
