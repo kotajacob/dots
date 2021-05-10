@@ -1,0 +1,9 @@
+#!/bin/sh
+
+BOOKS="/home/kota/docs/books/"
+
+SEARCH=$(fd . --type f "$BOOKS" -e pdf -e epub -x basename |\
+	sort -R | dmenu -i -l 8)
+
+SELECTION=$(fd "$SEARCH" "$BOOKS")
+zathura "$SELECTION"
