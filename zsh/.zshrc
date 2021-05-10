@@ -1,8 +1,8 @@
 # basic settings
 export PROMPT='$(vi_mode_status)'
-export SAVEHIST=10000
+export SAVEHIST=100000
 export HISTFILE=$HOME/.history
-export HISTSIZE=10000
+export HISTSIZE=100000
 export EDITOR='/bin/nvim'
 export VISUAL='/bin/nvim'
 export PAGER='/bin/less'
@@ -11,7 +11,7 @@ export NNN_OPTS='cC'
 export FZF_DEFAULT_COMMAND='rg --files'
 export AART_VIEWER='sxiv -b -g 640x640'
 export GOPATH="$HOME/go"
-export PATH=$GOPATH/bin:$HOME/.yarn/bin:$HOME/bin:$HOME/.local/bin:$PATH
+export PATH=$GOPATH/bin:$HOME/.yarn/bin:$HOME/bin:$HOME/.local/bin:$HOME/.luarocks/bin:$PATH
 unsetopt beep nomatch menu_complete flowcontrol
 setopt appendhistory autocd extendedglob auto_menu complete_in_word always_to_end notify
 bindkey -v
@@ -65,6 +65,10 @@ readme() {
 
 record() {
 	ffmpeg -f x11grab -video_size 2560x1440 -r 30 -i "$DISPLAY" -f alsa -i default -c:v ffvhuff -an ~/tmp/record.mkv
+}
+
+timer() {
+	minitimer $1; notify-send "timer finished"; beep -f 500 -l 400 -r 4
 }
 
 cf() {
