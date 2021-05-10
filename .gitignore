@@ -30,4 +30,6 @@ ncmpcpp/.config/ncmpcpp/error.log
 bin/bin/godot
 bin/bin/osync
 bin/bin/pmbootstrap
+bin/bin/calories
+bin/bin/pico8
 neomutt/*
