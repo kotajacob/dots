@@ -8,7 +8,7 @@ let g:airline_theme='base16'
 set termguicolors
 
 " Coc Extensions
-let g:coc_global_extensions = ['coc-vimlsp', 'coc-tsserver', 'coc-snippets', 'coc-sh', 'coc-python', 'coc-json', 'coc-java', 'coc-html', 'coc-highlight', 'coc-godot', 'coc-go', 'coc-css']
+let g:coc_global_extensions = ['coc-vimlsp', 'coc-tsserver', 'coc-snippets', 'coc-sh', 'coc-python', 'coc-json', 'coc-java', 'coc-html', 'coc-highlight', 'coc-godot', 'coc-go', 'coc-css', 'coc-lua']
 
 " Enable autowrite (automatically write when :make or :GoBuild are called)
 set autowrite
@@ -94,6 +94,7 @@ autocmd FileType text setlocal tw=80
 autocmd FileType meson setlocal noet ts=2 sw=2
 autocmd FileType bzl setlocal et ts=2 sw=2
 autocmd FileType typescript setlocal et ts=2 sw=2
+autocmd FileType lua setlocal et ts=2 sw=2
 autocmd FileType python setlocal et ts=4 sw=4
 autocmd BufNewFile,BufRead *.ms set syntax=python ts=4 sw=4 noet
 autocmd FileType tex hi Error ctermbg=NONE
