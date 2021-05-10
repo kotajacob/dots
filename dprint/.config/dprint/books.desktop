@@ -1,6 +1,6 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=zathura
+Name=books
 Comment=A minimalistic document viewer
-Exec=zathura-fzf
+Exec=books-fzf
