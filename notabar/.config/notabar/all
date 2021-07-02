@@ -38,3 +38,9 @@ txt,\n
 txt,d = 
 cmd,freespace
 txt,\n
+
+# Wave
+urgency,normal
+txt,w = 
+cmd,tide,/home/kota/docs/Dunedin2021.csv
+txt,\n
