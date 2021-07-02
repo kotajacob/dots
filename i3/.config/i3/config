@@ -39,9 +39,14 @@ bindsym $mod+s exec --no-startup-id scrotpcf
 bindsym $altmod+s exec --no-startup-id maim -s | xclip -selection clipboard -t image/png
 bindsym $mod+Shift+s exec --no-startup-id scrotpcf s
 
+# toggle screen resolution
+bindsym $mod+shift+n exec --no-startup-id /home/kota/.screenlayout/1280.sh
+bindsym $mod+n exec --no-startup-id /home/kota/.screenlayout/2560.sh
+
 # info
 bindsym $mod+Escape exec --no-startup-id notabar < /home/kota/.config/notabar/config
 bindsym $mod+Shift+Escape exec --no-startup-id notabar < /home/kota/.config/notabar/all
+bindsym $mod+t exec --no-startup-id notabar < /home/kota/.config/notabar/timentide
 
 # backlight
 bindsym XF86MonBrightnessUp exec --no-startup-id backlight +5
@@ -252,7 +257,7 @@ for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
 for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
 for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
 for_window [class="Viewnior"] floating enable
-for_window [class="love"] floating enable
+for_window [class="Godot"] floating enable
 for_window [class="Galculator"] floating enable
 for_window [class="Galculator"] resize set 600 px 800 px
 for_window [class="Sxiv"] floating enable
