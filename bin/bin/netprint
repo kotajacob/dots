@@ -8,7 +8,7 @@ else
 	I=$1
 fi
 
-I=$(ip a show dev "$I" | grep "inet " | awk '{print $2}')
+I=$(ip a show dev "$I" | grep "inet " | grep -v "secondary" | awk '{print $2}')
 # Really shitty error checking lol
 I=$(echo "$I" | grep "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*/[0-9]*")
 echo "$I"
