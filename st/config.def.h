@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Iosevka Term:size=10";
+static char *font = "Iosevka:size=10";
 static int borderpx = 16;
 
 /*
@@ -107,29 +107,28 @@ unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	/* 8 normal colors */
-	[0] = "#000000", /* black   */
-	[1] = "#f2003c", /* red     */
-	[2] = "#9fbc00", /* green   */
-	[3] = "#f2ab00", /* yellow  */
-	[4] = "#0082b2", /* blue    */
-	[5] = "#b900a6", /* magenta */
-	[6] = "#00a78a", /* cyan    */
-	[7] = "#d2d2d2", /* white   */
-
-	/* 8 bright colors */
-	[8]  = "#505050", /* black   */
-	[9]  = "#f24353", /* red     */
-	[10] = "#c0d752", /* green   */
-	[11] = "#f2bc3b", /* yellow  */
-	[12] = "#5799b2", /* blue    */
-	[13] = "#b95aaf", /* magenta */
-	[14] = "#7fa7a0", /* cyan    */
-	[15] = "#f5f5f5", /* white   */
+	/* normal colors */
+	[0] = "#000000",
+	[1] = "#ab4642",
+	[2] = "#a1b56c",
+	[3] = "#f7ca88",
+	[4] = "#7cafc2",
+	[5] = "#ba8baf",
+	[6] = "#86c1b9",
+	[7] = "#dedcdc",
+	[8] = "#585858",
+	[9] = "#c44d53",
+	[10] = "#bdcc7a",
+	[11] = "#ffd2a6",
+	[12] = "#8ccddb",
+	[13] = "#d19dc9",
+	[14] = "#98d9c8",
+	[15] = "#f8f8f8",
 
 	/* special colors */
 	[256] = "#000000", /* background */
 	[257] = "#dedcdc", /* foreground */
+
 };
 
 
