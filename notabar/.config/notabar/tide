@@ -1,5 +1,5 @@
 # Tide
 urgency,normal
-txt,w = 
+txt,o = 
 cmd,tide,/home/kota/docs/Dunedin2021.csv
 txt,\n

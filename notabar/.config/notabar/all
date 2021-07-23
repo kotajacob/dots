@@ -28,12 +28,6 @@ txt,n =
 cmd,netprint
 txt,\n
 
-# Mullvad VPN
-urgency,low
-txt,m = 
-cmd,mullcheck
-txt,\n
-
 # Disk
 txt,d = 
 cmd,freespace
@@ -41,6 +35,6 @@ txt,\n
 
 # Wave
 urgency,normal
-txt,w = 
+txt,o = 
 cmd,tide,/home/kota/docs/Dunedin2021.csv
 txt,\n
