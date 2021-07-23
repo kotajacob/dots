@@ -27,10 +27,6 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # start dpass (password selector script)
 bindsym $mod+p exec --no-startup-id dpass
 
-# dump clipboard into CLIP file or back
-bindsym $mod+v exec --no-startup-id xclip -o -selection clipboard > /home/kota/docs/notes/CLIP
-bindsym $mod+c exec --no-startup-id xclip -selection clipboard /home/kota/docs/notes/CLIP
-
 # start firefox
 bindsym $mod+b exec --no-startup-id qutebrowser
 
@@ -40,13 +36,12 @@ bindsym $altmod+s exec --no-startup-id maim -s | xclip -selection clipboard -t i
 bindsym $mod+Shift+s exec --no-startup-id scrotpcf s
 
 # toggle screen resolution
-bindsym $mod+shift+n exec --no-startup-id /home/kota/.screenlayout/1280.sh
+bindsym $mod+shift+n exec --no-startup-id /home/kota/.screenlayout/1600.sh
 bindsym $mod+n exec --no-startup-id /home/kota/.screenlayout/2560.sh
 
 # info
-bindsym $mod+Escape exec --no-startup-id notabar < /home/kota/.config/notabar/config
-bindsym $mod+Shift+Escape exec --no-startup-id notabar < /home/kota/.config/notabar/all
-bindsym $mod+t exec --no-startup-id notabar < /home/kota/.config/notabar/timentide
+bindsym $mod+Escape exec --no-startup-id notabar < /home/kota/.config/notabar/all
+bindsym $mod+v exec --no-startup-id notabar < /home/kota/.config/notabar/vpn
 
 # backlight
 bindsym XF86MonBrightnessUp exec --no-startup-id backlight +5
