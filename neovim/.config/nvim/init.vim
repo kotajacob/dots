@@ -1,5 +1,5 @@
 syntax enable
-set number
+set relativenumber
 set encoding=utf-8
 set cursorline
 set colorcolumn=80
@@ -94,7 +94,7 @@ autocmd FileType text setlocal tw=80
 autocmd FileType meson setlocal noet ts=2 sw=2
 autocmd FileType bzl setlocal et ts=2 sw=2
 autocmd FileType typescript setlocal et ts=2 sw=2
-autocmd FileType lua setlocal et ts=2 sw=2
+autocmd FileType lua setlocal noet ts=4 sw=4
 autocmd FileType python setlocal et ts=4 sw=4
 autocmd BufNewFile,BufRead *.ms set syntax=python ts=4 sw=4 noet
 autocmd FileType tex hi Error ctermbg=NONE
