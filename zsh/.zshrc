@@ -1,13 +1,15 @@
 # basic settings
 export PROMPT='$(vi_mode_status)'
-export SAVEHIST=100000
+export SAVEHIST=1000000
 export HISTFILE=$HOME/.history
-export HISTSIZE=100000
+export HISTSIZE=1000000
 export EDITOR='/bin/nvim'
 export VISUAL='/bin/nvim'
 export PAGER='/bin/less'
 export TERM='xterm-256color'
 export NNN_OPTS='cC'
+export PCFSERVER='https://paste.nilsu.org:21/incoming'
+export JAVA_HOME='/home/kota/.local'
 export FZF_DEFAULT_COMMAND='rg --files'
 export AART_VIEWER='sxiv -b -g 640x640'
 export GOPATH="$HOME/go"
@@ -23,7 +25,6 @@ compinit
 source /home/kota/.local/share/zsh/plugins/kota-prompt/kota-prompt.zsh
 
 ## aliases
-alias tun='ssh pi@192.168.0.109'
 alias rsync='rsync -avP'
 alias hist='cat .history|less'
 alias ncm='ncmpcpp'
@@ -52,6 +53,8 @@ alias todo='$EDITOR $HOME/TODO'
 alias log='$EDITOR $HOME/LOG'
 alias mnt='udisksctl mount -b'
 alias umnt='udisksctl unmount -b'
+alias tide='tide /home/kota/docs/Dunedin2021.csv'
+alias mail='mbsync primary'
 
 ## functions
 readme() {
