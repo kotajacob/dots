@@ -130,3 +130,18 @@
 [submodule "neovim-minimal/.config/nvim/pack/plugins/start/gemini-vim-syntax"]
 	path = neovim-minimal/.config/nvim/pack/plugins/start/gemini-vim-syntax
 	url = https://tildegit.org/sloum/gemini-vim-syntax
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-eunuch"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-eunuch
+	url = https://github.com/tpope/vim-eunuch
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-dirvish"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-dirvish
+	url = https://github.com/justinmk/vim-dirvish
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-floaterm"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-floaterm
+	url = https://github.com/voldikss/vim-floaterm
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-go"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-go
+	url = https://github.com/fatih/vim-go
+[submodule "neovim/.config/nvim/pack/plugins/start/preamble"]
+	path = neovim/.config/nvim/pack/plugins/start/preamble
+	url = https://github.com/vim-scripts/Preamble

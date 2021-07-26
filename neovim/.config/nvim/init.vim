@@ -8,7 +8,7 @@ let g:airline_theme='base16'
 set termguicolors
 
 " Coc Extensions
-let g:coc_global_extensions = ['coc-vimlsp', 'coc-tsserver', 'coc-snippets', 'coc-sh', 'coc-python', 'coc-json', 'coc-java', 'coc-html', 'coc-highlight', 'coc-godot', 'coc-go', 'coc-css', 'coc-lua']
+let g:coc_global_extensions = ['coc-vimlsp', 'coc-tsserver', 'coc-snippets', 'coc-sh', 'coc-python', 'coc-json', 'coc-java', 'coc-html', 'coc-highlight', 'coc-godot', 'coc-css', 'coc-lua']
 
 " Enable autowrite (automatically write when :make or :GoBuild are called)
 set autowrite
@@ -20,6 +20,9 @@ set undodir=~/.config/nvim/undo
 " Don't litter swp files everywhere
 set nobackup
 set nowritebackup
+
+" Enable nvim diffing
+set diffopt=filler,internal,algorithm:histogram,indent-heuristic
 
 " Unbreak vim's regex implementation
 set magic
@@ -228,28 +231,37 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+" Pandoc the current file
+nmap <leader>m :w<CR>:!pandoc % -o %:t:r.pdf<CR>
+nmap <leader>M :!zathura %:t:r.pdf &<CR>
+
 " FZF for file switching
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
-nmap <leader><leader> :Files<CR>
+nnoremap <leader><leader> :Buffers<CR>
+nnoremap <leader>] :Files<CR>
+nnoremap <leader>/ :Lines<CR>
+nnoremap <leader><CR> :FloatermNew! --height=0.9 --width=0.8 --autoclose=2<CR>
 
-" Use nnn for file picker
-let g:nnn#set_default_mappings = 0
-let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
-nnoremap <silent><nowait>- :NnnPicker %:p:h<CR>
-let g:nnn#action = {
-      \ '<c-t>': 'tab split',
-      \ '<c-x>': 'split',
-      \ '<c-v>': 'vsplit' }
+" terminal
+hi FloatermBorder guibg=black guifg=grey
+let g:floaterm_keymap_kill = '<leader><Esc>'
+
+" dirvish
+let g:dirvish_mode = ':sort ,^.*[\/],'
+let g:loaded_netrwPlugin = 1
+command! -nargs=? -complete=dir Explore Dirvish <args>
+command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
+command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 
 " Traverse back with arrows
 set whichwrap=b,s,<,>,[,]
 
 " Highlight searches
 " \s to temp hide the search results
-nmap <leader>n :noh<CR>
+nnoremap <leader>n :noh<CR>
 
 " Run tabular with \t
-nmap <leader>T :Tabularize /
+nnoremap <leader>T :Tabularize /
 
 " Set f5 and \u as hotkeys to show Undo Tree
 nnoremap <F5> :UndotreeToggle<CR>
@@ -257,11 +269,10 @@ nnoremap <leader>u :UndotreeToggle<CR>
 
 " Set f3 as hotkey to show Hidden characters
 nnoremap <F3> :set list!<CR>
-nmap <leader>h :set list!<CR>
 set listchars=tab:▸\ ,eol:¬
 
 " Set spell toggle
-nmap <leader>s :set spell!<CR>
+nnoremap <leader>s :set spell!<CR>
 
 " Map %% to return my current working directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
@@ -282,3 +293,23 @@ let g:gitgutter_sign_modified='┃'
 let g:gitgutter_sign_removed='┃'
 let g:gitgutter_sign_removed_first_line='┃'
 let g:gitgutter_sign_modified_removed='┃'
+
+" Remap j and k to move by display with wrapped lines, but also move the
+" correct number of lines when preceded with a count. Counts greater than 5
+" will be added to the movement history to make Control-O and Control-I work.
+nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+
+" vim-go is used instead of coc-nvim, but there's a few settings to change to
+" make it a more seamless transition
+let g:go_doc_popup_window = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_build_constraints = 1
+autocmd FileType go nmap <leader>t <Plug>(go-test)
+autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>1, 'edit')
+autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>1, 'vsplit')
+autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>1, 'split')
+autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>1, 'tabe')

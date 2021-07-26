@@ -1,24 +1,40 @@
 {
 	"coc.preferences.formatOnSaveFiletypes": [
-    "javascript",
-    "html",
-    "json",
-    "css",
-    "scss",
-    "go"
-  ],
-    "languageserver": {
-        "godot": {
-            "host": "127.0.0.1",
-            "filetypes": ["gdscript"],
-            "port": 6008
-        }
-    },
-		"diagnostic-languageserver.filetypes": {
-				"sh": "shellcheck"
+		"javascript",
+		"html",
+		"json",
+		"css",
+		"scss"
+	],
+	"languageserver": {
+		"godot": {
+			"host": "127.0.0.1",
+			"filetypes": [
+				"gdscript"
+			],
+			"port": 6008
 		},
-		"diagnostic-languageserver.formatFiletypes": {
-		    "lua": "lua-format",
-				"sh": "shfmt"
-  }
+		"golang": {
+			"command": "gopls",
+			"args": [
+				"-remote=auto"
+			],
+			"rootPatterns": [
+				"go.mod",
+				".vim/",
+				".git/",
+				".hg/"
+			],
+			"filetypes": [
+				"go"
+			]
+		}
+	},
+	"diagnostic-languageserver.filetypes": {
+		"sh": "shellcheck"
+	},
+	"diagnostic-languageserver.formatFiletypes": {
+		"lua": "lua-format",
+		"sh": "shfmt"
+	}
 }
