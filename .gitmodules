@@ -145,3 +145,6 @@
 [submodule "neovim/.config/nvim/pack/plugins/start/preamble"]
 	path = neovim/.config/nvim/pack/plugins/start/preamble
 	url = https://github.com/vim-scripts/Preamble
+[submodule "neovim/.config/nvim/pack/plugins/start/gx-extended"]
+	path = neovim/.config/nvim/pack/plugins/start/gx-extended
+	url = https://github.com/stsewd/gx-extended.vim
