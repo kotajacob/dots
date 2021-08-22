@@ -32,4 +32,8 @@ bin/bin/osync
 bin/bin/pmbootstrap
 bin/bin/calories
 bin/bin/pico8
+bin/bin/access2csv
+bin/bin/demoji
+bin/bin/gemhu
+bin/bin/packwiz
 neomutt/*

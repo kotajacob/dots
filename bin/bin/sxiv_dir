@@ -11,7 +11,7 @@ abspath() {
 # list all images in a directory
 listimages() {
     find -L "$(dirname "$target")" -maxdepth 1 -type f -iregex \
-      '.*\(jpe?g\|bmp\|webp\|png\|gif\)$' -print0 | sort -z
+      '.*\(jpe?g\|bmp\|webp\|png\|gif\|tif\)$' -print0 | sort -z
 }
 
 target="$(abspath "$1")"
