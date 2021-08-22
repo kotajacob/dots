@@ -22,11 +22,13 @@
 	ff = merge --ff-only
 	noff = merge --no-ff
 	fa = fetch --all
-	pom = push origin master
-	pum = pull origin master
+	pom = push origin
+	pum = pull origin
 	dh1 = diff HEAD~1
 	ra = log --oneline
 [merge]
 	tool = vimdiff
 [pull]
 	rebase = false
+[gpg]
+	program = gpg2
