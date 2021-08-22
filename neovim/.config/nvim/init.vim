@@ -8,7 +8,7 @@ let g:airline_theme='base16'
 set termguicolors
 
 " Coc Extensions
-let g:coc_global_extensions = ['coc-vimlsp', 'coc-tsserver', 'coc-snippets', 'coc-sh', 'coc-python', 'coc-json', 'coc-java', 'coc-html', 'coc-highlight', 'coc-godot', 'coc-css', 'coc-lua']
+let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-clangd', 'coc-vimlsp', 'coc-tsserver', 'coc-snippets', 'coc-sh', 'coc-python', 'coc-json', 'coc-java', 'coc-html', 'coc-highlight', 'coc-godot', 'coc-css', 'coc-lua']
 
 " Enable autowrite (automatically write when :make or :GoBuild are called)
 set autowrite
@@ -237,7 +237,8 @@ nmap <leader>M :!zathura %:t:r.pdf &<CR>
 
 " FZF for file switching
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
-nnoremap <leader><leader> :Buffers<CR>
+nnoremap <leader><leader> :GFiles<CR>
+nnoremap <leader>[ :Buffers<CR>
 nnoremap <leader>] :Files<CR>
 nnoremap <leader>/ :Lines<CR>
 nnoremap <leader><CR> :FloatermNew! --height=0.9 --width=0.8 --autoclose=2<CR>
