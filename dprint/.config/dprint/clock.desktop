@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=clock
 GenericName=Clock
-Exec=st -t st-float -g 39x8 -e tty-clock -c -D -C 7
+Exec=alacritty --class "Alacritty-float,Alacritty-float" -o window.dimensions.columns=39 -o window.dimensions.lines=8 -e tty-clock -c -D -C 7
 Terminal=false
 Type=Application
 Version=1.0

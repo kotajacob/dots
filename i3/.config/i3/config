@@ -18,14 +18,17 @@ floating_modifier $mod
 ##
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id st
-bindsym $mod+Shift+Return exec --no-startup-id st -t st-float
+bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+Shift+Return exec --no-startup-id "alacritty --class Alacritty-float,Alacritty-float"
 
 # start rofi (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
 
 # start dpass (password selector script)
 bindsym $mod+p exec --no-startup-id dpass
+
+# start demoji
+bindsym $mod+o exec --no-startup-id demoji
 
 # start firefox
 bindsym $mod+b exec --no-startup-id qutebrowser
@@ -257,7 +260,7 @@ for_window [class="Galculator"] floating enable
 for_window [class="Galculator"] resize set 600 px 800 px
 for_window [class="Sxiv"] floating enable
 for_window [class="Tor Browser"] floating enable
-for_window [title="st-float"] floating enable
+for_window [Class="Alacritty-float"] floating enable
 for_window [class="Zathura"] floating enable
 for_window [class="Zathura"] resize set 1306 px 1344 px
 for_window [class="Zathura"] move absolute position center

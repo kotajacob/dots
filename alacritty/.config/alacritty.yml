@@ -1,0 +1,47 @@
+window:
+  # Window padding (changes require restart)
+  dimensions:
+    columns: 80
+    lines: 24
+  padding:
+    x: 12
+    y: 12
+
+font:
+  size: 10
+
+colors:
+  # Default colors
+  primary:
+    background: '0x000000'
+    foreground: '0xdedcdc'
+
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: CellBackground
+    cursor: CellForeground
+
+  # Normal colors
+  normal:
+    black:   '0x000000'
+    red:     '0xab4642'
+    green:   '0xa1b56c'
+    yellow:  '0xf7ca88'
+    blue:    '0x7cafc2'
+    magenta: '0xba8baf'
+    cyan:    '0x86c1b9'
+    white:   '0xdedcdc'
+
+  # Bright colors
+  bright:
+    black:   '0x585858'
+    red:     '0xc44d53'
+    green:   '0xbdcc7a'
+    yellow:  '0xffd2a6'
+    blue:    '0x8ccddb'
+    magenta: '0xd19dc9'
+    cyan:    '0x98d9c8'
+    white:   '0xf8f8f8'
+
+key_bindings:
+    - { key: Return,              mods: Control,                    action: SpawnNewInstance      }

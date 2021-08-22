@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=cava
-Exec=st -t st-float -g 80x8 -e cava
+Exec=alacritty --class "Alacritty-float,Alacritty-float" -o window.dimensions.columns=80 -o window.dimensions.lines=8 -e cava
 Terminal=false
 Type=Application
 Version=1.0

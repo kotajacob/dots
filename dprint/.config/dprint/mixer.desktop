@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=mixer
 GenericName=Volume controller
-Exec=st -t st-float -g 80x14 -e pulsemixer
+Exec=alacritty --class "Alacritty-float,Alacritty-float" -o window.dimensions.columns=80 -o window.dimensions.lines=14 -e pulsemixer
 Terminal=false
 Type=Application
 Version=1.0
