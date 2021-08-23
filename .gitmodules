@@ -151,3 +151,6 @@
 [submodule "https:/github.com/stsewd/gx-extended.vim"]
 	path = https:/github.com/stsewd/gx-extended.vim
 	url = https://git.sr.ht/~kota/light-pastel
+[submodule "neovim/.config/nvim/pack/themes/start/light-pastel"]
+	path = neovim/.config/nvim/pack/themes/start/light-pastel
+	url = https://git.sr.ht/~kota/light-pastel
