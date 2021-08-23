@@ -32,3 +32,5 @@
 	rebase = false
 [gpg]
 	program = gpg2
+[init]
+	defaultBranch = master
