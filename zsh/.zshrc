@@ -8,7 +8,9 @@ export VISUAL='/bin/nvim'
 export PAGER='/bin/less'
 export TERM='xterm-256color'
 export GPG_TTY=$(tty)
-export NNN_OPTS='cC'
+export NNN_OPTS='rcC'
+export NNN_COLORS='4444'
+export NNN_BMS="d:$HOME/docs;h:$HOME;g:$HOME/g;t:$HOME/tmp;m:/run/media/kota"
 export CGO_ENABLED=1
 export PCFSERVER='https://paste.nilsu.org:21/incoming'
 export JAVA_HOME='/home/kota/.local'
@@ -57,6 +59,9 @@ alias mnt='udisksctl mount -b'
 alias umnt='udisksctl unmount -b'
 alias tide='tide /home/kota/docs/Dunedin2021.csv'
 alias mail='mbsync primary'
+# https://github.com/jarun/advcpmv
+alias cp='cpg -g'
+alias mv='mvg -g'
 
 ## functions
 readme() {
