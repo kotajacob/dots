@@ -36,4 +36,6 @@ bin/bin/access2csv
 bin/bin/demoji
 bin/bin/gemhu
 bin/bin/packwiz
+bin/bin/cpg
+bin/bin/mvg
 neomutt/*
