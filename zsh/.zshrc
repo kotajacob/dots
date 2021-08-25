@@ -3,14 +3,18 @@ export PROMPT='$(vi_mode_status)'
 export SAVEHIST=1000000
 export HISTFILE=$HOME/.history
 export HISTSIZE=1000000
-export EDITOR='/bin/nvim'
-export VISUAL='/bin/nvim'
-export PAGER='/bin/less'
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PAGER='less'
+export MANPAGER='less -R --use-color -Dd+g -Du+b'
+export LESS='-R'
 export TERM='xterm-256color'
 export GPG_TTY=$(tty)
-export NNN_OPTS='rcC'
+export NNN_OPTS='arcC'
 export NNN_COLORS='4444'
 export NNN_BMS="d:$HOME/docs;h:$HOME;g:$HOME/g;t:$HOME/tmp;m:/run/media/kota"
+export NNN_PLUG="x:!chmod +x $nnn;r:fixname;d:xdgdefault;p:preview-tui"
+export PF_INFO="ascii title os kernel uptime pkgs memory editor palette"
 export CGO_ENABLED=1
 export PCFSERVER='https://paste.nilsu.org:21/incoming'
 export JAVA_HOME='/home/kota/.local'
@@ -42,6 +46,7 @@ alias vim='nvim'
 alias ls='ls --color=auto'
 alias la='ls -lAh --color=auto'
 alias l='ls -1F --color=auto'
+alias ip='ip -color=auto'
 alias t='tmux'
 alias tn='tmux new -s'
 alias ta='tmux attach -t'
@@ -73,69 +78,37 @@ readme() {
 	touch "$NAME" && "$EDITOR" "$NAME"
 }
 
-record() {
-	ffmpeg -f x11grab -video_size 2560x1440 -r 30 -i "$DISPLAY" -f alsa -i default -c:v ffvhuff -an ~/tmp/record.mkv
-}
-
 timer() {
-	minitimer $1; notify-send "timer finished"; beep -f 500 -l 400 -r 4
+	minitimer $1
+	notify-send "timer finished"
+	vol="$(pamixer --get-volume)"
+	pamixer --set-volume 85
+	ffplay -loglevel quiet -f lavfi -i "sine=frequency=900:duration=2" -autoexit -nodisp
+	pamixer --set-volume "$vol"
 }
 
 cf() {
-	if [ "$PWD" = "$HOME" ]; then
-		cd "$(fzf < "$HOME/.cache/search-cache-dirs")" || exit
-	else
-		cd "$(fd --type d | fzf)" || exit
-	fi
+	cd "$(fd --type d | fzf)" || exit
 }
 
 cfh() {
-	if [ "$PWD" = "$HOME" ]; then
-		cd "$(fzf < "$HOME/.cache/search-cache-dirs-hidden")" || exit
-	else
-		cd "$(fd -H --type d | fzf)" || exit
-	fi
+	cd "$(fd -H --type d | fzf)" || exit
 }
 
 of() {
-	if [ "$PWD" = "$HOME" ]; then
-		SELECTION=$(fzf < "$HOME/.cache/search-cache-files")
-	else
-		SELECTION=$(fd --type f | fzf)
-	fi
+	SELECTION=$(fd --type f | fzf)
 	xdg-open "$SELECTION" >/dev/null 2>&1 &
 }
 
 ofh() {
-	if [ "$PWD" = "$HOME" ]; then
-		SELECTION=$(fzf < "$HOME/.cache/search-cache-files-hidden")
-	else
-		SELECTION=$(fd -H --type f | fzf)
-	fi
+	SELECTION=$(fd -H --type f | fzf)
 	xdg-open "$SELECTION" >/dev/null 2>&1 &
 }
 
 vf() {
-	if [ "$PWD" = "$HOME" ]; then
-		SELECTION=$(fzf < "$HOME/.cache/search-cache-files-hidden")
-	else
-		SELECTION=$(fd -H --type f | fzf)
-	fi
-	"$EDITOR" "$SELECTION"
-}
-
-vcf() {
-	if [ "$PWD" = "$HOME" ]; then
-		SELECTION=$(fzf < "$HOME/.cache/search-cache-files-hidden")
-	else
-		SELECTION=$(fd -H --type f | fzf)
-	fi
+	SELECTION=$(fd -H --type f | fzf)
 	cd "$(dirname "$SELECTION")" || exit
 	"$EDITOR" "$(basename "$SELECTION")"
-}
-
-d () {
-	. ranger
 }
 
 n ()
@@ -157,7 +130,7 @@ n ()
     # stty lwrap undef
     # stty lnext undef
 
-    nnn "$@"
+    tmux new-session 'nnn "$@"'
 
     if [ -f "$NNN_TMPFILE" ]; then
             . "$NNN_TMPFILE"
