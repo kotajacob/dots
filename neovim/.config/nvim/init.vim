@@ -3,9 +3,10 @@ set relativenumber
 set encoding=utf-8
 set cursorline
 set colorcolumn=80
+set termguicolors
+set background=dark
 colorscheme black-pastel
 let g:airline_theme='base16'
-set termguicolors
 
 " Coc Extensions
 let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-clangd', 'coc-vimlsp', 'coc-tsserver', 'coc-snippets', 'coc-sh', 'coc-python', 'coc-json', 'coc-java', 'coc-html', 'coc-highlight', 'coc-godot', 'coc-css', 'coc-lua']
@@ -83,7 +84,7 @@ autocmd FileType cpp setlocal noet ts=8 sw=8 tw=80
 autocmd FileType s setlocal noet ts=8 sw=8
 autocmd FileType go setlocal noet ts=4 sw=4
 autocmd FileType hy setlocal filetype=lisp
-autocmd FileType sh setlocal noet ts=4 sw=4
+autocmd FileType sh setlocal et ts=2 sw=2
 autocmd BufRead,BufNewFile *.js setlocal et ts=2 sw=2
 autocmd FileType html setlocal et ts=2 sw=2
 autocmd FileType htmldjango setlocal et ts=2 sw=2
@@ -237,6 +238,7 @@ nmap <leader>M :!zathura %:t:r.pdf &<CR>
 
 " FZF for file switching
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
+let g:fzf_preview_window = []
 nnoremap <leader><leader> :GFiles<CR>
 nnoremap <leader>[ :Buffers<CR>
 nnoremap <leader>] :Files<CR>
