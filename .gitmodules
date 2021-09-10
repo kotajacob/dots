@@ -154,3 +154,21 @@
 [submodule "neovim/.config/nvim/pack/themes/start/light-pastel"]
 	path = neovim/.config/nvim/pack/themes/start/light-pastel
 	url = https://git.sr.ht/~kota/light-pastel
+[submodule "neovim/.config/nvim/pack/plugins/start/vimwiki"]
+	path = neovim/.config/nvim/pack/plugins/start/vimwiki
+	url = https://github.com/vimwiki/vimwiki.git
+[submodule "neovim/.config/nvim/pack/plugins/start/wiki.vim"]
+	path = neovim/.config/nvim/pack/plugins/start/wiki.vim
+	url = https://github.com/lervag/wiki.vim
+[submodule "neovim/.config/nvim/pack/plugins/start/wiki-ft.vim"]
+	path = neovim/.config/nvim/pack/plugins/start/wiki-ft.vim
+	url = https://github.com/lervag/wiki-ft.vim
+[submodule "neovim/.config/nvim/pack/plugins/start/ctrlsf.vim"]
+	path = neovim/.config/nvim/pack/plugins/start/ctrlsf.vim
+	url = https://github.com/dyng/ctrlsf.vim
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-visual-multi"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-visual-multi
+	url = https://github.com/mg979/vim-visual-multi
+[submodule "neovim/.config/nvim/pack/plugins/start/vim-hexokinase"]
+	path = neovim/.config/nvim/pack/plugins/start/vim-hexokinase
+	url = https://github.com/RRethy/vim-hexokinase

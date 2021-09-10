@@ -9,7 +9,7 @@ colorscheme black-pastel
 let g:airline_theme='base16'
 
 " Coc Extensions
-let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-clangd', 'coc-vimlsp', 'coc-tsserver', 'coc-snippets', 'coc-sh', 'coc-python', 'coc-json', 'coc-java', 'coc-html', 'coc-highlight', 'coc-godot', 'coc-css', 'coc-lua']
+let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-clangd', 'coc-vimlsp', 'coc-tsserver', 'coc-snippets', 'coc-sh', 'coc-python', 'coc-json', 'coc-java', 'coc-html', 'coc-godot', 'coc-css', 'coc-lua']
 
 " Enable autowrite (automatically write when :make or :GoBuild are called)
 set autowrite
@@ -63,7 +63,7 @@ set wrap
 set linebreak
 
 " Set when vim will scroll
-set scrolloff=6
+set scrolloff=8
 
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=50
@@ -77,6 +77,9 @@ set shiftwidth=2
 set tabstop=2
 set noexpandtab
 
+" Open all folds by default
+set foldlevelstart=99
+
 " Auto indent differently per file
 autocmd FileType c setlocal noet ts=8 sw=8 tw=80
 autocmd FileType h setlocal noet ts=8 sw=8 tw=80
@@ -85,7 +88,7 @@ autocmd FileType s setlocal noet ts=8 sw=8
 autocmd FileType go setlocal noet ts=4 sw=4
 autocmd FileType hy setlocal filetype=lisp
 autocmd FileType sh setlocal et ts=2 sw=2
-autocmd BufRead,BufNewFile *.js setlocal et ts=2 sw=2
+autocmd FileType js setlocal et ts=2 sw=2
 autocmd FileType html setlocal et ts=2 sw=2
 autocmd FileType htmldjango setlocal et ts=2 sw=2
 autocmd FileType ruby setlocal et ts=2 sw=2
@@ -99,11 +102,12 @@ autocmd FileType meson setlocal noet ts=2 sw=2
 autocmd FileType bzl setlocal et ts=2 sw=2
 autocmd FileType typescript setlocal et ts=2 sw=2
 autocmd FileType lua setlocal noet ts=4 sw=4
-autocmd FileType python setlocal et ts=4 sw=4
+autocmd FileType python setlocal noet ts=4 sw=4
 autocmd BufNewFile,BufRead *.ms set syntax=python ts=4 sw=4 noet
 autocmd FileType tex hi Error ctermbg=NONE
 autocmd FileType mail setlocal noautoindent
 autocmd FileType gmi set wrap linebreak
+autocmd FileType wiki setlocal tw=80 et ts=2 sw=2
 
 " Multiline indenting
 set breakindent
@@ -239,15 +243,25 @@ nmap <leader>M :!zathura %:t:r.pdf &<CR>
 " FZF for file switching
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 let g:fzf_preview_window = []
-nnoremap <leader><leader> :GFiles<CR>
-nnoremap <leader>[ :Buffers<CR>
-nnoremap <leader>] :Files<CR>
-nnoremap <leader>/ :Lines<CR>
+nnoremap <leader><leader> :Files<CR>
+nnoremap <leader>[ :CtrlSF 
+nnoremap <leader>] :GFiles<CR>
+nnoremap <leader>/ :Buffers<CR>
 nnoremap <leader><CR> :FloatermNew! --height=0.9 --width=0.8 --autoclose=2<CR>
+
+" wiki.vim
+let g:wiki_root = '~/docs/memex'
+" override <leader>ww for wiki.vim
+nmap <leader>ww <plug>(wiki-index)\|:cd ~/docs/memex<cr>
+" override <leader><leader> for wiki.vim
+autocmd FileType wiki nnoremap <leader><leader> :WikiFzfPages<CR>
 
 " terminal
 hi FloatermBorder guibg=black guifg=grey
 let g:floaterm_keymap_kill = '<leader><Esc>'
+
+" hexokinase.vim
+let g:Hexokinase_highlighters = ['backgroundfull']
 
 " dirvish
 let g:dirvish_mode = ':sort ,^.*[\/],'
@@ -316,3 +330,6 @@ autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>1, 'edit')
 autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>1, 'vsplit')
 autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>1, 'split')
 autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>1, 'tabe')
+
+" vim-visual-multi
+let g:VM_leader = "\,"
