@@ -13,8 +13,8 @@ font:
 colors:
   # Default colors
   primary:
-    background: '0x000000'
-    foreground: '0xdedcdc'
+    background: '#000000'
+    foreground: '#dedcdc'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
@@ -23,25 +23,25 @@ colors:
 
   # Normal colors
   normal:
-    black:   '0x000000'
-    red:     '0xf24353'
-    green:   '0xa1b56c'
-    yellow:  '0xf7ca88'
-    blue:    '0x7cafc2'
-    magenta: '0xba8baf'
-    cyan:    '0x86c1b9'
-    white:   '0xdedcdc'
+    black:   '#000000'
+    red:     '#e65737'
+    green:   '#a1b56c'
+    yellow:  '#f7ca88'
+    blue:    '#7cafc2'
+    magenta: '#ba8baf'
+    cyan:    '#86c1b9'
+    white:   '#dedcdc'
 
   # Bright colors
   bright:
-    black:   '0x585858'
-    red:     '0xe9717d'
-    green:   '0xbdcc7a'
-    yellow:  '0xffd2a6'
-    blue:    '0x8ccddb'
-    magenta: '0xd19dc9'
-    cyan:    '0x98d9c8'
-    white:   '0xf8f8f8'
+    black:   '#585858'
+    red:     '#ee8060'
+    green:   '#bdcc7a'
+    yellow:  '#ffd2a6'
+    blue:    '#8ccddb'
+    magenta: '#d19dc9'
+    cyan:    '#98d9c8'
+    white:   '#f8f8f8'
 
 key_bindings:
     - { key: Return,              mods: Control,                    action: SpawnNewInstance      }
