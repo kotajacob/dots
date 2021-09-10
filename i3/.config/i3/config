@@ -1,89 +1,81 @@
-####################
-#                  #
-# Kota's i3 Config #
-#                  #
-####################
+# Kota's i3 Config
 
 set $mod Mod4
 set $altmod Mod1
 
-# Font for window titles.
+### Font for window titles.
 font pango:Iosevka Term SS09 9
 
-# Use Mouse+$mod to drag floating windows to their wanted position
+### Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-##
 ## Bindings (Launchers)
-##
 
-# start a terminal
+### start a terminal
 bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+Shift+Return exec --no-startup-id "alacritty --class Alacritty-float,Alacritty-float"
 
-# start rofi (a program launcher)
+### start rofi (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
 
-# start dpass (password selector script)
+### start dpass (password selector script)
 bindsym $mod+p exec --no-startup-id dpass
 
-# start demoji
+### start demoji
 bindsym $mod+o exec --no-startup-id demoji
 
-# start firefox
+### start qutebrowser
 bindsym $mod+b exec --no-startup-id qutebrowser
 
-# high quality screenshot
+### high quality screenshot
 bindsym $mod+s exec --no-startup-id scrotpcf
 bindsym $altmod+s exec --no-startup-id maim -s | xclip -selection clipboard -t image/png
 bindsym $mod+Shift+s exec --no-startup-id scrotpcf s
 
-# toggle screen resolution
+### toggle screen resolution
 bindsym $mod+shift+n exec --no-startup-id /home/kota/.screenlayout/1600.sh
 bindsym $mod+n exec --no-startup-id /home/kota/.screenlayout/2560.sh
 
-# info
+### info
 bindsym $mod+Escape exec --no-startup-id notabar < /home/kota/.config/notabar/all
 bindsym $mod+v exec --no-startup-id notabar < /home/kota/.config/notabar/vpn
 
-# backlight
+### backlight
 bindsym XF86MonBrightnessUp exec --no-startup-id backlight +5
 bindsym XF86MonBrightnessDown exec --no-startup-id backlight -5
 bindsym Shift+XF86MonBrightnessUp exec --no-startup-id backlight +10
 bindsym Shift+XF86MonBrightnessDown exec --no-startup-id backlight -10
 
-# sound
+### sound
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && notabar < /home/kota/.config/notabar/volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 && notabar < /home/kota/.config/notabar/volume
 bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id pamixer -i 10 && notabar < /home/kota/.config/notabar/volume
 bindsym Shift+XF86AudioLowerVolume exec --no-startup-id pamixer -d 10 && notabar < /home/kota/.config/notabar/volume
 bindsym XF86AudioMute exec --no-startup-id pamixer -t && notabar < /home/kota/.config/notabar/volume
 
-# music
+### music
 bindsym $mod+m exec --no-startup-id mpc toggle
 bindsym $mod+comma exec --no-startup-id mpc prev
 bindsym $mod+period exec --no-startup-id mpc next
 
-##
 ## Bindings (i3)
-##
 
-# kill focused window
+### kill focused window
 bindsym $mod+q kill
 
-# change focus
+### change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# move focused window
+### move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# resize
+### resize
 set $distance 10
 bindsym $mod+Control+h resize shrink width $distance px or $distance ppt
 bindsym $mod+Control+j resize grow height $distance px or $distance ppt
@@ -94,7 +86,7 @@ bindsym $mod+Control+8 resize set 2028 1344
 bindsym $mod+Control+9 resize set 1306 1344
 bindsym $mod+Control+0 resize set 1072 800
 
-# move bindings
+### move bindings
 bindsym $mod+Control+a move left $distance px
 bindsym $mod+Control+s move down $distance px
 bindsym $mod+Control+w move up $distance px
@@ -102,40 +94,36 @@ bindsym $mod+Control+d move right $distance px
 bindsym $mod+Control+x move absolute position center
 bindsym $mod+Control+u move position 36 36
 
-# split in horizontal orientation
+### split in horizontal orientation
 bindsym $mod+x split h
 
-# split in vertical orientation
+### split in vertical orientation
 bindsym $mod+z split v
 
-# enter fullscreen mode for the focused container
+### enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (tabbed, toggle split)
+### change container layout (tabbed, toggle split)
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
+### toggle tiling / floating
 bindsym $mod+space floating toggle
 
-# change focus between tiling / floating windows
+### change focus between tiling / floating windows
 bindsym $mod+Shift+space focus mode_toggle
 
-# reload the configuration file
+### reload the configuration file
 bindsym $mod+Shift+c reload
 
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+### restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-# exit i3 (logs you out of your X session)
+### exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Would you like to exit i3?' -b 'Yes' 'i3-msg exit'"
 
-##
 ## i3 Workspaces
-##
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -147,7 +135,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# switch to workspace
+### switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -159,7 +147,7 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
-# move focused container to workspace
+### move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3
@@ -171,30 +159,28 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-##
 ## i3 Appearance
-##
 
-# Improve borders
+### Improve borders
 default_border pixel 3
 default_floating_border pixel 3
 
-# Gaps
+### Gaps
 gaps inner 16
 smart_gaps on
 
-# selection color
+### selection color
 set $sc #f24353
-# old selection color
+### old selection color
 set $oc #dedcdc
-# bright selection color
+### bright selection color
 set $bc #b800b8
-# font color
+### font color
 set $fc #f0f0f0
-# unselected color
+### unselected color
 set $uc #565656
 
-# class                 border  backgr. text indicator child_border
+### class               border  backgr. text indicator child_border
 client.focused          $sc	$sc	$fc	$sc	$sc
 client.focused_inactive $oc	$oc	$fc	$oc	$oc
 client.unfocused        $uc     $uc	$fc	$uc	$uc
@@ -202,11 +188,9 @@ client.urgent           $bc	$bc	$fc	$bc	$bc
 client.placeholder      $sc     $sc	$fc	$sc	$sc
 client.background       $sc
 
-##
 ## i3 Modes
-##
 
-# resize window (you can also use the mouse for that)
+### resize window (you can also use the mouse for that)
 mode "resize" {
 	# These bindings trigger as soon as you enter the resize mode
 	set $distance 10
@@ -235,9 +219,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-##
 ## Change how some programs open - gather info with xprop
-##
 
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
@@ -260,9 +242,8 @@ for_window [class="Galculator"] floating enable
 for_window [class="Galculator"] resize set 600 px 800 px
 for_window [class="Sxiv"] floating enable
 for_window [class="Tor Browser"] floating enable
-for_window [Class="Alacritty-float"] floating enable
 for_window [class="Zathura"] floating enable
-for_window [class="Zathura"] resize set 1306 px 1344 px
+for_window [class="Zathura"] resize set 1600 px 1344 px
 for_window [class="Zathura"] move absolute position center
 for_window [title="Minecraft"] floating enable
 for_window [class="Fceux"] floating enable
@@ -270,10 +251,10 @@ for_window [class="Fceux"] resize set 1280 px 1200 px
 for_window [class="pico8"] floating enable
 for_window [class="pico8"] resize set 1024 px 1024 px
 for_window [class="pico8"] move absolute position center
+for_window [class="Alacritty-float"] floating enable
+no_focus [class="Alacritty-nofocus"]
 
-##
 ## Start programs
-##
 
 # set wallpaper
 # exec --no-startup-id xsetroot -solid '#f29390'
