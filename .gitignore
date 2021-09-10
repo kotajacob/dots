@@ -38,4 +38,6 @@ bin/bin/gemhu
 bin/bin/packwiz
 bin/bin/cpg
 bin/bin/mvg
+bin/bin/gmni
+bin/bin/mkcert
 neomutt/*
