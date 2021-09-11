@@ -254,20 +254,12 @@ for_window [class="pico8"] move absolute position center
 for_window [class="Alacritty-float"] floating enable
 no_focus [class="Alacritty-nofocus"]
 
-## Start programs
-
 # set wallpaper
 # exec --no-startup-id xsetroot -solid '#f29390'
 exec --no-startup-id feh --bg-center /home/kota/pics/walls/rose_1440.png
 
 # set backlight
 exec --no-startup-id backlight 35
-
-# start mpd
-exec --no-startup-id mpd
-
-# start dunst
-exec --no-startup-id dunst
 
 # start netwatch to show notifications on network change
 exec --no-startup-id netwatch
