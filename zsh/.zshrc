@@ -8,6 +8,12 @@ compinit
 
 # plugins
 source /home/kota/.local/share/zsh/plugins/kota-prompt/kota-prompt.zsh
+source /home/kota/.local/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# zsh history substring search
+setopt HIST_IGNORE_ALL_DUPS
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 # initialize jump
 eval "$(jump shell)"
@@ -47,6 +53,7 @@ alias mail='mbsync primary'
 # https://github.com/jarun/advcpmv
 alias cp='cpg -g'
 alias mv='mvg -g'
+alias neofetch='pfetch'
 
 ## functions
 readme() {
