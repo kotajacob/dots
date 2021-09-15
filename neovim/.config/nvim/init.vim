@@ -18,6 +18,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
+Plug 'stsewd/gx-extended.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'airblade/vim-gitgutter'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
@@ -25,7 +26,10 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'voldikss/vim-floaterm'
 Plug 'lervag/wiki.vim'
 Plug 'lervag/wiki-ft.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'neovim/nvim-lspconfig'
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 call plug#end()
 
 " Make vim pretty
@@ -41,6 +45,9 @@ let g:airline_theme='base16'
 
 " Enable autowrite (automatically write when :make or :GoBuild are called)
 set autowrite
+
+" Set the default register to + so I don't gotta fucking type "+y again.
+set clipboard=unnamedplus
 
 " Enable persistent undo so that undo history persists across vim sessions
 set undofile
@@ -143,6 +150,12 @@ autocmd FileType wiki setlocal tw=80 et ts=2 sw=2
 " Multiline indenting
 set breakindent
 
+" Move between splits without C-W prefix
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " FZF
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 let g:fzf_preview_window = []
@@ -217,12 +230,15 @@ nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 let g:VM_leader = "\,"
 
 " vim-go
+let g:go_gopls_enabled = 0 " disable vim-go LSP features to use built-in lsp client
+let g:go_fmt_fail_silently = 1
 let g:go_doc_popup_window = 1
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_build_constraints = 1
+
 autocmd FileType go nmap <leader>t <Plug>(go-test)
 autocmd FileType go nmap <leader>r <Plug>(go-run-vertical)
 autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>1, 'edit')
@@ -230,9 +246,14 @@ autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>1, 'vsplit'
 autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>1, 'split')
 autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>1, 'tabe')
 
+" coq
+let g:coq_settings = { 'display.pum.fast_close': v:false } " disable weird flickering
+let g:coq_settings = { 'auto_start': 'shut-up' }
+
 " nvim-lspconfig
 lua << EOF
 local nvim_lsp = require('lspconfig')
+local coq = require('coq')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -264,12 +285,13 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  buf_set_keymap('n', '<space>s', '<cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>', opts)
 
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'clangd' }
+local servers = { 'clangd', 'pyright', 'gopls', 'gdscript', 'cssls', 'html', 'jsonls', 'tsserver', 'vimls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
