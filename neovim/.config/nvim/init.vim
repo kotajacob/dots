@@ -247,8 +247,7 @@ autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>1, 'split')
 autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>1, 'tabe')
 
 " coq
-let g:coq_settings = { 'display.pum.fast_close': v:false } " disable weird flickering
-let g:coq_settings = { 'auto_start': 'shut-up' }
+let g:coq_settings = { 'auto_start': 'shut-up', 'display.pum.fast_close': v:false }
 
 " nvim-lspconfig
 lua << EOF
