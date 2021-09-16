@@ -27,6 +27,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'lervag/wiki.vim'
 Plug 'lervag/wiki-ft.vim'
 Plug 'neovim/nvim-lspconfig'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 call plug#end()
@@ -116,35 +117,6 @@ set noexpandtab
 
 " Open all folds by default
 set foldlevelstart=99
-
-" Auto indent differently per file
-autocmd FileType c setlocal noet ts=8 sw=8 tw=80
-autocmd FileType h setlocal noet ts=8 sw=8 tw=80
-autocmd FileType cpp setlocal noet ts=8 sw=8 tw=80
-autocmd FileType s setlocal noet ts=8 sw=8
-autocmd FileType go setlocal noet ts=4 sw=4
-autocmd FileType hy setlocal filetype=lisp
-autocmd FileType sh setlocal et ts=2 sw=2
-autocmd FileType js setlocal et ts=2 sw=2
-autocmd FileType html setlocal et ts=2 sw=2
-autocmd FileType htmldjango setlocal et ts=2 sw=2
-autocmd FileType ruby setlocal et ts=2 sw=2
-autocmd FileType scss setlocal et ts=2 sw=2
-autocmd FileType css setlocal et ts=2 sw=2
-autocmd FileType yaml setlocal et ts=2 sw=2
-autocmd FileType toml setlocal et ts=2 sw=2
-autocmd FileType markdown setlocal tw=80 et ts=2 sw=2
-autocmd FileType text setlocal tw=80
-autocmd FileType meson setlocal noet ts=2 sw=2
-autocmd FileType bzl setlocal et ts=2 sw=2
-autocmd FileType typescript setlocal et ts=2 sw=2
-autocmd FileType lua setlocal noet ts=4 sw=4
-autocmd FileType python setlocal noet ts=4 sw=4
-autocmd BufNewFile,BufRead *.ms set syntax=python ts=4 sw=4 noet
-autocmd FileType tex hi Error ctermbg=NONE
-autocmd FileType mail setlocal noautoindent
-autocmd FileType gmi set wrap linebreak
-autocmd FileType wiki setlocal tw=80 et ts=2 sw=2
 
 " Multiline indenting
 set breakindent
@@ -282,6 +254,7 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+-- Make the diagnostic messages look a little better
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     -- disable virtual text
@@ -296,3 +269,49 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 EOF
+
+" Auto indent differently per file
+autocmd FileType c setlocal noet ts=8 sw=8 tw=80
+autocmd FileType h setlocal noet ts=8 sw=8 tw=80
+autocmd FileType cpp setlocal noet ts=8 sw=8 tw=80
+autocmd FileType s setlocal noet ts=8 sw=8
+autocmd FileType go setlocal noet ts=4 sw=4
+autocmd FileType hy setlocal filetype=lisp
+autocmd FileType sh setlocal et ts=2 sw=2
+autocmd FileType js setlocal et ts=2 sw=2
+autocmd FileType html setlocal et ts=2 sw=2
+autocmd FileType htmldjango setlocal et ts=2 sw=2
+autocmd FileType ruby setlocal et ts=2 sw=2
+autocmd FileType scss setlocal et ts=2 sw=2
+autocmd FileType css setlocal et ts=2 sw=2
+autocmd FileType yaml setlocal et ts=2 sw=2
+autocmd FileType toml setlocal et ts=2 sw=2
+autocmd FileType markdown setlocal tw=80 et ts=2 sw=2
+autocmd FileType text setlocal tw=80
+autocmd FileType meson setlocal noet ts=2 sw=2
+autocmd FileType bzl setlocal et ts=2 sw=2
+autocmd FileType typescript setlocal et ts=2 sw=2
+autocmd FileType lua setlocal noet ts=4 sw=4
+autocmd FileType python setlocal noet ts=4 sw=4
+autocmd BufNewFile,BufRead *.ms set syntax=python ts=4 sw=4 noet
+autocmd FileType tex hi Error ctermbg=NONE
+autocmd FileType mail setlocal noautoindent
+autocmd FileType gmi set wrap linebreak
+autocmd FileType wiki setlocal tw=80 et ts=2 sw=2
+
+" vim-go
+let g:go_gopls_enabled = 0 " disable vim-go LSP features to use built-in lsp client
+let g:go_fmt_fail_silently = 1
+let g:go_doc_popup_window = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_build_constraints = 1
+
+autocmd FileType go nmap <leader>t <Plug>(go-test)
+autocmd FileType go nmap <leader>r <Plug>(go-run-vertical)
+autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>1, 'edit')
+autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>1, 'vsplit')
+autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>1, 'split')
+autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>1, 'tabe')
