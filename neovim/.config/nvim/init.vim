@@ -6,13 +6,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'lambdalisue/battery.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'junegunn/gv.vim'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'dyng/ctrlsf.vim'
 Plug 'bronson/vim-visual-star-search'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -27,6 +26,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'lervag/wiki.vim'
 Plug 'lervag/wiki-ft.vim'
 Plug 'neovim/nvim-lspconfig'
+Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
@@ -127,35 +127,37 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" FZF
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
-let g:fzf_preview_window = []
-nnoremap <leader><leader> :Files<CR>
-nnoremap <leader>[ :CtrlSF
-nnoremap <leader>] :GFiles<CR>
-nnoremap <leader>/ :Buffers<CR>
-nnoremap <leader><CR> :FloatermNew! --height=0.9 --width=0.8 --autoclose=2<CR>
+" Telescope
+lua << EOF
+require('telescope').setup{}
+-- To get fzf loaded and working with telescope, you need to call
+-- load_extension, somewhere after setup function:
+require('telescope').load_extension('fzf')
+EOF
+nnoremap - <cmd>Telescope file_browser<cr>
+nnoremap <leader><leader> <cmd>Telescope find_files<cr>
+nnoremap <leader>[ <cmd>Telescope live_grep<cr>
+nnoremap <leader>] <cmd>Telescope git_files<cr>
+nnoremap <leader>/ <cmd>Telescope buffers<cr>
+nnoremap z= <cmd>Telescope spell_suggest<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fk <cmd>Telescope keymaps<cr>
+nnoremap gr <cmd>Telescope lsp_references<cr>
+nnoremap <space>ca <cmd>Telescope lsp_code_actions<cr>
+nnoremap <space>el <cmd>Telescope lsp_document_diagnostics<cr>
 
 " wiki.vim
 let g:wiki_root = '~/docs/memex'
 " override <leader>ww for wiki.vim
 nmap <leader>ww <plug>(wiki-index)\|:cd ~/docs/memex<cr>
-" override <leader><leader> for wiki.vim
-autocmd FileType wiki nnoremap <leader><leader> :WikiFzfPages<CR>
 
 " floaterm
 hi FloatermBorder guibg=black guifg=grey
 let g:floaterm_keymap_kill = '<leader><Esc>'
+nnoremap <leader><CR> :FloatermNew! --height=0.9 --width=0.8 --autoclose=2<CR>
 
 " hexokinase.vim
 let g:Hexokinase_highlighters = ['backgroundfull']
-
-" dirvish
-let g:dirvish_mode = ':sort ,^.*[\/],'
-let g:loaded_netrwPlugin = 1
-command! -nargs=? -complete=dir Explore Dirvish <args>
-command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
-command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 
 " Traverse back with arrows
 set whichwrap=b,s,<,>,[,]
@@ -231,9 +233,9 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  -- buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  -- buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>ee', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
@@ -242,9 +244,15 @@ local on_attach = function(client, bufnr)
 
 end
 
+-- null-ls (use non-language server tools like language servers)
+require("null-ls").config({
+    -- you must define at least one source for the plugin to work
+    sources = { require("null-ls").builtins.diagnostics.shellcheck }
+})
+
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'clangd', 'pyright', 'gopls', 'gdscript', 'cssls', 'html', 'jsonls', 'tsserver', 'vimls' }
+local servers = { 'clangd', 'pyright', 'gopls', 'gdscript', 'cssls', 'html', 'jsonls', 'tsserver', 'vimls', 'null-ls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -300,9 +308,6 @@ autocmd FileType gmi set wrap linebreak
 autocmd FileType wiki setlocal tw=80 et ts=2 sw=2
 
 " vim-go
-let g:go_gopls_enabled = 0 " disable vim-go LSP features to use built-in lsp client
-let g:go_fmt_fail_silently = 1
-let g:go_doc_popup_window = 1
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
