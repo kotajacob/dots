@@ -46,8 +46,8 @@ let g:airline_theme='base16'
 " Enable autowrite (automatically write when :make or :GoBuild are called)
 set autowrite
 
-" Set the default register to + so I don't gotta fucking type "+y again.
-set clipboard=unnamedplus
+" Set the default register to * so I can have a shared OS clipboard.
+set clipboard=unnamed
 
 " Enable persistent undo so that undo history persists across vim sessions
 set undofile
@@ -247,7 +247,7 @@ autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>1, 'split')
 autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>1, 'tabe')
 
 " coq
-let g:coq_settings = { 'auto_start': 'shut-up', 'display.pum.fast_close': v:false }
+let g:coq_settings = { 'auto_start': 'shut-up', 'display.pum.fast_close': v:false, 'keymap.bigger_preview': '<leader>k', 'keymap.jump_to_mark': '<leader>h' }
 
 " nvim-lspconfig
 lua << EOF
