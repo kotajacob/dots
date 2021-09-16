@@ -26,7 +26,6 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'voldikss/vim-floaterm'
 Plug 'lervag/wiki.vim'
 Plug 'lervag/wiki-ft.vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
@@ -229,23 +228,6 @@ nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 " vim-visual-multi
 let g:VM_leader = "\,"
 
-" vim-go
-let g:go_gopls_enabled = 0 " disable vim-go LSP features to use built-in lsp client
-let g:go_fmt_fail_silently = 1
-let g:go_doc_popup_window = 1
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_build_constraints = 1
-
-autocmd FileType go nmap <leader>t <Plug>(go-test)
-autocmd FileType go nmap <leader>r <Plug>(go-run-vertical)
-autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>1, 'edit')
-autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>1, 'vsplit')
-autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>1, 'split')
-autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>1, 'tabe')
-
 " coq
 let g:coq_settings = { 'auto_start': 'shut-up', 'display.pum.fast_close': v:false, 'keymap.bigger_preview': '<leader>k', 'keymap.jump_to_mark': '<leader>h' }
 
@@ -299,4 +281,18 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    -- disable virtual text
+    virtual_text = false,
+
+    -- show signs
+    signs = true,
+
+    -- delay update diagnostics
+    update_in_insert = false,
+    -- display_diagnostic_autocmds = { "InsertLeave" },
+  }
+)
 EOF
