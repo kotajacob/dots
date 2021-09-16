@@ -29,7 +29,7 @@ bindsym $mod+b exec --no-startup-id qutebrowser
 
 ### high quality screenshot
 bindsym $mod+s exec --no-startup-id scrotpcf
-bindsym $altmod+s exec --no-startup-id maim -s | xclip -selection clipboard -t image/png
+bindsym $altmod+s exec --no-startup-id scrotactive
 bindsym $mod+Shift+s exec --no-startup-id scrotpcf s
 
 ### toggle screen resolution
