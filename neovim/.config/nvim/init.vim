@@ -6,6 +6,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'lambdalisue/battery.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
+Plug 'ggandor/lightspeed.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -145,16 +146,17 @@ nnoremap <leader>fk <cmd>Telescope keymaps<cr>
 nnoremap gr <cmd>Telescope lsp_references<cr>
 nnoremap <space>ca <cmd>Telescope lsp_code_actions<cr>
 nnoremap <space>el <cmd>Telescope lsp_document_diagnostics<cr>
+nnoremap <space><space> <cmd>Telescope lsp_document_symbols<cr>
 
 " wiki.vim
 let g:wiki_root = '~/docs/memex'
 " override <leader>ww for wiki.vim
 nmap <leader>ww <plug>(wiki-index)\|:cd ~/docs/memex<cr>
 
-" floaterm
+" floaterm can open non floating terminals nicely too
 hi FloatermBorder guibg=black guifg=grey
 let g:floaterm_keymap_kill = '<leader><Esc>'
-nnoremap <leader><CR> :FloatermNew! --height=0.9 --width=0.8 --autoclose=2<CR>
+nnoremap <leader><CR> :FloatermNew! --autoclose=2 --wintype=vsplit<CR>
 
 " hexokinase.vim
 let g:Hexokinase_highlighters = ['backgroundfull']
@@ -203,7 +205,7 @@ nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 let g:VM_leader = "\,"
 
 " coq
-let g:coq_settings = { 'auto_start': 'shut-up', 'display.pum.fast_close': v:false, 'keymap.bigger_preview': '<leader>k', 'keymap.jump_to_mark': '<leader>h' }
+let g:coq_settings = { 'auto_start': 'shut-up', 'display.pum.fast_close': v:false, 'keymap.bigger_preview': '<leader>k', 'keymap.jump_to_mark': '<leader>h', 'display.ghost_text.context': ['',''], 'display.icons.mode': 'none' }
 
 " nvim-lspconfig
 lua << EOF
@@ -247,7 +249,7 @@ end
 -- null-ls (use non-language server tools like language servers)
 require("null-ls").config({
     -- you must define at least one source for the plugin to work
-    sources = { require("null-ls").builtins.diagnostics.shellcheck }
+		sources = { require("null-ls").builtins.diagnostics.shellcheck, require("null-ls").builtins.formatting.shfmt, require("null-ls").builtins.diagnostics.vale, require("null-ls").builtins.formatting.clang_format }
 })
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -295,6 +297,7 @@ autocmd FileType css setlocal et ts=2 sw=2
 autocmd FileType yaml setlocal et ts=2 sw=2
 autocmd FileType toml setlocal et ts=2 sw=2
 autocmd FileType markdown setlocal tw=80 et ts=2 sw=2
+autocmd FileType markdown let g:airline#extensions#whitespace#enabled = 0
 autocmd FileType text setlocal tw=80
 autocmd FileType meson setlocal noet ts=2 sw=2
 autocmd FileType bzl setlocal et ts=2 sw=2
@@ -306,6 +309,8 @@ autocmd FileType tex hi Error ctermbg=NONE
 autocmd FileType mail setlocal noautoindent
 autocmd FileType gmi set wrap linebreak
 autocmd FileType wiki setlocal tw=80 et ts=2 sw=2
+autocmd FileType wiki let g:airline#extensions#whitespace#enabled = 0
+autocmd FileType vim let g:airline#extensions#whitespace#enabled = 0
 
 " vim-go
 let g:go_highlight_types = 1
@@ -313,10 +318,5 @@ let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_build_constraints = 1
-
-autocmd FileType go nmap <leader>t <Plug>(go-test)
-autocmd FileType go nmap <leader>r <Plug>(go-run-vertical)
-autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>1, 'edit')
-autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>1, 'vsplit')
-autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>1, 'split')
-autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>1, 'tabe')
+let g:go_fmt_command="gopls"
+let g:go_gopls_gofumpt=1
