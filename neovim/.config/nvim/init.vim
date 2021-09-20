@@ -1,13 +1,11 @@
 " Use vim-plug
 call plug#begin(stdpath('data') . '/plugged')
+Plug 'nvim-lua/plenary.nvim'
 Plug 'https://git.sr.ht/~kota/black-pastel'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'lambdalisue/battery.vim'
+Plug 'ojroques/nvim-hardline'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
 Plug 'ggandor/lightspeed.nvim'
-Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'junegunn/gv.vim'
@@ -42,7 +40,39 @@ set colorcolumn=80
 set termguicolors
 set background=dark
 colorscheme black-pastel
-let g:airline_theme='base16'
+lua << EOF
+require('hardline').setup {
+  theme = 'custom',   -- change theme
+  custom_theme = {
+    text = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
+    normal = {gui = "#7cafc2", cterm = "NONE", cterm16 = "NONE"},
+    insert = {gui = "#a1b56c", cterm = "NONE", cterm16 = "NONE"},
+    replace = {gui = "#dc9656", cterm = "NONE", cterm16 = "NONE"},
+    inactive_comment = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
+    inactive_cursor = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
+    inactive_menu = {gui = "#383838", cterm = "NONE", cterm16 = "NONE"},
+    visual = {gui = "#ba8baf", cterm = "NONE", cterm16 = "NONE"},
+    command = {gui = "#e65737", cterm = "NONE", cterm16 = "NONE"},
+    alt_text = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
+    warning = {gui = "#dc9656", cterm = "NONE", cterm16 = "NONE"},
+  },
+  sections = {         -- define sections
+    {class = 'mode', item = require('hardline.parts.mode').get_item},
+    {class = 'high', item = require('hardline.parts.git').get_item, hide = 100},
+    {class = 'med', item = require('hardline.parts.filename').get_item},
+    '%<',
+    {class = 'med', item = '%='},
+    {class = 'low', item = require('hardline.parts.wordcount').get_item, hide = 100},
+    {class = 'high', item = require('hardline.parts.filetype').get_item, hide = 80},
+    {class = 'warning', item = require('hardline.parts.lsp').get_warning},
+    {class = 'error', item = require('hardline.parts.lsp').get_error},
+		{class = 'mode', item = require('hardline.parts.line').get_item},
+  },
+}
+EOF
+
+" Disable mode printing since it's in the status bar
+set noshowmode
 
 " Enable autowrite (automatically write when :make or :GoBuild are called)
 set autowrite
@@ -79,9 +109,6 @@ set smartcase
 
 " Stop certain movements from always going to the first character of a line.
 set nostartofline
-
-" Always display the status line, even if only one window is displayed
-set laststatus=2
 
 " Instead of failing a command because of unsaved changes, instead raise a
 " dialogue asking if you wish to save changed files.
@@ -153,6 +180,9 @@ let g:wiki_root = '~/docs/memex'
 " override <leader>ww for wiki.vim
 nmap <leader>ww <plug>(wiki-index)\|:cd ~/docs/memex<cr>
 
+" hexokinase
+let g:Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla'
+
 " floaterm can open non floating terminals nicely too
 hi FloatermBorder guibg=black guifg=grey
 let g:floaterm_keymap_kill = '<leader><Esc>'
@@ -184,10 +214,6 @@ nnoremap <leader>s :set spell!<CR>
 " Map %% to return my current working directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
-" Enable battery statusline
-let g:airline_section_y = '%{battery#component()}'
-let g:battery#component_format = "%s %v%"
-
 " Use lines for gitgutter
 let g:gitgutter_sign_added='┃'
 let g:gitgutter_sign_modified='┃'
@@ -202,7 +228,7 @@ nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
 " vim-visual-multi
-let g:VM_leader = "\,"
+let g:VM_leader = "<space>,"
 
 " coq
 let g:coq_settings = { 'auto_start': 'shut-up', 'display.pum.fast_close': v:false, 'keymap.bigger_preview': '<leader>k', 'keymap.jump_to_mark': '<leader>h', 'display.ghost_text.context': ['',''], 'display.icons.mode': 'none' }
@@ -297,7 +323,6 @@ autocmd FileType css setlocal et ts=2 sw=2
 autocmd FileType yaml setlocal et ts=2 sw=2
 autocmd FileType toml setlocal et ts=2 sw=2
 autocmd FileType markdown setlocal tw=80 et ts=2 sw=2
-autocmd FileType markdown let g:airline#extensions#whitespace#enabled = 0
 autocmd FileType text setlocal tw=80
 autocmd FileType meson setlocal noet ts=2 sw=2
 autocmd FileType bzl setlocal et ts=2 sw=2
@@ -309,8 +334,6 @@ autocmd FileType tex hi Error ctermbg=NONE
 autocmd FileType mail setlocal noautoindent
 autocmd FileType gmi set wrap linebreak
 autocmd FileType wiki setlocal tw=80 et ts=2 sw=2
-autocmd FileType wiki let g:airline#extensions#whitespace#enabled = 0
-autocmd FileType vim let g:airline#extensions#whitespace#enabled = 0
 
 " vim-go
 let g:go_highlight_types = 1
