@@ -54,6 +54,7 @@ alias mail='mbsync primary'
 alias cp='cpg -g'
 alias mv='mvg -g'
 alias neofetch='pfetch'
+alias wiki="cd $HOME/docs/memex && nvim index.wiki"
 
 ## functions
 readme() {
