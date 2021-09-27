@@ -401,16 +401,6 @@ function LineCount()
 	return printf(' ㏑ %d/%d ', line('.'), line('$'))
 endfunction
 
-function GitStatus()
-	let l:gitdir = FugitiveGitDir()
-	if empty(l:gitdir)
-		return ''
-	else
-		let [added,modified,deleted] = GitGutterGetHunkSummary()
-		return printf(' +%d ~%d -%d @%s | ', added, modified, deleted, FugitiveHead(l:gitdir))
-	endif
-endfunction
-
 " default statusline highlight
 highlight statusdefault guibg='#000000' guifg='#dedcdc'
 
