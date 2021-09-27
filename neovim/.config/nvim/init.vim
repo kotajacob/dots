@@ -275,8 +275,6 @@ cmp.setup({
 		['<Tab>'] = function(fallback)
       if vim.fn.pumvisible() == 1 then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
-      elseif luasnip.expand_or_jumpable() then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
       else
         fallback()
       end
@@ -284,8 +282,6 @@ cmp.setup({
     ['<S-Tab>'] = function(fallback)
       if vim.fn.pumvisible() == 1 then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
-      elseif luasnip.jumpable(-1) then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
       else
         fallback()
       end
@@ -426,16 +422,28 @@ function Filestatus() abort
 endfunction
 
 " get warning/error messages from lsp
-function LspMessages()
+function LspWarnings()
 	if luaeval('not vim.tbl_isempty(vim.lsp.buf_get_clients(0))')
 		let l:warnings = luaeval("vim.lsp.diagnostic.get_count(0, [[Warning]])")
 		let l:warnings .= l:warnings == 1 ? " warning" : " warnings"
 
+		if l:warnings >= 1
+			return printf('%%#Warning# %s ', warnings)
+		else
+			return printf('')
+		endif
+	else
+		return ""
+	endif
+endfunction
+
+function LspErrors()
+	if luaeval('not vim.tbl_isempty(vim.lsp.buf_get_clients(0))')
 		let l:errors = luaeval("vim.lsp.diagnostic.get_count(0, [[Error]])")
 		let l:errors .= l:errors == 1 ? " error" : " errors"
 
-		if l:warnings >= 1 || l:errors >= 1
-			return printf('%%#Error# %s %s ', warnings, errors)
+		if l:errors >= 1
+			return printf('%%#Error# %s ', errors)
 		else
 			return printf('')
 		endif
@@ -478,4 +486,5 @@ let &statusline .= '%{%(empty(&filetype) ? "" : "%#colorcolum# ".&filetype)%} '
 let &statusline .= "%#modeHL#"
 let &statusline .= "%{LineCount()}"
 " lsp warnings/errors
-let &statusline .= "%{%LspMessages()%}"
+let &statusline .= "%{%LspWarnings()%}"
+let &statusline .= "%{%LspErrors()%}"
