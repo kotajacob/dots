@@ -1,0 +1,61 @@
+[Desktop Entry]
+Name=darktable
+GenericName=Virtual Lighttable and Darkroom
+GenericName[af]=Virtuele Ligtafel en Donkerkamer
+GenericName[de]=Virtueller Leuchttisch und Dunkelkammer
+GenericName[eo]=Virtuala Lumtablo kaj Senluma Ĉambro
+GenericName[es]=Mesa de Luz y Cuarto Oscuro Virtuales
+GenericName[fr]=Table Lumineuse et Chambre Noire virtuelles
+GenericName[he]=שולחן אור וחדר חושך וירטואלי
+GenericName[hu]=Virtuális átvilágító és sötétkamra
+GenericName[it]=Tavolo Luminoso e Camera Oscura virtuali
+GenericName[nl]=Virtuele bibliotheek en donkere kamer
+GenericName[pt_BR]=Mesa de Luz e Sala Escura Virtuais
+GenericName[ru]=Виртуальный световой стол и фоторедактор
+GenericName[sl]=Virtualna osvetljena podlaga in temnica
+Comment=Organize and develop images from digital cameras
+Comment[af]=Organiseer en ontwikkel beelde van digitale kameras
+Comment[de]=Organisiere und entwickle Bilder von Digitalkameras
+Comment[eo]=Organizi kaj disvolvi bildojn de ciferecaj fotiloj
+Comment[es]=Organice y revele fotografías de cámaras digitales
+Comment[fr]=Organiser et développer les images d'un boîtier numérique
+Comment[he]=ארגן ופתח תמונות ממצלמות דיגיטליות
+Comment[hu]=Digitális fényképező képeinek rendezése, kidolgozása
+Comment[it]=Organizza e sviluppa le immagini della tua fotocamera digitale
+Comment[nl]=Organiseer en ontwikkel afbeeldingen van digitale camera's
+Comment[pt_BR]=Organize e trate imagens de câmeras digitais
+Comment[ru]=Организация и обработка цифровых фотографий
+Comment[sl]=Organizira in razvija slike digitalnih kamer
+
+X-GNOME-FullName=Darktable Photo Workflow Software
+
+Version=1.0
+
+Type=Application
+Categories=Graphics;Photography;GTK;
+# TRANSLATORS: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+Keywords=graphics;photography;raw;
+Keywords[af]=grafika;fotografie;raw;
+Keywords[de]=Graphik;Grafik;Photographie;Fotografie;Raw;
+Keywords[eo]=grafikaĵoj;foto;kruda;
+Keywords[es]=gráficos;fotografía;raw;
+Keywords[fr]=graphisme;photographie;raw;
+Keywords[he]=גרפיקה;צילום;raw;
+Keywords[hu]=grafika;fénykép;fotó;raw;
+Keywords[it]=grafica;fotografia;raw;
+Keywords[nl]=grafische vormgeving;fotografie;raw;
+Keywords[pt_BR]=gráfico;fotografia;raw;
+Keywords[ru]=graphics;photography;raw;
+Keywords[sl]=grafika;fotografije;surove;
+
+Exec=/usr/bin/darktable %U
+TryExec=/usr/bin/darktable
+Terminal=false
+StartupNotify=true
+
+MimeType=application/x-darktable;image/x-dcraw;image/jpeg;image/jpg;image/jp2;image/png;image/tiff;image/x-portable-pixmap;image/x-portable-floatmap;image/x-exr;
+
+Icon=darktable
+
+X-Unity-IconBackgroundColor=#252525
+
