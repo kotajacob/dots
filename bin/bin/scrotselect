@@ -1,0 +1,3 @@
+#!/bin/sh
+
+maim -m 10 -s | xclip -selection clipboard -t image/png

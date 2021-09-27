@@ -1,0 +1,6 @@
+#!/bin/sh
+# pic-new [input]
+# Moves pictures from the input folder into an organized structure in the
+# cwd.
+
+exiftool '-FileName<FileModifyDate' '-FileName<DateTimeOriginal' -d %Y/%m/%Y%m%d_%H%M%S%%-c.%%e "$1"
