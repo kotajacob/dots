@@ -30,6 +30,7 @@ bindsym $mod+b exec --no-startup-id qutebrowser
 ### high quality screenshot
 bindsym $mod+s exec --no-startup-id scrotpcf
 bindsym $altmod+s exec --no-startup-id scrotactive
+bindsym $altmod+Shift+s exec --no-startup-id scrotselect
 bindsym $mod+Shift+s exec --no-startup-id scrotpcf s
 
 ### toggle screen resolution
@@ -241,6 +242,7 @@ for_window [class="Galculator"] floating enable
 for_window [class="Galculator"] resize set 600 px 800 px
 for_window [class="Sxiv"] floating enable
 for_window [class="Tor Browser"] floating enable
+for_window [window_role="GtkFileChooserDialog"] resize set 1024 px 1024 px
 for_window [class="Zathura"] floating enable
 for_window [class="Zathura"] resize set 1600 px 1344 px
 for_window [class="Zathura"] move absolute position center
