@@ -26,8 +26,11 @@ Plug 'lervag/wiki-ft.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 call plug#end()
 
 " Make vim pretty
@@ -56,6 +59,9 @@ set undodir=~/.config/nvim/undo
 " Don't litter swp files everywhere
 set nobackup
 set nowritebackup
+
+" always use signcolumn
+set signcolumn=yes
 
 " Enable nvim diffing
 set diffopt=filler,internal,algorithm:histogram,indent-heuristic
@@ -169,6 +175,10 @@ nnoremap <leader>n :noh<CR>
 
 " show extra whitespace
 match Error /\s\+$/
+autocmd BufWinEnter * match Error /\s\+$/
+autocmd InsertEnter * match Error /\s\+\%#\@<!$/
+autocmd InsertLeave * match Error /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -206,13 +216,12 @@ command Date :exec 'normal a'.substitute(system("date -Iseconds"),"[\n]*$","",""
 " vim-visual-multi
 let g:VM_leader = "<space>,"
 
-" coq
-let g:coq_settings = { 'auto_start': 'shut-up', 'display.pum.fast_close': v:false, 'keymap.bigger_preview': '<leader>k', 'keymap.jump_to_mark': '<leader>h', 'display.ghost_text.context': ['',''], 'display.icons.mode': 'none' }
+" nvim-cmp
+set completeopt=menu,menuone,noselect
 
 " nvim-lspconfig
 lua << EOF
 local nvim_lsp = require('lspconfig')
-local coq = require('coq')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -248,6 +257,50 @@ local on_attach = function(client, bufnr)
 
 end
 
+-- Setup nvim-cmp.
+local cmp = require'cmp'
+cmp.setup({
+    snippet = {
+      expand = function(args)
+        -- For `vsnip` user.
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
+	mapping = {
+		['<C-d>'] = cmp.mapping.scroll_docs(-4),
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<C-Space>'] = cmp.mapping.complete(),
+		['<C-e>'] = cmp.mapping.close(),
+		['<CR>'] = cmp.mapping.confirm({ select = true }),
+		['<Tab>'] = function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
+      elseif luasnip.expand_or_jumpable() then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
+      else
+        fallback()
+      end
+    end,
+    ['<S-Tab>'] = function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
+      elseif luasnip.jumpable(-1) then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
+      else
+        fallback()
+      end
+    end,
+	},
+	experimental = {
+		ghost_text = true,
+  },
+	sources = {
+		{ name = 'nvim_lsp' },
+		{ name = 'vsnip' },
+		{ name = 'buffer' },
+	}
+})
+
 -- null-ls (use non-language server tools like language servers)
 require("null-ls").config({
     -- you must define at least one source for the plugin to work
@@ -266,6 +319,7 @@ local servers = { 'clangd', 'pyright', 'gopls', 'gdscript', 'cssls', 'html', 'js
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     flags = {
       debounce_text_changes = 150,
     }
