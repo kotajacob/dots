@@ -26,6 +26,7 @@
 	pum = pull origin
 	dh1 = diff HEAD~1
 	ra = log --oneline
+	raa = log --oneline --graph --reflog
 [merge]
 	tool = vimdiff
 [pull]
