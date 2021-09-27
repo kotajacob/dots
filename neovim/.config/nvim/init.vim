@@ -2,7 +2,6 @@
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'nvim-lua/plenary.nvim'
 Plug 'https://git.sr.ht/~kota/black-pastel'
-Plug 'ojroques/nvim-hardline'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
 Plug 'ggandor/lightspeed.nvim'
@@ -40,36 +39,6 @@ set colorcolumn=80
 set termguicolors
 set background=dark
 colorscheme black-pastel
-lua << EOF
-require('hardline').setup {
-  theme = 'custom',   -- change theme
-  custom_theme = {
-    text = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
-    normal = {gui = "#7cafc2", cterm = "NONE", cterm16 = "NONE"},
-    insert = {gui = "#a1b56c", cterm = "NONE", cterm16 = "NONE"},
-    replace = {gui = "#dc9656", cterm = "NONE", cterm16 = "NONE"},
-    inactive_comment = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
-    inactive_cursor = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
-    inactive_menu = {gui = "#383838", cterm = "NONE", cterm16 = "NONE"},
-    visual = {gui = "#ba8baf", cterm = "NONE", cterm16 = "NONE"},
-    command = {gui = "#e65737", cterm = "NONE", cterm16 = "NONE"},
-    alt_text = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
-    warning = {gui = "#dc9656", cterm = "NONE", cterm16 = "NONE"},
-  },
-  sections = {         -- define sections
-    {class = 'mode', item = require('hardline.parts.mode').get_item},
-    {class = 'high', item = require('hardline.parts.git').get_item, hide = 100},
-    {class = 'med', item = require('hardline.parts.filename').get_item},
-    '%<',
-    {class = 'med', item = '%='},
-    {class = 'low', item = require('hardline.parts.wordcount').get_item, hide = 100},
-    {class = 'high', item = require('hardline.parts.filetype').get_item, hide = 80},
-    {class = 'warning', item = require('hardline.parts.lsp').get_warning},
-    {class = 'error', item = require('hardline.parts.lsp').get_error},
-		{class = 'mode', item = require('hardline.parts.line').get_item},
-  },
-}
-EOF
 
 " Disable mode printing since it's in the status bar
 set noshowmode
@@ -198,6 +167,9 @@ set whichwrap=b,s,<,>,[,]
 " \n to temp hide the search results
 nnoremap <leader>n :noh<CR>
 
+" show extra whitespace
+match Error /\s\+$/
+
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
@@ -215,6 +187,7 @@ nnoremap <leader>s :set spell!<CR>
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
 " Use lines for gitgutter
+let g:gitgutter_sign_priority=9
 let g:gitgutter_sign_added='┃'
 let g:gitgutter_sign_modified='┃'
 let g:gitgutter_sign_removed='┃'
@@ -226,6 +199,9 @@ let g:gitgutter_sign_modified_removed='┃'
 " will be added to the movement history to make Control-O and Control-I work.
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+
+" Create a Date command... mostly for hugo.
+command Date :exec 'normal a'.substitute(system("date -Iseconds"),"[\n]*$","","")
 
 " vim-visual-multi
 let g:VM_leader = "<space>,"
@@ -275,7 +251,13 @@ end
 -- null-ls (use non-language server tools like language servers)
 require("null-ls").config({
     -- you must define at least one source for the plugin to work
-		sources = { require("null-ls").builtins.diagnostics.shellcheck, require("null-ls").builtins.formatting.shfmt, require("null-ls").builtins.diagnostics.vale, require("null-ls").builtins.formatting.clang_format }
+    sources = {
+        require("null-ls").builtins.diagnostics.shellcheck,
+        require("null-ls").builtins.formatting.shfmt,
+        require("null-ls").builtins.diagnostics.vale,
+        require("null-ls").builtins.formatting.clang_format,
+        require("null-ls").builtins.formatting.prettier.with({filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "css", "scss", "html", "json" }}),
+    }
 })
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -343,3 +325,113 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command="gopls"
 let g:go_gopls_gofumpt=1
+
+" based on henry's statusline
+" https://git.sr.ht/~hnaguski/pineapple-dots/tree/master/item/neovim/.config/nvim/init.vim
+" set highlights for statusline based on mode, uses gui* so make sure you can
+" use termguicolors. This funcion also returns the current mode as a word
+function StatusColor() abort
+	let l:mode = mode()
+	if l:mode ==# 'n'
+		highlight modeHL guibg='#7cafc2' guifg='#000000'
+		let l:mode = "normal"
+	elseif l:mode ==# 'i'
+		highlight modeHL guibg='#a1b56c' guifg='#000000'
+		let l:mode = "insert"
+	elseif l:mode ==# 'v'
+		highlight modeHL guibg='#ba8baf' guifg='#000000'
+		let l:mode = "visual"
+	elseif l:mode ==# 'V'
+		highlight modeHL guibg='#ba8baf' guifg='#000000'
+		let l:mode = "visual line"
+	elseif l:mode ==# "\<C-V>"
+		highlight modeHL guibg='#ba8baf' guifg='#000000'
+		let l:mode = "visual block"
+	elseif l:mode ==# 'R'
+		highlight modeHL guibg='#f7ca88' guifg='#000000'
+		let l:mode = "replace"
+	elseif l:mode ==# 'c'
+		highlight modeHL guibg='#dc9656' guifg='#000000'
+		let l:mode = "command"
+	endif
+	return l:mode
+endfunction
+
+" style filename based on it's status
+function Filestatus() abort
+	if &modified
+		highlight fileHL gui=italic
+	elseif &readonly
+		highlight fileHL gui=NONE guifg='#e65737'
+	elseif &modified && &readonly
+		highlight fileHL gui=italic guifg='#e65737'
+	else
+		highlight clear fileHL
+	endif
+	return "%#fileHL# %F"
+endfunction
+
+" get warning/error messages from lsp
+function LspMessages()
+	if luaeval('not vim.tbl_isempty(vim.lsp.buf_get_clients(0))')
+		let l:warnings = luaeval("vim.lsp.diagnostic.get_count(0, [[Warning]])")
+		let l:warnings .= l:warnings == 1 ? " warning" : " warnings"
+
+		let l:errors = luaeval("vim.lsp.diagnostic.get_count(0, [[Error]])")
+		let l:errors .= l:errors == 1 ? " error" : " errors"
+
+		if l:warnings >= 1 || l:errors >= 1
+			return printf('%%#Error# %s %s ', warnings, errors)
+		else
+			return printf('')
+		endif
+	else
+		return ""
+	endif
+endfunction
+
+function WordCount()
+	if index(g:WCfiletypes, &filetype) != -1
+		return printf(' words %d ', wordcount().words)
+	else
+		return ""
+	endif
+endfunction
+function LineCount()
+	return printf(' ㏑ %d/%d ', line('.'), line('$'))
+endfunction
+
+function GitStatus()
+	let l:gitdir = FugitiveGitDir()
+	if empty(l:gitdir)
+		return ''
+	else
+		let [added,modified,deleted] = GitGutterGetHunkSummary()
+		return printf(' +%d ~%d -%d @%s | ', added, modified, deleted, FugitiveHead(l:gitdir))
+	endif
+endfunction
+
+" default statusline highlight
+highlight statusdefault guibg='#000000' guifg='#dedcdc'
+
+" clear statusline
+let &statusline = ''
+" show mode colorfully
+let &statusline .= "%#modeHL# %{StatusColor()} "
+
+" file name with modified + readonly status
+let &statusline .= "%{%Filestatus()%}%#statusdefault#"
+
+" right side
+let &statusline .= "%="
+
+" show word count in some files
+let WCfiletypes = [ 'text', 'wiki', 'markdown' ]
+let &statusline .= "%{WordCount()}"
+" filetype with different color for some reason (it looks nice)
+let &statusline .= '%{%(empty(&filetype) ? "" : "%#colorcolum# ".&filetype)%} '
+" color based on mode
+let &statusline .= "%#modeHL#"
+let &statusline .= "%{LineCount()}"
+" lsp warnings/errors
+let &statusline .= "%{%LspMessages()%}"
