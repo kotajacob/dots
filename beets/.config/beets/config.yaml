@@ -1,13 +1,12 @@
 directory: ~/music
 library: ~/.local/share/beet/library.db
-plugins: fetchart embedart lastgenre missing fromfilename convert
+plugins: fetchart lastgenre missing fromfilename convert
 import:
-  move: yes
+  timid: yes
 paths:
-  default: $albumartist/$album%aunique{}/$track $title
+  default: $albumartist/[$year-$month-$day] $album%aunique{}/$track - $title
   singleton: $artist/Singles/$title
-  comp: Compilations/$album%aunique{}/$track $title
-  albumtype:soundtrack: Soundtracks/$album/$track $title
+  comp: Various Artists/$album%aunique{}/$track - $title
 convert:
   never_convert_lossy_files: yes
   extension: mp3
