@@ -15,6 +15,7 @@ borg create                             \
     ~/pics                              \
     ~/music                             \
     ~/g                                 \
+    ~/.local/opt/MultiMC                \
 
 # borg prune                              \
 #     --list                              \

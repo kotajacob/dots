@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# get random artists, pass through awk to remove empty lines
+artist=$(mpc list albumartist | awk NF | shuf | fzf)
+
+# random list of albumns by said artist
+album=$(mpc list album "((artist == \"$artist\"))" | shuf | fzf)
+
+# play album
+mpc findadd album "$album"
