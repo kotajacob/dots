@@ -4,7 +4,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'https://git.sr.ht/~kota/black-pastel'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
-Plug 'ggandor/lightspeed.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'junegunn/gv.vim'
@@ -23,6 +22,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'voldikss/vim-floaterm'
 Plug 'lervag/wiki.vim'
 Plug 'lervag/wiki-ft.vim'
+Plug 'habamax/vim-godot'
 Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -303,7 +303,7 @@ require("null-ls").config({
     sources = {
         require("null-ls").builtins.diagnostics.shellcheck,
         require("null-ls").builtins.formatting.shfmt,
-        require("null-ls").builtins.diagnostics.vale,
+				require("null-ls").builtins.diagnostics.vale.with({filetypes = { "markdown", "tex", "gmi", "git", "mail" }}),
         require("null-ls").builtins.formatting.clang_format,
         require("null-ls").builtins.formatting.prettier.with({filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "css", "scss", "html", "json" }}),
     }
