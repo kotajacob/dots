@@ -14,6 +14,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-eunuch'
 Plug 'stsewd/gx-extended.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'airblade/vim-gitgutter'
@@ -22,6 +23,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'voldikss/vim-floaterm'
 Plug 'lervag/wiki.vim'
 Plug 'lervag/wiki-ft.vim'
+Plug 'zah/nim.vim'
 Plug 'habamax/vim-godot'
 Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/null-ls.nvim'
@@ -31,6 +33,7 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
+Plug 'ggandor/lightspeed.nvim'
 call plug#end()
 
 " Make vim pretty
@@ -260,17 +263,16 @@ end
 -- Setup nvim-cmp.
 local cmp = require'cmp'
 cmp.setup({
-    snippet = {
-      expand = function(args)
-        -- For `vsnip` user.
-        vim.fn["vsnip#anonymous"](args.body)
-      end,
-    },
+	snippet = {
+		expand = function(args)
+			-- For `vsnip` user.
+			vim.fn["vsnip#anonymous"](args.body)
+		end,
+	},
 	mapping = {
 		['<C-d>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<C-e>'] = cmp.mapping.close(),
+		['<C-c>'] = cmp.mapping.close(),
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
 		['<Tab>'] = function(fallback)
       if vim.fn.pumvisible() == 1 then
@@ -304,14 +306,13 @@ require("null-ls").config({
         require("null-ls").builtins.diagnostics.shellcheck,
         require("null-ls").builtins.formatting.shfmt,
 				require("null-ls").builtins.diagnostics.vale.with({filetypes = { "markdown", "tex", "gmi", "git", "mail" }}),
-        require("null-ls").builtins.formatting.clang_format,
         require("null-ls").builtins.formatting.prettier.with({filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "css", "scss", "html", "json" }}),
     }
 })
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'clangd', 'pyright', 'gopls', 'gdscript', 'cssls', 'html', 'jsonls', 'tsserver', 'vimls', 'null-ls' }
+local servers = { 'clangd', 'pyright', 'gopls', 'gdscript', 'cssls', 'html', 'jsonls', 'tsserver', 'eslint', 'vimls', 'nimls', 'null-ls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -336,13 +337,18 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     -- display_diagnostic_autocmds = { "InsertLeave" },
   }
 )
+
+-- Lightspeed config
+require'lightspeed'.setup {
+  exit_after_idle_msecs = { labeled = 4500, unlabeled = 4000 },
+}
 EOF
 
 " Auto indent differently per file
-autocmd FileType c setlocal noet ts=8 sw=8 tw=80
-autocmd FileType h setlocal noet ts=8 sw=8 tw=80
-autocmd FileType cpp setlocal noet ts=8 sw=8 tw=80
-autocmd FileType s setlocal noet ts=8 sw=8
+autocmd FileType c setlocal noet ts=4 sw=4 tw=80
+autocmd FileType h setlocal noet ts=4 sw=4 tw=80
+autocmd FileType cpp setlocal noet ts=4 sw=4 tw=80
+autocmd FileType s setlocal noet ts=4 sw=4
 autocmd FileType go setlocal noet ts=4 sw=4
 autocmd FileType hy setlocal filetype=lisp
 autocmd FileType sh setlocal et ts=2 sw=2
