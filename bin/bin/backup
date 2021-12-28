@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export BORG_REPO=/run/media/kota/sietch/borg
+export BORG_REPO=/mnt/sietch/kota/borg
 
 borg create                             \
     --stats                             \

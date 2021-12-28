@@ -1,7 +1,8 @@
 " Use vim-plug
 call plug#begin(stdpath('data') . '/plugged')
-Plug 'nvim-lua/plenary.nvim'
 Plug 'https://git.sr.ht/~kota/black-pastel'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
 Plug 'nvim-telescope/telescope.nvim'
@@ -23,21 +24,15 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'voldikss/vim-floaterm'
 Plug 'lervag/wiki.vim'
 Plug 'lervag/wiki-ft.vim'
-Plug 'zah/nim.vim'
 Plug 'habamax/vim-godot'
 Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'quick-lint/quick-lint-js', {'rtp': 'plugin/vim/quick-lint-js.vim', 'tag': '1.0.0'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
 Plug 'ggandor/lightspeed.nvim'
 call plug#end()
 
 " Make vim pretty
-syntax enable
 set encoding=utf-8
 set relativenumber
 set cursorline
@@ -133,14 +128,14 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Telescope
+" Telescope + nnn
 lua << EOF
 require('telescope').setup{}
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 require('telescope').load_extension('fzf')
 EOF
-nnoremap - <cmd>Telescope file_browser<cr>
+nnoremap - <cmd>Telescope file_browser<CR>
 nnoremap <leader><leader> <cmd>Telescope find_files<cr>
 nnoremap <leader>[ <cmd>Telescope live_grep<cr>
 nnoremap <leader>] <cmd>Telescope git_files<cr>
@@ -152,6 +147,15 @@ nnoremap gr <cmd>Telescope lsp_references<cr>
 nnoremap <space>ca <cmd>Telescope lsp_code_actions<cr>
 nnoremap <space>el <cmd>Telescope lsp_document_diagnostics<cr>
 nnoremap <space><space> <cmd>Telescope lsp_document_symbols<cr>
+
+" Treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+  },
+}
+EOF
 
 " wiki.vim
 let g:wiki_root = '~/docs/memex'
@@ -219,12 +223,15 @@ command Date :exec 'normal a'.substitute(system("date -Iseconds"),"[\n]*$","",""
 " vim-visual-multi
 let g:VM_leader = "<space>,"
 
-" nvim-cmp
-set completeopt=menu,menuone,noselect
-
-" nvim-lspconfig
 lua << EOF
-local nvim_lsp = require('lspconfig')
+-- Lightspeed config
+require'lightspeed'.setup {
+  exit_after_idle_msecs = { labeled = 4500, unlabeled = 4000 },
+}
+
+-- nvim-lspconfig
+local nvim_lsp = require("lspconfig")
+local null_ls = require("null-ls")
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -257,71 +264,30 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   buf_set_keymap('n', '<space>s', '<cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>', opts)
-
 end
-
--- Setup nvim-cmp.
-local cmp = require'cmp'
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			-- For `vsnip` user.
-			vim.fn["vsnip#anonymous"](args.body)
-		end,
-	},
-	mapping = {
-		['<C-d>'] = cmp.mapping.scroll_docs(-4),
-		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-c>'] = cmp.mapping.close(),
-		['<CR>'] = cmp.mapping.confirm({ select = true }),
-		['<Tab>'] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
-      else
-        fallback()
-      end
-    end,
-    ['<S-Tab>'] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
-      else
-        fallback()
-      end
-    end,
-	},
-	experimental = {
-		ghost_text = true,
-  },
-	sources = {
-		{ name = 'nvim_lsp' },
-		{ name = 'vsnip' },
-		{ name = 'buffer' },
-	}
-})
-
--- null-ls (use non-language server tools like language servers)
-require("null-ls").config({
-    -- you must define at least one source for the plugin to work
-    sources = {
-        require("null-ls").builtins.diagnostics.shellcheck,
-        require("null-ls").builtins.formatting.shfmt,
-				require("null-ls").builtins.diagnostics.vale.with({filetypes = { "markdown", "tex", "gmi", "git", "mail" }}),
-        require("null-ls").builtins.formatting.prettier.with({filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "css", "scss", "html", "json" }}),
-    }
-})
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'clangd', 'pyright', 'gopls', 'gdscript', 'cssls', 'html', 'jsonls', 'tsserver', 'eslint', 'vimls', 'nimls', 'null-ls' }
+local servers = { 'clangd', 'pyright', 'gopls', 'gdscript', 'cssls', 'html', 'jsonls', 'quick_lint_js', 'vimls', 'zls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     flags = {
       debounce_text_changes = 150,
     }
   }
 end
+
+-- null-ls (use non-language server tools like language servers)
+null_ls.setup({
+    sources = {
+        null_ls.builtins.diagnostics.shellcheck,
+        null_ls.builtins.formatting.shfmt,
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.prettier.with({extra_args = { "--use-tabs", "--no-semi" }}),
+    },
+    on_attach = on_attach,
+})
 
 -- Make the diagnostic messages look a little better
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -337,24 +303,16 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     -- display_diagnostic_autocmds = { "InsertLeave" },
   }
 )
-
--- Lightspeed config
-require'lightspeed'.setup {
-  exit_after_idle_msecs = { labeled = 4500, unlabeled = 4000 },
-}
 EOF
 
 " Auto indent differently per file
 autocmd FileType c setlocal noet ts=4 sw=4 tw=80
 autocmd FileType h setlocal noet ts=4 sw=4 tw=80
 autocmd FileType cpp setlocal noet ts=4 sw=4 tw=80
-autocmd FileType s setlocal noet ts=4 sw=4
-autocmd FileType go setlocal noet ts=4 sw=4
+autocmd FileType go setlocal noet ts=4 sw=4 tw=80
 autocmd FileType hy setlocal filetype=lisp
 autocmd FileType sh setlocal et ts=2 sw=2
-autocmd FileType js setlocal et ts=2 sw=2
 autocmd FileType html setlocal et ts=2 sw=2
-autocmd FileType htmldjango setlocal et ts=2 sw=2
 autocmd FileType ruby setlocal et ts=2 sw=2
 autocmd FileType scss setlocal et ts=2 sw=2
 autocmd FileType css setlocal et ts=2 sw=2
@@ -364,8 +322,9 @@ autocmd FileType markdown setlocal tw=80 et ts=2 sw=2
 autocmd FileType text setlocal tw=80
 autocmd FileType meson setlocal noet ts=2 sw=2
 autocmd FileType bzl setlocal et ts=2 sw=2
-autocmd FileType typescript setlocal et ts=2 sw=2
-autocmd FileType lua setlocal noet ts=4 sw=4
+autocmd FileType javascript setlocal noet ts=4 sw=4 tw=80
+autocmd FileType typescript setlocal noet ts=4 sw=4 ts=80
+autocmd FileType lua setlocal noet ts=4 sw=4 tw=80
 autocmd FileType python setlocal noet ts=4 sw=4
 autocmd BufNewFile,BufRead *.ms set syntax=python ts=4 sw=4 noet
 autocmd FileType tex hi Error ctermbg=NONE

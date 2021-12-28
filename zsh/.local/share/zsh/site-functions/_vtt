@@ -1,0 +1,34 @@
+#compdef vtu vts vtd
+
+_vtt_avaliable_packs() {
+	compadd "$@" -- ${${${(f)"$(jq -r '.categories[].packs[].name' "${VTT_CACHE:-$HOME/.cache}"/rpcategories-${VTT_MCVER:-1.18}.json | sort)"}#??? }%%-[^- ]# *}
+}
+
+_vtd() {
+	_arguments : \
+		'*:package:_vtt_avaliable_packs'
+}
+
+_vtu() {
+	_arguments : \
+		-c'[remove rpcategories files in VTT_CACHE directory]' \
+		-h'[print help for vtu]'
+}
+
+_vts() {
+	_arguments : \
+		-a'[list all packs]' \
+		-i'[print information about a pack]' \
+		-h'[print help for vts]' \
+		'*:package:_vtt_avaliable_packs'
+}
+
+_vtt() {
+	case "$service" in
+		vtd) _vtd "$@";;
+		vtu) _vtu "$@";;
+		vts) _vts "$@";;
+	esac
+}
+
+_vtt "$@"

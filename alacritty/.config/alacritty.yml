@@ -45,3 +45,4 @@ colors:
 
 key_bindings:
     - { key: Return,              mods: Control,                    action: SpawnNewInstance      }
+    - { key: V,         mods: Shift|Alt,                           action: PasteSelection   }

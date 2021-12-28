@@ -1,0 +1,4 @@
+#!/bin/sh
+
+SELECTION=$(fzf +m < "$HOME"/.config/emojis)
+printf '%s' "$SELECTION" | sed 's/ .*//' | xclip

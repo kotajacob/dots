@@ -21,8 +21,8 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 ### start dpass (password selector script)
 bindsym $mod+p exec --no-startup-id dpass
 
-### start demoji
-bindsym $mod+o exec --no-startup-id demoji
+### start emoji
+bindsym $mod+o exec --no-startup-id "alacritty --class Alacritty-float,Alacritty-float -o window.dimensions.columns=76 -o window.dimensions.lines=30 -e emoji"
 
 ### start qutebrowser
 bindsym $mod+b exec --no-startup-id qutebrowser

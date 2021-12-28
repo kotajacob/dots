@@ -19,7 +19,8 @@ bindkey -M vicmd 'j' history-substring-search-down
 eval "$(jump shell)"
 
 ## aliases
-alias rsync='rsync -avP'
+alias mntkoi='sshfs -o allow_other,default_permissions kota@koi:/home/kota /mnt/koi'
+alias mntsietch='sshfs -o allow_other,default_permissions kota@koi:/mnt/sietch /mnt/sietch'
 alias hist='cat .history|less -I'
 alias ncm='ncmpcpp'
 alias m='make all'
@@ -44,6 +45,7 @@ alias xr='sudo xbps-pkgdb -m auto'
 alias xrm='sudo xbps-remove -R'
 alias xc='sudo xbps-remove -Oo && sudo vkpurge rm all'
 alias xinfo='xbps-query -R -S'
+alias xlist='xpkg -m'
 alias todo='$EDITOR $HOME/TODO'
 alias log='$EDITOR $HOME/LOG'
 alias mnt='udisksctl mount -b'
@@ -55,6 +57,7 @@ alias cp='cpg -g'
 alias mv='mvg -g'
 alias neofetch='pfetch'
 alias wiki="cd $HOME/docs/memex && nvim index.wiki"
+alias light="backlight"
 
 ## functions
 readme() {
