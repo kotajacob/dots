@@ -1,3 +1,0 @@
-#!/bin/sh
-SELECTION=$(dprint -p | dmenu -i -l 8 "$@")
-echo "Name:$SELECTION" | dprint -p -i - -o "StripExec" | ${SHELL:-"/bin/sh"} &
