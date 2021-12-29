@@ -122,6 +122,10 @@ set foldlevelstart=99
 " Multiline indenting
 set breakindent
 
+" Scroll one line at a time with ALT-J or ALT-K
+map <A-j> <C-E>
+map <A-k> <C-Y>
+
 " Move between splits without C-W prefix
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
