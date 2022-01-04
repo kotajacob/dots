@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=element
 Comment=A feature-rich client for Matrix.org
-Exec=element-desktop
+Exec=element-desktop --enable-features=UseOzonePlatform --ozone-platform=wayland --force-device-scale-factor=1.5
 Terminal=false
 Type=Application
 Icon=element

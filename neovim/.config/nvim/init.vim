@@ -25,10 +25,18 @@ Plug 'voldikss/vim-floaterm'
 Plug 'lervag/wiki.vim'
 Plug 'lervag/wiki-ft.vim'
 Plug 'habamax/vim-godot'
+Plug 'mattn/emmet-vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'quick-lint/quick-lint-js', {'rtp': 'plugin/vim/quick-lint-js.vim', 'tag': '1.0.0'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'ggandor/lightspeed.nvim'
 call plug#end()
 
@@ -139,7 +147,6 @@ require('telescope').setup{}
 -- load_extension, somewhere after setup function:
 require('telescope').load_extension('fzf')
 EOF
-nnoremap - <cmd>Telescope file_browser<CR>
 nnoremap <leader><leader> <cmd>Telescope find_files<cr>
 nnoremap <leader>[ <cmd>Telescope live_grep<cr>
 nnoremap <leader>] <cmd>Telescope git_files<cr>
@@ -153,13 +160,13 @@ nnoremap <space>el <cmd>Telescope lsp_document_diagnostics<cr>
 nnoremap <space><space> <cmd>Telescope lsp_document_symbols<cr>
 
 " Treesitter
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-  },
-}
-EOF
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   highlight = {
+"     enable = true,
+"   },
+" }
+" EOF
 
 " wiki.vim
 let g:wiki_root = '~/docs/memex'
@@ -228,6 +235,10 @@ command Date :exec 'normal a'.substitute(system("date -Iseconds"),"[\n]*$","",""
 let g:VM_leader = "<space>,"
 
 lua << EOF
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 -- Lightspeed config
 require'lightspeed'.setup {
   exit_after_idle_msecs = { labeled = 4500, unlabeled = 4000 },
@@ -272,10 +283,11 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'clangd', 'pyright', 'gopls', 'gdscript', 'cssls', 'html', 'jsonls', 'quick_lint_js', 'vimls', 'zls' }
+local servers = { 'clangd', 'pyright', 'gopls', 'rust_analyzer', 'gdscript', 'cssls', 'html', 'jsonls', 'quick_lint_js', 'vimls', 'zls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
+		capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
     }
@@ -307,6 +319,41 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     -- display_diagnostic_autocmds = { "InsertLeave" },
   }
 )
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
+
+-- luasnip setup
+local luasnip = require 'luasnip'
+
+-- Setup nvim-cmp.
+local cmp = require'cmp'
+
+cmp.setup({
+	snippet = {
+		-- REQUIRED - you must specify a snippet engine
+		expand = function(args)
+			require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+		end,
+	},
+	mapping = {
+		['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+		['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+		['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+		['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+		['<C-e>'] = cmp.mapping({
+			i = cmp.mapping.abort(),
+			c = cmp.mapping.close(),
+		}),
+		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+	},
+	sources = cmp.config.sources({
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' }, -- For luasnip users.
+	}, {
+		{ name = 'buffer' },
+	})
+})
 EOF
 
 " Auto indent differently per file
@@ -337,11 +384,6 @@ autocmd FileType gmi set wrap linebreak
 autocmd FileType wiki setlocal tw=80 et ts=2 sw=2
 
 " vim-go
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_build_constraints = 1
 let g:go_fmt_command="gopls"
 let g:go_gopls_gofumpt=1
 
