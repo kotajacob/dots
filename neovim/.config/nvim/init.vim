@@ -16,6 +16,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-eunuch'
+Plug 'bkad/CamelCaseMotion'
 Plug 'stsewd/gx-extended.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'airblade/vim-gitgutter'
@@ -49,15 +50,6 @@ set termguicolors
 set background=dark
 colorscheme black-pastel
 
-" Disable mode printing since it's in the status bar
-set noshowmode
-
-" Enable autowrite (automatically write when :make or :GoBuild are called)
-set autowrite
-
-" Set the default register to * so I can have a shared OS clipboard.
-set clipboard=unnamed
-
 " Enable persistent undo so that undo history persists across vim sessions
 set undofile
 set undodir=~/.config/nvim/undo
@@ -66,69 +58,39 @@ set undodir=~/.config/nvim/undo
 set nobackup
 set nowritebackup
 
-" always use signcolumn
-set signcolumn=yes
-
-" Enable nvim diffing
-set diffopt=filler,internal,algorithm:histogram,indent-heuristic
-
-" Unbreak vim's regex implementation
-set magic
-
-" response time
-set updatetime=100
-
-" Allow hidden buffers to be opened without a bang.
-set hidden
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
 " Use case insensitive search, except when using capital letters.
 set ignorecase
 set smartcase
-
-" Stop certain movements from always going to the first character of a line.
-set nostartofline
-
-" Instead of failing a command because of unsaved changes, instead raise a
-" dialogue asking if you wish to save changed files.
-set confirm
-
-" Set spellcheck language
-set spelllang=en
-
-" Enable use of the mouse for all modes
-set mouse=a
-
-" Set the command window height to 2 lines, to avoid many cases of having to
-" press <Enter> to continue
-set cmdheight=2
 
 " Set word wrapping on
 set wrap
 set linebreak
 
-" Set when vim will scroll
-set scrolloff=8
-
-" Quickly time out on keycodes, but never time out on mappings
-set notimeout ttimeout ttimeoutlen=50
-
-" Live substitution
-set inccommand=nosplit
+set noshowmode " Disable mode printing since it's in the status bar.
+set autowrite " Enable autowrite (automatically write when :make or :GoBuild are called).
+set clipboard=unnamed " Set the default register to * so I can have a shared OS clipboard.
+set signcolumn=yes " Always use signcolumn.
+set diffopt=filler,internal,algorithm:histogram,indent-heuristic " Enable nvim diffing.
+set magic " Unbreak vim's regex implementation.
+set updatetime=100 " Faster responce time.
+set hidden " Allow hidden buffers to be opened without a bang.
+set shortmess+=c " Don't pass messages to |ins-completion-menu|.
+set nostartofline " Stop movements from always going to the first character of a line.
+set confirm " Show a dialog to confirm changes instead of failure.
+set spelllang=en " Set spellcheck language.
+set mouse=a " Enable use of the mouse for all modes.
+set cmdheight=2 " Set the command window height to 2 lines.
+set scrolloff=8 " Set when vim will scroll.
+set notimeout ttimeout ttimeoutlen=50 " Time out on keycodes, but not mappings.
+set inccommand=nosplit " Live substitution.
+set foldlevelstart=99 " Open all folds by default.
+set breakindent " Multiline indenting.
 
 " Indentation settings for using hard tabs for indent.
 set softtabstop=2
 set shiftwidth=2
 set tabstop=2
 set noexpandtab
-
-" Open all folds by default
-set foldlevelstart=99
-
-" Multiline indenting
-set breakindent
 
 " Scroll one line at a time with ALT-J or ALT-K
 map <A-j> <C-E>
@@ -139,6 +101,38 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" Visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
+
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Remap j and k to move by display with wrapped lines, but also move the
+" correct number of lines when preceded with a count. Counts greater than 5
+" will be added to the movement history to make Control-O and Control-I work.
+nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+
+" Traverse back with arrows
+set whichwrap=b,s,<,>,[,]
+
+" Highlight searches
+" \n to temp hide the search results
+nnoremap <leader>n :noh<CR>
+
+" Set f3 as hotkey to show Hidden characters
+nnoremap <F3> :set list!<CR>
+set listchars=tab:▸\ ,eol:¬
+
+" Set spell toggle
+nnoremap <leader>s :set spell!<CR>
+
+" Map %% to return my current working directory
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
 " Telescope + nnn
 lua << EOF
@@ -160,13 +154,13 @@ nnoremap <space>el <cmd>Telescope lsp_document_diagnostics<cr>
 nnoremap <space><space> <cmd>Telescope lsp_document_symbols<cr>
 
 " Treesitter
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
-"   highlight = {
-"     enable = true,
-"   },
-" }
-" EOF
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+  },
+}
+EOF
 
 " wiki.vim
 let g:wiki_root = '~/docs/memex'
@@ -175,21 +169,15 @@ nmap <leader>ww <plug>(wiki-index)\|:cd ~/docs/memex<cr>
 
 " hexokinase
 let g:Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla'
+let g:Hexokinase_highlighters = ['backgroundfull']
 
-" floaterm can open non floating terminals nicely too
+" CamelCaseMotion
+let g:camelcasemotion_key = ','
+
+" Floaterm can open non floating terminals.
 hi FloatermBorder guibg=black guifg=grey
 let g:floaterm_keymap_kill = '<leader><Esc>'
 nnoremap <leader><CR> :FloatermNew! --autoclose=2 --wintype=vsplit<CR>
-
-" hexokinase.vim
-let g:Hexokinase_highlighters = ['backgroundfull']
-
-" Traverse back with arrows
-set whichwrap=b,s,<,>,[,]
-
-" Highlight searches
-" \n to temp hide the search results
-nnoremap <leader>n :noh<CR>
 
 " show extra whitespace
 match Error /\s\+$/
@@ -204,16 +192,6 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-" Set f3 as hotkey to show Hidden characters
-nnoremap <F3> :set list!<CR>
-set listchars=tab:▸\ ,eol:¬
-
-" Set spell toggle
-nnoremap <leader>s :set spell!<CR>
-
-" Map %% to return my current working directory
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-
 " Use lines for gitgutter
 let g:gitgutter_sign_priority=9
 let g:gitgutter_sign_added='┃'
@@ -221,12 +199,6 @@ let g:gitgutter_sign_modified='┃'
 let g:gitgutter_sign_removed='┃'
 let g:gitgutter_sign_removed_first_line='┃'
 let g:gitgutter_sign_modified_removed='┃'
-
-" Remap j and k to move by display with wrapped lines, but also move the
-" correct number of lines when preceded with a count. Counts greater than 5
-" will be added to the movement history to make Control-O and Control-I work.
-nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
-nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
 " Create a Date command... mostly for hugo.
 command Date :exec 'normal a'.substitute(system("date -Iseconds"),"[\n]*$","","")
@@ -260,7 +232,6 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   local opts = { noremap=true, silent=true }
 
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -273,17 +244,16 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   -- buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   -- buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>ee', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<space>ee', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  buf_set_keymap('n', '<space>s', '<cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>', opts)
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'clangd', 'pyright', 'gopls', 'rust_analyzer', 'gdscript', 'cssls', 'html', 'jsonls', 'quick_lint_js', 'vimls', 'zls' }
+local servers = { 'clangd', 'gopls', 'cssls', 'html', 'jsonls', 'quick_lint_js', 'vimls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -299,7 +269,6 @@ null_ls.setup({
     sources = {
         null_ls.builtins.diagnostics.shellcheck,
         null_ls.builtins.formatting.shfmt,
-        null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.prettier.with({extra_args = { "--use-tabs", "--no-semi" }}),
     },
     on_attach = on_attach,
@@ -370,6 +339,7 @@ autocmd FileType css setlocal et ts=2 sw=2
 autocmd FileType yaml setlocal et ts=2 sw=2
 autocmd FileType toml setlocal et ts=2 sw=2
 autocmd FileType markdown setlocal tw=80 et ts=2 sw=2
+autocmd FileType wiki setlocal wrap
 autocmd FileType text setlocal tw=80
 autocmd FileType meson setlocal noet ts=2 sw=2
 autocmd FileType bzl setlocal et ts=2 sw=2
@@ -380,7 +350,6 @@ autocmd FileType python setlocal noet ts=4 sw=4
 autocmd BufNewFile,BufRead *.ms set syntax=python ts=4 sw=4 noet
 autocmd FileType tex hi Error ctermbg=NONE
 autocmd FileType mail setlocal noautoindent
-autocmd FileType gmi set wrap linebreak
 autocmd FileType wiki setlocal tw=80 et ts=2 sw=2
 
 " vim-go
@@ -435,7 +404,7 @@ endfunction
 " get warning/error messages from lsp
 function LspWarnings()
 	if luaeval('not vim.tbl_isempty(vim.lsp.buf_get_clients(0))')
-		let l:warnings = luaeval("vim.lsp.diagnostic.get_count(0, [[Warning]])")
+		let l:warnings = luaeval("#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })")
 		let l:warnings .= l:warnings == 1 ? " warning" : " warnings"
 
 		if l:warnings >= 1
@@ -450,7 +419,7 @@ endfunction
 
 function LspErrors()
 	if luaeval('not vim.tbl_isempty(vim.lsp.buf_get_clients(0))')
-		let l:errors = luaeval("vim.lsp.diagnostic.get_count(0, [[Error]])")
+		let l:errors = luaeval("#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })")
 		let l:errors .= l:errors == 1 ? " error" : " errors"
 
 		if l:errors >= 1

@@ -1,8 +1,0 @@
-#!/bin/sh
-
-# First pull all my git repos
-for dir in ~/git/*; do
-	echo $dir
-	cd $dir
-	git pull --all
-done

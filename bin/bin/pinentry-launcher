@@ -1,7 +1,0 @@
-#!/bin/sh
-
-if [ -n "$WINDOWID" ]; then
-	exec pinentry-curses "$@"
-else
-	exec pinentry-dmenu "$@"
-fi

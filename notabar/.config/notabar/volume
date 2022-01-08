@@ -1,5 +1,0 @@
-# Volume
-urgency,low
-txt,v = 
-cmd,pamixer,--get-volume-human
-txt,\n

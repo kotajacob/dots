@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=printer config
-Categories=System;Printing;HardwareSettings;X-Red-Hat-Base;
-Exec=xdg-open http://localhost:631/
-Icon=cups
-StartupNotify=false
-Terminal=false
-Type=Application

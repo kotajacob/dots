@@ -1,5 +1,0 @@
-#!/bin/sh
-
-DF=$(df -h|grep 'sda2')
-FREE=$(echo "$DF" | awk '{ print $4 }')
-echo "$FREE"

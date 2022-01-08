@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=emoji
-Exec=/home/kota/bin/dmenu_emoji
+Exec=/home/kota/bin/menu-emoji
 Terminal=false
 Type=Application
 Version=1.0

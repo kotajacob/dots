@@ -1,4 +1,0 @@
-#!/bin/sh
-
-SELECTION=$(dmenu -i -z 480 -l 16 < "$HOME"/.config/emojis)
-printf '%s' "$SELECTION" | sed 's/ .*//' | xclip -i -sel p -f | xclip -i -sel c

@@ -18,6 +18,9 @@ bindkey -M vicmd 'j' history-substring-search-down
 # initialize jump
 eval "$(jump shell)"
 
+# setup dircolors for ls
+eval $(dircolors -p | perl -pe 's/^((CAP|S[ET]|O[TR]|M|E)\w+).*/$1 00/' | dircolors -)
+
 ## aliases
 alias mntkoi='sshfs -o allow_other,default_permissions kota@koi:/home/kota /mnt/koi'
 alias mntsietch='sshfs -o allow_other,default_permissions kota@koi:/mnt/sietch /mnt/sietch'
@@ -26,13 +29,13 @@ alias ncm='ncmpcpp'
 alias m='make all'
 alias mc='make clean'
 alias mixer='pulsemixer'
-alias clip='xclip -selection clipboard'
+alias clip='wl-clipboard'
 alias c='clear'
 alias vi='nvim'
 alias vim='nvim'
-alias ls='ls --color=auto'
-alias la='ls -lAh --color=auto'
-alias l='ls -1F --color=auto'
+alias ls='ls --color=auto --group-directories-first'
+alias la='ls -lAh --color=auto --group-directories-first'
+alias l='ls -1F --color=auto --group-directories-first'
 alias ip='ip -color=auto'
 alias t='tmux'
 alias tn='tmux new -s'
@@ -47,17 +50,12 @@ alias xc='sudo xbps-remove -Oo && sudo vkpurge rm all'
 alias xinfo='xbps-query -R -S'
 alias xlist='xpkg -m'
 alias todo='$EDITOR $HOME/TODO'
-alias log='$EDITOR $HOME/LOG'
 alias mnt='udisksctl mount -b'
 alias umnt='udisksctl unmount -b'
-alias tide='tide /home/kota/docs/Dunedin2021.csv'
+alias tide='tide /home/kota/docs/Dunedin2022.csv'
 alias mail='mbsync primary'
-# https://github.com/jarun/advcpmv
-alias cp='cpg -g'
-alias mv='mvg -g'
 alias neofetch='pfetch'
 alias wiki="cd $HOME/docs/memex && nvim index.wiki"
-alias light="backlight"
 
 ## functions
 readme() {
@@ -67,15 +65,6 @@ readme() {
 		NAME="README.md"
 	fi
 	touch "$NAME" && "$EDITOR" "$NAME"
-}
-
-timer() {
-	minitimer $1
-	notify-send "timer finished"
-	vol="$(pamixer --get-volume)"
-	pamixer --set-volume 85
-	ffplay -loglevel quiet -f lavfi -i "sine=frequency=900:duration=2" -autoexit -nodisp
-	pamixer --set-volume "$vol"
 }
 
 of() {
@@ -108,7 +97,7 @@ n ()
 	# stty lwrap undef
 	# stty lnext undef
 
-	export TERMINAL="/bin/alacritty --class Alacritty-nofocus,Alacritty-nofocus"
+	# export TERMINAL="/bin/alacritty --class Alacritty-nofocus,Alacritty-nofocus"
 	nnn "$@"
 
 	if [ -f "$NNN_TMPFILE" ]; then
@@ -116,3 +105,22 @@ n ()
 		rm -f "$NNN_TMPFILE" > /dev/null
 	fi
 }
+
+# allow foot to open new windows in the same directory
+_urlencode() {
+	local length="${#1}"
+	for (( i = 0; i < length; i++ )); do
+		local c="${1:$i:1}"
+		case $c in
+			%) printf '%%%02X' "'$c" ;;
+			*) printf "%s" "$c" ;;
+		esac
+	done
+}
+
+osc7_cwd() {
+	printf '\e]7;file://%s%s\e\\' "$HOSTNAME" "$(_urlencode "$PWD")"
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook -Uz chpwd osc7_cwd

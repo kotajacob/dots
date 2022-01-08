@@ -1,3 +1,0 @@
-#!/bin/sh
-
-cp "$(find "$(xdg-user-dir TEMPLATES)" -type f | fzf)" .

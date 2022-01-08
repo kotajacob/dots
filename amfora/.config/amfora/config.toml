@@ -147,7 +147,7 @@ bind_close_tab = "q"
 bind_next_tab = "J"
 bind_prev_tab = "K"
 bind_copy_page_url = "y"
-bind_quit = "Ctrl-Q" 
+bind_quit = "Ctrl-Q"
 bind_help="?"
 bind_sub = "s"
 bind_add_sub = "S"
@@ -184,7 +184,7 @@ other = 'off'
 # To open jpeg files with the feh command:
 #
 [[mediatype-handlers]]
-cmd = ['sxiv']
+cmd = ['imv']
 types = ["image"]
 no_prompt = true
 #
@@ -194,22 +194,19 @@ no_prompt = true
 # If the subtype is omitted then the specified command will be used for the
 # entire type:
 #
-# [[mediatype-handlers]]
-# command = ['mpv']
-# types = ["audio", "video"]
-# stream = true
+[[mediatype-handlers]]
+cmd = ['mpv']
+types = ["audio", "video"]
+stream = true
 #
 # A catch-all handler can by specified with "*".
 # Note that there are already catch-all handlers in place for all OSes,
 # that open the file using your default application. This is only if you
 # want to override that.
 #
-# [[mediatype-handlers]]
-# cmd = ['some-command']
-# types = [
-#         "application/pdf",
-#         "*",
-# ]
+[[mediatype-handlers]]
+cmd = ['zathura']
+types = ["application/pdf"]
 #
 # You can also choose to stream the data instead of downloading it all before
 # opening it. This is especially useful for large video or audio files, as

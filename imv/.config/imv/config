@@ -1,0 +1,9 @@
+# styling
+[options]
+background = #000000
+fullscreen = false
+
+# bindings
+[binds]
+j = next
+k = prev

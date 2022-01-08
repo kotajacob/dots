@@ -1,6 +1,0 @@
-[submodule "zsh/.local/share/zsh/plugins/kota-prompt"]
-	path = zsh/.local/share/zsh/plugins/kota-prompt
-	url = https://git.sr.ht/~kota/kota-prompt
-[submodule "zsh/.local/share/zsh/plugins/zsh-history-substring-search"]
-	path = zsh/.local/share/zsh/plugins/zsh-history-substring-search
-	url = https://github.com/zsh-users/zsh-history-substring-search

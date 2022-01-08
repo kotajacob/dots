@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=aart
-Exec=/home/kota/bin/aart
+Exec=aart
 Terminal=false
 Type=Application
 Version=1.0

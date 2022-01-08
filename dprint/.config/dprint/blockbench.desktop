@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=blockbench
-Exec=/home/kota/.local/opt/Blockbench/blockbench %U
-Terminal=false
-Type=Application
-Icon=blockbench
-StartupWMClass=Blockbench
-Comment=Model editing and animation software
-Categories=3DGraphics;

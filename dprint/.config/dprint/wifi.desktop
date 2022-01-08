@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=wifi
-GenericName=Network Manager Wifi
-Exec=st -t st-float -e nmtui
-Terminal=false
-Type=Application
-Version=1.0

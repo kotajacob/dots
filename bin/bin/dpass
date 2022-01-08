@@ -1,6 +1,0 @@
-#!/bin/sh
-
-passwd=$(fd . "$HOME/.password-store/"|sed 's/.*\/\(.*\)\.gpg$/\1/'|dmenu -i -l 8)
-if [ -n "$passwd" ]; then
-	pass show -c "$passwd"
-fi

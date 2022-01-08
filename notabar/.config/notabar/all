@@ -2,20 +2,17 @@ urgency,low
 
 # Time
 txt,t = 
-cmd,date,+%H:%M
-txt, 
-cmd,date,+%m/%d
+cmd,date,+%H:%M %m/%d
 txt,\n
 
 # Battery
 txt,b = 
-cmd,battery
-cmd,battery,+,-
+cmd,battery,+,-,=
 txt,\n
 
 # Backlight
 txt,l = 
-cmd,backlight
+cmd,light
 txt,\n
 
 # Volume
@@ -25,7 +22,7 @@ txt,\n
 
 # Networking
 txt,n = 
-cmd,netprint
+cmd,netprint,wlp3s0
 txt,\n
 
 # Disk

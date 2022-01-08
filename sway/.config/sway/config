@@ -1,80 +1,79 @@
 set $mod Mod4
-set $altmod Mod1
+set $alt Mod1
 
-# Font for window titles.
-font Iosevka Term 20
+set $left h
+set $down j
+set $up k
+set $right l
 
-# Set output.
-output eDP-1 scale 1
+set $term foot
 
-# Set desktop background.
+# outputs
 output * bg /home/kota/pics/walls/rose_1440.png fill
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+# inputs
+input 6940:6958:Corsair_Corsair_Gaming_M65_Pro_RGB_Mouse accel_profile flat
 
-# Bindings (Launchers)
-# start a terminal
-bindsym $mod+Return exec --no-startup-id alacritty
-bindsym $mod+Shift+Return exec --no-startup-id foot
+input "type:keyboard" xkb_options caps:none
 
-# start rofi (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_dprint
+# bindings
+# Start a terminal
+bindsym $mod+Return exec $term
 
-# start emoji
-bindsym $mod+o exec --no-startup-id dmenu_emoji
+# Kill focused window
+bindsym $mod+q kill
 
-# start qutebrowser
-bindsym $mod+b exec --no-startup-id qutebrowser
+# Start your launcher
+bindsym $mod+d exec launch
 
-# high quality screenshot
-bindsym $mod+s exec --no-startup-id scrotpcf
-bindsym $altmod+s exec --no-startup-id scrotactive
-bindsym $altmod+Shift+s exec --no-startup-id scrotselect
-bindsym $mod+Shift+s exec --no-startup-id scrotpcf s
+# Start a browser
+bindsym $mod+b exec qutebrowser
 
-# info
+# Use mod to drag / resize
+floating_modifier $mod normal
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Screenshots
+bindsym $mod+s exec grimshot --notify copy output
+bindsym $mod+Shift+s exec grimshot --notify copy area
+bindsym $alt+s exec grimshot --notify save output /tmp/grim.png && pcf /tmp/grim.png | wl-copy && notify-send "uploaded screenshot"
+bindsym $alt+Shift+s exec grimshot --notify save area /tmp/grim.png && pcf /tmp/grim.png | wl-copy
+
+# Notabar
 bindsym $mod+Escape exec --no-startup-id notabar < /home/kota/.config/notabar/all
 bindsym $mod+v exec --no-startup-id notabar < /home/kota/.config/notabar/vpn
 bindsym Control+space exec --no-startup-id dunstctl close
 bindsym Control+Shift+space exec --no-startup-id dunstctl close-all
 
-# backlight
-bindsym XF86MonBrightnessUp exec --no-startup-id backlight +5
-bindsym XF86MonBrightnessDown exec --no-startup-id backlight -5
-bindsym Shift+XF86MonBrightnessUp exec --no-startup-id backlight +10
-bindsym Shift+XF86MonBrightnessDown exec --no-startup-id backlight -10
+# Backlight
+bindsym XF86MonBrightnessUp exec --no-startup-id light +5 && light > $WOBSOCK
+bindsym XF86MonBrightnessDown exec --no-startup-id light -5 && light > $WOBSOCK
 
-# sound
-bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && notabar < /home/kota/.config/notabar/volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 && notabar < /home/kota/.config/notabar/volume
-bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id pamixer -i 10 && notabar < /home/kota/.config/notabar/volume
-bindsym Shift+XF86AudioLowerVolume exec --no-startup-id pamixer -d 10 && notabar < /home/kota/.config/notabar/volume
-bindsym XF86AudioMute exec --no-startup-id pamixer -t && notabar < /home/kota/.config/notabar/volume
+# Sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioMute exec pamixer --toggle-mute && ( pamixer --get-mute && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK
 
-# music
-bindsym $mod+m exec --no-startup-id mpc toggle
-bindsym $mod+comma exec --no-startup-id mpc prev
-bindsym $mod+period exec --no-startup-id mpc next
+# Music
 
-# Bindings
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
-# kill focused window
-bindsym $mod+q kill
+# Change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
-# change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+# Move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
-# move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-# resize
+# Resize the focused window
 set $distance 10
 bindsym $mod+Control+h resize shrink width $distance px or $distance ppt
 bindsym $mod+Control+j resize grow height $distance px or $distance ppt
@@ -84,99 +83,82 @@ bindsym $mod+Control+7 resize set 1920 1080
 bindsym $mod+Control+8 resize set 2028 1344
 bindsym $mod+Control+9 resize set 1306 1344
 bindsym $mod+Control+0 resize set 1072 800
-
-# move bindings
-bindsym $mod+Control+a move left $distance px
-bindsym $mod+Control+s move down $distance px
-bindsym $mod+Control+w move up $distance px
-bindsym $mod+Control+d move right $distance px
 bindsym $mod+Control+x move absolute position center
-bindsym $mod+Control+u move position 36 36
 
-# split in horizontal orientation
+# Switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# Split in horizontal orientation
 bindsym $mod+x split h
 
-# split in vertical orientation
+# Split in vertical orientation
 bindsym $mod+z split v
 
-# enter fullscreen mode for the focused container
+# Fullscreen mode
 bindsym $mod+f fullscreen toggle
 
-# change container layout (tabbed, toggle split)
+# Change container layout (tabbed, toggle split)
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
+# Toggle tiling / floating
 bindsym $mod+space floating toggle
 
-# change focus between tiling / floating windows
+# Change focus between tiling / floating windows
 bindsym $mod+Shift+space focus mode_toggle
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
+# Scratchpad:
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
 
-# exit sway
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
 
-# Workspaces
-
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
-
-# switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
 
 # Appearance
+## Improve borders
+default_border pixel 3
+default_floating_border pixel 3
 
-# Improve borders
-default_border pixel 6
-default_floating_border pixel 6
-
-# Gaps
+## Gaps
 gaps inner 16
 smart_gaps on
 
-# selection color
+### selection color
 set $sc #f24353
-# old selection color
+### old selection color
 set $oc #dedcdc
-# bright selection color
+### bright selection color
 set $bc #b800b8
-# font color
+### font color
 set $fc #f0f0f0
-# unselected color
+### unselected color
 set $uc #565656
 
-# class               border  backgr. text indicator child_border
+### class               border  backgr. text indicator child_border
 client.focused          $sc	$sc	$fc	$sc	$sc
 client.focused_inactive $oc	$oc	$fc	$oc	$oc
 client.unfocused        $uc     $uc	$fc	$uc	$uc
@@ -184,13 +166,15 @@ client.urgent           $bc	$bc	$fc	$bc	$bc
 client.placeholder      $sc     $sc	$fc	$sc	$sc
 client.background       $sc
 
-# Change how some programs open - gather info with xprop
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [class="Lxappearance"] floating enable
-for_window [class="mpv"] floating enable
-for_window [class="mpv"] resize set 1920 px 1080 px
-for_window [class="mpv"] move absolute position center
+# Program overrides
+for_window [app_id="imv"] floating enable
+for_window [app_id="imv"] resize set 640px 360px
+for_window [app_id="imv"]	border pixel 3
+for_window [app_id="bemenu"]	border pixel 3
+for_window [app_id="mpv"] floating enable
+for_window [app_id="mpv"] resize set 640px 630px
+for_window [title="Minecraft"] floating enable
+for_window [title="MultiMC"] floating enable
 for_window [class="^Steam$" title="^Friends$"] floating enable
 for_window [class="^Steam$" title="Steam - News"] floating enable
 for_window [class="^Steam$" title=".* - Chat"] floating enable
@@ -200,25 +184,16 @@ for_window [class="^Steam$" title=".* CD key"] floating enable
 for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
 for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
 for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
-for_window [class="Viewnior"] floating enable
-for_window [class="Godot"] floating enable
-for_window [class="Galculator"] floating enable
-for_window [class="Galculator"] resize set 600 px 800 px
-for_window [class="Sxiv"] floating enable
-for_window [class="imv"] floating enable
-for_window [class="Tor Browser"] floating enable
-for_window [window_role="GtkFileChooserDialog"] resize set 1024 px 1024 px
-for_window [class="Zathura"] floating enable
-for_window [class="Zathura"] resize set 1600 px 1344 px
-for_window [class="Zathura"] move absolute position center
-for_window [title="Minecraft"] floating enable
 for_window [class="Fceux"] floating enable
 for_window [class="Fceux"] resize set 1280 px 1200 px
 for_window [class="pico8"] floating enable
 for_window [class="pico8"] resize set 1024 px 1024 px
 for_window [class="pico8"] move absolute position center
-for_window [class="Alacritty-float"] floating enable
-no_focus [class="Alacritty-nofocus"]
 
-# start netwatch to show notifications on network change
-exec --no-startup-id netwatch
+# Start some programs
+exec pipewire &
+exec pipewire-pulse &
+exec dunst &
+
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob --border-color "#F24353FF" --bar-color "#F24353FF" -W 200 -H 30 -b 3 -p 3 -o 0 -a top -a right -M 30
