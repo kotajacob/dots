@@ -1,6 +1,7 @@
 [Desktop Entry]
-Name=emoji
-Exec=menu-emoji
+Name=idea
+GenericName=idea
+Exec=idea
 Terminal=false
 Type=Application
 Version=1.0

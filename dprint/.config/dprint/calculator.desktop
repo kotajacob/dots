@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=calculator
 GenericName=Python Calculator
-Exec=foot python
+Exec=alacritty --class "Alacritty-float,Alacritty-float" -o window.dimensions.columns=76 -o window.dimensions.lines=30 -e python
 Terminal=false
 Type=Application
 Version=1.0

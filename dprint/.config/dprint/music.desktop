@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=music
-Exec=foot ncmpcpp
+Exec=alacritty --class "Alacritty-float,Alacritty-float" -o window.dimensions.columns=100 -o window.dimensions.lines=22 -e ncmpcpp
 Terminal=false
 Type=Application
 Version=1.0

@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=emoji
-Exec=menu-emoji
+Name=libreoffice
+Exec=libreoffice
 Terminal=false
 Type=Application
 Version=1.0
