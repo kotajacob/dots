@@ -3,6 +3,8 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'https://git.sr.ht/~kota/black-pastel'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'David-Kunz/treesitter-unit'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
 Plug 'nvim-telescope/telescope.nvim'
@@ -15,6 +17,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
 Plug 'tommcdo/vim-exchange'
 Plug 'bkad/CamelCaseMotion'
@@ -26,6 +29,8 @@ Plug 'voldikss/vim-floaterm'
 Plug 'lervag/wiki.vim'
 Plug 'lervag/wiki-ft.vim'
 Plug 'habamax/vim-godot'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'akinsho/flutter-tools.nvim'
 Plug 'mattn/emmet-vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/null-ls.nvim'
@@ -38,6 +43,7 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'rafamadriz/friendly-snippets'
 call plug#end()
 
 " Make vim pretty
@@ -129,6 +135,11 @@ nnoremap <leader>s :set spell!<CR>
 " Map %% to return my current working directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
+" flutter-tools.nvim setup
+lua << EOF
+  require("flutter-tools").setup{} -- use defaults
+EOF
+
 " Telescope + nnn
 lua << EOF
 require('telescope').setup{}
@@ -154,7 +165,50 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
   },
+  textobjects = {
+    select = {
+      enable = true,
+			disable = {"go"},
+
+      -- Automatically jump forward to textobj, similar to targets.vim
+      lookahead = true,
+
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      },
+    },
+    move = {
+      enable = true,
+			disable = {"go"},
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        ["]m"] = "@function.outer",
+        ["]]"] = "@class.outer",
+      },
+      goto_next_end = {
+        ["]M"] = "@function.outer",
+        ["]["] = "@class.outer",
+      },
+      goto_previous_start = {
+        ["[m"] = "@function.outer",
+        ["[["] = "@class.outer",
+      },
+      goto_previous_end = {
+        ["[M"] = "@function.outer",
+        ["[]"] = "@class.outer",
+      },
+    },
+  },
 }
+
+vim.api.nvim_set_keymap('x', 'iu', ':lua require"treesitter-unit".select()<CR>', {noremap=true})
+vim.api.nvim_set_keymap('x', 'au', ':lua require"treesitter-unit".select(true)<CR>', {noremap=true})
+vim.api.nvim_set_keymap('o', 'iu', ':<c-u>lua require"treesitter-unit".select()<CR>', {noremap=true})
+vim.api.nvim_set_keymap('o', 'au', ':<c-u>lua require"treesitter-unit".select(true)<CR>', {noremap=true})
 EOF
 
 " wiki.vim
@@ -197,6 +251,12 @@ let g:gitgutter_sign_modified_removed='┃'
 
 " Create a Date command... mostly for hugo.
 command Date :exec 'normal a'.substitute(system("date -Iseconds"),"[\n]*$","","")
+command DateShort :exec 'normal a'.substitute(system("date +%Y-%m-%d"),"[\n]*$","","")
+
+" Dart vim
+" let dart_html_in_string=v:true
+let g:dart_style_guide = 2
+let g:dart_format_on_save = 1
 
 " emmet
 let g:user_emmet_leader_key='<C-S>'
@@ -226,7 +286,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -243,7 +303,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'clangd', 'gopls', 'cssls', 'html', 'jsonls', 'tsserver', 'vimls' }
+local servers = { 'clangd', 'gopls', 'cssls', 'html', 'jsonls', 'tsserver', 'vimls', 'dartls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -299,6 +359,7 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- luasnip setup
 local luasnip = require 'luasnip'
+require("luasnip.loaders.from_vscode").lazy_load()
 
 -- Setup nvim-cmp.
 local cmp = require'cmp'
@@ -312,8 +373,15 @@ cmp.setup({
 	},
   mapping = {
     ["<Tab>"] = cmp.mapping(function(fallback)
+		-- This little snippet will confirm with tab, and if no entry is selected,
+		-- will confirm the first item. Use C-N and C-P to change selected.
       if cmp.visible() then
-        cmp.select_next_item()
+				local entry = cmp.get_selected_entry()
+				if not entry then
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+				else
+					cmp.confirm()
+				end
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
       else
@@ -359,7 +427,8 @@ autocmd FileType text setlocal tw=80
 autocmd FileType meson setlocal noet ts=2 sw=2
 autocmd FileType bzl setlocal et ts=2 sw=2
 autocmd FileType javascript setlocal noet ts=4 sw=4 tw=80
-autocmd FileType typescript setlocal noet ts=4 sw=4 ts=80
+autocmd BufNewFile,BufRead /home/kota/g/portainer/*.js setlocal et ts=2 sw=2
+autocmd FileType typescript setlocal noet ts=4 sw=4 tw=80
 autocmd FileType lua setlocal noet ts=4 sw=4 tw=80
 autocmd FileType python setlocal noet ts=4 sw=4
 autocmd BufNewFile,BufRead *.ms set syntax=python ts=4 sw=4 noet
@@ -369,7 +438,7 @@ autocmd FileType wiki setlocal tw=80 et ts=2 sw=2
 
 " vim-go
 let g:go_fmt_command="gopls"
-let g:go_gopls_gofumpt=1
+" let g:go_gopls_gofumpt=1
 
 " based on henry's statusline
 " https://git.sr.ht/~hnaguski/pineapple-dots/tree/master/item/neovim/.config/nvim/init.vim

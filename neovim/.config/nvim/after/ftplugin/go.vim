@@ -10,6 +10,9 @@ nnoremap <leader>b <cmd>GoBuild<cr>
 " Tests the project
 nnoremap <leader>tt <cmd>GoTest<cr>
 
+" Identifier resolution
+nnoremap <leader>i <Plug>(go-info)
+
 " Tests the function under your cursor
 nnoremap <leader>tf <cmd>GoTestFunc<cr>
 
