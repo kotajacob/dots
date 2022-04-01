@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=nnn
+Comment=Terminal file manager
+Exec=alacritty --class "Alacritty-float,Alacritty-float" -o window.dimensions.columns=100 -o window.dimensions.lines=22 -e nnn
+Terminal=true
+Icon=nnn
+MimeType=inode/directory
+Categories=System;FileTools;FileManager;ConsoleOnly
+Keywords=File;Manager;Management;Explorer;Launcher

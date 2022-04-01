@@ -4,6 +4,6 @@ Type=Application
 Name=minecraft
 GenericName=Minecraft
 Comment=Game
-Exec=/home/kota/.local/opt/MultiMC/MultiMC
+Exec=/home/kota/.local/games/MultiMC/MultiMC
 Actions=
 Categories=Game;

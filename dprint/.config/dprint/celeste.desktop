@@ -1,7 +1,6 @@
 [Desktop Entry]
-Name=idea
-GenericName=idea
-Exec=idea
+Name=celeste
+Exec=/home/kota/.local/games/celeste/Celeste
 Terminal=false
 Type=Application
 Version=1.0
