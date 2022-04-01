@@ -29,9 +29,9 @@ alias ncm='ncmpcpp'
 alias m='make all'
 alias mc='make clean'
 alias mixer='pulsemixer'
-alias clip='wl-clipboard'
+alias clip='xclip -selection clipboard'
 alias c='clear'
-alias vi='nvim'
+alias cdc='cd; clear'
 alias vim='nvim'
 alias ls='ls --color=auto --group-directories-first'
 alias la='ls -lAh --color=auto --group-directories-first'
@@ -106,21 +106,5 @@ n ()
 	fi
 }
 
-# allow foot to open new windows in the same directory
-_urlencode() {
-	local length="${#1}"
-	for (( i = 0; i < length; i++ )); do
-		local c="${1:$i:1}"
-		case $c in
-			%) printf '%%%02X' "'$c" ;;
-			*) printf "%s" "$c" ;;
-		esac
-	done
-}
-
-osc7_cwd() {
-	printf '\e]7;file://%s%s\e\\' "$HOSTNAME" "$(_urlencode "$PWD")"
-}
-
-autoload -Uz add-zsh-hook
-add-zsh-hook -Uz chpwd osc7_cwd
+# use direnv
+eval "$(direnv hook zsh)"
