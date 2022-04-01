@@ -1,46 +1,40 @@
 set $mod Mod4
 set $alt Mod1
 
+### Font for window titles.
+font pango:Iosevka Term SS09 9
+
 set $left h
 set $down j
 set $up k
 set $right l
 
-set $term foot
-
-# outputs
-output * bg /home/kota/pics/walls/rose_1440.png fill
-
-# inputs
-input 6940:6958:Corsair_Corsair_Gaming_M65_Pro_RGB_Mouse accel_profile flat
-input 1133:16394:Logitech_M325 accel_profile flat
-
-input "type:keyboard" xkb_options caps:none,ctrl:swap_lalt_lctl
-
 # bindings
 # Start a terminal
-bindsym $mod+Return exec $term
+bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+Shift+Return exec --no-startup-id "alacritty --class Alacritty-float,Alacritty-float"
 
 # Kill focused window
 bindsym $mod+q kill
 
 # Start your launcher
-bindsym $mod+d exec launch
+bindsym $mod+d exec --no-startup-id dmenu_dprint
 
 # Start a browser
 bindsym $mod+b exec qutebrowser
 
 # Use mod to drag / resize
-floating_modifier $mod normal
+floating_modifier $mod
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
 
 # Screenshots
-bindsym $mod+s exec grimshot --notify copy output
-bindsym $mod+Shift+s exec grimshot --notify copy area
-bindsym $alt+s exec grimshot --notify save output /tmp/grim.png && pcf /tmp/grim.png | wl-copy && notify-send "uploaded screenshot"
-bindsym $alt+Shift+s exec grimshot --notify save area /tmp/grim.png && pcf /tmp/grim.png | wl-copy
+### high quality screenshot
+bindsym $mod+s exec --no-startup-id scrotpcf
+bindsym $alt+s exec --no-startup-id scrotactive
+bindsym $alt+Shift+s exec --no-startup-id scrotselect
+bindsym $mod+Shift+s exec --no-startup-id scrotpcf s
 
 # Notabar
 bindsym $mod+Escape exec --no-startup-id notabar < /home/kota/.config/notabar/all
@@ -49,21 +43,21 @@ bindsym Control+space exec --no-startup-id dunstctl close
 bindsym Control+Shift+space exec --no-startup-id dunstctl close-all
 
 # Backlight
-bindsym XF86MonBrightnessUp exec --no-startup-id light +5 && light > $WOBSOCK
-bindsym XF86MonBrightnessDown exec --no-startup-id light -5 && light > $WOBSOCK
+bindsym XF86MonBrightnessUp exec --no-startup-id "light +5 && light > $XOBSOCK"
+bindsym XF86MonBrightnessDown exec --no-startup-id "light -5 && light > $XOBSOCK"
 
 # Sound
-bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && pamixer --get-volume > $WOBSOCK
-bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 && pamixer --get-volume > $WOBSOCK
-bindsym XF86AudioMute exec pamixer --toggle-mute && ( pamixer --get-mute && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pamixer --allow-boost -i 5 && pamixer --get-volume > $XOBSOCK"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pamixer --allow-boost -d 5 && pamixer --get-volume > $XOBSOCK"
+bindsym XF86AudioMute exec --no-startup-id "pamixer --toggle-mute && xob-get-mute"
 
 # Music
 bindsym $mod+m exec --no-startup-id mpc toggle
 bindsym $mod+comma exec --no-startup-id mpc prev
 bindsym $mod+period exec --no-startup-id mpc next
 
-# Exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+# Exit i3
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Would you like to exit i3?' -b 'Yes' 'i3-msg exit'"
 
 # Change focus
 bindsym $mod+$left focus left
@@ -131,17 +125,6 @@ bindsym $mod+space floating toggle
 # Change focus between tiling / floating windows
 bindsym $mod+Shift+space focus mode_toggle
 
-# Scratchpad:
-# Sway has a "scratchpad", which is a bag of holding for windows.
-# You can send windows there and get them back later.
-
-# Move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
-
 # Appearance
 ## Improve borders
 default_border pixel 3
@@ -171,13 +154,9 @@ client.placeholder      $sc     $sc	$fc	$sc	$sc
 client.background       $sc
 
 # Program overrides
-for_window [app_id="foot-float"] floating enable
-for_window [app_id="imv"] floating enable
-for_window [app_id="imv"] resize set 640px 360px
-for_window [app_id="imv"]	border pixel 3
-for_window [app_id="bemenu"]	border pixel 3
-for_window [app_id="mpv"] floating enable
-for_window [app_id="mpv"] resize set 640px 630px
+for_window [class="Sxiv"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="mpv"] resize set 640px 630px
 for_window [title="Minecraft"] floating enable
 for_window [class="^Steam$" title="^Friends$"] floating enable
 for_window [class="^Steam$" title="Steam - News"] floating enable
@@ -193,16 +172,15 @@ for_window [class="Fceux"] resize set 1280 px 1200 px
 for_window [class="pico8"] floating enable
 for_window [class="pico8"] resize set 1024 px 1024 px
 for_window [class="pico8"] move absolute position center
+for_window [class="Alacritty-float"] floating enable
+no_focus [class="Alacritty-nofocus"]
 
-# Start some programs
-exec pipewire &
-exec pipewire-pulse &
-exec dunst &
-exec mpd &
+# set wallpaper
+# exec --no-startup-id xsetroot -solid '#f29390'
+exec --no-startup-id feh --bg-center /home/kota/pics/walls/rose_1440.png
 
-set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob --border-color "#F24353FF" --bar-color "#F24353FF" -W 200 -H 30 -b 3 -p 3 -o 0 -a top -a right -M 30
+# use xob for backlight and volume adjustments
+exec --no-startup-id tail -f $XOBSOCK | xob -t 1400
 
-# cursor
-seat seat0 xcursor_theme capitaine-cursors 24
-exec_always gsettings set org.gnome.desktop.interface cursor-theme "capitaine-cursors"
+# start mpd
+exec --no-startup-id mpd

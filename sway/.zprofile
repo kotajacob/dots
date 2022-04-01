@@ -7,4 +7,4 @@ if test -z "${XDG_RUNTIME_DIR}"; then
 	fi
 fi
 
-[ "$(tty)" = "/dev/tty1" ] && exec dbus-run-session sway
+[ "$(tty)" = "/dev/tty1" ] && exec dbus-launch --sh-syntax --exit-with-session sway
