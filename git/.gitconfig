@@ -1,13 +1,7 @@
 [user]
 	email = kota@nilsu.org
 	name = Dakota Walsh
-	signingkey = 570878F7
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[diff]
+	signingkey = C8C93687E2E3D333C21320230D2BB141570878F7
 [color]
 	ui = auto
 [alias]
@@ -25,10 +19,8 @@
 	pom = push origin
 	pum = pull origin
 	dh1 = diff HEAD~1
-	ra = log --oneline
-	raa = log --oneline --graph --reflog
-[merge]
-	tool = vimdiff
+	ra = log --oneline --graph --decorate --all
+	raa = log --oneline
 [pull]
 	rebase = false
 [gpg]
@@ -36,6 +28,10 @@
 [init]
 	defaultBranch = master
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
-[interactive]
-	diffFilter = diff-so-fancy --patch
+    pager = less -FRX
+	excludesfile = ~/.gitignore_global
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[includeIf "gitdir:~g/portainer/"]
+    [user]
+        email = "dakota.walsh@portainer.io"
