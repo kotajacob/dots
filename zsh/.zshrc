@@ -9,6 +9,7 @@ compinit
 # plugins
 source /home/kota/.local/share/zsh/plugins/kota-prompt/kota-prompt.zsh
 source /home/kota/.local/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /home/kota/.local/share/zsh/plugins/zsh-autoenv/autoenv.zsh
 
 # zsh history substring search
 setopt HIST_IGNORE_ALL_DUPS
@@ -105,6 +106,3 @@ n ()
 		rm -f "$NNN_TMPFILE" > /dev/null
 	fi
 }
-
-# use direnv
-eval "$(direnv hook zsh)"
