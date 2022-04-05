@@ -28,10 +28,10 @@
 [init]
 	defaultBranch = master
 [core]
-    pager = less -FRX
+	pager = less -FRX
 	excludesfile = ~/.gitignore_global
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [includeIf "gitdir:~g/portainer/"]
-    [user]
-        email = "dakota.walsh@portainer.io"
+	[user]
+		email = "dakota.walsh@portainer.io"
