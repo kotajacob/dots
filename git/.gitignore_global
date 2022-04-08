@@ -1,3 +1,2 @@
 # Direnv stuff
-.env
-.envrc
+.autoenv.zsh
