@@ -8,7 +8,10 @@
 	aa = add --all
 	st = status
 	ci = commit --verbose
+	sw = switch
 	co = checkout
+	ra = log --oneline --graph --decorate --all
+	raa = log --oneline
 	di = diff
 	dc = diff --cached
 	ds = diff --stat=160,120
@@ -16,11 +19,9 @@
 	ff = merge --ff-only
 	noff = merge --no-ff
 	fa = fetch --all
-	pom = push origin
-	pum = pull origin
+	po = push origin
+	pu = pull origin
 	dh1 = diff HEAD~1
-	ra = log --oneline --graph --decorate --all
-	raa = log --oneline
 [pull]
 	rebase = false
 [gpg]
