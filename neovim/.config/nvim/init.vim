@@ -14,7 +14,7 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
+Plug 'machakann/vim-sandwich'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
@@ -29,21 +29,20 @@ Plug 'voldikss/vim-floaterm'
 Plug 'lervag/wiki.vim'
 Plug 'lervag/wiki-ft.vim'
 Plug 'habamax/vim-godot'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'akinsho/flutter-tools.nvim'
 Plug 'mattn/emmet-vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'rafamadriz/friendly-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 call plug#end()
 
 " Make vim pretty
@@ -125,15 +124,17 @@ set whichwrap=b,s,<,>,[,]
 " \n to temp hide the search results
 nnoremap <leader>n :noh<CR>
 
+" close other windows
+nnoremap <leader>o :only<cr>
+
 " Set f3 as hotkey to show Hidden characters
 nnoremap <F3> :set list!<CR>
 set listchars=tab:▸\ ,eol:¬
 
-" Set spell toggle
-nnoremap <leader>s :set spell!<CR>
-
 " Map %% to return my current working directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
+
+runtime macros/sandwich/keymap/surround.vim
 
 " flutter-tools.nvim setup
 lua << EOF
@@ -240,6 +241,11 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Fugitive conflict resolution
+nnoremap <leader>gd :Gvdiff<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
 
 " Use lines for gitgutter
 let g:gitgutter_sign_priority=9
@@ -357,9 +363,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- luasnip setup
-local luasnip = require 'luasnip'
-require("luasnip.loaders.from_vscode").lazy_load()
+-- UltiSnips works best with vim-go
+local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 
 -- Setup nvim-cmp.
 local cmp = require'cmp'
@@ -368,43 +373,45 @@ cmp.setup({
 	snippet = {
 		-- REQUIRED - you must specify a snippet engine
 		expand = function(args)
-			require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+			vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
 		end,
 	},
-  mapping = {
+	sources = cmp.config.sources({
+		{ name = 'nvim_lsp' },
+		{ name = 'ultisnips' }, -- For ultisnips users.
+	}, {
+		{ name = 'buffer' },
+	}),
+	mapping = {
+		['<C-e>'] = cmp.mapping.abort(),
+		['<C-b>'] = cmp.mapping.scroll_docs(-4),
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
     ["<Tab>"] = cmp.mapping(function(fallback)
 		-- This little snippet will confirm with tab, and if no entry is selected,
 		-- will confirm the first item. Use C-N and C-P to change selected.
-      if cmp.visible() then
+      if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+				cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+			elseif cmp.visible() then
 				local entry = cmp.get_selected_entry()
 				if not entry then
 					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 				else
 					cmp.confirm()
 				end
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
       else
         fallback()
       end
     end, { "i", "s" }),
-
     ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
+      if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+				cmp_ultisnips_mappings.jump_backwards(fallback)
+			elseif cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
       else
         fallback()
       end
     end, { "i", "s" }),
-  },
-	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
-		{ name = 'luasnip' }, -- For luasnip users.
-	}, {
-		{ name = 'buffer' },
-	})
+	}
 })
 EOF
 
