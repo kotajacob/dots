@@ -1,9 +1,13 @@
 " Use vim-plug
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'https://git.sr.ht/~kota/black-pastel'
+Plug '~/g/granola'
+Plug '~/g/left.nvim'
+Plug 'rktjmp/lush.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-treesitter/playground' " Show highlight group w/ f12
 Plug 'David-Kunz/treesitter-unit'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
@@ -25,7 +29,7 @@ Plug 'stsewd/gx-extended.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'machakann/vim-highlightedyank'
-Plug 'voldikss/vim-floaterm'
+Plug 'akinsho/toggleterm.nvim'
 Plug 'lervag/wiki.vim'
 Plug 'lervag/wiki-ft.vim'
 Plug 'habamax/vim-godot'
@@ -36,13 +40,9 @@ Plug 'mattn/emmet-vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 call plug#end()
 
 " Make vim pretty
@@ -117,37 +117,51 @@ nnoremap N Nzzzv
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
+" Show extra whitespace
+match Error /\s\+$/
+autocmd BufWinEnter * match Error /\s\+$/
+autocmd InsertEnter * match Error /\s\+\%#\@<!$/
+autocmd InsertLeave * match Error /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
 " Traverse back with arrows
 set whichwrap=b,s,<,>,[,]
 
-" Highlight searches
-" \n to temp hide the search results
-nnoremap <leader>n :noh<CR>
+" Hide search highlight with backspace
+nmap <silent> <BS> :noh<CR>
 
-" close other windows
+" Close other windows
 nnoremap <leader>o :only<cr>
 
 " Set f3 as hotkey to show Hidden characters
 nnoremap <F3> :set list!<CR>
 set listchars=tab:▸\ ,eol:¬
 
+" Set f12 to print highlight group under cursor
+nnoremap <F12> :TSHighlightCapturesUnderCursor<CR>
+
 " Map %% to return my current working directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
 runtime macros/sandwich/keymap/surround.vim
 
-" flutter-tools.nvim setup
 lua << EOF
-  require("flutter-tools").setup{} -- use defaults
-EOF
+-- Toggleterm setup
+require("toggleterm").setup{
+	open_mapping = [[<C-\>]],
+	direction = 'float',
+	float_opts = {
+		border = 'curved'
+	}
+}
 
-" Telescope + nnn
-lua << EOF
+-- Telescope
 require('telescope').setup{}
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 require('telescope').load_extension('fzf')
 EOF
+
 nnoremap <leader><leader> <cmd>Telescope find_files<cr>
 nnoremap <leader>[ <cmd>Telescope live_grep<cr>
 nnoremap <leader>] <cmd>Telescope git_files<cr>
@@ -224,18 +238,6 @@ let g:Hexokinase_highlighters = ['backgroundfull']
 " CamelCaseMotion
 let g:camelcasemotion_key = ','
 
-" Floaterm can open non floating terminals.
-hi FloatermBorder guibg=black guifg=grey
-let g:floaterm_keymap_kill = '<leader><Esc>'
-nnoremap <leader><CR> :FloatermNew! --autoclose=2 --wintype=vsplit<CR>
-
-" show extra whitespace
-match Error /\s\+$/
-autocmd BufWinEnter * match Error /\s\+$/
-autocmd InsertEnter * match Error /\s\+\%#\@<!$/
-autocmd InsertLeave * match Error /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
@@ -244,8 +246,8 @@ nmap ga <Plug>(EasyAlign)
 
 " Fugitive conflict resolution
 nnoremap <leader>gd :Gvdiff<CR>
-nnoremap gdh :diffget //2<CR>
-nnoremap gdl :diffget //3<CR>
+nnoremap gh :diffget //2<CR>
+nnoremap gl :diffget //3<CR>
 
 " Use lines for gitgutter
 let g:gitgutter_sign_priority=9
@@ -259,19 +261,21 @@ let g:gitgutter_sign_modified_removed='┃'
 command Date :exec 'normal a'.substitute(system("date -Iseconds"),"[\n]*$","","")
 command DateShort :exec 'normal a'.substitute(system("date +%Y-%m-%d"),"[\n]*$","","")
 
+" vim-go
+let g:go_fmt_command="gopls"
+" let g:go_gopls_gofumpt=1
+
 " Dart vim
 " let dart_html_in_string=v:true
 let g:dart_style_guide = 2
 let g:dart_format_on_save = 1
 
-" emmet
+" Emmet.vim
 let g:user_emmet_leader_key='<C-S>'
 
-lua << EOF
--- Add additional capabilities supported by nvim-cmp
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+let g:coq_settings = { 'auto_start': 'shut-up', 'display.pum.fast_close': v:false, 'display.icons.mode': 'none' }
 
+lua << EOF
 -- nvim-lspconfig
 local nvim_lsp = require("lspconfig")
 local null_ls = require("null-ls")
@@ -320,6 +324,9 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+-- flutter-tools.nvim setup
+require("flutter-tools").setup{} -- use defaults
+
 -- tsserver
 nvim_lsp.tsserver.setup({
     on_attach = function(client, bufnr)
@@ -363,56 +370,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- UltiSnips works best with vim-go
-local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
-
--- Setup nvim-cmp.
-local cmp = require'cmp'
-
-cmp.setup({
-	snippet = {
-		-- REQUIRED - you must specify a snippet engine
-		expand = function(args)
-			vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-		end,
-	},
-	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
-		{ name = 'ultisnips' }, -- For ultisnips users.
-	}, {
-		{ name = 'buffer' },
-	}),
-	mapping = {
-		['<C-e>'] = cmp.mapping.abort(),
-		['<C-b>'] = cmp.mapping.scroll_docs(-4),
-		['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ["<Tab>"] = cmp.mapping(function(fallback)
-		-- This little snippet will confirm with tab, and if no entry is selected,
-		-- will confirm the first item. Use C-N and C-P to change selected.
-      if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-				cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
-			elseif cmp.visible() then
-				local entry = cmp.get_selected_entry()
-				if not entry then
-					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-				else
-					cmp.confirm()
-				end
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-				cmp_ultisnips_mappings.jump_backwards(fallback)
-			elseif cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-	}
-})
+local coq = require('coq')
 EOF
 
 " Auto indent differently per file
@@ -442,120 +400,3 @@ autocmd BufNewFile,BufRead *.ms set syntax=python ts=4 sw=4 noet
 autocmd FileType tex hi Error ctermbg=NONE
 autocmd FileType mail setlocal noautoindent
 autocmd FileType wiki setlocal tw=80 et ts=2 sw=2
-
-" vim-go
-let g:go_fmt_command="gopls"
-" let g:go_gopls_gofumpt=1
-
-" based on henry's statusline
-" https://git.sr.ht/~hnaguski/pineapple-dots/tree/master/item/neovim/.config/nvim/init.vim
-" set highlights for statusline based on mode, uses gui* so make sure you can
-" use termguicolors. This funcion also returns the current mode as a word
-function StatusColor() abort
-	let l:mode = mode()
-	if l:mode ==# 'n'
-		highlight modeHL guibg='#7cafc2' guifg='#000000'
-		let l:mode = "normal"
-	elseif l:mode ==# 'i'
-		highlight modeHL guibg='#a1b56c' guifg='#000000'
-		let l:mode = "insert"
-	elseif l:mode ==# 'v'
-		highlight modeHL guibg='#ba8baf' guifg='#000000'
-		let l:mode = "visual"
-	elseif l:mode ==# 'V'
-		highlight modeHL guibg='#ba8baf' guifg='#000000'
-		let l:mode = "visual line"
-	elseif l:mode ==# "\<C-V>"
-		highlight modeHL guibg='#ba8baf' guifg='#000000'
-		let l:mode = "visual block"
-	elseif l:mode ==# 'R'
-		highlight modeHL guibg='#f7ca88' guifg='#000000'
-		let l:mode = "replace"
-	elseif l:mode ==# 'c'
-		highlight modeHL guibg='#dc9656' guifg='#000000'
-		let l:mode = "command"
-	endif
-	return l:mode
-endfunction
-
-" style filename based on it's status
-function Filestatus() abort
-	if &modified
-		highlight fileHL gui=italic
-	elseif &readonly
-		highlight fileHL gui=NONE guifg='#e65737'
-	elseif &modified && &readonly
-		highlight fileHL gui=italic guifg='#e65737'
-	else
-		highlight clear fileHL
-	endif
-	return "%#fileHL# %F"
-endfunction
-
-" get warning/error messages from lsp
-function LspWarnings()
-	if luaeval('not vim.tbl_isempty(vim.lsp.buf_get_clients(0))')
-		let l:warnings = luaeval("#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })")
-		let l:warnings .= l:warnings == 1 ? " warning" : " warnings"
-
-		if l:warnings >= 1
-			return printf('%%#Warning# %s ', warnings)
-		else
-			return printf('')
-		endif
-	else
-		return ""
-	endif
-endfunction
-
-function LspErrors()
-	if luaeval('not vim.tbl_isempty(vim.lsp.buf_get_clients(0))')
-		let l:errors = luaeval("#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })")
-		let l:errors .= l:errors == 1 ? " error" : " errors"
-
-		if l:errors >= 1
-			return printf('%%#Error# %s ', errors)
-		else
-			return printf('')
-		endif
-	else
-		return ""
-	endif
-endfunction
-
-function WordCount()
-	if index(g:WCfiletypes, &filetype) != -1
-		return printf(' words %d ', wordcount().words)
-	else
-		return ""
-	endif
-endfunction
-function LineCount()
-	return printf(' ㏑ %d/%d ', line('.'), line('$'))
-endfunction
-
-" default statusline highlight
-highlight statusdefault guibg='#000000' guifg='#dedcdc'
-
-" clear statusline
-let &statusline = ''
-" show mode colorfully
-let &statusline .= "%#modeHL# %{StatusColor()} "
-
-" file name with modified + readonly status
-let &statusline .= "%{%Filestatus()%}%#statusdefault#"
-
-" right side
-let &statusline .= "%="
-
-" show word count in some files
-let WCfiletypes = [ 'text', 'wiki', 'markdown' ]
-let &statusline .= "%{WordCount()}"
-" filetype with different color for some reason (it looks nice)
-let &statusline .= '%{%(empty(&filetype) ? "" : "%#colorcolum# ".&filetype)%} '
-" color based on mode
-let &statusline .= "%#modeHL#"
-let &statusline .= "%{LineCount()}"
-" lsp warnings/errors
-let &statusline .= "%{%LspWarnings()%}"
-let &statusline .= "%{%LspErrors()%}"
