@@ -1,0 +1,66 @@
+-- Base16 black-pastel for neovim
+require('base16-colorscheme').setup({
+base00 = "#000000",
+base01 = "#282828",
+base02 = "#383838",
+base03 = "#888888",
+base04 = "#b8b8b8",
+base05 = "#d8d8d8",
+base06 = "#e8e8e8",
+base07 = "#f8f8f8",
+base08 = "#e65737",
+base09 = "#dc9656",
+base0A = "#f7ca88",
+base0B = "#a1b56c",
+base0C = "#86c1b9",
+base0D = "#7cafc2",
+base0E = "#ba8baf",
+base0F = "#a16946",
+})
+
+local function lineCount()
+	total = vim.api.nvim_buf_line_count(0)
+  return '%l' .. '/' .. total
+end
+
+local wcFiletypes = { 'md', 'markdown', 'txt', 'wiki' }
+local function getWords()
+	for _,v in pairs(wcFiletypes) do
+		if v == vim.bo.filetype then
+			if vim.fn.wordcount().visual_words == 1 then
+				return tostring(vim.fn.wordcount().visual_words) .. " word"
+			elseif not (vim.fn.wordcount().visual_words == nil) then
+				return tostring(vim.fn.wordcount().visual_words) .. " words"
+			else
+				return tostring(vim.fn.wordcount().words) .. " words"
+			end
+		end
+	end
+	return ""
+end
+
+-- NOTE: Load colorscheme before lualine
+require('lualine').setup {
+	options = {
+		theme = 'base16',
+		section_separators = { left = '', right = '' },
+		component_separators = { left = '', right = '' },
+		globalstatus = true,
+	},
+	sections = {
+		lualine_a = {'mode'},
+		lualine_b = {'filename'},
+		lualine_c = {{'b:gitsigns_head', icon = ''}},
+		lualine_x = {getWords},
+		lualine_y = {'diagnostics', 'filetype'},
+		lualine_z = {lineCount}
+	},
+	inactive_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {'filename'},
+		lualine_x = {'location'},
+		lualine_y = {},
+		lualine_z = {}
+	},
+}
