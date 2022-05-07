@@ -43,6 +43,9 @@ colors:
     cyan:    '#98d9c8'
     white:   '#f8f8f8'
 
+env:
+  TERM: xterm-256color
+
 key_bindings:
     - { key: Return,    mods: Control,              action: SpawnNewInstance }
     - { key: V,         mods: Shift|Alt,            action: PasteSelection   }

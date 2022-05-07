@@ -25,7 +25,7 @@ colors:
   normal:
     black:   '#ffffff'
     red:     '#eb3232'
-    green:   '#99e550'
+    green:   '#77cc99'
     yellow:  '#ffb35b'
     blue:    '#57bda0'
     magenta: '#888aca'
@@ -35,13 +35,16 @@ colors:
   # Bright colors
   bright:
     black:   '#666666'
-    red:     '#e66a6a'
-    green:   '#d6f264'
-    yellow:  '#ffd541'
-    blue:    '#92dcba'
-    magenta: '#a5b0f2'
-    cyan:    '#e584f5'
+    red:     '#eb3232'
+    green:   '#77cc99'
+    yellow:  '#ffb35b'
+    blue:    '#57bda0'
+    magenta: '#888aca'
+    cyan:    '#aa55cc'
     white:   '#eeeeee'
+
+env:
+  TERM: xterm-256color
 
 key_bindings:
     - { key: Return,    mods: Control,              action: SpawnNewInstance }
