@@ -25,7 +25,7 @@
 [gpg]
 	program = gpg2
 [init]
-	defaultBranch = master
+	defaultBranch = main
 [core]
 	pager = less -FRX
 	excludesfile = ~/.gitignore_global
