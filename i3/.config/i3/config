@@ -158,7 +158,7 @@ client.placeholder      $sc     $sc	$fc	$sc	$sc
 client.background       $sc
 
 # Program overrides
-for_window [class="Sxiv"] floating enable
+for_window [class="imv"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="mpv"] resize set 640px 630px
 for_window [title="Minecraft"] floating enable
