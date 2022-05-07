@@ -14,14 +14,12 @@
 	raa = log --oneline
 	di = diff
 	dc = diff --cached
-	ds = diff --stat=160,120
 	amend = commit --amend
-	ff = merge --ff-only
-	noff = merge --no-ff
 	fa = fetch --all
-	po = push origin
-	pu = pull origin
+	ps = push origin
+	pl = pull origin
 	dh1 = diff HEAD~1
+	hard = reset --hard FETCH_HEAD
 [pull]
 	rebase = false
 [gpg]
