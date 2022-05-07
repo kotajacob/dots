@@ -97,6 +97,7 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
+
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2
@@ -138,15 +139,15 @@ gaps inner 16
 smart_gaps on
 
 ### selection color
-set $sc #f24353
+set_from_resource $sc i3wm.sc #f24353
 ### old selection color
-set $oc #dedcdc
+set_from_resource $oc i3wm.oc #dedcdc
 ### bright selection color
-set $bc #b800b8
+set_from_resource $bc i3wm.bc #b800b8
 ### font color
-set $fc #f0f0f0
+set_from_resource $fc i3wm.fc #f0f0f0
 ### unselected color
-set $uc #565656
+set_from_resource $uc i3wm.uc #565656
 
 ### class               border  backgr. text indicator child_border
 client.focused          $sc	$sc	$fc	$sc	$sc
