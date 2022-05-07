@@ -23,6 +23,9 @@ bindsym $mod+d exec --no-startup-id dmenu_dprint
 # Start a browser
 bindsym $mod+b exec qutebrowser
 
+# Select an emoji
+bindsym $mod+o exec --no-startup-id menu-emoji
+
 # Use mod to drag / resize
 floating_modifier $mod
 
