@@ -1,8 +1,0 @@
-Xft.dpi: 192
-
-Sxiv.background: #dddddd
-Sxiv.foreground: #000000
-
-dmenu.font: Iosevka:size=9:antialias=true:autohint=true
-dmenu.normbgcolor: #000000
-dmenu.selbgcolor: #f24353
