@@ -33,7 +33,8 @@ alias mixer='pulsemixer'
 alias clip='xclip -selection clipboard'
 alias c='clear'
 alias cdc='cd; clear'
-# alias vim='nvim'
+alias v='nvim'
+alias vim='nvim'
 alias ls='ls --color=auto --group-directories-first'
 alias la='ls -lAh --color=auto --group-directories-first'
 alias l='ls -1F --color=auto --group-directories-first'
@@ -42,6 +43,7 @@ alias t='tmux'
 alias tn='tmux new -s'
 alias ta='tmux attach -t'
 alias tls='tmux ls'
+alias dmesg='sudo dmesg -wH'
 # alias xi='sudo xbps-install -S' // Use xi from xtools instead
 alias xu='sudo xbps-install -Su'
 alias xs='xbps-query -Rs'
@@ -56,7 +58,7 @@ alias umnt='udisksctl unmount -b'
 alias tide='tide /home/kota/docs/Dunedin2022.csv'
 alias mail='mbsync primary'
 alias neofetch='pfetch'
-alias wiki="cd $HOME/docs/memex && nvim index.wiki"
+alias wiki="cd $HOME/docs/memex && nvim index.md"
 
 ## functions
 readme() {
