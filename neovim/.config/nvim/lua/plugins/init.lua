@@ -1,9 +1,10 @@
 require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
+	use 'wbthomason/packer.nvim'
 
 	-- "Libraries"
 	use 'nvim-lua/plenary.nvim'
 	use 'tpope/vim-repeat'
+	use 'antoinemadec/FixCursorHold.nvim'
 
 	-- Startup speed improvement (must call require before others plugins!)
 	use {
@@ -12,6 +13,7 @@ require('packer').startup(function(use)
 	}
 
 	-- Colorscheme
+	use '~/g/left.nvim'
 	use 'RRethy/nvim-base16'
 	use {
 		'nvim-lualine/lualine.nvim',
@@ -19,7 +21,13 @@ require('packer').startup(function(use)
 	}
 
 	-- Advanced syntax highlighting and more...
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		run = ':TSUpdate',
+		config = function()
+			require('plugins.treesitter')
+		end
+	}
 	use {
 		'lewis6991/spellsitter.nvim',
 		config = function() require('spellsitter').setup() end
@@ -28,7 +36,7 @@ require('packer').startup(function(use)
 	use 'nvim-treesitter/playground' -- Show highlight group w/ f12
 
 	-- LSP
- 	use 'neovim/nvim-lspconfig'
+	use 'neovim/nvim-lspconfig'
 	use 'hrsh7th/cmp-nvim-lsp' -- TODO: swap for nvim-compleet eventually...
 	use 'hrsh7th/cmp-buffer'
 	use 'hrsh7th/cmp-path'
@@ -46,13 +54,14 @@ require('packer').startup(function(use)
 	use 'hrsh7th/vim-vsnip'
 
 	-- Language support
+	use 'https://git.sr.ht/~sircmpwn/hare.vim'
+	use 'mattn/emmet-vim'
 	use 'jose-elias-alvarez/null-ls.nvim'
 	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
 	use 'mfussenegger/nvim-jdtls'
 	use {
 		'fatih/vim-go',
 		run = ':GoUpdateBinaries',
-		ft = {'go', 'gomod', 'gowork'}
 	}
 
 	-- Hop around the page quickly
@@ -60,27 +69,28 @@ require('packer').startup(function(use)
 		'phaazon/hop.nvim', -- TODO: theme with base16
 		branch = 'v1', -- optional but strongly recommended
 		config = function()
-			require'hop'.setup()
+			require 'hop'.setup()
 		end
 	}
 
 	-- Fuzzy searcher
 	use 'nvim-telescope/telescope.nvim'
+	-- use 'nvim-telescope/telescope-ui-select.nvim'
 	use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
 	-- dirbuf as filemanager
 	use "elihunter173/dirbuf.nvim"
 
-	-- Toggleterm to quickly open a terminal
-	use 'akinsho/toggleterm.nvim'
+	-- Draw ASCII diagrams :VBox
+	use "jbyuki/venn.nvim"
 
 	-- Wiki
 	use { 'lervag/wiki.vim', ft = 'wiki' }
-	use { 'lervag/wiki-ft.vim', ft = 'wiki' }
+	use { '~/g/wiki-ft.vim', ft = 'wiki' }
 
 	-- Auto-close brackets and such when hitting enter
-	-- use 'rstacruz/vim-closer'
-	use 'tpope/vim-endwise'
+	use 'rstacruz/vim-closer'
+	use 'tpope/vim-endwise' -- TODO: Add markdown ``` support
 
 	-- Comment things in/out
 	use {
@@ -90,8 +100,10 @@ require('packer').startup(function(use)
 
 	-- Git improvements
 	use 'tpope/vim-fugitive'
+	use 'https://git.sr.ht/~willdurand/srht.vim'
 	use 'junegunn/gv.vim'
-	use {'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' }}
+	use 'tpope/vim-unimpaired'
+	use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 
 	-- Operate on "sandwhiched" text
 	use {
@@ -104,6 +116,9 @@ require('packer').startup(function(use)
 
 	-- Adds a cx "exchange" operator to swap selections
 	use 'tommcdo/vim-exchange'
+
+	-- Slightly improved %
+	use 'andymass/vim-matchup'
 
 	-- Expands on the idea of commands like di'
 	use 'wellle/targets.vim'
@@ -123,26 +138,14 @@ require('packer').startup(function(use)
 	-- Show color codes as their color
 	use {
 		'rrethy/vim-hexokinase',
-		run = 'make hexokinase' 
+		run = 'make hexokinase'
 	}
 
 	-- Move blocks of selected text around
 	use 'zirrostig/vim-schlepp'
 
-	-- Misc ][ bindings
-	-- use 'tpope/vim-unimpaired' -- TODO: create bindings from lua myself
-	
 	-- Make * search work in visual mode
 	use 'bronson/vim-visual-star-search'
-
-	-- Pencil to do "smart wrapping" in text and markdown files
-	use 'preservim/vim-pencil'
-
-	-- Emmet.vim for easier HTML writing
-	use {
-		'mattn/emmet-vim',
-		ft = {'html', 'css'}
-	}
 
 	-- Display :StartupTime
 	use 'dstein64/vim-startuptime'
@@ -157,25 +160,16 @@ vim.cmd([[
 ]])
 
 require('plugins.theme')
-require('plugins.treesitter')
 require('plugins.lsp')
 require('plugins.git')
 
 require("dirbuf").setup {
-    show_hidden = false,
-    sort_order = "directories_first",
-    write_cmd = "DirbufSync",
+	show_hidden = false,
+	sort_order = "directories_first",
+	write_cmd = "DirbufSync",
 }
 
-require("toggleterm").setup{
-	open_mapping = [[<C-\>]],
-	direction = 'float',
-	float_opts = {
-		border = 'curved'
-	}
-}
-
-require('telescope').setup{}
+require('telescope').setup {}
 require('telescope').load_extension('fzf')
 
 -- hexokinase
@@ -183,14 +177,6 @@ vim.g.Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla'
 
 -- wiki.vim
 vim.g.wiki_root = "~/docs/memex"
-vim.g.wiki_filetypes = {'md', 'wiki'}
-
--- emmet trigger key
-vim.g.user_emmet_leader_key = '<C-S>'
+vim.g.wiki_filetypes = { 'md', 'wiki' }
 
 -- vim-go
-vim.g.go_highlight_types = 1
-vim.g.go_highlight_fields = 1
-vim.g.go_highlight_functions = 1
-vim.g.go_highlight_function_calls = 1
-vim.g.go_highlight_build_constraints = 1

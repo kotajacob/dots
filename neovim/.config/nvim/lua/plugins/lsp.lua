@@ -1,9 +1,5 @@
 -- Setup nvim-cmp.
-local feedkey = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
-
-local cmp = require'cmp'
+local cmp = require 'cmp'
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 cmp.setup({
@@ -20,30 +16,34 @@ cmp.setup({
 		-- completion = cmp.config.window.bordered(),
 		-- documentation = cmp.config.window.bordered(),
 	},
-	mapping = cmp.mapping.preset.insert({
+	mapping = {
+		['<C-n>'] = cmp.mapping.select_next_item(),
+		['<C-p>'] = cmp.mapping.select_prev_item(),
 		['<C-b>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<C-e>'] = cmp.mapping.abort(),
-		['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 		["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif vim.fn["vsnip#available"](1) == 1 then
-        feedkey("<Plug>(vsnip-expand-or-jump)", "")
-      else
-        fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-      end
-    end, { "i", "s" }),
+			-- This little snippet will confirm with tab, and if no entry is selected,
+			-- will confirm the first item. Use C-N and C-P to change selected.
+			if cmp.visible() then
+				local entry = cmp.get_selected_entry()
+				if not entry then
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+				else
+					cmp.confirm()
+				end
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
 
-    ["<S-Tab>"] = cmp.mapping(function()
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-        feedkey("<Plug>(vsnip-jump-prev)", "")
-      end
-    end, { "i", "s" }),
-	}),
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+	},
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
 		{ name = 'vsnip' }, -- For vsnip users.
@@ -76,11 +76,11 @@ cmp.setup.cmdline(':', {
 
 -- LSP
 local nvim_lsp = require("lspconfig")
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
 	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
 	-- Mappings.
-	local opts = { noremap=true, silent=true }
+	local opts = { noremap = true, silent = true }
 
 	buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 	buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -114,6 +114,18 @@ nvim_lsp.clangd.setup {
 nvim_lsp.cssls.setup {
 	on_attach = on_attach,
 	capabilities = capabilities
+}
+
+nvim_lsp.sumneko_lua.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { 'vim' }
+			}
+		}
+	}
 }
 
 nvim_lsp.tsserver.setup({
@@ -159,7 +171,7 @@ local jdtlsConfig = {
 		'-data', workspace_dir,
 	},
 
-	root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'}),
+	root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew' }),
 
 	-- Here you can configure eclipse.jdt.ls specific settings
 	-- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
@@ -186,8 +198,8 @@ local jdtlsConfig = {
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 vim.api.nvim_create_autocmd(
-  "FileType",
-  { pattern = "java" , callback = function() require('jdtls').start_or_attach(jdtlsConfig) end }
+	"FileType",
+	{ pattern = "java", callback = function() require('jdtls').start_or_attach(jdtlsConfig) end }
 )
 
 local null_ls = require("null-ls")
@@ -195,7 +207,7 @@ null_ls.setup({
 	sources = {
 		null_ls.builtins.diagnostics.shellcheck,
 		null_ls.builtins.formatting.shfmt,
-		null_ls.builtins.formatting.prettier.with({extra_args = { "--use-tabs", "--no-semi" }}),
+		null_ls.builtins.formatting.prettier.with({ extra_args = { "--use-tabs", "--no-semi" } }),
 	},
 	on_attach = on_attach,
 	capabilities = capabilities

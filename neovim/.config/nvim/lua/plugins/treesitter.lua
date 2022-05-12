@@ -1,42 +1,48 @@
-require'nvim-treesitter.configs'.setup{
+require 'nvim-treesitter.configs'.setup {
 	highlight = {
 		enable = true,
 	},
 	textobjects = {
 		select = {
 			enable = true,
-			disable = {"go"},
+			disable = { "go" },
 
 			-- Automatically jump forward to textobj, similar to targets.vim
 			lookahead = true,
 
 			keymaps = {
-				-- You can use the capture groups defined in textobjects.scm
 				["af"] = "@function.outer",
 				["if"] = "@function.inner",
-				["ac"] = "@class.outer",
-				["ic"] = "@class.inner",
+				["aF"] = "@class.outer",
+				["iF"] = "@class.inner",
+				["ac"] = "@comment.outer",
+				["ic"] = "@comment.outer",
+				-- markdown
+				["il"] = "@list_item.inner",
+				["al"] = "@list_item.outer",
+				["iC"] = "@code_block.inner", -- Doesn't apply to wiki.vim
+				["aC"] = "@code_block.outer", -- But wiki-ft has this too!
 			},
 		},
 		move = {
 			enable = true,
-			disable = {"go"},
+			disable = { "go" },
 			set_jumps = true, -- whether to set jumps in the jumplist
 			goto_next_start = {
-				["]m"] = "@function.outer",
-				["]]"] = "@class.outer",
+				["]]"] = "@function.outer",
+				["]m"] = "@class.outer",
 			},
 			goto_next_end = {
-				["]M"] = "@function.outer",
-				["]["] = "@class.outer",
+				["]["] = "@function.outer",
+				["]M"] = "@class.outer",
 			},
 			goto_previous_start = {
-				["[m"] = "@function.outer",
-				["[["] = "@class.outer",
+				["[["] = "@function.outer",
+				["[m"] = "@class.outer",
 			},
 			goto_previous_end = {
-				["[M"] = "@function.outer",
-				["[]"] = "@class.outer",
+				["[]"] = "@function.outer",
+				["[M"] = "@class.outer",
 			},
 		},
 	},

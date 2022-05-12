@@ -1,5 +1,6 @@
 local map = vim.api.nvim_set_keymap
 local noremap = { noremap = true }
+local snoremap = { noremap = true, silent = true }
 
 -- Move between splits without C-W prefix
 map('n', '<C-J>', '<C-W><C-J>', noremap)
@@ -23,21 +24,79 @@ map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Disable search highlighting
-map('n', '<space>n', ':nohl<CR>', noremap)
+map('n', '<space>n', ':nohl<CR>', snoremap)
 
 -- Toggle hidden characters
-map('n', '<space>sh', ':set list!<cr>', noremap)
+map('n', '<space>sh', ':set list!<cr>', snoremap)
 
+-- Toggle spell checking
+map('n', '<space>ss', ':set spell!<cr>', snoremap)
+
+-- Toggle line wrapping
+map('n', '<space>sw', ':set wrap!<cr>', snoremap)
+
+-- Toggle virtual edit (move around freely in the window)
+map('n', '<space>sv', '', {
+	noremap = true,
+	silent = true,
+	callback = function()
+		if (vim.o.virtualedit == '') then
+			vim.o.virtualedit = 'all'
+		else
+			vim.o.virtualedit = ''
+		end
+	end,
+})
+
+-- Toggle number
+map('n', '<space>sn', '', {
+	noremap = true,
+	silent = true,
+	callback = function()
+		vim.o.relativenumber = not vim.o.relativenumber
+		vim.o.number = not vim.o.number
+	end,
+})
+
+-- Repeat macros with , because @@ is too long for me lol
+map('n', ',', '@@', noremap)
+
+-- Recreate some of vim-unimpaired
+-- map('n', '[a', ':previous<cr>', snoremap)
+-- map('n', ']a', ':next<cr>', snoremap)
+-- map('n', '[A', ':first<cr>', snoremap)
+-- map('n', ']A', ':last<cr>', snoremap)
+--
+-- map('n', '[b', ':bprevious<cr>', snoremap)
+-- map('n', ']b', ':bnext<cr>', snoremap)
+-- map('n', '[B', ':bfirst<cr>', snoremap)
+-- map('n', ']B', ':blast<cr>', snoremap)
+--
+-- map('n', '[l', ':lprevious<cr>', snoremap)
+-- map('n', ']l', ':lnext<cr>', snoremap)
+-- map('n', '[L', ':lfirst<cr>', snoremap)
+-- map('n', ']L', ':llast<cr>', snoremap)
+--
+-- map('n', '[q', ':cprevious<cr>', snoremap)
+-- map('n', ']q', ':cnext<cr>', snoremap)
+-- map('n', '[Q', ':cfirst<cr>', snoremap)
+-- map('n', ']Q', ':clast<cr>', snoremap)
+--
+-- map('n', '[t', ':tprevious<cr>', snoremap)
+-- map('n', ']t', ':tnext<cr>', snoremap)
+-- map('n', '[T', ':tfirst<cr>', snoremap)
+-- map('n', ']T', ':tlast<cr>', snoremap)
+--
 -- Close other windows
-map('n', '<space>o', ':only<CR>', noremap)
+map('n', '<space>o', ':only<CR>', snoremap)
 
 
 -- Hop binds
 map('n', '<space><space>', "", {
+	noremap = true,
 	callback = function()
-		require'hop'.hint_char2()
-	end,
-	noremap = true
+		require 'hop'.hint_char2()
+	end
 })
 
 -- Telescope binds
@@ -99,49 +158,34 @@ map("n", "<space>ca", "", {
 -- Trouble error list
 map("n", "<space>el", ":TroubleToggle<CR>", noremap)
 
--- Fugitive 3-way diff
-map("n", "<leader>gd", ":Gvdiff<CR>", noremap)
-map("n", "gh", ":diffget //2<CR>", noremap)
-map("n", "gl", ":diffget //3<CR>", noremap)
-
 -- Use dial.nvim (speed-dating clone) instead of defaults
-map("n", "<C-a>", require("dial.map").inc_normal(), noremap)
-map("n", "<C-x>", require("dial.map").dec_normal(), noremap)
-map("v", "<C-a>", require("dial.map").inc_visual(), noremap)
-map("v", "<C-x>", require("dial.map").dec_visual(), noremap)
-map("v", "g<C-a>", require("dial.map").inc_gvisual(), noremap)
-map("v", "g<C-x>", require("dial.map").dec_gvisual(), noremap)
+map("n", "<C-a>", require("dial.map").inc_normal(), snoremap)
+map("n", "<C-x>", require("dial.map").dec_normal(), snoremap)
+map("v", "<C-a>", require("dial.map").inc_visual(), snoremap)
+map("v", "<C-x>", require("dial.map").dec_visual(), snoremap)
+map("v", "g<C-a>", require("dial.map").inc_gvisual(), snoremap)
+map("v", "g<C-x>", require("dial.map").dec_gvisual(), snoremap)
 
 -- Align text (EasyAlign)
-map("v", "ga", "<Plug>(EasyAlign)", noremap)
-map("n", "ga", "<Plug>(EasyAlign)", noremap)
+map("v", "ga", "<Plug>(EasyAlign)", snoremap)
+map("n", "ga", "<Plug>(EasyAlign)", snoremap)
 
 -- Show highlight group with F12
-map("n", "<F12>", ":TSHighlightCapturesUnderCursor<CR>", noremap)
+map("n", "<F12>", ":TSHighlightCapturesUnderCursor<CR>", snoremap)
 
 -- Map %% to return my current working directory
-map("c", "%%", "<C-R>=expand('%:h').'/'<cr>", noremap)
+map("c", "%%", "<C-R>=expand('%:h').'/'<cr>", snoremap)
 
 -- Open undotree
-map("n", "<space>su", ":UndotreeToggle<CR>", noremap)
+map("n", "<space>su", ":UndotreeToggle<CR>", snoremap)
 
 -- Schlepp
-map("v", "<up>", "<Plug>SchleppUp", noremap)
-map("v", "<down>", "<Plug>SchleppDown", noremap)
-map("v", "<left>", "<Plug>SchleppLeft", noremap)
-map("v", "<right>", "<Plug>SchleppRight", noremap)
+map("v", "<up>", "<Plug>SchleppUp", snoremap)
+map("v", "<down>", "<Plug>SchleppDown", snoremap)
+map("v", "<left>", "<Plug>SchleppLeft", snoremap)
+map("v", "<right>", "<Plug>SchleppRight", snoremap)
 
 -- Date command ... but in lua?
-map("n", "<space>dd", "", {
-	noremap = true,
-	callback = function()
-		vim.api.nvim_put({os.date("%Y-%m-%dT%H:%M:%S")}, "l", false, true)
-	end,
-})
+map("n", "<space>dd", [[:exec 'normal a'.substitute(system("date -Iseconds"),"[\n]*$","","")<CR>]], snoremap)
 
-map("n", "<space>ds", "", {
-	noremap = true,
-	callback = function()
-		vim.api.nvim_put({os.date("%Y-%m-%d")}, "l", false, true)
-	end,
-})
+map("n", "<space>ds", [[:exec 'normal a'.substitute(system("date +%Y-%m-%d"),"[\n]*$","","")<CR>]], snoremap)

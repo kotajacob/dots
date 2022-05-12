@@ -1,6 +1,5 @@
 local o = vim.o
 local g = vim.g
-local cmd = vim.cmd
 local autocmd = vim.api.nvim_create_autocmd
 
 -- EXPERIMENTAL: Use filetype.lua instead of filetype.vim
@@ -22,6 +21,9 @@ o.background = "dark"
 g.loaded_netrwPlugin = 1
 g.loaded_netrw = 1
 
+-- Use matchup instead of matchit
+g.loaded_matchit = 1
+
 -- Enable persistent undo
 o.undofile = true
 
@@ -29,7 +31,7 @@ o.undofile = true
 o.writebackup = false
 
 -- Traverse lines with arrow keys
-o.whichwrap = "b,s,<,>,[,]"
+vim.o.whichwrap = "b,s,<,>,[,]"
 
 -- Indentation settings for using hard tabs for indent
 o.softtabstop = 4
@@ -52,29 +54,29 @@ o.clipboard = "unnamed" -- Set the default register to * so I can have a shared 
 o.signcolumn = "yes" -- Always use signcolumn
 o.diffopt = "filler,internal,algorithm:histogram,indent-heuristic" -- Enable nvim diffing
 o.updatetime = 100 -- Faster responce time
-o.confirm = true-- Show a dialog to confirm changes instead of failure
+o.confirm = true -- Show a dialog to confirm changes instead of failure
 o.mouse = "a" -- Enable use of the mouse for all modes
 o.foldlevelstart = 99 -- Open all folds by default
 o.breakindent = true -- Multiline indenting
 
 -- Disable line ending diagnotic messages
 vim.diagnostic.config({
-  virtual_text = false,
+	virtual_text = false,
 })
 
 -- Restore cursor position
 autocmd('BufReadPost', {
-  pattern = '*',
-  callback = function()
-    vim.fn.setpos(".", vim.fn.getpos("'\""))
-  end,
+	pattern = '*',
+	callback = function()
+		vim.fn.setpos(".", vim.fn.getpos("'\""))
+	end,
 })
 
 -- Highlight on yank
 autocmd('TextYankPost', {
 	pattern = '*',
 	callback = function()
-		vim.highlight.on_yank {higroup="IncSearch", timeout=350}
+		vim.highlight.on_yank { higroup = "IncSearch", timeout = 350 }
 	end,
 })
 
