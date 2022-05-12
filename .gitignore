@@ -2,6 +2,7 @@
 beets/.local/share/beet/library.db
 beets/.config/beets/state.pickle
 neovim*/.config/nvim/undo/*
+neovim*/.config/nvim/plugin/*
 neovim*/.config/nvim/.netrwhist
 mpd/.config/mpd/mpdstate
 mpd/.config/mpd/mpd.db
