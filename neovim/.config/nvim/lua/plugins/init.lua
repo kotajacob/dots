@@ -178,5 +178,3 @@ vim.g.Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla'
 -- wiki.vim
 vim.g.wiki_root = "~/docs/memex"
 vim.g.wiki_filetypes = { 'md', 'wiki' }
-
--- vim-go

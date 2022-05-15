@@ -2,12 +2,6 @@ local map = vim.api.nvim_set_keymap
 local noremap = { noremap = true }
 local snoremap = { noremap = true, silent = true }
 
--- Move between splits without C-W prefix
-map('n', '<C-J>', '<C-W><C-J>', noremap)
-map('n', '<C-K>', '<C-W><C-K>', noremap)
-map('n', '<C-L>', '<C-W><C-L>', noremap)
-map('n', '<C-H>', '<C-W><C-H>', noremap)
-
 -- Visual shifting (does not exit Visual mode)
 map('v', '<', '<gv', noremap)
 map('v', '>', '>gv', noremap)
@@ -61,37 +55,10 @@ map('n', '<space>sn', '', {
 -- Repeat macros with , because @@ is too long for me lol
 map('n', ',', '@@', noremap)
 
--- Recreate some of vim-unimpaired
--- map('n', '[a', ':previous<cr>', snoremap)
--- map('n', ']a', ':next<cr>', snoremap)
--- map('n', '[A', ':first<cr>', snoremap)
--- map('n', ']A', ':last<cr>', snoremap)
---
--- map('n', '[b', ':bprevious<cr>', snoremap)
--- map('n', ']b', ':bnext<cr>', snoremap)
--- map('n', '[B', ':bfirst<cr>', snoremap)
--- map('n', ']B', ':blast<cr>', snoremap)
---
--- map('n', '[l', ':lprevious<cr>', snoremap)
--- map('n', ']l', ':lnext<cr>', snoremap)
--- map('n', '[L', ':lfirst<cr>', snoremap)
--- map('n', ']L', ':llast<cr>', snoremap)
---
--- map('n', '[q', ':cprevious<cr>', snoremap)
--- map('n', ']q', ':cnext<cr>', snoremap)
--- map('n', '[Q', ':cfirst<cr>', snoremap)
--- map('n', ']Q', ':clast<cr>', snoremap)
---
--- map('n', '[t', ':tprevious<cr>', snoremap)
--- map('n', ']t', ':tnext<cr>', snoremap)
--- map('n', '[T', ':tfirst<cr>', snoremap)
--- map('n', ']T', ':tlast<cr>', snoremap)
---
 -- Close other windows
 map('n', '<space>o', ':only<CR>', snoremap)
 
-
--- Hop binds
+-- Hop around
 map('n', '<space><space>', "", {
 	noremap = true,
 	callback = function()
@@ -187,5 +154,11 @@ map("v", "<right>", "<Plug>SchleppRight", snoremap)
 
 -- Date command ... but in lua?
 map("n", "<space>dd", [[:exec 'normal a'.substitute(system("date -Iseconds"),"[\n]*$","","")<CR>]], snoremap)
-
 map("n", "<space>ds", [[:exec 'normal a'.substitute(system("date +%Y-%m-%d"),"[\n]*$","","")<CR>]], snoremap)
+
+-- Move between splits without C-W prefix
+map('n', '<C-J>', '<C-W><C-J>', {})
+map('n', '<C-K>', '<C-W><C-K>', {})
+map('n', '<C-L>', '<C-W><C-L>', {})
+map('n', '<C-H>', '<C-W><C-H>', {})
+
