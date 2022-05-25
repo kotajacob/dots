@@ -157,8 +157,7 @@ map("n", "<space>dd", [[:exec 'normal a'.substitute(system("date -Iseconds"),"[\
 map("n", "<space>ds", [[:exec 'normal a'.substitute(system("date +%Y-%m-%d"),"[\n]*$","","")<CR>]], snoremap)
 
 -- Move between splits without C-W prefix
-map('n', '<C-J>', '<C-W><C-J>', {})
-map('n', '<C-K>', '<C-W><C-K>', {})
-map('n', '<C-L>', '<C-W><C-L>', {})
-map('n', '<C-H>', '<C-W><C-H>', {})
-
+map('n', '<C-j>', '<C-W><C-j>', snoremap)
+map('n', '<C-k>', '<C-W><C-k>', snoremap)
+map('n', '<C-l>', '<C-W><C-l>', snoremap)
+map('n', '<C-h>', '<C-W><C-h>', snoremap)
