@@ -207,11 +207,36 @@ vim.api.nvim_create_autocmd(
 )
 
 local null_ls = require("null-ls")
+
+local haredoc = {
+	method = null_ls.methods.HOVER,
+	filetypes = { "hare" },
+	generator = {
+		fn = function(_, done)
+			local oldiskeyword = vim.opt_local.iskeyword
+			vim.opt_local.iskeyword:append(":")
+			local symbol = vim.fn.expand('<cword>')
+			vim.opt_local.iskeyword = oldiskeyword
+
+			require('plenary.job'):new({
+				command = 'haredoc',
+				args = { symbol },
+				on_exit = function(j, _)
+					done(j:result())
+				end,
+			}):start()
+		end,
+		async = true,
+	},
+}
+
 null_ls.setup({
 	sources = {
 		null_ls.builtins.diagnostics.shellcheck,
 		null_ls.builtins.formatting.shfmt,
-		null_ls.builtins.formatting.prettier.with({ extra_args = { "--use-tabs", "--no-semi" } }),
+		null_ls.builtins.formatting.prettier,
+		null_ls.builtins.hover.dictionary,
+		haredoc,
 	},
 	on_attach = on_attach,
 	capabilities = capabilities

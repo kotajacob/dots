@@ -21,7 +21,7 @@ require 'nvim-treesitter.configs'.setup {
 				["il"] = "@list_item.inner",
 				["al"] = "@list_item.outer",
 				["iC"] = "@code_block.inner", -- Doesn't apply to wiki.vim
-				["aC"] = "@code_block.outer", -- But wiki-ft has this too!
+				["aC"] = "@code_block.outer", -- wiki-ft has this already!
 			},
 		},
 		move = {

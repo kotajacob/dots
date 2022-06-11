@@ -1,4 +1,4 @@
-local left = require('left')
+local left = require('far-left')
 left.setup()
 local left_theme = left.lualine()
 

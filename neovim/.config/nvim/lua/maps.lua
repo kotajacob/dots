@@ -56,7 +56,8 @@ map('n', '<space>sn', '', {
 map('n', ',', '@@', noremap)
 
 -- Close other windows
-map('n', '<space>o', ':only<CR>', snoremap)
+map('n', '<space>o', ':BufOnly<CR>', snoremap)
+map('n', '<space>O', ':only<CR>', snoremap)
 
 -- Hop around
 map('n', '<space><space>', "", {
@@ -73,48 +74,63 @@ map("n", "<space>f", "", {
 		require("telescope.builtin").find_files()
 	end,
 })
+
 map("n", "<space>/", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").live_grep()
 	end,
 })
+
 map("n", "<space>F", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").git_files()
 	end,
 })
+
+map("n", "<space>m", "", {
+	noremap = true,
+	callback = function ()
+		require("telescope.builtin").marks()
+	end
+})
+
 map("n", "<space>b", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").buffers()
 	end,
 })
+
 map("n", "z=", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").spell_suggest()
 	end,
 })
+
 map("n", "<space>h", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").help_tags()
 	end,
 })
+
 map("n", "<space>k", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").keymaps()
 	end,
 })
+
 map("n", "gr", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").lsp_references()
 	end,
 })
+
 map("n", "<space>ca", "", {
 	noremap = true,
 	callback = function()

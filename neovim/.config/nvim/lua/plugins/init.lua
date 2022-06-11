@@ -12,8 +12,11 @@ require('packer').startup(function(use)
 		config = function() require('impatient') end
 	}
 
+	-- Support "editorconfig" spec
+	use "gpanders/editorconfig.nvim"
+
 	-- Colorscheme
-	use '~/g/left.nvim'
+	use '~/g/far-left'
 	use 'RRethy/nvim-base16'
 	use {
 		'nvim-lualine/lualine.nvim',
@@ -99,7 +102,7 @@ require('packer').startup(function(use)
 	}
 
 	-- Git improvements
-	use 'tpope/vim-fugitive'
+	use '~/git/vim-fugitive'
 	use 'https://git.sr.ht/~willdurand/srht.vim'
 	use 'junegunn/gv.vim'
 	use 'tpope/vim-unimpaired'
@@ -113,6 +116,9 @@ require('packer').startup(function(use)
 
 	-- Show undo history as a tree
 	use 'mbbill/undotree'
+
+	-- Close all buffers except the current
+	use 'vim-scripts/BufOnly.vim'
 
 	-- Adds a cx "exchange" operator to swap selections
 	use 'tommcdo/vim-exchange'
