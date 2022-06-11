@@ -1,6 +1,6 @@
 # basic settings
 unsetopt beep nomatch menu_complete flowcontrol
-setopt appendhistory autocd extendedglob auto_menu complete_in_word always_to_end notify
+setopt appendhistory autocd extendedglob auto_menu complete_in_word always_to_end notify auto_continue
 bindkey -v
 zstyle :compinstall filename '/home/kota/.zshrc'
 autoload -Uz compinit
@@ -27,12 +27,14 @@ alias mntkoi='sshfs -o allow_other,default_permissions kota@koi:/home/kota /mnt/
 alias mntsietch='sshfs -o allow_other,default_permissions kota@koi:/mnt/sietch /mnt/sietch'
 alias hist='cat .history|less -I'
 alias ncm='ncmpcpp'
-alias m='make all'
+alias g='git'
+alias m='make'
 alias mc='make clean'
 alias mixer='pulsemixer'
 alias clip='xclip -selection clipboard'
 alias c='clear'
 alias cdc='cd; clear'
+alias cc='clang'
 alias v='nvim'
 alias vim='nvim'
 alias ls='ls --color=auto --group-directories-first'
@@ -61,7 +63,21 @@ alias neofetch='pfetch'
 alias wiki="cd $HOME/docs/memex && nvim index.md"
 
 ## functions
-readme() {
+jira()
+{
+	if [ "$1" = "me" ]; then
+		$HOME/bin/jira issue list -a"Dakota Walsh" -s~Done -s~Rejected --plain
+		return
+	elif [ "$1" = "w" ]; then
+		$HOME/bin/jira issue list -s~Done -w --plain
+		return
+	else
+		$HOME/bin/jira "$@"
+	fi
+}
+
+readme() 
+{
 	if [ -f readme.md ]; then
 		NAME="readme.md"
 	else
@@ -70,12 +86,14 @@ readme() {
 	touch "$NAME" && "$EDITOR" "$NAME"
 }
 
-of() {
+of() 
+{
 	SELECTION=$(fd -H --type f | fzf)
 	xdg-open "$SELECTION" >/dev/null 2>&1 &
 }
 
-vf() {
+vf() 
+{
 	SELECTION=$(fd -H --type f | fzf)
 	cd "$(dirname "$SELECTION")" || exit
 	"$EDITOR" "$(basename "$SELECTION")"
