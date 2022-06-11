@@ -20,5 +20,8 @@ exec mkfifo $XOBSOCK &
 exec pipewire &
 exec pipewire-pulse &
 
+# increase key repeat speed
+exec xset r rate 350 40 &
+
 # start i3 with dbus so notifications and other things work correctly
 [ "$(tty)" = "/dev/tty1" ] && exec dbus-launch --exit-with-session /bin/i3
