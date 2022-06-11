@@ -2,7 +2,7 @@
 Type=Application
 Name=nnn
 Comment=Terminal file manager
-Exec=alacritty --class "Alacritty-float,Alacritty-float" -o window.dimensions.columns=100 -o window.dimensions.lines=22 -e nnn
+Exec=alacritty --class "Alacritty-float,Alacritty-float" -o window.dimensions.columns=100 -o window.dimensions.lines=22 -e nnn %u
 Terminal=true
 Icon=nnn
 MimeType=inode/directory
