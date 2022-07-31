@@ -1,2 +1,3 @@
 #!/bin/sh
-syncthing
+exec >/dev/null
+exec syncthing -logflags 0 -no-restart
