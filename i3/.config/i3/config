@@ -135,7 +135,7 @@ default_border pixel 3
 default_floating_border pixel 3
 
 ## Gaps
-gaps inner 16
+gaps inner 8
 smart_gaps on
 
 ### selection color
@@ -146,15 +146,15 @@ set_from_resource $oc i3wm.oc #dedcdc
 set_from_resource $bc i3wm.bc #b800b8
 ### font color
 set_from_resource $fc i3wm.fc #f0f0f0
-### unselected color
-set_from_resource $uc i3wm.uc #565656
+### background color
+set_from_resource $bg i3wm.bg #000000
 
-### class               border  backgr. text indicator child_border
-client.focused          $sc	$sc	$fc	$sc	$sc
-client.focused_inactive $oc	$oc	$fc	$oc	$oc
-client.unfocused        $uc     $uc	$fc	$uc	$uc
-client.urgent           $bc	$bc	$fc	$bc	$bc
-client.placeholder      $sc     $sc	$fc	$sc	$sc
+### class				<border> <background> <text> <indicator> <child_border>
+client.focused          $sc			$sc			$fc			$sc			$sc
+client.focused_inactive $bg			$bg			$sc			$bg			$bg
+client.unfocused        $bg     	$bg			$fc			$bg			$bg
+client.urgent           $bc			$bc			$fc			$bc			$bc
+client.placeholder      $sc     	$sc			$fc			$sc			$sc
 client.background       $sc
 
 # Program overrides
@@ -181,7 +181,7 @@ no_focus [class="Alacritty-nofocus"]
 
 # set wallpaper
 # exec --no-startup-id xsetroot -solid '#f29390'
-exec --no-startup-id feh --bg-center /home/kota/pics/walls/rose_1440.png
+exec --no-startup-id feh --bg-center /home/kota/pics/walls/moon_1440.jpg
 
 # use xob for backlight and volume adjustments
 exec --no-startup-id tail -f $XOBSOCK | xob -t 1400

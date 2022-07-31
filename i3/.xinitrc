@@ -23,5 +23,10 @@ exec pipewire-pulse &
 # increase key repeat speed
 exec xset r rate 350 40 &
 
+# run mbsync once on login
+# normally, it's only run when new mail arrives, but if it arrived while the
+# computer was offline it wont get detected until a new email arrives.
+exec mbsync primary &
+
 # start i3 with dbus so notifications and other things work correctly
 [ "$(tty)" = "/dev/tty1" ] && exec dbus-launch --exit-with-session /bin/i3

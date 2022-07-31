@@ -5,10 +5,11 @@ Sxiv.foreground: #000000
 
 dmenu.font: Iosevka:size=9:antialias=true:autohint=true
 dmenu.normbgcolor: #000000
-dmenu.selbgcolor: #f24353
+dmenu.selbgcolor: #888aca
 
-i3wm.sc: #f24353
+i3wm.sc: #888aca
 i3wm.oc: #dedcdc
-i3wm.bc: #b800b8
+i3wm.bc: #e6417e
 i3wm.fc: #f0f0f0
 i3wm.uc: #565656
+i3wm.bg: #000000
