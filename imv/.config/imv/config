@@ -2,8 +2,8 @@
 [options]
 background = #000000
 fullscreen = false
+upscaling_method = nearest_neighbour
 
 # bindings
 [binds]
-j = next
-k = prev
+<Return> = exec nnn-select $imv_current_file
