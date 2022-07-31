@@ -23,13 +23,12 @@ eval "$(jump shell)"
 eval $(dircolors -p | perl -pe 's/^((CAP|S[ET]|O[TR]|M|E)\w+).*/$1 00/' | dircolors -)
 
 ## aliases
-alias mntkoi='sshfs -o allow_other,default_permissions kota@koi:/home/kota /mnt/koi'
-alias mntsietch='sshfs -o allow_other,default_permissions kota@koi:/mnt/sietch /mnt/sietch'
 alias hist='cat .history|less -I'
 alias ncm='ncmpcpp'
 alias g='git'
 alias m='make'
 alias mc='make clean'
+alias md='glow'
 alias mixer='pulsemixer'
 alias clip='xclip -selection clipboard'
 alias c='clear'
@@ -61,6 +60,8 @@ alias tide='tide /home/kota/docs/Dunedin2022.csv'
 alias mail='mbsync primary'
 alias neofetch='pfetch'
 alias wiki="cd $HOME/docs/memex && nvim index.md"
+alias mntkoi='sshfs -o allow_other,default_permissions kota@koi:/home/kota /mnt/koi'
+alias mntsietch='sshfs -o allow_other,default_permissions kota@koi:/mnt/sietch /mnt/sietch'
 
 ## functions
 jira()
