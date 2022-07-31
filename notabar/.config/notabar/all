@@ -27,7 +27,7 @@ txt,\n
 
 # Disk
 txt,d = 
-cmd,freespace
+cmd,freespace,/dev/sda3
 txt,\n
 
 # Ocean
