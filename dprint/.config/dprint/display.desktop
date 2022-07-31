@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=left
-Exec=uxnemu "$HOME"/docs/uxn/left.rom
+Name=display
+Exec=arandr
 Terminal=false
 Type=Application
 Version=1.0
