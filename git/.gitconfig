@@ -20,6 +20,8 @@
 	pl = pull
 	dh1 = diff HEAD~1
 	hard = reset --hard FETCH_HEAD
+[push]
+	autoSetupRemote = true
 [pull]
 	rebase = true
 [gpg]
