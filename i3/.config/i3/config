@@ -2,7 +2,7 @@ set $mod Mod4
 set $alt Mod1
 
 ### Font for window titles.
-font pango:Iosevka Term SS09 9
+font pango:Iosevka Term SS09 Bold 9
 
 set $left h
 set $down j
@@ -140,8 +140,6 @@ smart_gaps on
 
 ### selection color
 set_from_resource $sc i3wm.sc #f24353
-### old selection color
-set_from_resource $oc i3wm.oc #dedcdc
 ### bright selection color
 set_from_resource $bc i3wm.bc #b800b8
 ### font color
@@ -177,7 +175,9 @@ for_window [class="pico8"] floating enable
 for_window [class="pico8"] resize set 1024 px 1024 px
 for_window [class="pico8"] move absolute position center
 for_window [class="Alacritty-float"] floating enable
+for_window [class="Alacritty-entr"] floating enable resize set 800 px 1024 px
 no_focus [class="Alacritty-nofocus"]
+no_focus [class="Alacritty-entr"]
 
 # set wallpaper
 # exec --no-startup-id xsetroot -solid '#f29390'
