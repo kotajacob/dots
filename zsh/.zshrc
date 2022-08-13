@@ -78,16 +78,6 @@ jira()
 	fi
 }
 
-readme() 
-{
-	if [ -f readme.md ]; then
-		NAME="readme.md"
-	else
-		NAME="README.md"
-	fi
-	touch "$NAME" && "$EDITOR" "$NAME"
-}
-
 of() 
 {
 	SELECTION=$(fd -H --type f | fzf)
