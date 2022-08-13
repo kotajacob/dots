@@ -1,5 +1,4 @@
 window:
-  # Window padding (changes require restart)
   dimensions:
     columns: 80
     lines: 24
@@ -42,6 +41,7 @@ colors:
     magenta: '#888aca'
     cyan:    '#aa55cc'
     white:   '#eeeeee'
+
 
 env:
   TERM: xterm-256color

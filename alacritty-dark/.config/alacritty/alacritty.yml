@@ -1,5 +1,4 @@
 window:
-  # Window padding (changes require restart)
   dimensions:
     columns: 80
     lines: 24

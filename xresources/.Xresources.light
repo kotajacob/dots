@@ -10,7 +10,6 @@ dmenu.selbgcolor: #57bda0
 dmenu.selfgcolor: #ffffff
 
 i3wm.sc: #57bda0
-i3wm.oc: #dedcdc
 i3wm.bc: #888aca
 i3wm.fc: #f0f0f0
 i3wm.uc: #565656
