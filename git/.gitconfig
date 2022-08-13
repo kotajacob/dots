@@ -8,8 +8,10 @@
 	aa = add --all
 	st = status
 	ci = commit --verbose
+	br = branch --sort=committerdate
 	sw = switch
 	co = checkout
+	ff = merge --ff-only
 	ra = log --oneline --graph --decorate --all
 	raa = log --oneline
 	di = diff
@@ -29,9 +31,11 @@
 [init]
 	defaultBranch = main
 [core]
-	pager = less -FRX
 	excludesfile = ~/.gitignore_global
+[pager]
+	log = diff-highlight | less -FRX
+	show = diff-highlight | less -FRX
+	diff = diff-highlight | less -FRX
+	branch = cat
 [url "git@github.com:"]
 	insteadOf = https://github.com/
-[diff]
-	external = difft
