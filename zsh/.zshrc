@@ -118,3 +118,18 @@ n ()
 		rm -f "$NNN_TMPFILE" > /dev/null
 	fi
 }
+
+# Set title for terminal
+case "$TERM" in (rxvt|rxvt-*|st|st-*|*xterm*|(dt|k|E)term)
+    local term_title () { print -n "\e]0;${(j: :q)@}\a" }
+    precmd () {
+      local DIR="$(print -P '[%c]%#')"
+      term_title "zsh"
+    }
+    preexec () {
+      local DIR="$(print -P '[%c]%#')"
+      local CMD="${(j:\n:)${(f)1}}"
+      term_title "$CMD"
+    }
+  ;;
+esac
