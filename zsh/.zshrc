@@ -62,6 +62,7 @@ alias neofetch='pfetch'
 alias wiki="cd $HOME/docs/memex && nvim index.md"
 alias mntkoi='sshfs -o allow_other,default_permissions kota@koi:/home/kota /mnt/koi'
 alias mntsietch='sshfs -o allow_other,default_permissions kota@koi:/mnt/sietch /mnt/sietch'
+alias weather='metweather forecast | column -t -l3'
 
 ## functions
 jira()
