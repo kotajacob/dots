@@ -82,10 +82,10 @@ map("n", "<space>/", "", {
 	end,
 })
 
-map("n", "<space>F", "", {
+map("n", "<space>G", "", {
 	noremap = true,
 	callback = function()
-		require("telescope.builtin").git_files()
+		require("telescope.builtin").git_status()
 	end,
 })
 
@@ -100,6 +100,13 @@ map("n", "<space>b", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").buffers()
+	end,
+})
+
+map("n", "<space>B", "", {
+	noremap = true,
+	callback = function()
+		require("telescope.builtin").oldfiles()
 	end,
 })
 
@@ -135,6 +142,20 @@ map("n", "<space>ca", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").lsp_code_actions()
+	end,
+})
+
+map("n", "ma", "", {
+	noremap = true,
+	callback = function()
+		require('telescope').extensions.vim_bookmarks.all()
+	end,
+})
+
+map("n", "mA", "", {
+	noremap = true,
+	callback = function()
+		require('telescope').extensions.vim_bookmarks.current_file()
 	end,
 })
 

@@ -12,9 +12,6 @@ require('packer').startup(function(use)
 		config = function() require('impatient') end
 	}
 
-	-- Support "editorconfig" spec
-	use "gpanders/editorconfig.nvim"
-
 	-- Colorscheme
 	use '~/g/far-left'
 	use 'RRethy/nvim-base16'
@@ -78,8 +75,8 @@ require('packer').startup(function(use)
 
 	-- Fuzzy searcher
 	use 'nvim-telescope/telescope.nvim'
-	-- use 'nvim-telescope/telescope-ui-select.nvim'
 	use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+	use 'tom-anders/telescope-vim-bookmarks.nvim'
 
 	-- dirbuf as filemanager
 	use "elihunter173/dirbuf.nvim"
@@ -92,8 +89,8 @@ require('packer').startup(function(use)
 	use { '~/g/wiki-ft.vim', ft = 'wiki' }
 
 	-- Auto-close brackets and such when hitting enter
-	use 'rstacruz/vim-closer'
-	use 'tpope/vim-endwise' -- TODO: Add markdown ``` support
+	-- use 'rstacruz/vim-closer'
+	-- use 'tpope/vim-endwise' -- TODO: Add markdown ``` support
 
 	-- Comment things in/out
 	use {
@@ -119,6 +116,9 @@ require('packer').startup(function(use)
 
 	-- Close all buffers except the current
 	use 'vim-scripts/BufOnly.vim'
+
+	-- Bookmarks (project wide marks)
+	use 'MattesGroeger/vim-bookmarks'
 
 	-- Adds a cx "exchange" operator to swap selections
 	use 'tommcdo/vim-exchange'
@@ -147,7 +147,7 @@ require('packer').startup(function(use)
 		run = 'make hexokinase'
 	}
 
-	-- Move blocks of selected text around
+	-- Move blocks of selected text around with arrow keys
 	use 'zirrostig/vim-schlepp'
 
 	-- Make * search work in visual mode
@@ -175,8 +175,13 @@ require("dirbuf").setup {
 	write_cmd = "DirbufSync",
 }
 
-require('telescope').setup {}
+require('telescope').setup {
+	defaults = {
+		path_display = { 'truncate' },
+	}
+}
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('vim_bookmarks')
 
 -- hexokinase
 vim.g.Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla'
@@ -184,3 +189,8 @@ vim.g.Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla'
 -- wiki.vim
 vim.g.wiki_root = "~/docs/memex"
 vim.g.wiki_filetypes = { 'md', 'wiki' }
+
+-- bookmarks
+vim.g.bookmark_save_per_working_dir = 1
+vim.g.bookmark_center = 1
+vim.g.bookmark_auto_save = 1

@@ -7,7 +7,7 @@ g.do_filetype_lua = 1
 g.did_load_filetypes = 0
 
 -- Make neovim pretty
-o.relativenumber = true
+o.number = true
 o.cursorline = true
 o.colorcolumn = "80"
 o.showmode = false
