@@ -75,11 +75,11 @@ bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
 # Resize the focused window
-set $distance 10
-bindsym $mod+Control+h resize shrink width $distance px or $distance ppt
-bindsym $mod+Control+j resize grow height $distance px or $distance ppt
-bindsym $mod+Control+k resize shrink height $distance px or $distance ppt
-bindsym $mod+Control+l resize grow width $distance px or $distance ppt
+set $distance 20
+bindsym $mod+Control+h resize shrink width $distance px
+bindsym $mod+Control+j resize grow height $distance px
+bindsym $mod+Control+k resize shrink height $distance px
+bindsym $mod+Control+l resize grow width $distance px
 bindsym $mod+Control+7 resize set 1920 1080
 bindsym $mod+Control+8 resize set 2028 1344
 bindsym $mod+Control+9 resize set 1306 1344
