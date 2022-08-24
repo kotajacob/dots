@@ -12,6 +12,9 @@ require('packer').startup(function(use)
 		config = function() require('impatient') end
 	}
 
+	-- Ability to reload neovim
+	use 'famiu/nvim-reload'
+
 	-- Colorscheme
 	use '~/g/far-left'
 	use 'RRethy/nvim-base16'
@@ -37,7 +40,7 @@ require('packer').startup(function(use)
 
 	-- LSP
 	use 'neovim/nvim-lspconfig'
-	use 'hrsh7th/cmp-nvim-lsp' -- TODO: swap for nvim-compleet eventually...
+	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-buffer'
 	use 'hrsh7th/cmp-path'
 	use 'hrsh7th/cmp-cmdline'
@@ -64,33 +67,18 @@ require('packer').startup(function(use)
 		run = ':GoUpdateBinaries',
 	}
 
-	-- Hop around the page quickly
-	use {
-		'phaazon/hop.nvim', -- TODO: theme with base16
-		branch = 'v1', -- optional but strongly recommended
-		config = function()
-			require 'hop'.setup()
-		end
-	}
-
 	-- Fuzzy searcher
 	use 'nvim-telescope/telescope.nvim'
 	use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-	use 'tom-anders/telescope-vim-bookmarks.nvim'
+	use '~/g/telescope-thesaurus.nvim'
 
 	-- dirbuf as filemanager
 	use "elihunter173/dirbuf.nvim"
 
-	-- Draw ASCII diagrams :VBox
-	use "jbyuki/venn.nvim"
-
 	-- Wiki
 	use { 'lervag/wiki.vim', ft = 'wiki' }
 	use { '~/g/wiki-ft.vim', ft = 'wiki' }
-
-	-- Auto-close brackets and such when hitting enter
-	-- use 'rstacruz/vim-closer'
-	-- use 'tpope/vim-endwise' -- TODO: Add markdown ``` support
+	use 'jkramer/vim-checkbox' -- useful in non-wiki markdown too
 
 	-- Comment things in/out
 	use {
@@ -111,14 +99,17 @@ require('packer').startup(function(use)
 		config = 'vim.cmd[[runtime macros/sandwich/keymap/surround.vim]]'
 	}
 
+	-- Improvements to marks
+	use '~/g/bettermarks'
+
 	-- Show undo history as a tree
 	use 'mbbill/undotree'
 
+	-- Show code outline window.
+	use 'stevearc/aerial.nvim'
+
 	-- Close all buffers except the current
 	use 'vim-scripts/BufOnly.vim'
-
-	-- Bookmarks (project wide marks)
-	use 'MattesGroeger/vim-bookmarks'
 
 	-- Adds a cx "exchange" operator to swap selections
 	use 'tommcdo/vim-exchange'
@@ -130,7 +121,7 @@ require('packer').startup(function(use)
 	use 'wellle/targets.vim'
 
 	-- Better speed-dating
-	use 'monaqa/dial.nvim' -- TODO: configure properly
+	use 'monaqa/dial.nvim'
 
 	-- Align text
 	use 'junegunn/vim-easy-align'
@@ -152,6 +143,9 @@ require('packer').startup(function(use)
 
 	-- Make * search work in visual mode
 	use 'bronson/vim-visual-star-search'
+
+	-- Fancy startup screen lol
+	use 'goolord/alpha-nvim'
 
 	-- Display :StartupTime
 	use 'dstein64/vim-startuptime'
@@ -181,7 +175,17 @@ require('telescope').setup {
 	}
 }
 require('telescope').load_extension('fzf')
-require('telescope').load_extension('vim_bookmarks')
+
+-- mark visualizations
+require('marks').setup()
+
+-- code outline
+require'aerial'.setup({
+	on_attach = function(bufnr)
+		vim.api.nvim_buf_set_keymap(bufnr, 'n', '_', '<cmd>AerialToggle<CR>', {})
+	end
+})
+
 
 -- hexokinase
 vim.g.Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla'
@@ -190,7 +194,5 @@ vim.g.Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla'
 vim.g.wiki_root = "~/docs/memex"
 vim.g.wiki_filetypes = { 'md', 'wiki' }
 
--- bookmarks
-vim.g.bookmark_save_per_working_dir = 1
-vim.g.bookmark_center = 1
-vim.g.bookmark_auto_save = 1
+-- startup
+require'alpha'.setup(require('plugins.dashboard').config)
