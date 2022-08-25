@@ -296,13 +296,13 @@
 [urgency_normal]
     background = "#000000"
     foreground = "#ffffff"
-    frame_color = "#f7ca88"
+    frame_color = "#57bda0"
     timeout = 60
 
 [urgency_critical]
     background = "#000000"
     foreground = "#ffffff"
-    frame_color = "#f24353"
+    frame_color = "#f7ca88"
     timeout = 0
 
 # Every section that isn't one of the above is interpreted as a rules to
