@@ -26,6 +26,9 @@ bindsym $mod+b exec qutebrowser
 # Select an emoji
 bindsym $mod+o exec --no-startup-id menu-emoji
 
+# Select a password
+bindsym $mod+p exec --no-startup-id menu-pass
+
 # Use mod to drag / resize
 floating_modifier $mod
 
