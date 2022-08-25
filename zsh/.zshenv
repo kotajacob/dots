@@ -5,6 +5,7 @@ export HISTSIZE=1000000
 export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
+export SDCV_PAGER='less -FRX'
 export LESS='--use-color -IR'
 export TERM='xterm-256color'
 export SVDIR=$HOME/.service/
