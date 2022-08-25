@@ -45,6 +45,7 @@ alias tn='tmux new -s'
 alias ta='tmux attach -t'
 alias tls='tmux ls'
 alias dmesg='sudo dmesg -wH'
+alias dict='sdcv --color'
 # alias xi='sudo xbps-install -S' // Use xi from xtools instead
 alias xu='sudo xbps-install -Su'
 alias xs='xbps-query -Rs'
@@ -58,13 +59,20 @@ alias mnt='udisksctl mount -b'
 alias umnt='udisksctl unmount -b'
 alias tide='tide /home/kota/docs/Dunedin2022.csv'
 alias mail='mbsync primary'
-alias neofetch='pfetch'
 alias wiki="cd $HOME/docs/memex && nvim index.md"
 alias mntkoi='sshfs -o allow_other,default_permissions kota@koi:/home/kota /mnt/koi'
 alias mntsietch='sshfs -o allow_other,default_permissions kota@koi:/mnt/sietch /mnt/sietch'
 alias weather='metweather forecast | column -t -l3'
 
 ## functions
+go() {
+    if [[ $1 == "doc" ]]; then
+        command go "$@" | less -FRX
+    else
+        command go "$@"
+    fi
+}
+
 jira()
 {
 	if [ "$1" = "me" ]; then
@@ -133,3 +141,5 @@ case "$TERM" in (rxvt|rxvt-*|st|st-*|*xterm*|(dt|k|E)term)
     }
   ;;
 esac
+
+source "$HOME/.zshenv-secrets"
