@@ -18,7 +18,7 @@ map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Disable search highlighting
-map('n', '<space>n', ':nohl<CR>', snoremap)
+map('n', '<space>c', ':nohl<CR>', snoremap)
 
 -- Toggle hidden characters
 map('n', '<space>sh', ':set list!<cr>', snoremap)
@@ -59,19 +59,19 @@ map('n', ',', '@@', noremap)
 map('n', '<space>o', ':BufOnly<CR>', snoremap)
 map('n', '<space>O', ':only<CR>', snoremap)
 
--- Hop around
-map('n', '<space><space>', "", {
-	noremap = true,
-	callback = function()
-		require 'hop'.hint_char2()
-	end
-})
-
 -- Telescope binds
-map("n", "<space>f", "", {
+map("n", "<space><space>", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").find_files()
+	end,
+})
+
+-- Telescope binds
+map("n", "<space>n", "", {
+	noremap = true,
+	callback = function()
+		require("telescope.builtin").resume()
 	end,
 })
 
@@ -82,7 +82,7 @@ map("n", "<space>/", "", {
 	end,
 })
 
-map("n", "<space>G", "", {
+map("n", "<space>gg", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").git_status()
@@ -99,14 +99,25 @@ map("n", "<space>m", "", {
 map("n", "<space>b", "", {
 	noremap = true,
 	callback = function()
-		require("telescope.builtin").buffers()
+		require("telescope.builtin").buffers({
+			show_all_buffers = false,
+			ignore_current_buffer = true,
+			sort_mru = true,
+		})
 	end,
 })
 
 map("n", "<space>B", "", {
 	noremap = true,
 	callback = function()
-		require("telescope.builtin").oldfiles()
+		require("telescope.builtin").oldfiles({cwd_only=true})
+	end,
+})
+
+map("n", "<space>H", "", {
+	noremap = true,
+	callback = function()
+		require("telescope.builtin").command_history()
 	end,
 })
 
@@ -114,6 +125,13 @@ map("n", "z=", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").spell_suggest()
+	end,
+})
+
+map("n", "z-", "", {
+	noremap = true,
+	callback = function()
+		require("telescope").extensions.thesaurus.synonyms()
 	end,
 })
 
@@ -138,24 +156,10 @@ map("n", "gr", "", {
 	end,
 })
 
-map("n", "<space>ca", "", {
+map("n", "<space>a", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").lsp_code_actions()
-	end,
-})
-
-map("n", "ma", "", {
-	noremap = true,
-	callback = function()
-		require('telescope').extensions.vim_bookmarks.all()
-	end,
-})
-
-map("n", "mA", "", {
-	noremap = true,
-	callback = function()
-		require('telescope').extensions.vim_bookmarks.current_file()
 	end,
 })
 
@@ -198,3 +202,16 @@ map('n', '<C-j>', '<C-W><C-j>', snoremap)
 map('n', '<C-k>', '<C-W><C-k>', snoremap)
 map('n', '<C-l>', '<C-W><C-l>', snoremap)
 map('n', '<C-h>', '<C-W><C-h>', snoremap)
+
+-- New Project (for project-scoped marks and oldfiles)
+vim.api.nvim_create_user_command(
+    'Pnew',
+    function()
+		local file = io.open(".viminfo", "w")
+		if file == nil then
+			return
+		end
+		file:close()
+    end,
+    { nargs = 0 }
+)

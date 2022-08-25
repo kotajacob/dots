@@ -15,7 +15,11 @@ o.cmdheight = 2
 o.scrolloff = 4
 o.sidescrolloff = 5
 o.termguicolors = true
-o.background = "dark"
+
+-- Project-local marks and oldfiles!
+o.viminfofile=vim.api.nvim_eval([[findfile('.viminfo','.;')]])
+-- use :Pnew to "create" a new project
+-- or touch .viminfo :D
 
 -- Use dirbuf instead of netrw
 g.loaded_netrwPlugin = 1
