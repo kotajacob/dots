@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=mpv
-Exec=mpv $(xclip -o) || notify-send "failed running mpv"
-Terminal=false
-Type=Application
-Version=1.0

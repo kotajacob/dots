@@ -1,3 +1,0 @@
-#!/bin/sh
-exec >/dev/null
-exec syncthing -logflags 0 -no-restart

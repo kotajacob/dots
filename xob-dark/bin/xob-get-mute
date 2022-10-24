@@ -1,9 +1,0 @@
-#!/bin/sh
-VOL=$(pamixer --get-volume)
-MUTE=$(pamixer --get-mute)
-
-if [ "$MUTE" = "true" ]; then
-  echo "$VOL"! > "$XOBSOCK"
-else
-  echo "$VOL" > "$XOBSOCK"
-fi

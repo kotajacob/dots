@@ -1,9 +1,0 @@
-# styling
-[options]
-background = #000000
-fullscreen = false
-upscaling_method = nearest_neighbour
-
-# bindings
-[binds]
-<Return> = exec nnn-select $imv_current_file

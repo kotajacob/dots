@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=sims
-Exec=env WINEPREFIX="/home/kota/.wine" wine "/home/kota/.wine/dosdevices/c:/users/kota/Games/The Sims 4/Game/Bin/ts4_x64.exe"
-Terminal=false
-Type=Application
-Version=1.0

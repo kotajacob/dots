@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=senpai
-Exec=alacritty --class "Alacritty-float,Alacritty-float" -o window.dimensions.columns=116 -o window.dimensions.lines=36 -e senpai
-Terminal=false
-Type=Application
-Version=1.0

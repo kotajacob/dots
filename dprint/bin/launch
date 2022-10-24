@@ -1,3 +1,0 @@
-#!/bin/sh
-SELECTION=$(dprint -p | bemenu -i -s -p '' -w -l 8 -c -M 480 --fn 'Iosevka Term [16]' "$@")
-echo "Name:$SELECTION" | dprint -p -i - -o "StripExec" | ${SHELL:-"/bin/sh"} &

@@ -1,5 +1,0 @@
-# Time
-urgency,normal
-txt,t = 
-cmd,date,+%H:%M
-txt,\n

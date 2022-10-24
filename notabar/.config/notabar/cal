@@ -1,6 +1,0 @@
-# Battery
-urgency,normal
-cmd,cal
-txt,\n
-txt,     
-cmd,date,-I
