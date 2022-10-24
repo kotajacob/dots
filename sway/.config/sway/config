@@ -1,95 +1,115 @@
 set $mod Mod4
-set $alt Mod1
-
 set $left h
 set $down j
 set $up k
 set $right l
 
-set $term foot
+font Berkeley Mono 10
 
 # outputs
-output * bg /home/kota/pics/walls/rose_1440.png fill
+output eDP-1 background ~/pics/walls/flower.png fill
+output eDP-1 scale 1.5
+
+# disable subpixel antialias
+output * subpixel none
+
+# disable monitor after 15 minutes of inactivity
+exec swayidle -w \
+	timeout 900 'swaymsg "output * dpms off"' \
+	resume 'swaymsg "output * dpms on"'
+
 
 # inputs
-input 6940:6958:Corsair_Corsair_Gaming_M65_Pro_RGB_Mouse accel_profile flat
-input 1133:16394:Logitech_M325 accel_profile flat
+input "type:keyboard" {
+	xkb_layout us
+	xkb_file /home/kota/.config/sway/keymap.xkb
+	repeat_delay 350
+	repeat_rate 40
+}
 
-input "type:keyboard" xkb_options caps:none,ctrl:swap_lalt_lctl
+input "type:pointer" {
+	accel_profile "flat"
+}
 
-# bindings
-# Start a terminal
-bindsym $mod+Return exec $term
+input "type:touchpad" {
+    dwt enabled
+    tap enabled
+    tap_button_map lmr
+    middle_emulation enabled
+    natural_scroll enabled
+}
 
-# Kill focused window
+# start a terminal
+bindsym $mod+Return exec foot
+bindsym $mod+Shift+Return exec foot -o app-id="foot-float"
+
+# kill focused window
 bindsym $mod+q kill
 
-# Start your launcher
-bindsym $mod+d exec launch
+# start your launcher
+bindsym $mod+d exec launcher
 
-# Start a browser
-bindsym $mod+b exec qutebrowser
+# start a browser
+bindsym $mod+b exec firefox
 
-# Use mod to drag / resize
-floating_modifier $mod normal
+# floating mod
+floating_modifier $mod
 
-# Reload the configuration file
+# reload the configuration
 bindsym $mod+Shift+c reload
 
-# Screenshots
+# brightness
+bindsym --locked XF86MonBrightnessDown exec light -2 && light > $WOBSOCK
+bindsym --locked XF86MonBrightnessUp exec light +2 && light > $WOBSOCK
+
+# volume
+bindsym XF86AudioRaiseVolume exec pamixer -ui 2 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioLowerVolume exec pamixer -ud 2 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioMute exec pamixer --toggle-mute && ( [ "$(pamixer --get-mute)" = "true" ] && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK
+
+# screenshots
 bindsym $mod+s exec grimshot --notify copy output
 bindsym $mod+Shift+s exec grimshot --notify copy area
-bindsym $alt+s exec grimshot --notify save output /tmp/grim.png && pcf /tmp/grim.png | wl-copy && notify-send "uploaded screenshot"
-bindsym $alt+Shift+s exec grimshot --notify save area /tmp/grim.png && pcf /tmp/grim.png | wl-copy
+bindsym Print exec grimshot --notify copy output
+bindsym Shift+Print exec grimshot --notify copy area
 
-# Notabar
+# info notification
 bindsym $mod+Escape exec --no-startup-id notabar < /home/kota/.config/notabar/all
 bindsym $mod+v exec --no-startup-id notabar < /home/kota/.config/notabar/vpn
-bindsym Control+space exec --no-startup-id dunstctl close
-bindsym Control+Shift+space exec --no-startup-id dunstctl close-all
 
-# Backlight
-bindsym XF86MonBrightnessUp exec --no-startup-id light +5 && light > $WOBSOCK
-bindsym XF86MonBrightnessDown exec --no-startup-id light -5 && light > $WOBSOCK
+# dismiss notifications
+bindsym Control+space exec --no-startup-id fnottctl dismiss
+bindsym Control+Shift+space exec --no-startup-id fnottctl dismiss all
 
-# Sound
-bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && pamixer --get-volume > $WOBSOCK
-bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 && pamixer --get-volume > $WOBSOCK
-bindsym XF86AudioMute exec pamixer --toggle-mute && ( pamixer --get-mute && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK
-
-# Music
+# music
 bindsym $mod+m exec --no-startup-id mpc toggle
 bindsym $mod+comma exec --no-startup-id mpc prev
 bindsym $mod+period exec --no-startup-id mpc next
 
-# Exit sway (logs you out of your Wayland session)
+# exit
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
-# Change focus
+# change focus
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
-# Move focused window
+# move focused window
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
-# Resize the focused window
+# resize the focused window
 set $distance 10
-bindsym $mod+Control+h resize shrink width $distance px or $distance ppt
-bindsym $mod+Control+j resize grow height $distance px or $distance ppt
-bindsym $mod+Control+k resize shrink height $distance px or $distance ppt
-bindsym $mod+Control+l resize grow width $distance px or $distance ppt
-bindsym $mod+Control+7 resize set 1920 1080
-bindsym $mod+Control+8 resize set 2028 1344
-bindsym $mod+Control+9 resize set 1306 1344
-bindsym $mod+Control+0 resize set 1072 800
+bindsym $mod+Control+h resize shrink width $distance px
+bindsym $mod+Control+j resize grow height $distance px
+bindsym $mod+Control+k resize shrink height $distance px
+bindsym $mod+Control+l resize grow width $distance px
 bindsym $mod+Control+x move absolute position center
 
-# Switch to workspace
+# switch to workspace
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
 bindsym $mod+3 workspace number 3
@@ -100,7 +120,8 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
-# Move focused container to workspace
+
+# move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2
 bindsym $mod+Shift+3 move container to workspace number 3
@@ -112,97 +133,81 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
-# Split in horizontal orientation
+# split in horizontal orientation
 bindsym $mod+x split h
 
-# Split in vertical orientation
+# split in vertical orientation
 bindsym $mod+z split v
 
-# Fullscreen mode
+# fullscreen mode
 bindsym $mod+f fullscreen toggle
 
-# Change container layout (tabbed, toggle split)
+# change container layout (tabbed, toggle split)
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# Toggle tiling / floating
+# toggle tiling / floating
 bindsym $mod+space floating toggle
 
-# Change focus between tiling / floating windows
+# change focus between tiling / floating windows
 bindsym $mod+Shift+space focus mode_toggle
 
-# Scratchpad:
-# Sway has a "scratchpad", which is a bag of holding for windows.
-# You can send windows there and get them back later.
+## borders
+default_border pixel 4
+default_floating_border pixel 4
 
-# Move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
-
-# Appearance
-## Improve borders
-default_border pixel 3
-default_floating_border pixel 3
-
-## Gaps
-gaps inner 16
+## gaps
+gaps inner 8
 smart_gaps on
 
 ### selection color
-set $sc #f24353
-### old selection color
-set $oc #dedcdc
-### bright selection color
-set $bc #b800b8
+set $sc #647d34
+### inactive color
+set $ic #dddddd
+### urgent color
+set $uc #8c8fae
 ### font color
-set $fc #f0f0f0
-### unselected color
-set $uc #565656
+set $fc #000000
 
-### class               border  backgr. text indicator child_border
-client.focused          $sc	$sc	$fc	$sc	$sc
-client.focused_inactive $oc	$oc	$fc	$oc	$oc
-client.unfocused        $uc     $uc	$fc	$uc	$uc
-client.urgent           $bc	$bc	$fc	$bc	$bc
-client.placeholder      $sc     $sc	$fc	$sc	$sc
-client.background       $sc
+### class					border	back	text	indicator	child_border
+client.focused				$sc		$sc		$fc		$sc			$sc
+client.focused_inactive		$ic		$ic		$sc		$ic			$ic
+client.unfocused			$ic    	$ic		$fc		$ic			$ic
+client.urgent				$uc		$uc		$fc		$uc			$uc
+client.placeholder			$sc    	$sc		$fc		$sc			$sc
+client.background			$sc
 
-# Program overrides
+# wait a bit before removing urgency hint from windows/workspaces
+force_display_urgency_hint 750 ms
+
+# program overrides
+# use swaymsg -t get_tree
 for_window [app_id="foot-float"] floating enable
 for_window [app_id="imv"] floating enable
 for_window [app_id="imv"] resize set 640px 360px
-for_window [app_id="imv"]	border pixel 3
-for_window [app_id="bemenu"]	border pixel 3
+for_window [app_id="imv"] border pixel 3
+for_window [app_id="bemenu"] border pixel 3
 for_window [app_id="mpv"] floating enable
-for_window [app_id="mpv"] resize set 640px 630px
-for_window [title="Minecraft"] floating enable
-for_window [class="^Steam$" title="^Friends$"] floating enable
-for_window [class="^Steam$" title="Steam - News"] floating enable
-for_window [class="^Steam$" title=".* - Chat"] floating enable
-for_window [class="^Steam$" title="^Settings$"] floating enable
-for_window [class="^Steam$" title=".* - event started"] floating enable
-for_window [class="^Steam$" title=".* CD key"] floating enable
-for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
-for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
-for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
-for_window [class="Fceux"] floating enable
-for_window [class="Fceux"] resize set 1280 px 1200 px
-for_window [class="pico8"] floating enable
-for_window [class="pico8"] resize set 1024 px 1024 px
-for_window [class="pico8"] move absolute position center
+for_window [app_id="mpv"] resize set 1280px 720px
+for_window [title="Firefox — Sharing Indicator"] floating enable
+for_window [title="Firefox — Sharing Indicator"] kill
 
-# Start some programs
-exec pipewire &
-exec pipewire-pulse &
-exec dunst &
-exec mpd &
+# set DISPLAY variable for dbus...
+exec --no-startup-id exec dbus-update-activation-environment DISPLAY
 
-set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob --border-color "#F24353FF" --bar-color "#F24353FF" -W 200 -H 30 -b 3 -p 3 -o 0 -a top -a right -M 30
+# start fnott
+exec --no-startup-id fnott
+
+# start wob
+exec --no-startup-id rm -rf $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK |\
+	wob --border-color "#647D34FF" --bar-color "#647D34FF" \
+	--background-color "#FFFFFFFF" --overflow-bar-color "#E4943AFF" \
+	-W 200 -H 30 -b 4 -p 4 -o 0 -a top -a right -M 16
+
+# start pipewire
+exec --no-startup-id pipewire
+exec --no-startup-id pipewire-pulse
 
 # cursor
-seat seat0 xcursor_theme capitaine-cursors 24
+seat seat0 xcursor_theme capitaine-cursors
 exec_always gsettings set org.gnome.desktop.interface cursor-theme "capitaine-cursors"

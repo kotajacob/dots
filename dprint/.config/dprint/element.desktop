@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=element
+Exec=element-desktop --enable-features=WebRTCPipeWireCapturer --enable-features=UseOzonePlatform --ozone-platform=wayland
+Terminal=false
+X-MultipleArgs=false
+Type=Application

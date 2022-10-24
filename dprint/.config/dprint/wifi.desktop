@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=wifi
-GenericName=Network Manager TUI
-Exec=alacritty --class "Alacritty-float,Alacritty-float" -o window.dimensions.columns=120 -o window.dimensions.lines=30 -e nmtui
-Terminal=false
-Type=Application
 Version=1.0
+Name=wifi
+Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="800x600" nmtui
+Terminal=false
+X-MultipleArgs=false
+Type=Application

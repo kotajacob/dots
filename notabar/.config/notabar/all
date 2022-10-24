@@ -15,19 +15,9 @@ txt,l =
 cmd,light
 txt,\n
 
-# Volume
-txt,v = 
-cmd,pamixer,--get-volume-human
-txt,\n
-
 # Networking
 txt,n = 
-cmd,netprint,wlp3s0
-txt,\n
-
-# Disk
-txt,d = 
-cmd,freespace,/dev/sda3
+cmd,netprint,wlp166s0
 txt,\n
 
 # Ocean

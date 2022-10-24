@@ -1,9 +1,13 @@
 [Desktop Entry]
-Type=Application
+Version=1.0
 Name=aseprite
-Exec=aseprite %U
-TryExec=aseprite
+Exec=$HOME/.local/bin/aseprite
+Icon=aseprite
 Terminal=false
-StartupNotify=false
-StartupWMClass=Aseprite
-MimeType=image/bmp;image/gif;image/jpeg;image/png;image/x-pcx;image/x-tga;image/vnd.microsoft.icon;video/x-flic;image/webp;image/x-aseprite;
+X-MultipleArgs=false
+Type=Application
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;application/x-xpinstall;application/pdf;application/json;
+StartupNotify=true
+StartupWMClass=aseprite
+Categories=Network;WebBrowser;
+Actions=new-window;new-private-window;

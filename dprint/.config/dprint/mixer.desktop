@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=mixer
-GenericName=Volume controller
-Exec=alacritty --class "Alacritty-float,Alacritty-float" -o window.dimensions.columns=80 -o window.dimensions.lines=14 -e pulsemixer
-Terminal=false
-Type=Application
 Version=1.0
+Name=mixer
+Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="600x200" pulsemixer
+Terminal=false
+X-MultipleArgs=false
+Type=Application

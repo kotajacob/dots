@@ -1,6 +1,6 @@
 # styling
 [options]
-background = #000000
+background = #ffffff
 fullscreen = false
 upscaling_method = nearest_neighbour
 

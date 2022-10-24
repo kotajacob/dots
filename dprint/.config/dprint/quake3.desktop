@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=quake3
-Exec=exec ~/.local/games/quake3/ioquake3.x86_64
-Terminal=false
-Type=Application
-Version=1.0

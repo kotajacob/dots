@@ -2,6 +2,9 @@ local map = vim.api.nvim_set_keymap
 local noremap = { noremap = true }
 local snoremap = { noremap = true, silent = true }
 
+-- close a buffer
+map('n', '<Del>', ':close<CR>', noremap)
+
 -- Visual shifting (does not exit Visual mode)
 map('v', '<', '<gv', noremap)
 map('v', '>', '>gv', noremap)
@@ -18,7 +21,7 @@ map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Disable search highlighting
-map('n', '<space>c', ':nohl<CR>', snoremap)
+map('n', '<space>cc', ':nohl<CR>', snoremap)
 
 -- Toggle hidden characters
 map('n', '<space>sh', ':set list!<cr>', snoremap)
@@ -56,8 +59,8 @@ map('n', '<space>sn', '', {
 map('n', ',', '@@', noremap)
 
 -- Close other windows
-map('n', '<space>o', ':BufOnly<CR>', snoremap)
 map('n', '<space>O', ':only<CR>', snoremap)
+
 
 -- Telescope binds
 map("n", "<space><space>", "", {
@@ -67,7 +70,6 @@ map("n", "<space><space>", "", {
 	end,
 })
 
--- Telescope binds
 map("n", "<space>n", "", {
 	noremap = true,
 	callback = function()
@@ -82,10 +84,10 @@ map("n", "<space>/", "", {
 	end,
 })
 
-map("n", "<space>gg", "", {
+map("n", "<space>?", "", {
 	noremap = true,
 	callback = function()
-		require("telescope.builtin").git_status()
+		require("telescope.builtin").live_grep({ cwd = vim.fn.expand('%:p:h') })
 	end,
 })
 
@@ -107,7 +109,7 @@ map("n", "<space>b", "", {
 	end,
 })
 
-map("n", "<space>B", "", {
+map("n", "<space>o", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").oldfiles({cwd_only=true})
@@ -125,13 +127,6 @@ map("n", "z=", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").spell_suggest()
-	end,
-})
-
-map("n", "z-", "", {
-	noremap = true,
-	callback = function()
-		require("telescope").extensions.thesaurus.synonyms()
 	end,
 })
 
@@ -156,36 +151,8 @@ map("n", "gr", "", {
 	end,
 })
 
-map("n", "<space>a", "", {
-	noremap = true,
-	callback = function()
-		require("telescope.builtin").lsp_code_actions()
-	end,
-})
-
--- Trouble error list
-map("n", "<space>el", ":TroubleToggle<CR>", noremap)
-
--- Use dial.nvim (speed-dating clone) instead of defaults
-map("n", "<C-a>", require("dial.map").inc_normal(), snoremap)
-map("n", "<C-x>", require("dial.map").dec_normal(), snoremap)
-map("v", "<C-a>", require("dial.map").inc_visual(), snoremap)
-map("v", "<C-x>", require("dial.map").dec_visual(), snoremap)
-map("v", "g<C-a>", require("dial.map").inc_gvisual(), snoremap)
-map("v", "g<C-x>", require("dial.map").dec_gvisual(), snoremap)
-
--- Align text (EasyAlign)
-map("v", "ga", "<Plug>(EasyAlign)", snoremap)
-map("n", "ga", "<Plug>(EasyAlign)", snoremap)
-
--- Show highlight group with F12
-map("n", "<F12>", ":TSHighlightCapturesUnderCursor<CR>", snoremap)
-
 -- Map %% to return my current working directory
 map("c", "%%", "<C-R>=expand('%:h').'/'<cr>", snoremap)
-
--- Open undotree
-map("n", "<space>su", ":UndotreeToggle<CR>", snoremap)
 
 -- Schlepp
 map("v", "<up>", "<Plug>SchleppUp", snoremap)
@@ -215,3 +182,11 @@ vim.api.nvim_create_user_command(
     end,
     { nargs = 0 }
 )
+
+-- Remove trailing whitespace
+map("n", "<space>wr", "", {
+	noremap = true,
+	callback = function()
+		MiniTrailspace.trim()
+	end,
+})

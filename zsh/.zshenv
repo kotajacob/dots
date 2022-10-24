@@ -7,28 +7,32 @@ export VISUAL='nvim'
 export PAGER='less'
 export SDCV_PAGER='less -FRX'
 export LESS='--use-color -IR'
-export TERM='xterm-256color'
-export SVDIR=$HOME/.service/
+
 export GUI=1
 export NNN_OPTS='aAcC'
 export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
 export NNN_COLORS='2222'
 export NNN_BMS="d:$HOME/docs;h:$HOME;g:$HOME/g;G:$HOME/git;p:$HOME/pics;t:$HOME/tmp;m:/run/media/kota;M:/mnt"
 export NNN_PLUG='r:fixname;d:xdgdefault;j:autojump;p:preview-tui'
-export XDG_CURRENT_DESKTOP='gnome' # Use gnome's file select dialogs.
 export PF_INFO="ascii title os kernel uptime pkgs memory editor palette"
 export PCFSERVER='https://paste.nilsu.org:21/incoming'
 export FZF_DEFAULT_COMMAND='rg --files'
-export AART_VIEWER='sxiv -b -g 640x640'
-export CGO_ENABLED=1
-# export GOPROXY=direct
+export AART_VIEWER='imv'
+export LS_COLORS="$LS_COLORS:di=1;32:ex=0;35"
+
+# NOTE: Steam, most games and other (older) binary applications might not work!
+# Manual overrides should be used as needed.
+# https://github.com/swaywm/sway/wiki/Running-programs-natively-under-wayland
+export SDL_VIDEODRIVER=wayland
+export MOZ_ENABLE_WAYLAND=1
+export MOZ_DBUS_REMOTE=1 # Workaround for clicking links in electron...
+export QT_QPA_PLATFORM=wayland-egl
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
 export GOPATH="$HOME/.local/go"
-export VAGRANT_DEFAULT_PROVIDER="libvirt"
-export NPM_PACKAGES="${HOME}/.npm-packages"
-export PERL_BASE="$HOME/.local/perl5"
-export PERL5LIB="$PERL_BASE/lib/perl5"
-export ANDROID_HOME="$HOME/.local/opt/android-sdk"
-export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib:$HOME/.local/lib:$LD_LIBRARY_PATH
+export GOPROXY=direct
+export NPM_PACKAGES="${HOME}/.local/npm"
 export MANPAGER='less -Dd+g -Du+b'
-export MANPATH="$HOME/.local/perl5/man:$NPM_PACKAGES/share/man:$MANPATH"
-export PATH="$HOME/.cargo/bin:$HOME/.local/perl5/bin:$HOME/.local/opt/flutter/bin:$HOME/.local/opt/android-sdk/cmdline-tools/latest/bin:$GOPATH/bin:$NPM_PACKAGES/bin:$HOME/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/$NPM_PACKAGES:$PATH"
+# export MANPATH="$NPM_PACKAGES/share/man:$HOME/.local/share/man:$MANPATH"
+export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"

@@ -8,7 +8,7 @@ compinit
 
 # plugins
 source /home/kota/.local/share/zsh/plugins/kota-prompt/kota-prompt.zsh
-source /home/kota/.local/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 source /home/kota/.local/share/zsh/plugins/zsh-autoenv/autoenv.zsh
 
 # zsh history substring search
@@ -19,23 +19,24 @@ bindkey -M vicmd 'j' history-substring-search-down
 # initialize jump
 eval "$(jump shell)"
 
-# setup dircolors for ls
-eval $(dircolors -p | perl -pe 's/^((CAP|S[ET]|O[TR]|M|E)\w+).*/$1 00/' | dircolors -)
-
 ## aliases
-alias hist='cat .history|less -I'
-alias ncm='ncmpcpp'
+alias xu='sudo xbps-install -Su'
+alias xs='xbps-query -Rs'
+alias xr='sudo xbps-pkgdb -m auto'
+alias xrm='sudo xbps-remove -R'
+alias xc='sudo xbps-remove -Oo && sudo vkpurge rm all'
+alias xinfo='xbps-query -R -S'
+alias xlist='xpkg -m'
+alias v='nvim'
+alias vi='nvim'
+alias vim='nvim'
 alias g='git'
+alias k='kubectl'
 alias m='make'
 alias mc='make clean'
-alias md='glow'
-alias mixer='pulsemixer'
-alias clip='xclip -selection clipboard'
+alias clip='wl-copy'
 alias c='clear'
 alias cdc='cd; clear'
-alias cc='clang'
-alias v='nvim'
-alias vim='nvim'
 alias ls='ls --color=auto --group-directories-first'
 alias la='ls -lAh --color=auto --group-directories-first'
 alias l='ls -1F --color=auto --group-directories-first'
@@ -45,16 +46,6 @@ alias tn='tmux new -s'
 alias ta='tmux attach -t'
 alias tls='tmux ls'
 alias dmesg='sudo dmesg -wH'
-alias dict='sdcv --color'
-# alias xi='sudo xbps-install -S' // Use xi from xtools instead
-alias xu='sudo xbps-install -Su'
-alias xs='xbps-query -Rs'
-alias xr='sudo xbps-pkgdb -m auto'
-alias xrm='sudo xbps-remove -R'
-alias xc='sudo xbps-remove -Oo && sudo vkpurge rm all'
-alias xinfo='xbps-query -R -S'
-alias xlist='xpkg -m'
-alias todo='$EDITOR $HOME/TODO'
 alias mnt='udisksctl mount -b'
 alias umnt='udisksctl unmount -b'
 alias tide='tide /home/kota/docs/Dunedin2022.csv'
@@ -63,6 +54,8 @@ alias wiki="cd $HOME/docs/memex && nvim index.md"
 alias mntkoi='sshfs -o allow_other,default_permissions kota@koi:/home/kota /mnt/koi'
 alias mntsietch='sshfs -o allow_other,default_permissions kota@koi:/mnt/sietch /mnt/sietch'
 alias weather='metweather forecast | column -t -l3'
+alias music='ncmpcpp'
+alias mixer='pulsemixer'
 
 ## functions
 go() {
@@ -73,26 +66,13 @@ go() {
     fi
 }
 
-jira()
-{
-	if [ "$1" = "me" ]; then
-		$HOME/bin/jira issue list -a"Dakota Walsh" -s~Done -s~Rejected --plain
-		return
-	elif [ "$1" = "w" ]; then
-		$HOME/bin/jira issue list -s~Done -w --plain
-		return
-	else
-		$HOME/bin/jira "$@"
-	fi
-}
-
-of() 
+of()
 {
 	SELECTION=$(fd -H --type f | fzf)
 	xdg-open "$SELECTION" >/dev/null 2>&1 &
 }
 
-vf() 
+vf()
 {
 	SELECTION=$(fd -H --type f | fzf)
 	cd "$(dirname "$SELECTION")" || exit
@@ -118,7 +98,6 @@ n ()
 	# stty lwrap undef
 	# stty lnext undef
 
-	# export TERMINAL="/bin/alacritty --class Alacritty-nofocus,Alacritty-nofocus"
 	nnn "$@"
 
 	if [ -f "$NNN_TMPFILE" ]; then
@@ -127,19 +106,14 @@ n ()
 	fi
 }
 
-# Set title for terminal
-case "$TERM" in (rxvt|rxvt-*|st|st-*|*xterm*|(dt|k|E)term)
-    local term_title () { print -n "\e]0;${(j: :q)@}\a" }
-    precmd () {
-      local DIR="$(print -P '[%c]%#')"
-      term_title "zsh"
-    }
-    preexec () {
-      local DIR="$(print -P '[%c]%#')"
-      local CMD="${(j:\n:)${(f)1}}"
-      term_title "$CMD"
-    }
-  ;;
-esac
+# Emit terminal CWD for foot
+function osc7 {
+    local LC_ALL=C
+    export LC_ALL
 
-source "$HOME/.zshenv-secrets"
+    setopt localoptions extendedglob
+    input=( ${(s::)PWD} )
+    uri=${(j::)input/(#b)([^A-Za-z0-9_.\!~*\'\(\)-\/])/%${(l:2::0:)$(([##16]#match))}}
+    print -n "\e]7;file://${HOSTNAME}${uri}\e\\"
+}
+add-zsh-hook -Uz chpwd osc7
