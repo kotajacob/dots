@@ -24,6 +24,7 @@ export LS_COLORS="$LS_COLORS:di=1;32:ex=0;35"
 # Manual overrides should be used as needed.
 # https://github.com/swaywm/sway/wiki/Running-programs-natively-under-wayland
 export SDL_VIDEODRIVER=wayland
+export XDG_CURRENT_DESKTOP=sway
 export MOZ_ENABLE_WAYLAND=1
 export MOZ_DBUS_REMOTE=1 # Workaround for clicking links in electron...
 export QT_QPA_PLATFORM=wayland-egl
