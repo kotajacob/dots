@@ -1,0 +1,5 @@
+#!/bin/sh
+
+DF=$(df -h|grep "$1")
+FREE=$(echo "$DF" | awk '{ print $4 }')
+echo "$FREE"

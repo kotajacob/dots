@@ -1,0 +1,12 @@
+#!/bin/sh
+
+BOOKS="/home/kota/docs/books/"
+
+SEARCH=$(fd . --type f "$BOOKS" -e pdf -e epub -x basename |\
+	sort -R | fuzzel -d -I -l 16 -w 80 \
+	-f "Berkeley Mono:size=10" -P "" -x 4 -y 0 -B 3 -r 0 \
+	-b "FFFFFFFF" -t "000000FF" -m "000000FF" -s "647D34FF" -S "FFFFFFFF" \
+	-C "647D34FF")
+
+SELECTION=$(fd "$SEARCH" "$BOOKS")
+zathura "$SELECTION"

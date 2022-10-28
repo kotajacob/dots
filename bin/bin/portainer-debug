@@ -1,0 +1,9 @@
+#!/bin/bash
+
+PROJECT_ROOT=$(git rev-parse --show-toplevel)
+DIST=$PROJECT_ROOT/dist
+DATA="$HOME/g/portainer/drives/current"
+ASSETS=$DIST
+
+cd "$PROJECT_ROOT"/api/cmd/portainer || exit
+dlv debug -- --data="$DATA" --assets="$ASSETS"

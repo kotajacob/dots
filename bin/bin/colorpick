@@ -1,0 +1,7 @@
+#!/bin/sh
+# dependencies: grim slurp wl-clipboard ImageMagick libnotify
+color=$(grim -g "$(slurp -p -b 00000000)" - \
+	| magick - -format '#%[hex:s]' info:)
+wl-copy "$color"
+magick -size 100x100 "canvas:$color" "/tmp/colorpick.png"
+notify-send "$color" "copied to clipboard" --icon "/tmp/colorpick.png"

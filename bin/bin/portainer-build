@@ -1,0 +1,19 @@
+#!/bin/bash
+
+PROJECT_ROOT=$(git rev-parse --show-toplevel)
+DIST=$PROJECT_ROOT/dist
+DATA="$HOME/g/portainer/drives/current"
+
+cd "$PROJECT_ROOT"/api || exit
+
+if [ "$1" = "clean" ]; then
+	rm -rf "$DATA"
+	exit
+fi
+
+go build \
+	--installsuffix cgo \
+	--ldflags '-X github.com/portainer/portainer-ee/api/kubernetes/cli.DefaultAgentVersion=latest -X github.com/portainer/liblicense.LicenseServerBaseURL=https://localhost:6002' \
+	-o "$DIST"/portainer cmd/portainer/*.go
+
+notify-send "backend built"

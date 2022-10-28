@@ -1,0 +1,31 @@
+#!/bin/sh
+# usage: pr-files portainer/portainer-ee
+# or to look at PRs against a specific branch:
+# usage: pr-files portainer/portainer-ee release/2.14
+
+if [ -z "$1" ]
+then
+      echo "error: please provide a repo to search!"
+	  exit 1
+fi
+
+
+if [ -z "$2" ]
+then
+	prs=$(gh search prs -L 100 --repo="$1" --state=open --json number \
+		| jq '.[] | .number')
+else
+	prs=$(gh search prs -L 100 --repo="$1" -B="$2" --state=open --json number \
+		| jq '.[] | .number')
+fi
+
+
+for pr in $prs; do
+	files=$(gh api \
+	  -H "Accept: application/vnd.github+json" \
+	  /repos/portainer/portainer-ee/pulls/"$pr"/files | jq -r '.[] | .filename')
+
+	for file in $files; do
+		echo "$pr" "$file"
+	done
+done

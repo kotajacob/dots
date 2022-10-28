@@ -1,0 +1,3 @@
+#!/bin/sh
+dir="${1:-.}"
+fd . "$dir" -t f | sed -n 's/..*\.//p' | sort | uniq -c | sort -r
