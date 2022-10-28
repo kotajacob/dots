@@ -35,5 +35,7 @@ export GOPROXY=direct
 export NPM_PACKAGES="${HOME}/.local/npm"
 export MANPAGER='less -Dd+g -Du+b'
 export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/$NPM_PACKAGES:$PATH"
-# export MANPATH="$NPM_PACKAGES/share/man:$HOME/.local/share/man:$MANPATH"
 export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
+# export MANPATH="$NPM_PACKAGES/share/man:$HOME/.local/share/man:$MANPATH"
+# Seems like this causes errors if the subdirs (for each chapter) in a given
+# man path do not exist.
