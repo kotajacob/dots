@@ -117,3 +117,6 @@ function osc7 {
     print -n "\e]7;file://${HOSTNAME}${uri}\e\\"
 }
 add-zsh-hook -Uz chpwd osc7
+
+# add secrets
+source $HOME/.zshenv-secrets
