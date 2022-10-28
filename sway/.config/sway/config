@@ -81,6 +81,9 @@ bindsym $mod+v exec --no-startup-id notabar < /home/kota/.config/notabar/vpn
 bindsym Control+space exec --no-startup-id fnottctl dismiss
 bindsym Control+Shift+space exec --no-startup-id fnottctl dismiss all
 
+# emoji selection
+bindsym $mod+o exec --no-startup-id emoji
+
 # music
 bindsym $mod+m exec --no-startup-id mpc toggle
 bindsym $mod+comma exec --no-startup-id mpc prev
