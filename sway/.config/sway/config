@@ -188,6 +188,7 @@ force_display_urgency_hint 750 ms
 for_window [app_id="foot-float"] floating enable
 for_window [app_id="imv"] floating enable
 for_window [app_id="imv"] resize set 640px 360px
+for_window [app_id="imv" title=".*aart.*"] resize set 360px 360px
 for_window [app_id="imv"] border pixel 3
 for_window [app_id="bemenu"] border pixel 3
 for_window [app_id="mpv"] floating enable
