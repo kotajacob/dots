@@ -4,7 +4,7 @@ set $down j
 set $up k
 set $right l
 
-font Berkeley Mono 10
+font pango:Berkeley Mono Bold 9
 
 # outputs
 output eDP-1 background ~/pics/walls/flower.png fill
