@@ -197,7 +197,7 @@ for_window [title="Firefox — Sharing Indicator"] floating enable
 for_window [title="Firefox — Sharing Indicator"] kill
 
 # set DISPLAY variable for dbus...
-exec --no-startup-id exec dbus-update-activation-environment DISPLAY
+exec --no-startup-id exec dbus-update-activation-environment --all
 
 # start fnott
 exec --no-startup-id fnott
