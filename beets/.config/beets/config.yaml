@@ -1,6 +1,6 @@
 directory: ~/music
 library: ~/.local/share/beet/library.db
-plugins: fetchart lastgenre missing fromfilename convert
+plugins: fetchart missing fromfilename convert
 import:
   timid: yes
 paths:
