@@ -3,7 +3,7 @@
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
 DIST=$PROJECT_ROOT/dist
 PORTAINER=$DIST/portainer
-DATA="$HOME/g/portainer/drives/current"
+DATA="$HOME/src/portainer/drives/current"
 # DATA="/run/media/kota/A449-6632/current"
 ASSETS=$DIST
 
