@@ -20,6 +20,9 @@ g.loaded_netrw = 1
 -- Use matchup instead of matchit
 g.loaded_matchit = 1
 
+-- Use par for formatting text blocks
+o.formatprg = 'par -w80'
+
 -- Use telescope instead of fzf
 g.loaded_fzf = 1
 
