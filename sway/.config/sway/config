@@ -7,7 +7,7 @@ set $right l
 font pango:Berkeley Mono Bold 9
 
 # outputs
-output eDP-1 background ~/pics/walls/flower.png fill
+output eDP-1 background ~/pics/walls/E8DAFF.png fill
 output eDP-1 scale 1.5
 
 # disable subpixel antialias
@@ -169,20 +169,20 @@ gaps inner 8
 smart_gaps on
 
 ### selection color
-set $sc #647d34
+set $sc #9b70ff
 ### inactive color
-set $ic #dddddd
+set $ic #f7f1ff
 ### urgent color
-set $uc #8c8fae
+set $uc #bc4a9b
 ### font color
 set $fc #000000
 
 ### class					border	back	text	indicator	child_border
-client.focused				$sc		$sc		$fc		$sc			$sc
+client.focused				$sc		$sc		$ic		$sc			$sc
 client.focused_inactive		$ic		$ic		$sc		$ic			$ic
-client.unfocused			$ic    	$ic		$fc		$ic			$ic
-client.urgent				$uc		$uc		$fc		$uc			$uc
-client.placeholder			$sc    	$sc		$fc		$sc			$sc
+client.unfocused			$ic    	$ic		$sc		$ic			$ic
+client.urgent				$uc		$uc		$sc		$uc			$uc
+client.placeholder			$sc    	$sc		$sc		$sc			$sc
 client.background			$sc
 
 # wait a bit before removing urgency hint from windows/workspaces
@@ -208,10 +208,7 @@ exec --no-startup-id exec dbus-update-activation-environment --all
 exec --no-startup-id fnott
 
 # start wob
-exec --no-startup-id rm -rf $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK |\
-	wob --border-color "#647D34FF" --bar-color "#647D34FF" \
-	--background-color "#FFFFFFFF" --overflow-bar-color "#E4943AFF" \
-	-W 200 -H 30 -b 4 -p 4 -o 0 -a top -a right -M 16
+exec --no-startup-id $HOME/bin/wob-daemon
 
 # start pipewire
 exec --no-startup-id pipewire

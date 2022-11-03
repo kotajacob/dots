@@ -1,0 +1,59 @@
+#!/bin/bash
+# Update various programs with
+# the colors I've defined as
+# env variables.
+
+# sway
+sed "s/^set \$sc.*/set \$sc #$PRIMARY/" -i "$HOME/.config/sway/config"
+sed "s/^set \$ic.*/set \$ic #$LIGHT_PRIMARY/" -i "$HOME/.config/sway/config"
+sed "s/^set \$uc.*/set \$uc #$SECONDARY/" -i "$HOME/.config/sway/config"
+
+# foot
+sed "s/^foreground=.*/foreground=$FG/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^background=.*/background=$BG/" -i "$HOME/.config/foot/foot.ini"
+
+sed "s/^regular0=.*/regular0=$BLACK/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^regular1=.*/regular1=$RED/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^regular2=.*/regular2=$GREEN/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^regular3=.*/regular3=$YELLOW/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^regular4=.*/regular4=$BLUE/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^regular5=.*/regular5=$MAGENTA/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^regular6=.*/regular6=$CYAN/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^regular7=.*/regular7=$WHITE/" -i "$HOME/.config/foot/foot.ini"
+
+sed "s/^bright0=.*/bright0=$LIGHT_BLACK/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^bright1=.*/bright1=$LIGHT_RED/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^bright2=.*/bright2=$LIGHT_GREEN/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^bright3=.*/bright3=$LIGHT_YELLOW/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^bright4=.*/bright4=$LIGHT_BLUE/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^bright5=.*/bright5=$LIGHT_MAGENTA/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^bright6=.*/bright6=$LIGHT_CYAN/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^bright7=.*/bright7=$LIGHT_WHITE/" -i "$HOME/.config/foot/foot.ini"
+
+sed "s/^dim0=.*/dim0=$DIM_BLACK/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^dim1=.*/dim1=$DIM_RED/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^dim2=.*/dim2=$DIM_GREEN/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^dim3=.*/dim3=$DIM_YELLOW/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^dim4=.*/dim4=$DIM_BLUE/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^dim5=.*/dim5=$DIM_MAGENTA/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^dim6=.*/dim6=$DIM_CYAN/" -i "$HOME/.config/foot/foot.ini"
+sed "s/^dim7=.*/dim7=$DIM_WHITE/" -i "$HOME/.config/foot/foot.ini"
+
+sed "s/^jump-labels=.*/jump-labels=$BG $PRIMARY/" \
+	-i "$HOME/.config/foot/foot.ini"
+sed "s/^scrollback-indicator=.*/scrollback-indicator=$BG $PRIMARY/" \
+	-i "$HOME/.config/foot/foot.ini"
+
+# fnott
+sed "s/^background=.*/background="$BG"ff/" \
+	-i "$HOME/.config/fnott/fnott.ini"
+sed "s/^border-color=.*/border-color="$PRIMARY"ff/" \
+	-i "$HOME/.config/fnott/fnott.ini"
+sed "s/^title-color=.*/title-color="$FG"ff/" \
+	-i "$HOME/.config/fnott/fnott.ini"
+sed "s/^summary-color=.*/summary-color="$FG"ff/" \
+	-i "$HOME/.config/fnott/fnott.ini"
+sed "s/^body-color=.*/body-color="$FG"ff/" \
+	-i "$HOME/.config/fnott/fnott.ini"
+
+# zathura

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+bg=#"$BG"ff
+primary=#"$PRIMARY"ff
+secondary=#"$SECONDARY"ff
+
+rm -rf "$WOBSOCK"
+mkfifo "$WOBSOCK"
+tail -f "$WOBSOCK" | wob \
+	-W 200 -H 30 -b 4 -p 4 -o 0 -a top -a right -M 16 \
+	--border-color "$primary" \
+	--bar-color "$primary" \
+	--background-color "$bg" \
+	--overflow-bar-color "$secondary"

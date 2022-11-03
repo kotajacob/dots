@@ -1,9 +1,13 @@
 #!/bin/sh
 
+fg="$FG"ff
+bg="$BG"ff
+primary="$PRIMARY"ff
+
 SELECTION=$(dprint -d /home/kota/.config/dprint -p \
-	| fuzzel -d -I -l 10 -f "Berkeley Mono:size=10" -P "" -F \
-	name -x 4 -y 0 -B 8 -r 0 \
-	-b "FFFFFFFF" -t "000000FF" -m "000000FF" -s "647D34FF" -S "FFFFFFFF" \
-	-C "647D34FF" "$@")
+	| fuzzel -d -I -l 10 -f "Berkeley Mono:size=10" \
+	-x 4 -y 0 -B 8 -r 0 -p "" \
+	-b "$bg" -t "$fg" -m "$fg" -M "$fg" -s "$primary" -S "$bg" \
+	-C "$primary" "$@")
 
 echo "Name:$SELECTION" | dprint -d /home/kota/.config/dprint -p -i - -o "StripExec" | ${SHELL:-"/bin/sh"} &

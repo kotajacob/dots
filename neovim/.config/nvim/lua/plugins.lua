@@ -68,11 +68,7 @@ require 'paq' {
 }
 
 -- Install my local plugins
-vim.opt.runtimepath:append('~/g/far-left')
-vim.opt.runtimepath:append('~/g/wiki-ft.vim')
-
--- Plugin configs
-require('far-left').setup()
+vim.opt.runtimepath:append('~/src/kota/wiki-ft.vim')
 
 require('mini.ai').setup() -- a/i text object improvements
 require('mini.align').setup() -- align with gaipi<space> or gaip-

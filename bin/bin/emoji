@@ -1,8 +1,13 @@
 #!/bin/sh
 
-SELECTION=$( fuzzel -d -I -l 10 -f "Berkeley Mono:size=10,Noto Color Emoji:size=10" \
-	-P "" -F name -x 4 -y 0 -B 8 -r 0 \
-	-b "FFFFFFFF" -t "000000FF" -m "000000FF" -s "647D34FF" -S "FFFFFFFF" \
-	-C "647D34FF" "$@" < "$HOME/.config/emoji" | awk '{ print $1}')
+fg="$FG"ff
+bg="$BG"ff
+primary="$PRIMARY"ff
+
+SELECTION=$(fuzzel -d -I -l 10 \
+	-f "Berkeley Mono:size=10,Noto Color Emoji:size=10" \
+	-x 4 -y 0 -B 8 -r 0 -p "" \
+	-b "$bg" -t "$fg" -m "$fg" -M "$fg" -s "$primary" -S "$bg" \
+	-C "$primary" "$@" < "$HOME/.config/emoji" | awk '{ print $1}')
 
 wl-copy "$SELECTION"
