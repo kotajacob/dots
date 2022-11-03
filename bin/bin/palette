@@ -57,3 +57,61 @@ sed "s/^body-color=.*/body-color="$FG"ff/" \
 	-i "$HOME/.config/fnott/fnott.ini"
 
 # zathura
+sed "s/default-bg.*/default-bg \"#$BG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+sed "s/default-fg.*/default-fg \"#$FG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+
+sed "s/statusbar-bg.*/statusbar-bg \"#$BG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+sed "s/statusbar-fg.*/statusbar-fg \"#$FG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+
+sed "s/inputbar-bg.*/inputbar-bg \"#$BG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+sed "s/inputbar-fg.*/inputbar-fg \"#$FG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+
+sed "s/notification-bg.*/notification-bg \"#$BG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+sed "s/notification-fg.*/notification-fg \"#$FG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+
+sed "s/notification-error-bg.*/notification-error-bg \"#$BG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+sed "s/notification-error-fg.*/notification-error-fg \"#$RED\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+
+sed "s/notification-warning-bg.*/notification-warning-bg \"#$BG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+sed "s/notification-warning-fg.*/notification-warning-fg \"#$RED\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+
+sed "s/highlight-color.*/highlight-color \"#$YELLOW\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+sed "s/highlight-active-color.*/highlight-active-color \"#$PRIMARY\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+
+sed "s/completion-bg.*/completion-bg \"#$BG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+sed "s/completion-fg.*/completion-fg \"#$PRIMARY\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+
+sed "s/completion-highlight-bg.*/completion-highlight-bg \"#$PRIMARY\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+sed "s/completion-highlight-fg.*/completion-highlight-fg \"#$FG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+
+sed "s/recolor-lightcolor.*/recolor-lightcolor \"#$BG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+sed "s/recolor-darkcolor.*/recolor-darkcolor \"#$FG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+
+sed "s/index-bg.*/index-bg \"#$BG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+sed "s/index-fg.*/index-fg \"#$FG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+sed "s/index-active-bg.*/index-active-bg \"#$PRIMARY\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
+sed "s/index-active-fg.*/index-active-fg \"#$FG\"/" \
+	-i "$HOME/.config/zathura/zathurarc"
