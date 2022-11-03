@@ -75,13 +75,10 @@ require('mini.align').setup() -- align with gaipi<space> or gaip-
 require('mini.comment').setup() -- comment with gcc
 require('mini.indentscope').setup() -- indent text object with ii
 require('mini.jump').setup() -- improve f and t
-require('mini.pairs').setup() -- autopairs
 require('mini.surround').setup() -- sa (add), sd (delete), sr (replace)
 require('mini.trailspace').setup() -- highlight trailing spaces
 
 vim.g.miniindentscope_disable = true -- disable animation
-vim.api.nvim_del_keymap("i", "`") -- disable ` auto pair
-
 
 require('dirbuf').setup {
 	show_hidden = false,

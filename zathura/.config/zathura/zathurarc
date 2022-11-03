@@ -1,4 +1,4 @@
-font Berkeley Mono 8
+set font "Berkeley Mono 8"
 
 set default-bg                  "#ffffff"
 set default-fg                  "#e8e8e8"
@@ -24,8 +24,8 @@ set highlight-active-color      "#34859d"
 set completion-bg               "#e8e8e8"
 set completion-fg               "#34859d"
 
-set completion-highlight-fg     "#000000"
 set completion-highlight-bg     "#34859d"
+set completion-highlight-fg     "#000000"
 
 set recolor-lightcolor          "#ffffff"
 set recolor-darkcolor           "#282828"
