@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
-Name=wifi
-Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="800x600" nmtui
+Name=top
+Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="800x600" gotop
 Terminal=false
 X-MultipleArgs=false
 Type=Application
