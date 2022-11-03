@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export BORG_REPO=/mnt/sietch/kota/borg
+export BORG_REPO='ssh://kota@192.168.178.3:22/mnt/sietch/home/kota/borg'
 
 borg create                                \
     --stats                                \
