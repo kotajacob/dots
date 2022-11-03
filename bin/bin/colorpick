@@ -3,5 +3,5 @@
 color=$(grim -g "$(slurp -p -b 00000000)" - \
 	| magick - -format '#%[hex:s]' info:)
 wl-copy "$color"
-magick -size 100x100 "canvas:$color" "/tmp/colorpick.png"
+magick -size 48x48 "canvas:$color" "/tmp/colorpick.png"
 notify-send "$color" "copied to clipboard" --icon "/tmp/colorpick.png"
