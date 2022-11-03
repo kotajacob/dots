@@ -348,7 +348,7 @@ nvim_lsp.sumneko_lua.setup {
 	}
 }
 
--- local null_ls = require("null-ls")
+local null_ls = require("null-ls")
 
 -- local haredoc = {
 -- 	method = null_ls.methods.HOVER,
@@ -372,14 +372,13 @@ nvim_lsp.sumneko_lua.setup {
 -- 	},
 -- }
 
--- null_ls.setup({
--- 	sources = {
--- 		null_ls.builtins.diagnostics.shellcheck,
--- 		null_ls.builtins.formatting.shfmt,
--- 		null_ls.builtins.formatting.prettier,
--- 		null_ls.builtins.hover.dictionary,
--- 		haredoc,
--- 	},
--- 	on_attach = on_attach,
--- 	capabilities = capabilities
--- })
+null_ls.setup({
+	sources = {
+		null_ls.builtins.diagnostics.shellcheck,
+		null_ls.builtins.formatting.shfmt,
+		null_ls.builtins.formatting.prettier,
+		-- haredoc,
+	},
+	on_attach = on_attach,
+	capabilities = capabilities
+})
