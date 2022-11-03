@@ -3,6 +3,7 @@
 background = #ffffff
 fullscreen = false
 upscaling_method = nearest_neighbour
+overlay_font = Monospace:10
 
 # bindings
 [binds]
