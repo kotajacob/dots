@@ -56,6 +56,9 @@ require 'paq' {
 	-- Move blocks of selected text around with arrow keys
 	'zirrostig/vim-schlepp';
 
+	-- Better URL plumbing.
+	'stsewd/gx-extended.vim';
+
 	-- TODO
 	-- bufonly
 	-- status bar
