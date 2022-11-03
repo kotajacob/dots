@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=aart
+Exec=aart
+Terminal=false
+X-MultipleArgs=false
+Type=Application
