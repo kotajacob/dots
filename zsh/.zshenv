@@ -12,7 +12,7 @@ export GUI=1
 export NNN_OPTS='aAcC'
 export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
 export NNN_COLORS='6666'
-export NNN_BMS="d:$HOME/docs;h:$HOME;g:$HOME/g;G:$HOME/git;p:$HOME/pics;t:$HOME/tmp;m:/run/media/kota;M:/mnt"
+export NNN_BMS="d:$HOME/docs;h:$HOME;s:$HOME/src;S:$HOME/src/kota;p:$HOME/pics;t:$HOME/tmp;m:/run/media/kota;M:$HOME/.local/share/PolyMC/instances"
 export NNN_PLUG='r:fixname;d:xdgdefault;j:autojump;p:preview-tui'
 export PF_INFO="ascii title os kernel uptime pkgs memory editor palette"
 export PCFSERVER='https://paste.nilsu.org:21/incoming'
@@ -69,7 +69,7 @@ export GOPATH="$HOME/.local/go"
 export GOPROXY=direct
 export NPM_PACKAGES="${HOME}/.local/npm"
 export MANPAGER='less -Dd+g -Du+b'
-export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/$NPM_PACKAGES:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$NPM_PACKAGES/bin:$PATH"
 export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
 # export MANPATH="$NPM_PACKAGES/share/man:$HOME/.local/share/man:$MANPATH"
 # Seems like this causes errors if the subdirs (for each chapter) in a given
