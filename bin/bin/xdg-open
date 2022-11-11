@@ -1,4 +1,0 @@
-#!/bin/sh
-# unset GDK_BACKEND
-# export XDG_CURRENT_DESKTOP="gnome"
-/usr/bin/xdg-open "$@"
