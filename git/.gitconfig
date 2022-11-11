@@ -36,5 +36,5 @@
 	show = diff-highlight | less -FRX
 	diff = diff-highlight | less -FRX
 	branch = cat
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+; [url "git@github.com:"]
+; 	insteadOf = https://github.com/
