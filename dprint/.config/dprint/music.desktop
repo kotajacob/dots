@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=music
-Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="800x800" ncmpcpp
+Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="800x740" ncmpcpp
 Terminal=false
 X-MultipleArgs=false
 Type=Application
