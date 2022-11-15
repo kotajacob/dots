@@ -80,7 +80,9 @@ bindsym Shift+Print exec grimshot --notify copy area
 
 # info notification
 bindsym $mod+Escape exec --no-startup-id notabar < /home/kota/.config/notabar/all
-bindsym $mod+v exec --no-startup-id notabar < /home/kota/.config/notabar/vpn
+
+# airplane mode
+bindsym XF86RFKill exec --no-startup-id notabar < /home/kota/.config/notabar/airplane
 
 # dismiss notifications
 bindsym Control+space exec --no-startup-id fnottctl dismiss
