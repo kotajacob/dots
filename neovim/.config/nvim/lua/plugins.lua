@@ -59,6 +59,9 @@ require 'paq' {
 	-- Better URL plumbing.
 	'stsewd/gx-extended.vim';
 
+	-- Per project configs.
+	'windwp/nvim-projectconfig';
+
 	-- TODO
 	-- bufonly
 	-- status bar
@@ -82,6 +85,9 @@ require('mini.surround').setup() -- sa (add), sd (delete), sr (replace)
 require('mini.trailspace').setup() -- highlight trailing spaces
 
 vim.g.miniindentscope_disable = true -- disable animation
+
+-- Per project configs.
+require('nvim-projectconfig').setup()
 
 require('dirbuf').setup {
 	show_hidden = false,

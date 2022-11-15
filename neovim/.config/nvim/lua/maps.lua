@@ -70,7 +70,7 @@ map("n", "<space><space>", "", {
 	end,
 })
 
-map("n", "<space>n", "", {
+map("n", "<space>.", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").resume()
