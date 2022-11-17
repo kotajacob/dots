@@ -95,6 +95,12 @@ require('dirbuf').setup {
 	write_cmd = 'DirbufSync',
 }
 
+require 'nvim-treesitter.configs'.setup {
+	highlight = {
+		enable = true,
+	},
+}
+
 require('telescope').setup {
 	defaults = {
 		path_display = { 'truncate' },
