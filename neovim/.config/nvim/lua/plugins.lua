@@ -321,14 +321,16 @@ nvim_lsp.clangd.setup {
 	capabilities = capabilities
 }
 
+nvim_lsp.zls.setup {
+	on_attach = on_attach,
+	capabilities = capabilities
+}
+
 nvim_lsp.tsserver.setup({
 	capabilities = capabilities,
 	on_attach = function(client, bufnr)
-		client.resolved_capabilities.document_formatting = false
-		client.resolved_capabilities.document_range_formatting = false
-		local ts_utils = require("nvim-lsp-ts-utils")
-		ts_utils.setup({})
-		ts_utils.setup_client(client)
+		client.server_capabilities.document_formatting = false
+		client.server_capabilities.document_range_formatting = false
 		vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", {
 			silent = true,
 		})
