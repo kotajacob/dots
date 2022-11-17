@@ -69,6 +69,6 @@ export GOPATH="$HOME/.local/go"
 export GOPROXY=direct
 export NPM_PACKAGES="${HOME}/.local/npm"
 export MANPAGER='less -Dd+g -Du+b'
-export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$NPM_PACKAGES/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$NPM_PACKAGES/bin:$HOME/.local/zig:$PATH"
 export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
 export MANPATH="$HOME/.local/share/man:$MANPATH"
