@@ -357,7 +357,13 @@ nvim_lsp.sumneko_lua.setup {
 		Lua = {
 			diagnostics = {
 				globals = { 'vim' }
-			}
+			},
+			workspace = {
+				checkThirdParty = false,
+				library = {
+					"/usr/lib/lua-language-server/meta/3rd/love2d/library"
+				}
+			},
 		}
 	}
 }
