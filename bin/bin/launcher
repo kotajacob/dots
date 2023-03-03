@@ -6,7 +6,7 @@ primary="$PRIMARY"ff
 
 SELECTION=$(dprint -d /home/kota/.config/dprint -p \
 	| fuzzel -d -I -l 10 -f "Berkeley Mono:size=10" \
-	-x 4 -y 0 -B 8 -r 0 -p "" \
+	-x 4 -y 0 -B 4 -r 0 -p "" -D "no" \
 	-b "$bg" -t "$fg" -m "$fg" -M "$fg" -s "$primary" -S "$bg" \
 	-C "$primary" "$@")
 

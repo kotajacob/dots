@@ -1,76 +1,67 @@
 -- Install remote plugins
 require 'paq' {
-	'savq/paq-nvim';
+	'savq/paq-nvim',
 
 	-- libraries
-	'nvim-lua/plenary.nvim';
+	'nvim-lua/plenary.nvim',
 
 	-- mini
-	'echasnovski/mini.nvim';
+	'echasnovski/mini.nvim',
 
 	-- display :StartupTime
-	'dstein64/vim-startuptime';
+	'dstein64/vim-startuptime',
 
 	-- fuzzy searcher
-	'nvim-telescope/telescope.nvim';
-	{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' };
+	'nvim-telescope/telescope.nvim',
+	{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
 
 	-- dirbuf as filemanager
-	'elihunter173/dirbuf.nvim';
+	'elihunter173/dirbuf.nvim',
 
 	-- git improvements
-	'tpope/vim-fugitive';
-	'lewis6991/gitsigns.nvim';
+	'tpope/vim-fugitive',
+	'lewis6991/gitsigns.nvim',
 
 	-- bracket mappings and more
-	'tpope/vim-unimpaired';
+	'tpope/vim-unimpaired',
 
 	-- lsp + autocomplete
-	'neovim/nvim-lspconfig';
-	'jose-elias-alvarez/null-ls.nvim';
-	'stevearc/dressing.nvim';
-	'hrsh7th/cmp-nvim-lsp';
-	'hrsh7th/cmp-buffer';
-	'hrsh7th/cmp-path';
-	'hrsh7th/cmp-cmdline';
-	'hrsh7th/nvim-cmp';
-	'hrsh7th/cmp-vsnip';
-	'hrsh7th/vim-vsnip';
+	'neovim/nvim-lspconfig',
+	'jose-elias-alvarez/null-ls.nvim',
+	'stevearc/dressing.nvim',
+	'hrsh7th/cmp-nvim-lsp',
+	'hrsh7th/cmp-buffer',
+	'hrsh7th/cmp-path',
+	'hrsh7th/cmp-cmdline',
+	'hrsh7th/nvim-cmp',
+	'hrsh7th/cmp-vsnip',
+	'hrsh7th/vim-vsnip',
 
 	-- treesitter
-	'nvim-treesitter/nvim-treesitter';
+	'nvim-treesitter/nvim-treesitter',
+
+	-- project LSP error list
+	'folke/trouble.nvim',
 
 	-- langauge specific
-	'fatih/vim-go';
-	'lervag/wiki.vim';
+	'fatih/vim-go',
+	'lervag/wiki.vim',
+	'mattn/emmet-vim',
 
 	-- colors inline
-	{ 'rrethy/vim-hexokinase', run = 'make' };
+	{ 'rrethy/vim-hexokinase',                    run = 'make' },
 
 	-- "exchange" operator to swap selections
-	'tommcdo/vim-exchange';
+	'tommcdo/vim-exchange',
 
 	-- Join/Split long lines in various languages
-	'AndrewRadev/splitjoin.vim';
-
-	-- Move blocks of selected text around with arrow keys
-	'zirrostig/vim-schlepp';
+	'AndrewRadev/splitjoin.vim',
 
 	-- Better URL plumbing.
-	'stsewd/gx-extended.vim';
+	'stsewd/gx-extended.vim',
 
 	-- Per project configs.
-	'windwp/nvim-projectconfig';
-
-	-- TODO
-	-- bufonly
-	-- status bar
-	-- "open" with enter ("gf" or "gx" a link/file)
-	-- marks: fix telescope list
-	-- hare: language server?
-	-- list synonyms with telescope?
-	-- better autocomplete
-	-- replace "unimpaired", "wiki", "vim-go"
+	'MunifTanjim/exrc.nvim',
 }
 
 -- Install my local plugins
@@ -80,14 +71,17 @@ require('mini.ai').setup() -- a/i text object improvements
 require('mini.align').setup() -- align with gaipi<space> or gaip-
 require('mini.comment').setup() -- comment with gcc
 require('mini.indentscope').setup() -- indent text object with ii
-require('mini.jump').setup() -- improve f and t
 require('mini.surround').setup() -- sa (add), sd (delete), sr (replace)
 require('mini.trailspace').setup() -- highlight trailing spaces
+require('mini.move').setup() -- move code with alt+hjkl
 
 vim.g.miniindentscope_disable = true -- disable animation
 
--- Per project configs.
-require('nvim-projectconfig').setup()
+require("exrc").setup({
+	files = {
+		".vimrc.lua",
+	},
+})
 
 require('dirbuf').setup {
 	show_hidden = false,
@@ -133,7 +127,9 @@ require('telescope').load_extension('fzf')
 require('dressing').setup({
 	input = {
 		insert_only = false,
-		winblend = 0,
+		win_options = {
+			winblend = 0,
+		},
 	},
 	select = {
 		telescope = require('telescope.themes').get_cursor({})
@@ -234,7 +230,7 @@ cmp.setup({
 	mapping = {
 		['<C-n>'] = cmp.mapping.select_next_item(),
 		['<C-p>'] = cmp.mapping.select_prev_item(),
-		['<C-b>'] = cmp.mapping.scroll_docs(-4),
+		['<C-b>'] = cmp.mapping.scroll_docs( -4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			-- This little snippet will confirm with tab, and if no entry is selected,
@@ -291,7 +287,7 @@ cmp.setup.cmdline(':', {
 
 
 local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<space>ee', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
@@ -350,47 +346,32 @@ nvim_lsp.tsserver.setup({
 	end,
 })
 
-nvim_lsp.sumneko_lua.setup {
+nvim_lsp.lua_ls.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
 		Lua = {
+			runtime = {
+				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+				version = 'LuaJIT',
+			},
 			diagnostics = {
-				globals = { 'vim' }
+				-- Get the language server to recognize the `vim` global
+				globals = { 'vim' },
 			},
 			workspace = {
-				checkThirdParty = false,
-				library = {
-					"/usr/lib/lua-language-server/meta/3rd/love2d/library"
-				}
+				-- Make the server aware of Neovim runtime files
+				library = vim.api.nvim_get_runtime_file("", true),
 			},
-		}
-	}
-}
+			-- Do not send telemetry data containing a randomized but unique identifier
+			telemetry = {
+				enable = false,
+			},
+		},
+	},
+})
 
 local null_ls = require("null-ls")
-
--- local haredoc = {
--- 	method = null_ls.methods.HOVER,
--- 	filetypes = { "hare" },
--- 	generator = {
--- 		fn = function(_, done)
--- 			local oldiskeyword = vim.opt_local.iskeyword
--- 			vim.opt_local.iskeyword:append(":")
--- 			local symbol = vim.fn.expand('<cword>')
--- 			vim.opt_local.iskeyword = oldiskeyword
---
--- 			require('plenary.job'):new({
--- 				command = 'haredoc',
--- 				args = { symbol },
--- 				on_exit = function(j, _)
--- 					done(j:result())
--- 				end,
--- 			}):start()
--- 		end,
--- 		async = true,
--- 	},
--- }
 
 null_ls.setup({
 	sources = {
@@ -401,4 +382,19 @@ null_ls.setup({
 	},
 	on_attach = on_attach,
 	capabilities = capabilities
+})
+
+require("trouble").setup({
+	icons = false,
+	fold_open = "v", -- icon used for open folds
+	fold_closed = ">", -- icon used for closed folds
+	indent_lines = false, -- add an indent guide below the fold icons
+	signs = {
+		-- icons / text used for a diagnostic
+		error = "error",
+		warning = "warn",
+		hint = "hint",
+		information = "info"
+	},
+	use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
 })

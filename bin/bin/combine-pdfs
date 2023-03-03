@@ -1,0 +1,8 @@
+#!/bin/bash
+
+shopt -s globstar
+# generate big combined pdf with ghostscript
+fd -e pdf -0 \
+	| xargs -0 gs -dNOPAUSE -sDEVICE=pdfwrite \
+	-sOUTPUTFILE=combine.pdf -dBATCH
+shopt -u globstar

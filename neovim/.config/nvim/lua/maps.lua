@@ -59,7 +59,7 @@ map('n', '<space>sn', '', {
 map('n', ',', '@@', noremap)
 
 -- Close other windows
-map('n', '<space>O', ':only<CR>', snoremap)
+map('n', '<space>o', ':only<CR>', snoremap)
 
 
 -- Telescope binds
@@ -109,7 +109,7 @@ map("n", "<space>b", "", {
 	end,
 })
 
-map("n", "<space>o", "", {
+map("n", "<space>O", "", {
 	noremap = true,
 	callback = function()
 		require("telescope.builtin").oldfiles({cwd_only=true})
@@ -190,3 +190,8 @@ map("n", "<space>wr", "", {
 		MiniTrailspace.trim()
 	end,
 })
+
+-- Open trouble (error list)
+map("n", "<space>el", "<cmd>TroubleToggle<cr>",
+  {silent = true, noremap = true}
+)

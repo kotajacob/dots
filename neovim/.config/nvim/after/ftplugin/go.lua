@@ -8,10 +8,7 @@ vim.o.tabstop = 4
 vim.o.textwidth = 80
 vim.o.expandtab = false
 
--- Run the project
-map(0, "n", "<leader>r", "<cmd>GoRun<cr>", noremap)
-
--- Run the current file
+-- Run and jump to errors
 map(0, "n", "<leader>R", "<cmd>GoRun %<cr>", noremap)
 
 -- Build the project

@@ -7,4 +7,5 @@ DATA="$HOME/src/portainer/drives/current"
 # DATA="/run/media/kota/A449-6632/current"
 ASSETS=$DIST
 
-$PORTAINER --data="$DATA" --assets="$ASSETS"
+# $PORTAINER --data="$DATA" --assets="$ASSETS"
+$PORTAINER --data="$DATA" --assets="$ASSETS" --log-level=DEBUG

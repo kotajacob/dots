@@ -27,6 +27,7 @@ alias xrm='sudo xbps-remove -R'
 alias xc='sudo xbps-remove -Oo && sudo vkpurge rm all'
 alias xinfo='xbps-query -R -S'
 alias xlist='xpkg -m'
+alias doas='sudo' # why the hell is sudo part of base on void ugggg
 alias v='nvim'
 alias vi='nvim'
 alias vim='nvim'
@@ -46,16 +47,17 @@ alias tn='tmux new -s'
 alias ta='tmux attach -t'
 alias tls='tmux ls'
 alias dmesg='sudo dmesg -wH'
-alias mnt='udisksctl mount -b'
-alias umnt='udisksctl unmount -b'
+alias mnt='udevil mount'
+alias umnt='udevil umount'
 alias tide='tide /home/kota/docs/Dunedin2022.csv'
 alias mail='mbsync primary'
-alias memex="cd $HOME/docs/memex && nvim index.md"
+# alias mm="cd $HOME/docs/memex && nvim index.md"
 alias mntkoi='sshfs -o allow_other,default_permissions kota@koi:/home/kota /mnt/koi'
 alias mntsietch='sshfs -o allow_other,default_permissions kota@koi:/mnt/sietch /mnt/sietch'
 alias weather='metweather forecast | column -t -l3'
 alias music='ncmpcpp'
 alias mixer='pulsemixer'
+alias cannon='gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 /dev/video2'
 
 ## functions
 go() {

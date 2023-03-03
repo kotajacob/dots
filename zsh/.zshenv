@@ -12,7 +12,7 @@ export GUI=1
 export NNN_OPTS='aAcC'
 export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
 export NNN_COLORS='6666'
-export NNN_BMS="d:$HOME/docs;h:$HOME;s:$HOME/src;S:$HOME/src/kota;p:$HOME/pics;t:$HOME/tmp;m:/run/media/kota;M:$HOME/.local/share/PolyMC/instances"
+export NNN_BMS="d:$HOME/docs;h:$HOME;s:$HOME/src;S:$HOME/src/kota;p:$HOME/pics;t:$HOME/tmp;m:$HOME/docs/memex/;M:$HOME/.local/share/PolyMC/instances"
 export NNN_PLUG='r:fixname;d:xdgdefault;j:autojump;p:preview-tui'
 export PF_INFO="ascii title os kernel uptime pkgs memory editor palette"
 export PCFSERVER='https://paste.nilsu.org:21/incoming'
@@ -58,7 +58,7 @@ export SECONDARY="$MAGENTA"
 # NOTE: Steam, most games and other (older) binary applications might not work!
 # Manual overrides should be used as needed.
 # https://github.com/swaywm/sway/wiki/Running-programs-natively-under-wayland
-export SDL_VIDEODRIVER=wayland
+# export SDL_VIDEODRIVER=wayland
 export XDG_CURRENT_DESKTOP=sway
 export MOZ_ENABLE_WAYLAND=1
 export MOZ_DBUS_REMOTE=1 # Workaround for clicking links in electron...

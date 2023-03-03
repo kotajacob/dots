@@ -7,11 +7,13 @@ set $right l
 font pango:Berkeley Mono Bold 9
 
 # outputs
-output eDP-1 background ~/pics/walls/E8DAFF.png fill
+set $laptop eDP-1
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
 output eDP-1 scale 1.5
 
-# disable subpixel antialias
 output * subpixel none
+output * background ~/pics/walls/E8DAFF.png fill
 
 # disable monitor after 15 minutes of inactivity
 exec swayidle -w \
@@ -40,8 +42,8 @@ input "type:touchpad" {
 }
 
 # start a terminal
-bindsym $mod+Return exec foot
-bindsym $mod+Shift+Return exec foot -o app-id="foot-float"
+bindsym $mod+Return exec footclient
+bindsym $mod+Shift+Return exec footclient -o app-id="foot-float"
 
 # kill focused window
 bindsym $mod+q kill
@@ -59,13 +61,13 @@ floating_modifier $mod
 bindsym $mod+Shift+c reload
 
 # brightness
-bindsym --locked XF86MonBrightnessDown exec light -2 && light > $WOBSOCK
-bindsym --locked XF86MonBrightnessUp exec light +2 && light > $WOBSOCK
+bindsym --locked XF86MonBrightnessDown exec light -2 && light > $XDG_RUNTIME_DIR/wob.sock
+bindsym --locked XF86MonBrightnessUp exec light +2 && light > $XDG_RUNTIME_DIR/wob.sock
 
 # volume
-bindsym XF86AudioRaiseVolume exec pamixer -ui 2 && pamixer --get-volume > $WOBSOCK
-bindsym XF86AudioLowerVolume exec pamixer -ud 2 && pamixer --get-volume > $WOBSOCK
-bindsym XF86AudioMute exec pamixer --toggle-mute && ( [ "$(pamixer --get-mute)" = "true" ] && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioRaiseVolume exec pamixer -ui 2 && pamixer --get-volume > $XDG_RUNTIME_DIR/wob.sock
+bindsym XF86AudioLowerVolume exec pamixer -ud 2 && pamixer --get-volume > $XDG_RUNTIME_DIR/wob.sock
+bindsym XF86AudioMute exec pamixer --toggle-mute && ( [ "$(pamixer --get-mute)" = "true" ] && echo 0 > $XDG_RUNTIME_DIR/wob.sock ) || pamixer --get-volume > $XDG_RUNTIME_DIR/wob.sock
 
 # music controlls
 bindsym XF86AudioNext exec mpc next
@@ -85,8 +87,8 @@ bindsym $mod+Escape exec --no-startup-id notabar < /home/kota/.config/notabar/al
 bindsym XF86RFKill exec --no-startup-id notabar < /home/kota/.config/notabar/airplane
 
 # dismiss notifications
-bindsym Control+space exec --no-startup-id fnottctl dismiss
-bindsym Control+Shift+space exec --no-startup-id fnottctl dismiss all
+bindsym Control+space exec --no-startup-id dunstctl close
+bindsym Control+Shift+space exec --no-startup-id dunstctl close-all
 
 # emoji selection
 bindsym $mod+o exec --no-startup-id emoji
@@ -202,12 +204,13 @@ for_window [app_id="mpv"] floating enable
 for_window [app_id="mpv"] resize set 1280px 720px
 for_window [title="Firefox — Sharing Indicator"] floating enable
 for_window [title="Firefox — Sharing Indicator"] kill
+for_window [title="SL8"] floating enable
 
 # set DISPLAY variable for dbus...
 exec --no-startup-id exec dbus-update-activation-environment --all
 
-# start fnott
-exec --no-startup-id fnott
+# start dunst
+exec --no-startup-id dunst
 
 # start wob
 exec --no-startup-id $HOME/bin/wob-daemon
@@ -218,6 +221,9 @@ exec --no-startup-id pipewire-pulse
 
 # start mpd
 exec --no-startup-id mpd
+
+# start foot server
+exec --no-startup-id foot --server
 
 # cursor
 seat seat0 xcursor_theme capitaine-cursors
