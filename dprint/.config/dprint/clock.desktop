@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=clock
-Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="300x130" tty-clock -C 6
+Exec=footclient -o app-id="foot-float" -o initial-window-size-pixels="340x148" tty-clock -C 6
 Terminal=false
 X-MultipleArgs=false
 Type=Application

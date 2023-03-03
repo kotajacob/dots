@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=whatcd
+Exec=footclient -o app-id="foot-float" -o initial-window-size-pixels="600x800" whatcd
+Terminal=false
+X-MultipleArgs=false
+Type=Application

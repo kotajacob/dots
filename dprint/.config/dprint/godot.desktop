@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=godot
+Exec=Godot_v4.0-stable_linux.x86_64
+Terminal=false
+X-MultipleArgs=false
+Type=Application

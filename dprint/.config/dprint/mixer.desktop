@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=mixer
-Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="600x200" pulsemixer
+Exec=footclient -o app-id="foot-float" -o initial-window-size-pixels="800x600" pulsemixer
 Terminal=false
 X-MultipleArgs=false
 Type=Application

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=mpv
+Exec=wl-paste | xargs mpv
+Terminal=false
+X-MultipleArgs=false
+Type=Application
