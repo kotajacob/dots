@@ -1,19 +1,28 @@
--- Install remote plugins
-require 'paq' {
-	'savq/paq-nvim',
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
 
-	-- libraries
-	'nvim-lua/plenary.nvim',
-
-	-- mini
+require('lazy').setup({
+	-- many lil things
 	'echasnovski/mini.nvim',
 
-	-- display :StartupTime
-	'dstein64/vim-startuptime',
-
 	-- fuzzy searcher
-	'nvim-telescope/telescope.nvim',
-	{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+	{
+		'nvim-telescope/telescope.nvim',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+		}
+	},
 
 	-- dirbuf as filemanager
 	'elihunter173/dirbuf.nvim',
@@ -22,20 +31,28 @@ require 'paq' {
 	'tpope/vim-fugitive',
 	'lewis6991/gitsigns.nvim',
 
-	-- bracket mappings and more
-	'tpope/vim-unimpaired',
+	-- increment / decrement fixer
+	{
+		"monaqa/dial.nvim",
+		keys = { "<C-a>", { "<C-x>", mode = "n" } },
+	},
 
 	-- lsp + autocomplete
 	'neovim/nvim-lspconfig',
 	'jose-elias-alvarez/null-ls.nvim',
-	'stevearc/dressing.nvim',
-	'hrsh7th/cmp-nvim-lsp',
-	'hrsh7th/cmp-buffer',
-	'hrsh7th/cmp-path',
-	'hrsh7th/cmp-cmdline',
-	'hrsh7th/nvim-cmp',
-	'hrsh7th/cmp-vsnip',
-	'hrsh7th/vim-vsnip',
+	{
+		'hrsh7th/nvim-cmp',
+		event = "InsertEnter",
+		dependencies = {
+			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-buffer',
+			'hrsh7th/cmp-path',
+			'hrsh7th/cmp-cmdline',
+			'hrsh7th/cmp-vsnip',
+			'hrsh7th/vim-vsnip',
+		},
+	},
+	{ "stevearc/dressing.nvim", event = "VeryLazy" },
 
 	-- treesitter
 	'nvim-treesitter/nvim-treesitter',
@@ -44,12 +61,20 @@ require 'paq' {
 	'folke/trouble.nvim',
 
 	-- langauge specific
-	'fatih/vim-go',
-	'lervag/wiki.vim',
-	'mattn/emmet-vim',
+	{ 'fatih/vim-go',           ft = 'go' },
+	{
+		'lervag/wiki.vim',
+		dependencies = {
+			{
+				dir = '~/src/kota/wiki-ft.vim',
+				ft = 'wiki',
+			}
+		}
+	},
+	{ 'mattn/emmet-vim',       ft = 'html' },
 
 	-- colors inline
-	{ 'rrethy/vim-hexokinase',                    run = 'make' },
+	{ 'rrethy/vim-hexokinase', build = 'make hexokinase', event = "VeryLazy" },
 
 	-- "exchange" operator to swap selections
 	'tommcdo/vim-exchange',
@@ -58,17 +83,30 @@ require 'paq' {
 	'AndrewRadev/splitjoin.vim',
 
 	-- Better URL plumbing.
-	'stsewd/gx-extended.vim',
+	{ 'stsewd/gx-extended.vim', keys = { { "gx", mode = "n" } } },
 
 	-- Per project configs.
 	'MunifTanjim/exrc.nvim',
-}
-
--- Install my local plugins
-vim.opt.runtimepath:append('~/src/kota/wiki-ft.vim')
+})
 
 require('mini.ai').setup() -- a/i text object improvements
 require('mini.align').setup() -- align with gaipi<space> or gaip-
+require('mini.bracketed').setup({
+	buffer     = { suffix = 'b', options = {} },
+	comment    = { suffix = 'x', options = {} },
+	conflict   = { suffix = 'c', options = {} },
+	diagnostic = { suffix = 'd', options = {} },
+	file       = { suffix = 'f', options = {} },
+	indent     = { suffix = 'i', options = {} },
+	jump       = { suffix = 'j', options = {} },
+	location   = { suffix = 'l', options = {} },
+	oldfile    = { suffix = 'o', options = {} },
+	quickfix   = { suffix = 'q', options = {} },
+	treesitter = { suffix = 't', options = {} },
+	undo       = { suffix = 'u', options = {} },
+	window     = { suffix = 'w', options = {} },
+	yank       = { suffix = 'y', options = {} },
+})
 require('mini.comment').setup() -- comment with gcc
 require('mini.indentscope').setup() -- indent text object with ii
 require('mini.surround').setup() -- sa (add), sd (delete), sr (replace)
@@ -314,6 +352,11 @@ end
 local nvim_lsp = require("lspconfig")
 
 nvim_lsp.gopls.setup {
+	on_attach = on_attach,
+	capabilities = capabilities
+}
+
+nvim_lsp.rust_analyzer.setup {
 	on_attach = on_attach,
 	capabilities = capabilities
 }

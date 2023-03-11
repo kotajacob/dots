@@ -1,0 +1,28 @@
+{
+    "workspace.library": [
+        "/home/kota/.config/nvim",
+        "/home/kota/.local/share/nvim/lazy/lazy.nvim",
+        "/home/kota/.local/share/nvim/lazy/null-ls.nvim",
+        "/home/kota/.local/share/nvim/lazy/trouble.nvim",
+        "/home/kota/.local/share/nvim/lazy/exrc.nvim",
+        "/home/kota/.local/share/nvim/lazy/telescope-fzf-native.nvim",
+        "/home/kota/.local/share/nvim/lazy/plenary.nvim",
+        "/home/kota/.local/share/nvim/lazy/telescope.nvim",
+        "/home/kota/.local/share/nvim/lazy/vim-exchange",
+        "/home/kota/.local/share/nvim/lazy/splitjoin.vim",
+        "/home/kota/.local/share/nvim/lazy/dirbuf.nvim",
+        "/home/kota/.local/share/nvim/lazy/mini.nvim",
+        "/home/kota/.local/share/nvim/lazy/vim-unimpaired",
+        "/home/kota/.local/share/nvim/lazy/gitsigns.nvim",
+        "/home/kota/.local/share/nvim/lazy/vim-fugitive",
+        "/home/kota/src/kota/wiki-ft.vim",
+        "/home/kota/.local/share/nvim/lazy/wiki.vim",
+        "/home/kota/.local/share/nvim/lazy/nvim-treesitter",
+        "/home/kota/.local/share/nvim/lazy/nvim-lspconfig",
+        "/usr/share/nvim/runtime",
+        "/home/kota/.config/nvim/after",
+        "/home/kota/.local/state/nvim/lazy/readme",
+        "${3rd}/luassert/library",
+        "${3rd}/luv/library"
+    ]
+}
