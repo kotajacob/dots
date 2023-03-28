@@ -38,7 +38,7 @@ o.undofile = true
 o.writebackup = false
 
 -- Traverse lines with arrow keys
-vim.o.whichwrap = 'b,s,<,>,[,]'
+o.whichwrap = 'b,s,<,>,[,]'
 
 -- Indentation settings for using hard tabs for indent
 o.softtabstop = 4

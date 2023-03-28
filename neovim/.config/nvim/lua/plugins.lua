@@ -71,7 +71,7 @@ require('lazy').setup({
 			}
 		}
 	},
-	{ 'mattn/emmet-vim',       ft = 'html' },
+	{ 'mattn/emmet-vim',       ft = {'html', 'gohtmltmpl'} },
 
 	-- colors inline
 	{ 'rrethy/vim-hexokinase', build = 'make hexokinase', event = "VeryLazy" },
@@ -79,14 +79,8 @@ require('lazy').setup({
 	-- "exchange" operator to swap selections
 	'tommcdo/vim-exchange',
 
-	-- Join/Split long lines in various languages
-	'AndrewRadev/splitjoin.vim',
-
 	-- Better URL plumbing.
 	{ 'stsewd/gx-extended.vim', keys = { { "gx", mode = "n" } } },
-
-	-- Per project configs.
-	'MunifTanjim/exrc.nvim',
 })
 
 require('mini.ai').setup() -- a/i text object improvements
@@ -109,17 +103,12 @@ require('mini.bracketed').setup({
 })
 require('mini.comment').setup() -- comment with gcc
 require('mini.indentscope').setup() -- indent text object with ii
+require('mini.splitjoin').setup() -- split and join long lines
 require('mini.surround').setup() -- sa (add), sd (delete), sr (replace)
 require('mini.trailspace').setup() -- highlight trailing spaces
 require('mini.move').setup() -- move code with alt+hjkl
 
 vim.g.miniindentscope_disable = true -- disable animation
-
-require("exrc").setup({
-	files = {
-		".vimrc.lua",
-	},
-})
 
 require('dirbuf').setup {
 	show_hidden = false,
