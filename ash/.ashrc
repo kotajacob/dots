@@ -1,0 +1,119 @@
+set -o vi
+export PS1='\w '
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PAGER='less'
+export LESS='--use-color -IR'
+
+export GUI=1
+export NNN_OPTS='aAcC'
+export NNN_COLORS='1111'
+export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
+export NNN_BMS="d:$HOME/docs;h:$HOME;s:$HOME/src;S:$HOME/src/kota;p:$HOME/pics;t:$HOME/tmp;m:$HOME/docs/memex/;M:$HOME/.local/share/PolyMC/instances"
+export NNN_PLUG='r:fixname;d:xdgdefault;j:autojump;p:preview-tui'
+export PF_INFO="ascii title os kernel uptime pkgs memory editor palette"
+export PCFSERVER='https://paste.nilsu.org:21/incoming'
+export LS_COLORS="$LS_COLORS:di=1;31:ex=0;35"
+
+# Colors
+# Use with the palette script!
+# Note that programs which have imported
+# from the environment require a relog to
+# apply any changes.
+export FG="dddcd9"
+export BG="181818"
+export BLACK="$BG"
+export RED="d43949"
+export GREEN="57b9aa"
+export YELLOW="dbc495"
+export BLUE="6fa1c3"
+export MAGENTA="b668a0"
+export CYAN="9b7bc5"
+export WHITE="$FG"
+export LIGHT_BLACK="333333"
+export LIGHT_RED="$RED"
+export LIGHT_GREEN="$GREEN"
+export LIGHT_YELLOW="$YELLOW"
+export LIGHT_BLUE="$BLUE"
+export LIGHT_MAGENTA="$MAGENTA"
+export LIGHT_CYAN="$CYAN"
+export LIGHT_WHITE="b7b4ae"
+export DIM_BLACK="$BG"
+export DIM_WHITE="$FG"
+export DIM_RED="$RED"
+export DIM_GREEN="$GREEN"
+export DIM_YELLOW="$YELLOW"
+export DIM_BLUE="$BLUE"
+export DIM_MAGENTA="$MAGENTA"
+export DIM_CYAN="$CYAN"
+export PRIMARY="$RED"
+export LIGHT_PRIMARY="d44444"
+export SECONDARY="$MAGENTA"
+
+export GOPATH="$HOME/.local/go"
+export GOPROXY=direct
+export NPM_PACKAGES="${HOME}/.local/npm"
+export MANPAGER='less -Dd+g -Du+b'
+export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$NPM_PACKAGES/bin:$HOME/.local/zig:$PATH"
+export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
+export MANPATH="$HOME/.local/share/man:$MANPATH"
+
+## aliases
+alias xi='doas apk add'
+alias xu='doas apk update && doas apk upgrade'
+alias xs='apk search'
+alias xr='doas apk del'
+alias xls='apk info -L'
+alias xinfo='apk info'
+alias xlist='doas nvim /etc/apk/world'
+alias v='nvim'
+alias vi='nvim'
+alias vim='nvim'
+alias g='git'
+alias m='make'
+alias mc='make clean'
+alias c='clear'
+alias cdc='cd; clear'
+alias ls='ls --color=auto --group-directories-first'
+alias la='ls -lAh --color=auto --group-directories-first'
+alias l='ls -1F --color=auto --group-directories-first'
+alias ip='ip -color=auto'
+alias t='tmux'
+alias tn='tmux new -s'
+alias ta='tmux attach -t'
+alias tls='tmux ls'
+alias mnt='udevil mount'
+alias umnt='udevil umount'
+alias music='ncmpcpp'
+alias mixer='pulsemixer'
+
+# nnn filemanager
+n ()
+{
+	# Block nesting of nnn in subshells
+	if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+		echo "nnn is already running"
+		return
+	fi
+
+	# The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
+	# To cd on quit only on ^G, remove the "export" as in:
+	#     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+	export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+	# Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+	# stty start undef
+	# stty stop undef
+	# stty lwrap undef
+	# stty lnext undef
+
+	nnn "$@"
+
+	if [ -f "$NNN_TMPFILE" ]; then
+		. "$NNN_TMPFILE"
+		rm -f "$NNN_TMPFILE" > /dev/null
+	fi
+}
+
+# zoxide navigator
+eval "$(zoxide init posix --cmd j --hook prompt)"

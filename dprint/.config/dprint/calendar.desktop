@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=calendar
+Exec=st -c "st-float" calendar
+Terminal=false
+X-MultipleArgs=false
+Type=Application

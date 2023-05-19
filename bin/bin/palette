@@ -1,0 +1,62 @@
+#!/bin/sh
+# Update various programs with
+# the colors I've defined as
+# env variables.
+
+# i3
+sed "s/^set \$sc.*/set \$sc #$LIGHT_WHITE/" -i "$HOME/.config/i3/config"
+sed "s/^set \$ic.*/set \$ic #$LIGHT_BLACK/" -i "$HOME/.config/i3/config"
+sed "s/^set \$uc.*/set \$uc #$SECONDARY/" -i "$HOME/.config/i3/config"
+sed "s/^set \$fc.*/set \$fc #$FG/" -i "$HOME/.config/i3/config"
+
+# st
+cd "$HOME/dots/st"
+sed "s/.*\/\* FG.*/\t\"#"$FG"\", \/* FG *\//" -i config.h
+sed "s/.*\/\* BG.*/\t\"#"$BG"\", \/* BG *\//" -i config.h
+sed "s/.*\/\* BLACK.*/\t\"#"$BLACK"\", \/* BLACK *\//" -i config.h
+sed "s/.*\/\* RED.*/\t\"#"$RED"\", \/* RED *\//" -i config.h
+sed "s/.*\/\* GREEN.*/\t\"#"$GREEN"\", \/* GREEN *\//" -i config.h
+sed "s/.*\/\* YELLOW.*/\t\"#"$YELLOW"\", \/* YELLOW *\//" -i config.h
+sed "s/.*\/\* BLUE.*/\t\"#"$BLUE"\", \/* BLUE *\//" -i config.h
+sed "s/.*\/\* MAGENTA.*/\t\"#"$MAGENTA"\", \/* MAGENTA *\//" -i config.h
+sed "s/.*\/\* CYAN.*/\t\"#"$CYAN"\", \/* CYAN *\//" -i config.h
+sed "s/.*\/\* WHITE.*/\t\"#"$WHITE"\", \/* WHITE *\//" -i config.h
+sed "s/.*\/\* LIGHT_BLACK.*/\t\"#"$LIGHT_BLACK"\", \/* LIGHT_BLACK *\//" -i config.h
+sed "s/.*\/\* LIGHT_RED.*/\t\"#"$LIGHT_RED"\", \/* LIGHT_RED *\//" -i config.h
+sed "s/.*\/\* LIGHT_GREEN.*/\t\"#"$LIGHT_GREEN"\", \/* LIGHT_GREEN *\//" -i config.h
+sed "s/.*\/\* LIGHT_YELLOW.*/\t\"#"$LIGHT_YELLOW"\", \/* LIGHT_YELLOW *\//" -i config.h
+sed "s/.*\/\* LIGHT_BLUE.*/\t\"#"$LIGHT_BLUE"\", \/* LIGHT_BLUE *\//" -i config.h
+sed "s/.*\/\* LIGHT_MAGENTA.*/\t\"#"$LIGHT_MAGENTA"\", \/* LIGHT_MAGENTA *\//" -i config.h
+sed "s/.*\/\* LIGHT_CYAN.*/\t\"#"$LIGHT_CYAN"\", \/* LIGHT_CYAN *\//" -i config.h
+sed "s/.*\/\* LIGHT_WHITE.*/\t\"#"$LIGHT_WHITE"\", \/* LIGHT_WHITE *\//" -i config.h
+cd "$HOME/dots/st"
+make
+make install
+
+# virtual terminal
+vt="$(vt-color $BLACK $RED $GREEN $YELLOW $BLUE $MAGENTA $CYAN $WHITE $LIGHT_BLACK $LIGHT_RED $LIGHT_GREEN $LIGHT_YELLOW $LIGHT_BLUE $LIGHT_MAGENTA $LIGHT_CYAN $LIGHT_WHITE)"
+doas sed "s/vt.default_red.*/$vt/" -i /boot/cmdline.txt
+
+# dmenu
+sed "s/dmenu\.normbgcolor.*/dmenu.normbgcolor: #"$BG"/" -i $HOME/.Xresources
+sed "s/dmenu\.selbgcolor.*/dmenu.selbgcolor: #"$FG"/" -i $HOME/.Xresources
+sed "s/dmenu\.selfgcolor.*/dmenu.selfgcolor: #"$BG"/" -i $HOME/.Xresources
+xrdb $HOME/.Xresources
+
+# qutebrowser
+sed "s/\'background\':.*/\'background\': \'#"$BG"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'background-alt\':.*/\'background-alt\': \'#"$BG"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'background-attention\':.*/\'background-attention\': \'#"$PRIMARY"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'foreground\':.*/\'foreground\': \'#"$FG"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'foreground-alt\':.*/\'foreground-alt\': \'#"$FG"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'foreground-attention\':.*/\'foreground-attention\': \'#"$FG"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'border\':.*/\'border\': \'#"$BG"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'current-line\':.*/\'current-line\': \'#"$LIGHT_BLACK"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'selection\':.*/\'selection\': \'#"$LIGHT_BLACK"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'comment\':.*/\'comment\': \'#"$LIGHT_WHITE"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'cyan\':.*/\'cyan\': \'#"$BLUE"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'green\':.*/\'green\': \'#"$GREEN"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'orange\':.*/\'orange\': \'#"$MAGENTA"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'purple\':.*/\'purple\': \'#"$CYAN"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'red\':.*/\'red\': \'#"$RED"\',/" -i $HOME/.config/qutebrowser/config.py
+sed "s/\'yellow\':.*/\'yellow\': \'#"$YELLOW"\',/" -i $HOME/.config/qutebrowser/config.py

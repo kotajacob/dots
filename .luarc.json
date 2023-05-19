@@ -1,0 +1,31 @@
+{
+    "workspace.library": [
+        "/home/kota/.config/nvim",
+        "/home/kota/.local/share/nvim/lazy/lazy.nvim",
+        "/home/kota/.local/share/nvim/lazy/dressing.nvim",
+        "/home/kota/.local/share/nvim/lazy/nvim-lspconfig",
+        "/home/kota/.local/share/nvim/lazy/gitsigns.nvim",
+        "/home/kota/.local/share/nvim/lazy/nvim-treesitter",
+        "/home/kota/.local/share/nvim/lazy/telescope-fzf-native.nvim",
+        "/home/kota/.local/share/nvim/lazy/plenary.nvim",
+        "/home/kota/.local/share/nvim/lazy/telescope.nvim",
+        "/home/kota/.local/share/nvim/lazy/dirbuf.nvim",
+        "/home/kota/.local/share/nvim/lazy/mini.nvim",
+        "/home/kota/.local/share/nvim/lazy/nvim-web-devicons",
+        "/home/kota/.local/share/nvim/lazy/LuaSnip",
+        "/home/kota/.local/share/nvim/lazy/cmp-path",
+        "/home/kota/.local/share/nvim/lazy/cmp-buffer",
+        "/home/kota/.local/share/nvim/lazy/cmp-nvim-lsp",
+        "/home/kota/.local/share/nvim/lazy/nvim-cmp",
+        "/usr/share/nvim/runtime",
+        "/usr/share/nvim/runtime/pack/dist/opt/matchit",
+        "/usr/lib/nvim",
+        "/home/kota/.local/share/nvim/lazy/cmp-path/after",
+        "/home/kota/.local/share/nvim/lazy/cmp-buffer/after",
+        "/home/kota/.local/share/nvim/lazy/cmp-nvim-lsp/after",
+        "/home/kota/.config/nvim/after",
+        "/home/kota/.local/state/nvim/lazy/readme",
+        "${3rd}/luassert/library",
+        "${3rd}/luv/library"
+    ]
+}

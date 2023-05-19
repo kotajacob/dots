@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=calculator
+Exec=st -c "st-float" -e "calc -d"
+Terminal=false
+X-MultipleArgs=false
+Type=Application

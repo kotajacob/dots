@@ -1,0 +1,12 @@
+#!/bin/sh
+
+fg="$FG"ff
+bg="$BG"ff
+primary="$PRIMARY"ff
+
+SELECTION=$(fuzzel -d -p "timer: " -I -l 0 \
+	-f "Berkeley Mono:size=10" -x 4 -y 0 -B 7 -r 0 \
+	-b "$bg" -t "$fg" -m "$fg" -M "$fg" -s "$primary" -S "$bg" \
+	-C "$primary" "$@" < /dev/null)
+
+foot -o app-id="foot-float" -W "12x1" tea "$SELECTION"

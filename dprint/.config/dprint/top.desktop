@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=top
+Exec=st -c "st-float" -e "gotop"
+Terminal=false
+X-MultipleArgs=false
+Type=Application
