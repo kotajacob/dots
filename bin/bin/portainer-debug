@@ -6,4 +6,4 @@ DATA="$HOME/src/portainer/drives/current"
 ASSETS=$DIST
 
 cd "$PROJECT_ROOT"/api/cmd/portainer || exit
-dlv debug -- --data="$DATA" --assets="$ASSETS"
+dlv debug --build-flags="--ldflags '-X github.com/portainer/liblicense.LicenseServerBaseURL=https://localhost:6002'" -- --data="$DATA" --assets="$ASSETS"
