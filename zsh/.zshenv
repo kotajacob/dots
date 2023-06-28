@@ -19,6 +19,7 @@ export PCFSERVER='https://paste.nilsu.org:21/incoming'
 export FZF_DEFAULT_COMMAND='rg --files'
 export AART_VIEWER='imv'
 export LS_COLORS="$LS_COLORS:di=1;36:ex=0;35"
+export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
 # Colors
 # Use with the palette script!
@@ -69,6 +70,7 @@ export GOPATH="$HOME/.local/go"
 export GOPROXY=direct
 export NPM_PACKAGES="${HOME}/.local/npm"
 export MANPAGER='less -Dd+g -Du+b'
-export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$NPM_PACKAGES/bin:$HOME/.local/zig:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$NPM_PACKAGES/bin:$HOME/.local/zig:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$PATH"
 export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
 export MANPATH="$HOME/.local/share/man:$MANPATH"
+export GOPRIVATE="github.com/portainer"

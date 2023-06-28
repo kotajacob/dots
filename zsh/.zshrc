@@ -28,9 +28,10 @@ alias xc='sudo xbps-remove -Oo && sudo vkpurge rm all'
 alias xinfo='xbps-query -R -S'
 alias xlist='xpkg -m'
 alias doas='sudo' # why the hell is sudo part of base on void ugggg
-alias v='nvim'
-alias vi='nvim'
-alias vim='nvim'
+alias v='nice -n -10 nvim'
+alias vi='nice -n -10 nvim'
+alias vim='nice -n -10 nvim'
+alias nvim='nice -n -10 nvim'
 alias g='git'
 alias k='kubectl'
 alias m='make'
@@ -57,7 +58,7 @@ alias mntsietch='sshfs -o allow_other,default_permissions kota@koi:/mnt/sietch /
 alias weather='metweather forecast | column -t -l3'
 alias music='ncmpcpp'
 alias mixer='pulsemixer'
-alias cannon='gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 /dev/video2'
+alias alert='notify-send "command finished"'
 
 ## functions
 go() {
@@ -122,3 +123,6 @@ add-zsh-hook -Uz chpwd osc7
 
 # add secrets
 source $HOME/.zshenv-secrets
+
+# add all the silly rust variables
+source "$HOME/.cargo/env"
