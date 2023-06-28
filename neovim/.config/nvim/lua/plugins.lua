@@ -66,21 +66,24 @@ require('lazy').setup({
 		'lervag/wiki.vim',
 		dependencies = {
 			{
-				dir = '~/src/kota/wiki-ft.vim',
+				'lervag/wiki-ft.vim',
 				ft = 'wiki',
 			}
 		}
 	},
-	{ 'mattn/emmet-vim',       ft = {'html', 'gohtmltmpl'} },
+	{ 'mattn/emmet-vim',       ft = { 'html', 'gohtmltmpl' } },
 
-	-- colors inline
-	{ 'rrethy/vim-hexokinase', build = 'make hexokinase', event = "VeryLazy" },
+	-- inline colors
+	{ 'rrethy/vim-hexokinase', build = 'make hexokinase',    event = "VeryLazy" },
 
 	-- "exchange" operator to swap selections
 	'tommcdo/vim-exchange',
 
-	-- Better URL plumbing.
+	-- better URL plumbing
 	{ 'stsewd/gx-extended.vim', keys = { { "gx", mode = "n" } } },
+
+	-- open files to a specific line number
+	'lervag/file-line'
 })
 
 require('mini.ai').setup() -- a/i text object improvements
@@ -117,6 +120,23 @@ require('dirbuf').setup {
 }
 
 require 'nvim-treesitter.configs'.setup {
+	ensure_installed = {
+		"c",
+		"css",
+		"css",
+		"gdscript",
+		"glsl",
+		"go",
+		"hare",
+		"java",
+		"javascript",
+		"lua",
+		"query",
+		"rust",
+		"typescript",
+		"vim",
+		"zig",
+	},
 	highlight = {
 		enable = true,
 	},
@@ -131,7 +151,7 @@ require('telescope').setup {
 			preview_cutoff = 1, -- Show preview (unless previewer = false)
 
 			width = function(_, max_columns, _)
-				return math.min(max_columns, 80)
+				return math.min(max_columns, 160)
 			end,
 		},
 		border = true,
@@ -206,13 +226,13 @@ require('gitsigns').setup {
 		end
 
 		-- Navigation
-		map('n', ']c', function()
+		map('n', ']k', function()
 			if vim.wo.diff then return ']c' end
 			vim.schedule(function() gs.next_hunk() end)
 			return '<Ignore>'
 		end, { expr = true })
 
-		map('n', '[c', function()
+		map('n', '[k', function()
 			if vim.wo.diff then return '[c' end
 			vim.schedule(function() gs.prev_hunk() end)
 			return '<Ignore>'

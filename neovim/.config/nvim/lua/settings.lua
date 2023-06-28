@@ -27,7 +27,7 @@ o.formatprg = 'par -w80'
 g.loaded_fzf = 1
 
 -- Project-local marks and oldfiles!
-o.viminfofile=vim.api.nvim_eval([[findfile('.viminfo','.;')]])
+o.viminfofile = vim.api.nvim_eval([[findfile('.viminfo','.;')]])
 -- use :Pnew to 'init' a new project
 -- or touch .viminfo :D
 
@@ -93,5 +93,12 @@ autocmd('BufRead,BufNewFile', {
 	command = 'set filetype=wiki',
 })
 
-vim.g.wiki_root = "~/docs/memex"
-vim.g.wiki_filetypes = { 'md', 'wiki' }
+g.wiki_root = "~/docs/memex"
+g.wiki_filetypes = { 'md', 'wiki' }
+vim.g.wiki_link_creation = {
+	md = {
+		link_type = 'wiki',
+		url_extension = ''
+	}
+}
+g.go_gopls_gofumpt = true
