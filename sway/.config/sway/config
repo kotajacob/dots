@@ -42,8 +42,8 @@ input "type:touchpad" {
 }
 
 # start a terminal
-bindsym $mod+Return exec footclient
-bindsym $mod+Shift+Return exec footclient -o app-id="foot-float"
+bindsym $mod+Return exec nice -n -5 foot
+bindsym $mod+Shift+Return exec nice -n -5 foot -o app-id="foot-float"
 
 # kill focused window
 bindsym $mod+q kill
@@ -194,6 +194,7 @@ force_display_urgency_hint 750 ms
 
 # program overrides
 # use swaymsg -t get_tree
+for_window [shell="xwayland"] floating enable
 for_window [app_id="foot-float"] floating enable
 for_window [app_id="imv"] floating enable
 for_window [app_id="imv"] resize set 640px 360px
@@ -205,6 +206,9 @@ for_window [app_id="mpv"] resize set 1280px 720px
 for_window [title="Firefox — Sharing Indicator"] floating enable
 for_window [title="Firefox — Sharing Indicator"] kill
 for_window [title="SL8"] floating enable
+for_window [title="WASM-4"] floating enable
+# for_window [class="^Godot$" title="Settings"] floating enable
+# for_window [instance="Godot_Engine" title="DEBUG"] floating enable
 
 # set DISPLAY variable for dbus...
 exec --no-startup-id exec dbus-update-activation-environment --all
@@ -222,8 +226,8 @@ exec --no-startup-id pipewire-pulse
 # start mpd
 exec --no-startup-id mpd
 
-# start foot server
-exec --no-startup-id foot --server
+# start syncthing
+exec --no-startup-id syncthing --no-browser
 
 # cursor
 seat seat0 xcursor_theme capitaine-cursors
