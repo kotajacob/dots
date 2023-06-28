@@ -1,24 +1,24 @@
 #!/bin/sh
 
-export BORG_REPO='ssh://kota@192.168.178.3:22/mnt/sietch/home/kota/borg'
+export BORG_REPO='/media/sietch/kota/borg'
 
-borg create                                \
-    --stats                                \
-    --progress                             \
+borg create                                    \
+    --stats                                    \
+    --progress                                 \
 		--exclude "$HOME/docs/podcasts/*"      \
 		--exclude "$HOME/docs/games/3ds/*"     \
 		--exclude "$HOME/docs/games/ds/*"      \
 		--exclude "$HOME/docs/games/gamecube/*"\
 		--exclude "$HOME/docs/games/linux/*"   \
 		--exclude "$HOME/g/void-package/*"     \
-		--exclude "$HOME/vids/*"               \
 		--exclude "$HOME/.steam/*"             \
 		--exclude "$HOME/.wine/*"              \
 		--exclude "$HOME/.local/share/Steam/*" \
 		--exclude "$HOME/docs/iso/*"           \
+		--exclude "$HOME/docs/vms/*"           \
 		--exclude "$HOME/tmp/*"                \
 		--exclude "$HOME/.cache/*"             \
-    --exclude "$HOME/.minikube/*"          \
-                                           \
-    ::'{user}-{now}'                       \
+		--exclude "$HOME/.minikube/*"          \
+                                               \
+    ::'{user}-{now}'                           \
     ~/
