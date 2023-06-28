@@ -40,5 +40,5 @@
 	show = diff-highlight | less -FRX
 	diff = diff-highlight | less -FRX
 	branch = cat
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+[url "ssh://git@github.com/portainer"]
+	insteadOf = https://github.com/portainer
