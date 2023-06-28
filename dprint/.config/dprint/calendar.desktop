@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=calendar
-Exec=footclient -o app-id="foot-float" -o initial-window-size-pixels="300x600" calendar
+Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="300x600" calendar
 Terminal=false
 X-MultipleArgs=false
 Type=Application

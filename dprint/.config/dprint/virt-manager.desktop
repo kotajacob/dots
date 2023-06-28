@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=virt-manager
-Exec=virt-manager
-Icon=virt-manager
-Terminal=false
-Type=Application
-StartupNotify=true
-StartupWMClass=virt-manager

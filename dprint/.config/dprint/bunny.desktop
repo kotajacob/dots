@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=bunny
-Exec=footclient -o app-id="foot-float" -o initial-window-size-pixels="640x500" bunny
+Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="640x500" bunny
 Terminal=false
 X-MultipleArgs=false
 Type=Application

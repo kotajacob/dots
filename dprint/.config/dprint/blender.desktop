@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
-Name=godot
-Exec=Godot_v4.0.2-stable_linux.x86_64
+Name=blender
+Exec=/home/kota/src/blender/build_linux/bin/blender
 Terminal=false
 X-MultipleArgs=false
 Type=Application

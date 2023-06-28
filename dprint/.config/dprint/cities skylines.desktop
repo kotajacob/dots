@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=cities skylines
+Exec=env WINEPREFIX="/home/kota/.wine" wine C:\\\\users\\\\Public\\\\Desktop\\\\Play\\ Cities\\ Skylines.lnk
+Type=Application
+StartupNotify=true
+Path=/home/kota/.wine/dosdevices/c:/Program Files (x86)/DODI-Repacks/Cities Skylines
+Icon=8EBE_Cities.0
+StartupWMClass=cities.exe
