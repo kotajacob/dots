@@ -1,7 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=nnn
-Exec=st -c "st-float" -g "38x18" -e "nnn"
-Terminal=false
-X-MultipleArgs=false
-Type=Application

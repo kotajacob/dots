@@ -7,48 +7,9 @@ export LESS='--use-color -IR'
 
 export GUI=1
 export NNN_OPTS='aAcC'
-export NNN_COLORS='1111'
-export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
-export NNN_BMS="d:$HOME/docs;h:$HOME;s:$HOME/src;S:$HOME/src/kota;p:$HOME/pics;t:$HOME/tmp;m:$HOME/docs/memex/;M:$HOME/.local/share/PolyMC/instances"
-export NNN_PLUG='r:fixname;d:xdgdefault;j:autojump;p:preview-tui'
+export NNN_COLORS='6666'
 export PF_INFO="ascii title os kernel uptime pkgs memory editor palette"
-export PCFSERVER='https://paste.nilsu.org:21/incoming'
-export LS_COLORS="$LS_COLORS:di=1;31:ex=0;35"
-
-# Colors
-# Use with the palette script!
-# Note that programs which have imported
-# from the environment require a relog to
-# apply any changes.
-export FG="dddcd9"
-export BG="181818"
-export BLACK="$BG"
-export RED="d43949"
-export GREEN="57b9aa"
-export YELLOW="dbc495"
-export BLUE="6fa1c3"
-export MAGENTA="b668a0"
-export CYAN="9b7bc5"
-export WHITE="$FG"
-export LIGHT_BLACK="333333"
-export LIGHT_RED="$RED"
-export LIGHT_GREEN="$GREEN"
-export LIGHT_YELLOW="$YELLOW"
-export LIGHT_BLUE="$BLUE"
-export LIGHT_MAGENTA="$MAGENTA"
-export LIGHT_CYAN="$CYAN"
-export LIGHT_WHITE="b7b4ae"
-export DIM_BLACK="$BG"
-export DIM_WHITE="$FG"
-export DIM_RED="$RED"
-export DIM_GREEN="$GREEN"
-export DIM_YELLOW="$YELLOW"
-export DIM_BLUE="$BLUE"
-export DIM_MAGENTA="$MAGENTA"
-export DIM_CYAN="$CYAN"
-export PRIMARY="$RED"
-export LIGHT_PRIMARY="d44444"
-export SECONDARY="$MAGENTA"
+export TERM=xterm-256color
 
 export GOPATH="$HOME/.local/go"
 export GOPROXY=direct
@@ -82,10 +43,6 @@ alias t='tmux'
 alias tn='tmux new -s'
 alias ta='tmux attach -t'
 alias tls='tmux ls'
-alias mnt='udevil mount'
-alias umnt='udevil umount'
-alias music='ncmpcpp'
-alias mixer='pulsemixer'
 
 # nnn filemanager
 n ()
@@ -114,6 +71,3 @@ n ()
 		rm -f "$NNN_TMPFILE" > /dev/null
 	fi
 }
-
-# zoxide navigator
-eval "$(zoxide init posix --cmd j --hook prompt)"

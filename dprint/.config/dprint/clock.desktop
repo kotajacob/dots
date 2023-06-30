@@ -1,7 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=clock
-Exec=st -c "st-float" -g "38x7" tty-clock -C 1
-Terminal=false
-X-MultipleArgs=false
-Type=Application

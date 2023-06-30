@@ -12,24 +12,14 @@ font pango:BerkeleyMono Nerd Font Bold 12
 bindsym $mod+Return exec --no-startup-id st
 bindsym $mod+Shift+Return exec --no-startup-id st -c "st-float"
 
-# start a launcher
-bindsym $mod+d exec --no-startup-id launcher
-
 # kill focused window
 bindsym $mod+q kill
-
-# start a browser
-bindsym $mod+b exec --no-startup-id qutebrowser
 
 # reload the configuration
 bindsym $mod+Shift+c reload
 
 # exit
 bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'exit?' -B 'yes' 'i3-msg exit'"
-
-# dismiss notifications
-bindsym Control+space exec --no-startup-id dunstctl close
-bindsym Control+Shift+space exec --no-startup-id dunstctl close-all
 
 # change focus
 bindsym $mod+$left focus left
@@ -94,13 +84,8 @@ bindsym $mod+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+Shift+space focus mode_toggle
 
-## borders
-default_border pixel 4
-default_floating_border pixel 4
-
-## gaps
-gaps inner 8
-smart_gaps on
+# new window border
+default_border pixel 0
 
 ### selection color
 set $sc #b7b4ae
@@ -119,32 +104,22 @@ client.urgent				$uc		$uc		$sc		$uc			$uc
 client.placeholder			$sc    	$sc		$sc		$sc			$sc
 client.background			$sc
 
-# overrides
-for_window [class="imv"] floating enable
-for_window [class="mpv"] floating enable
-for_window [class="mpv"] resize set 640px 630px
-for_window [class="pico8"] floating enable
-for_window [class="pico8"] resize set 1024 px 1024 px
-for_window [class="pico8"] move absolute position center
-for_window [class="st-float"] floating enable
-
 # wait a bit before removing urgency hint from windows/workspaces
 force_display_urgency_hint 750 ms
 
 # set keymap
 exec --no-startup-id xkbcomp -w 0 "$HOME/.config/i3/keymap.xkb" "$DISPLAY"
 
-# set key repeat speed
-exec --no-startup-id xset r rate 350 40
+# disable laptop monitor
+exec --no-startup-id xrandr --output eDP-1 --off
 
-# disable monitor sleeping
-exec --no-startup-id xset -dpms
-
-# set background color
-exec --no-startup-id xsetroot -solid "#181818"
-
-# enable Xresources
-exec --no-startup-id xrdb ~/.Xresources
+# 1280x720 on second display
+exec --no-startup-id xrandr --output HDMI-1 --mode 1280x720 --rate 60
 
 # hide the mouse when we don't need it
 exec --no-startup-id unclutter-xfixes
+
+# disable sleep
+exec --no-startup-id xset s off -dpms
+# start initiative
+exec --no-startup-id /usr/local/bin/initiative-server
