@@ -6,5 +6,5 @@ PORTAINER=$DIST/portainer
 DATA="$HOME/src/portainer/drives/current"
 ASSETS=$DIST
 
-$PORTAINER --data="$DATA" --assets="$ASSETS"
+$PORTAINER --data="$DATA" --assets="$ASSETS" --license-expire-absolute
 # $PORTAINER --data="$DATA" --assets="$ASSETS" --log-level=DEBUG
