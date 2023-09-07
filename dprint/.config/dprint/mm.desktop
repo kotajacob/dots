@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=mm
-Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="800x600" mm
+Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="740x900" mm
 Terminal=false
 X-MultipleArgs=false
 Type=Application
