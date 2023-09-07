@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cd $HOME/docs/memex/tol && nvim Tol.md
