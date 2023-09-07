@@ -1,6 +1,7 @@
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.expandtab = true
+vim.o.formatoptions = 'jcrql'
 local map = vim.api.nvim_buf_set_keymap
 local noremap = { noremap = true }
 

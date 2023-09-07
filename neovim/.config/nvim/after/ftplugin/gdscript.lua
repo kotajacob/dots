@@ -1,3 +1,4 @@
+vim.o.formatoptions = 'jcrql'
 local map = vim.api.nvim_buf_set_keymap
 local noremap = { noremap = true }
 
