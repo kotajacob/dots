@@ -67,10 +67,10 @@ export QT_QPA_PLATFORM=wayland-egl
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
 export GOPATH="$HOME/.local/go"
-export GOPROXY=direct
-export NPM_PACKAGES="${HOME}/.local/npm"
+# export GOPROXY=direct
+export CGO_ENABLED=1
 export MANPAGER='less -Dd+g -Du+b'
-export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$NPM_PACKAGES/bin:$HOME/.local/zig:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$PATH"
+export PATH="$HOME/.nave/installed/18.19.1/bin:$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.local/zig:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$PATH"
 export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
 export MANPATH="$HOME/.local/share/man:$MANPATH"
 export GOPRIVATE="github.com/portainer"

@@ -33,8 +33,8 @@ alias vi='nice -n -10 nvim'
 alias vim='nice -n -10 nvim'
 alias nvim='nice -n -10 nvim'
 alias g='git'
+alias gst='git status'
 alias k='kubectl'
-alias m='make'
 alias mc='make clean'
 alias clip='wl-copy'
 alias c='clear'
@@ -50,15 +50,15 @@ alias tls='tmux ls'
 alias dmesg='sudo dmesg -wH'
 alias mnt='udevil mount'
 alias umnt='udevil umount'
-alias tide='tide /home/kota/docs/Dunedin2022.csv'
+alias tide='tide /home/kota/docs/Dunedin2024.csv'
 alias mail='mbsync primary'
 # alias mm="cd $HOME/docs/memex && nvim index.md"
-alias mntkoi='sshfs -o allow_other,default_permissions kota@koi:/home/kota /mnt/koi'
-alias mntsietch='sshfs -o allow_other,default_permissions kota@koi:/mnt/sietch /mnt/sietch'
+alias mntfog='sshfs -o allow_other,default_permissions kota@yepun:/var/fog /mnt/fog'
 alias weather='metweather forecast | column -t -l3'
 alias music='ncmpcpp'
 alias mixer='pulsemixer'
 alias alert='notify-send "command finished"'
+alias json-to-go='go-jsonschema -p main'
 
 ## functions
 go() {
@@ -109,6 +109,11 @@ n ()
 	fi
 }
 
+phone ()
+{
+	command ntfy publish "$NTFY_SECRET" "$@"
+}
+
 # Emit terminal CWD for foot
 function osc7 {
     local LC_ALL=C
@@ -123,6 +128,3 @@ add-zsh-hook -Uz chpwd osc7
 
 # add secrets
 source $HOME/.zshenv-secrets
-
-# add all the silly rust variables
-source "$HOME/.cargo/env"
