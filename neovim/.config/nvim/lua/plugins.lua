@@ -71,6 +71,7 @@ require('lazy').setup({
 			}
 		}
 	},
+	'junegunn/goyo.vim',
 	{ 'mattn/emmet-vim',       ft = { 'html', 'gohtmltmpl' } },
 
 	-- inline colors
@@ -86,7 +87,7 @@ require('lazy').setup({
 	'lervag/file-line'
 })
 
-require('mini.ai').setup() -- a/i text object improvements
+require('mini.ai').setup()    -- a/i text object improvements
 require('mini.align').setup() -- align with gaipi<space> or gaip-
 require('mini.bracketed').setup({
 	buffer     = { suffix = 'b', options = {} },
@@ -104,12 +105,12 @@ require('mini.bracketed').setup({
 	window     = { suffix = 'w', options = {} },
 	yank       = { suffix = 'y', options = {} },
 })
-require('mini.comment').setup() -- comment with gcc
-require('mini.indentscope').setup() -- indent text object with ii
-require('mini.splitjoin').setup() -- split and join long lines
-require('mini.surround').setup() -- sa (add), sd (delete), sr (replace)
-require('mini.trailspace').setup() -- highlight trailing spaces
-require('mini.move').setup() -- move code with alt+hjkl
+require('mini.comment').setup()      -- comment with gcc
+require('mini.indentscope').setup()  -- indent text object with ii
+require('mini.move').setup()         -- move code with alt+hjkl
+require('mini.splitjoin').setup()    -- split and join long lines
+require('mini.surround').setup()     -- sa (add), sd (delete), sr (replace)
+require('mini.trailspace').setup()   -- highlight trailing spaces
 
 vim.g.miniindentscope_disable = true -- disable animation
 
@@ -277,7 +278,7 @@ cmp.setup({
 	mapping = {
 		['<C-n>'] = cmp.mapping.select_next_item(),
 		['<C-p>'] = cmp.mapping.select_prev_item(),
-		['<C-b>'] = cmp.mapping.scroll_docs( -4),
+		['<C-b>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			-- This little snippet will confirm with tab, and if no entry is selected,
@@ -380,23 +381,38 @@ nvim_lsp.zls.setup {
 	capabilities = capabilities
 }
 
-nvim_lsp.tsserver.setup({
-	capabilities = capabilities,
-	on_attach = function(client, bufnr)
-		client.server_capabilities.document_formatting = false
-		client.server_capabilities.document_range_formatting = false
-		vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", {
-			silent = true,
-		})
-		vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspRenameFile<CR>", {
-			silent = true,
-		})
-		vim.api.nvim_buf_set_keymap(bufnr, "n", "go", ":TSLspImportAll<CR>", {
-			silent = true,
-		})
-		on_attach(client, bufnr)
-	end,
-})
+nvim_lsp.gdscript.setup {
+	on_attach = on_attach,
+	capabilities = capabilities
+}
+
+nvim_lsp.kotlin_language_server.setup {
+	on_attach = on_attach,
+	capabilities = capabilities
+}
+
+nvim_lsp.denols.setup {
+	on_attach = on_attach,
+	capabilities = capabilities
+}
+
+-- nvim_lsp.tsserver.setup({
+-- 	capabilities = capabilities,
+-- 	on_attach = function(client, bufnr)
+-- 		client.server_capabilities.document_formatting = false
+-- 		client.server_capabilities.document_range_formatting = false
+-- 		vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", {
+-- 			silent = true,
+-- 		})
+-- 		vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspRenameFile<CR>", {
+-- 			silent = true,
+-- 		})
+-- 		vim.api.nvim_buf_set_keymap(bufnr, "n", "go", ":TSLspImportAll<CR>", {
+-- 			silent = true,
+-- 		})
+-- 		on_attach(client, bufnr)
+-- 	end,
+-- })
 
 nvim_lsp.lua_ls.setup({
 	on_attach = on_attach,

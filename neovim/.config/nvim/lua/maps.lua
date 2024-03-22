@@ -20,6 +20,12 @@ map('n', 'N', 'Nzzzv', noremap)
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+-- Git history for current file
+map('n', '<leader>gh', ':0Gclog<CR>', noremap)
+
+-- Git blame for current file
+map('n', '<leader>gb', ':G blame<CR>', noremap)
+
 -- Disable search highlighting
 map('n', '<space>cc', ':nohl<CR>', snoremap)
 
