@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
-Name=godot
-Exec=Godot_v4.3-dev3_linux.x86_64 --display-driver wayland
+Name=blockbench
+Exec=$HOME/.local/bin/blockbench/blockbench
 Terminal=false
 X-MultipleArgs=false
 Type=Application

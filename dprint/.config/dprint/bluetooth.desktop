@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=bluetooth
+Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="600x600" bluetoothctl
+Terminal=false
+X-MultipleArgs=false
+Type=Application

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=aerc
+Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="740x900" aerc
+Terminal=false
+X-MultipleArgs=false
+Type=Application

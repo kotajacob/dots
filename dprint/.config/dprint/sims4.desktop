@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=sims
-Exec=env WINEPREFIX="/home/kota/.wine" wine C:\\\\Program\\ Files\\\\The\\ Sims\\ 4\\\\Game\\\\Bin\\\\TS4_x64.exe -alwaysoffline
-Type=Application
-StartupNotify=true
-Icon=DDE2_TS4_x64.0
-StartupWMClass=ts4_x64.exe
