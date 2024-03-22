@@ -4,9 +4,9 @@
 # env variables.
 
 # sway
-sed "s/^set \$sc.*/set \$sc #$PRIMARY/" -i "$HOME/.config/sway/config"
-sed "s/^set \$ic.*/set \$ic #$LIGHT_PRIMARY/" -i "$HOME/.config/sway/config"
-sed "s/^set \$uc.*/set \$uc #$SECONDARY/" -i "$HOME/.config/sway/config"
+# sed "s/^set \$sc.*/set \$sc #$PRIMARY/" -i "$HOME/.config/sway/config"
+# sed "s/^set \$ic.*/set \$ic #$LIGHT_PRIMARY/" -i "$HOME/.config/sway/config"
+# sed "s/^set \$uc.*/set \$uc #$SECONDARY/" -i "$HOME/.config/sway/config"
 
 # wob
 sed "s/^border_color =.*/border_color = $PRIMARY/" \

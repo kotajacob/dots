@@ -7,3 +7,4 @@ DATA="$HOME/src/portainer/drives/current"
 ASSETS=$DIST
 
 $PORTAINER --data="$DATA" --assets="$ASSETS" --log-level=DEBUG
+#$PORTAINER --data="$DATA" --assets="$ASSETS"

@@ -1,13 +1,10 @@
 #!/bin/sh
 
-fg="$FG"ff
-bg="$BG"ff
-primary="$PRIMARY"ff
+COMMAND="fzf --reverse --no-scrollbar --no-separator --no-color --info inline-right < $HOME/.config/emoji"
+TMP=$(mktemp)
 
-SELECTION=$(fuzzel -d -I -l 10 \
-	-f "Berkeley Mono:size=10,Noto Color Emoji:size=10" \
-	-x 4 -y 0 -B 8 -r 0 -p "" \
-	-b "$bg" -t "$fg" -m "$fg" -M "$fg" -s "$primary" -S "$bg" \
-	-C "$primary" "$@" < "$HOME/.config/emoji" | awk '{ print $1}')
+foot -o app-id="foot-float" -W 30x10 bash -c "$COMMAND > $TMP"
 
+SELECTION=$(cat "$TMP" | awk '{ print $1 }')
 wl-copy "$SELECTION"
+rm "$TMP"

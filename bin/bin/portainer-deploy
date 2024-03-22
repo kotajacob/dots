@@ -1,0 +1,99 @@
+#!/bin/bash
+
+usage(){
+    echo " $0 Deploys an test environment in github infrastructure repository."
+    echo ""
+    echo "Dependencies : "
+    echo "    This script relies on the github-cli package. "
+    echo "    Please run gh auth login once to authenticate before using this script."
+    echo ""
+    echo "Examples :"
+    echo "Run with all default values ( deploys develop images on docker standalone for 8 hours )"
+    echo "$0 "
+    echo ""
+    echo "Deploy a specific PR on docker standalone for 8 hours "
+    echo "$0 -p portainerci/portainer-ee:pr3100 -a portainerci/agent:pr745"
+    echo ""
+    echo "Deploy a PR on kubernetes 1.25 with portainer in portainer app template for a day"
+    echo "$0 --portainer portainerci/portainer:pr3100 \ "
+    echo "   --agent portainerci/agent:pr632 \ " 
+    echo "   --env_os amd \ "
+    echo "   --orchestrator kubernetes \ "
+    echo "   --kubever 1.25 \ "
+    echo "   --apptemplate true \ "
+    echo "   --duration 1d"
+    echo ""
+    echo "options : "
+    echo " -h : show this message"
+    echo " -p | --portainer    : The portainer server image ( default : portainerci/portainer:develop )"
+    echo " -a | --agent        : The portainer agent image ( default : portainerci/agent:develop )"
+    echo " -e | --env_os       : The OS to use "
+    echo "                        ( Must be one of : [ lin win arm amd ], Default : lin )"
+    echo " -o | --orchestrator : The orchestrator to use "
+    echo "                        ( Must be one of [ standalone  swarm kubernete nomad], Default : standalone )"
+    echo " -k | --kubever      : The kubernete version "
+    echo "                       If orchestrator is lin, must be one of 1.23.14, 1.24.8, 1.25.6"
+    echo "                       If orchestrator is amd or arm, must be one of 1.24 (default), 1.25, 1.26"
+    echo "                       Default value : 1.24 "
+    echo " -t | --app_template : To use portainer in portainer app template or not, must be true or false ( default : false )"
+    echo " -d | --duration     : The duration of the test environment, must be one of 8h (default), 1d, 3d, 5d or 10d"
+    echo ""
+    echo "Once started, the result will as always be sent in the #hook-test-infra-auto slack chan."
+    echo ""
+    exit 0
+}
+
+# Read params and override default values 
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+        -p|--portainer)
+            PORTAINER_IMAGE="$2"
+            shift
+            shift;;
+        -a|--agent)
+            AGENT_IMAGE=$2
+            shift
+            shift;;
+        -e|--env_os)
+            OS=$2
+            shift
+            shift;;
+        -o|--orchestrator)
+            ORCHESTRATOR=${2}
+            shift
+            shift;;
+        -k|--kubever)
+            KUBEVER=${2}
+            shift
+            shift;;
+        -t|-app_template)
+            TEMPLATE=${2}
+            shift
+            shift;;
+        -d|-duration)
+            DURATION=${2}
+            shift
+            shift;;
+       -h|--help)
+            usage
+            ;;
+    esac
+done
+
+### Go to the project ###
+
+cd $PLATFORM_PATH
+
+### EXECUTION ###
+
+gh workflow run tia-deploy \
+       -f portainer_image=${PORTAINER_IMAGE:-"portainerci/portainer-ee:develop"} \
+       -f portainer_agent_image=${AGENT_IMAGE:-"portainerci/agent:develop"} \
+       -f environment_os=${OS:-"lin"} \
+       -f environment_orchestration=${ORCHESTRATOR:-"standalone"} \
+       -f kubernetes_version=${KUBEVER:-"1.24"} \
+       -f apptemplates=${TEMPLATE:-"false"} \
+       -f environment_duration=${DURATION:-"8h"}
+

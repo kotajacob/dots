@@ -13,9 +13,9 @@ fi
 
 go build \
 	--installsuffix cgo \
-	--ldflags '-X github.com/portainer/portainer-ee/api/kubernetes/cli.DefaultAgentVersion=latest -X github.com/portainer/liblicense/v3.LicenseServerBaseURL=https://staging-api.portainer.io' \
 	-o "$DIST"/portainer cmd/portainer/*.go
 
 notify-send "backend built"
 
-# --ldflags '-X github.com/portainer/portainer-ee/api/kubernetes/cli.DefaultAgentVersion=latest' \
+	# --ldflags '-X github.com/portainer/liblicense/v3.LicenseServerBaseURL=https://staging-api.portainer.io' \
+	# --ldflags '-X github.com/portainer/portainer-ee/api/kubernetes/cli.DefaultAgentVersion=latest -X github.com/portainer/liblicense/v3.LicenseServerBaseURL=http://localhost:8080/v2' \

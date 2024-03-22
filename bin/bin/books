@@ -1,16 +1,13 @@
 #!/bin/sh
 
-fg="$FG"ff
-bg="$BG"ff
-primary="$PRIMARY"ff
+COMMAND="fd . --type f /home/kota/docs/books/ -e pdf -e epub -x basename \
+	| sort -R \
+	| fzf --reverse --no-scrollbar --no-separator --no-color --info inline-right"
+TMP=$(mktemp)
 
-BOOKS="/home/kota/docs/books/"
+foot -o app-id="foot-float" -W 60x20 bash -c "$COMMAND > $TMP"
 
-SEARCH=$(fd . --type f "$BOOKS" -e pdf -e epub -x basename |\
-	sort -R | fuzzel -d -I -l 16 -w 80 -f "Berkeley Mono:size=10" \
-	-x 4 -y 0 -B 8 -r 0 -p "" \
-	-b "$bg" -t "$fg" -m "$fg" -M "$fg" -s "$primary" -S "$bg" \
-	-C "$primary" "$@")
-
-SELECTION=$(fd "$SEARCH" "$BOOKS")
+SEARCH=$(cat "$TMP")
+SELECTION=$(fd "$SEARCH" /home/kota/docs/books/)
 zathura "$SELECTION"
+rm "$TMP"
