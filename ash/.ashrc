@@ -43,6 +43,7 @@ alias t='tmux'
 alias tn='tmux new -s'
 alias ta='tmux attach -t'
 alias tls='tmux ls'
+alias log='doas goaccess --log-format=CADDY'
 
 # nnn filemanager
 n ()
@@ -70,4 +71,10 @@ n ()
 		. "$NNN_TMPFILE"
 		rm -f "$NNN_TMPFILE" > /dev/null
 	fi
+}
+
+history ()
+{
+	search="$@"
+	grep "$search" ~/.ash_history | grep -v "history $search"
 }
