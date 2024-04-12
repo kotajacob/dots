@@ -1406,7 +1406,7 @@ xkb_symbols "(unnamed)" {
         type= "PC_ALT_LEVEL2",
         symbols[Group1]= [           Print,         Sys_Req ]
     };
-    key <RALT> {         [          Escape ] };
+    key <RALT> {         [           Escape ] };
     key <LNFD> {         [        Linefeed ] };
     key <HOME> {         [            Home ] };
     key   <UP> {         [              Up ] };

@@ -12,7 +12,6 @@ bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
 output eDP-1 scale 1.5
 
-output * subpixel none
 output * bg #E8DAFF solid_color
 
 # disable monitor after 15 minutes of inactivity
@@ -230,7 +229,7 @@ exec --no-startup-id mpd
 exec --no-startup-id syncthing --no-browser
 
 # start goimapnotify
-exec --no-startup-id "goimapnotify -conf /home/kota/.config/goimapnotify/primary.conf"
+exec --no-startup-id goimapnotify -conf /home/kota/.config/goimapnotify/primary.conf
 
 # cursor
 seat seat0 xcursor_theme capitaine-cursors
