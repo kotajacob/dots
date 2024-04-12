@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=tape
+Exec=foot -o app-id="foot-float" -o initial-window-size-chars="30x10" tape
+Terminal=false
+X-MultipleArgs=false
+Type=Application

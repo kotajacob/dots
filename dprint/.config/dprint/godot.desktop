@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=godot
-Exec=Godot_v4.3-dev3_linux.x86_64 --display-driver wayland
+Exec=Godot_v4.3-dev5_linux.x86_64 --display-driver wayland
 Terminal=false
 X-MultipleArgs=false
 Type=Application
