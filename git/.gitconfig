@@ -2,6 +2,11 @@
 	email = kota@nilsu.org
 	name = Dakota Walsh
 	signingkey = ~/.ssh/id_rsa.pub
+[sendemail]
+	smtpserver = smtp.migadu.com
+	smtpuser = kota@nilsu.org
+	smtpencryption = ssl
+	smtpserverport = 465
 [color]
 	ui = auto
 [alias]
@@ -36,9 +41,9 @@
 [core]
 	excludesfile = ~/.gitignore_global
 [pager]
-	log = diff-highlight | less -FRX
-	show = diff-highlight | less -FRX
-	diff = diff-highlight | less -FRX
+	log = diff-highlight | less -FRX --mouse
+	show = diff-highlight | less -FRX --mouse
+	diff = diff-highlight | less -FRX --mouse
 	branch = cat
 [url "ssh://git@github.com/portainer"]
 	insteadOf = https://github.com/portainer
