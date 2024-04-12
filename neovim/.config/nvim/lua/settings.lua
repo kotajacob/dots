@@ -4,7 +4,7 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- Make neovim pretty
 o.number = true
-o.cursorline = true
+-- o.cursorline = true
 o.colorcolumn = '80'
 o.showmode = false
 o.cmdheight = 2
@@ -13,20 +13,12 @@ o.sidescrolloff = 5
 o.termguicolors = true
 o.background = 'light'
 
--- Use dirbuf instead of netrw
+-- Disable netrw
 g.loaded_netrwPlugin = 1
 g.loaded_netrw = 1
 
--- Use matchup instead of matchit
-g.loaded_matchit = 1
-
--- Use telescope instead of fzf
+-- Disable fzf
 g.loaded_fzf = 1
-
--- Project-local marks and oldfiles!
-o.viminfofile = vim.api.nvim_eval([[findfile('.viminfo','.;')]])
--- use :Pnew to 'init' a new project
--- or touch .viminfo :D
 
 -- Enable persistent undo
 o.undofile = true
@@ -35,9 +27,9 @@ o.undofile = true
 o.writebackup = false
 
 -- Traverse lines with arrow keys
-o.whichwrap = 'b,s,<,>,[,]'
+vim.o.whichwrap = 'b,s,<,>,[,]'
 
--- Indentation settings for using hard tabs for indent
+-- Default indentation settings for using hard tabs for indent
 o.softtabstop = 4
 o.shiftwidth = 4
 o.tabstop = 4
@@ -51,21 +43,20 @@ o.smartcase = true
 o.listchars = 'tab:» ,space:·,nbsp:␣,eol:¬'
 
 -- Misc
-o.timeout = false -- Time out on keycodes, but not mappings
-o.linebreak = true -- Set word wrapping on
-o.autowrite = true -- Automatically write when :make or :GoBuild are called
-o.clipboard = 'unnamed' -- Set the default register to * so I can have a shared OS clipboard
-o.signcolumn = 'yes' -- Always use signcolumn
+o.timeout = false                                                  -- Time out on keycodes, but not mappings
+o.linebreak = true                                                 -- Set word wrapping on
+o.autowrite = true                                                 -- Automatically write when :make or :GoBuild are called
+o.clipboard = 'unnamed'                                            -- Set the default register to * so I can have a shared OS clipboard
 o.diffopt = 'filler,internal,algorithm:histogram,indent-heuristic' -- Enable nvim diffing
-o.updatetime = 100 -- Faster responce time
-o.confirm = true -- Show a dialog to confirm changes instead of failure
-o.mouse = 'a' -- Enable use of the mouse for all modes
-o.foldlevelstart = 99 -- Open all folds by default
-o.breakindent = true -- Multiline indenting
+o.updatetime = 100                                                 -- Faster responce time
+o.confirm = true                                                   -- Show a dialog to confirm changes instead of failure
+o.mouse = 'a'                                                      -- Enable use of the mouse for all modes
+o.foldlevelstart = 99                                              -- Open all folds by default
+o.breakindent = true                                               -- Multiline indenting
 
 -- Disable line ending diagnotic messages
 vim.diagnostic.config({
-	virtual_text = false,
+	signs = false,
 })
 
 -- Restore cursor position
@@ -84,21 +75,6 @@ autocmd('TextYankPost', {
 	end,
 })
 
--- memex
-autocmd('BufRead,BufNewFile', {
-	pattern = '*/memex/*.md',
-	command = 'set filetype=wiki',
-})
-
-g.wiki_root = "~/docs/memex"
-g.wiki_filetypes = { 'md', 'wiki' }
-vim.g.wiki_link_creation = {
-	md = {
-		link_type = 'wiki',
-		url_extension = ''
-	}
-}
-g.go_gopls_gofumpt = true
-
 -- Project local configs in .nvimrc or .exrc
 vim.o.exrc = true
+

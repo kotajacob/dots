@@ -1,92 +1,18 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
+-- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
+local path_package = vim.fn.stdpath('data') .. '/site/'
+local mini_path = path_package .. 'pack/deps/start/mini.nvim'
+if not vim.loop.fs_stat(mini_path) then
+	vim.cmd('echo "Installing `mini.nvim`" | redraw')
+	local clone_cmd = {
+		'git', 'clone', '--filter=blob:none',
+		'https://github.com/echasnovski/mini.nvim', mini_path
+	}
+	vim.fn.system(clone_cmd)
+	vim.cmd('packadd mini.nvim | helptags ALL')
+	vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
-vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
-	-- many lil things
-	'echasnovski/mini.nvim',
-
-	-- fuzzy searcher
-	{
-		'nvim-telescope/telescope.nvim',
-		dependencies = {
-			'nvim-lua/plenary.nvim',
-			{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-		}
-	},
-
-	-- dirbuf as filemanager
-	'elihunter173/dirbuf.nvim',
-
-	-- git improvements
-	'tpope/vim-fugitive',
-	'lewis6991/gitsigns.nvim',
-
-	-- increment / decrement fixer
-	{
-		"monaqa/dial.nvim",
-		keys = { "<C-a>", { "<C-x>", mode = "n" } },
-	},
-
-	-- lsp + autocomplete
-	'neovim/nvim-lspconfig',
-	'jose-elias-alvarez/null-ls.nvim',
-	{
-		'hrsh7th/nvim-cmp',
-		event = "InsertEnter",
-		dependencies = {
-			'hrsh7th/cmp-nvim-lsp',
-			'hrsh7th/cmp-buffer',
-			'hrsh7th/cmp-path',
-			'hrsh7th/cmp-cmdline',
-			'hrsh7th/cmp-vsnip',
-			'hrsh7th/vim-vsnip',
-		},
-	},
-	{ "stevearc/dressing.nvim", event = "VeryLazy" },
-
-	-- treesitter
-	'nvim-treesitter/nvim-treesitter',
-
-	-- project LSP error list
-	'folke/trouble.nvim',
-
-	-- langauge specific
-	{ 'fatih/vim-go',           ft = 'go' },
-	{
-		'lervag/wiki.vim',
-		dependencies = {
-			{
-				'lervag/wiki-ft.vim',
-				ft = 'wiki',
-			}
-		}
-	},
-	'junegunn/goyo.vim',
-	{ 'mattn/emmet-vim',       ft = { 'html', 'gohtmltmpl' } },
-
-	-- inline colors
-	{ 'rrethy/vim-hexokinase', build = 'make hexokinase',    event = "VeryLazy" },
-
-	-- "exchange" operator to swap selections
-	'tommcdo/vim-exchange',
-
-	-- better URL plumbing
-	{ 'stsewd/gx-extended.vim', keys = { { "gx", mode = "n" } } },
-
-	-- open files to a specific line number
-	'lervag/file-line'
-})
-
+require('mini.deps').setup({ path = { package = path_package } })
 require('mini.ai').setup()    -- a/i text object improvements
 require('mini.align').setup() -- align with gaipi<space> or gaip-
 require('mini.bracketed').setup({
@@ -106,24 +32,171 @@ require('mini.bracketed').setup({
 	yank       = { suffix = 'y', options = {} },
 })
 require('mini.comment').setup()      -- comment with gcc
+require('mini.completion').setup()   -- completion and signature help
+require('mini.diff').setup()         -- show and manipulate git diffs
 require('mini.indentscope').setup()  -- indent text object with ii
 require('mini.move').setup()         -- move code with alt+hjkl
+require('mini.operators').setup()    -- exchange, evaluate, repeat, multiply
+require('mini.pairs').setup()        -- open and close pairs
 require('mini.splitjoin').setup()    -- split and join long lines
 require('mini.surround').setup()     -- sa (add), sd (delete), sr (replace)
 require('mini.trailspace').setup()   -- highlight trailing spaces
-
 vim.g.miniindentscope_disable = true -- disable animation
 
-require('dirbuf').setup {
-	show_hidden = false,
-	sort_order = 'directories_first',
-	write_cmd = 'DirbufSync',
+local add = MiniDeps.add
+
+-- Lua plugins
+add('neovim/nvim-lspconfig')
+add({
+	source = 'nvim-treesitter/nvim-treesitter',
+	-- Use 'master' while monitoring updates in 'main'
+	checkout = 'master',
+	monitor = 'main',
+	-- Perform action after every checkout
+	hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
+})
+local function make_fzf_native(params)
+	vim.cmd("lcd " .. params.path)
+	vim.cmd("!make -s")
+	vim.cmd("lcd -")
+end
+add({
+	source = 'nvim-telescope/telescope.nvim',
+	depends = {
+		'nvim-lua/plenary.nvim',
+		{
+			source = "nvim-telescope/telescope-fzf-native.nvim",
+			hooks = {
+				post_install = make_fzf_native,
+				post_checkout = make_fzf_native,
+			},
+		}
+	},
+})
+add('stevearc/dressing.nvim')
+add('folke/trouble.nvim')
+add('elihunter173/dirbuf.nvim')
+add('rmagatti/gx-extended.nvim')
+add('L3MON4D3/LuaSnip')
+add('rafamadriz/friendly-snippets')
+
+-- Vim script plugins
+add('tpope/vim-fugitive')
+add('mattn/emmet-vim')
+add('lervag/file-line')
+add('fatih/vim-go')
+add('lervag/wiki.vim')
+add('lervag/wiki-ft.vim')
+
+-- LSP settings
+local opts = { noremap = true, silent = true }
+vim.keymap.set('n', '<space>ee', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+	-- Enable completion triggered by <c-x><c-o>
+	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+	-- Mappings.
+	-- See `:help vim.lsp.*` for documentation on any of the below functions
+	local bufopts = { noremap = true, silent = true, buffer = bufnr }
+	vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, bufopts)
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+	vim.keymap.set('n', '<space>D', vim.lsp.buf.declaration, bufopts)
+	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+	vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+end
+
+local nvim_lsp = require("lspconfig")
+
+nvim_lsp.gopls.setup {
+	on_attach = on_attach,
 }
 
-require 'nvim-treesitter.configs'.setup {
+nvim_lsp.rust_analyzer.setup {
+	on_attach = on_attach,
+}
+
+nvim_lsp.clangd.setup {
+	on_attach = on_attach,
+}
+
+nvim_lsp.zls.setup {
+	on_attach = on_attach,
+}
+
+nvim_lsp.gdscript.setup {
+	on_attach = on_attach,
+}
+
+nvim_lsp.kotlin_language_server.setup {
+	on_attach = on_attach,
+}
+
+-- nvim_lsp.denols.setup {
+-- 	on_attach = on_attach,
+-- }
+
+nvim_lsp.tsserver.setup({
+	on_attach = function(client, bufnr)
+		client.server_capabilities.document_formatting = false
+		client.server_capabilities.document_range_formatting = false
+		vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", {
+			silent = true,
+		})
+		vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspRenameFile<CR>", {
+			silent = true,
+		})
+		vim.api.nvim_buf_set_keymap(bufnr, "n", "go", ":TSLspImportAll<CR>", {
+			silent = true,
+		})
+		on_attach(client, bufnr)
+	end,
+})
+
+nvim_lsp.lua_ls.setup({
+	on_attach = on_attach,
+	settings = {
+		Lua = {
+			runtime = {
+				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+				version = 'LuaJIT',
+			},
+			diagnostics = {
+				-- Get the language server to recognize the `vim` global
+				globals = {
+					'vim',
+					'MiniDeps',
+					'MiniDiff',
+					'MiniFiles',
+					'MiniTrailspace'
+				},
+			},
+			workspace = {
+				-- Make the server aware of Neovim runtime files
+				library = vim.api.nvim_get_runtime_file("", true),
+
+				-- Stop offering to "change workspace settings"
+				checkThirdParty = false,
+			},
+			-- Do not send telemetry data containing a randomized but unique identifier
+			telemetry = {
+				enable = false,
+			},
+		},
+	},
+})
+
+require('nvim-treesitter.configs').setup({
 	ensure_installed = {
 		"c",
-		"css",
 		"css",
 		"gdscript",
 		"glsl",
@@ -135,13 +208,11 @@ require 'nvim-treesitter.configs'.setup {
 		"query",
 		"rust",
 		"typescript",
-		"vim",
+		"vimdoc",
 		"zig",
 	},
-	highlight = {
-		enable = true,
-	},
-}
+	highlight = { enable = true },
+})
 
 require('telescope').setup {
 	defaults = {
@@ -172,6 +243,21 @@ require('telescope').setup {
 }
 require('telescope').load_extension('fzf')
 
+require("trouble").setup({
+	icons = false,
+	fold_open = "v",   -- icon used for open folds
+	fold_closed = ">", -- icon used for closed folds
+	indent_lines = false, -- add an indent guide below the fold icons
+	signs = {
+		-- icons / text used for a diagnostic
+		error = "error",
+		warning = "warn",
+		hint = "hint",
+		information = "info"
+	},
+	use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+})
+
 require('dressing').setup({
 	input = {
 		insert_only = false,
@@ -184,285 +270,39 @@ require('dressing').setup({
 	}
 })
 
-require('gitsigns').setup {
-	signs = {
-		add          = {
-			hl = 'GitSignsAdd',
-			text = '│',
-			numhl = 'GitSignsAddNr',
-			linehl = 'GitSignsAddLn',
-		},
-		change       = {
-			hl = 'GitSignsChange',
-			text = '│',
-			numhl = 'GitSignsChangeNr',
-			linehl = 'GitSignsChangeLn',
-		},
-		delete       = {
-			hl = 'GitSignsDelete',
-			text = '│',
-			numhl = 'GitSignsDeleteNr',
-			linehl = 'GitSignsDeleteLn',
-		},
-		topdelete    = {
-			hl = 'GitSignsDelete',
-			text = '│',
-			numhl = 'GitSignsDeleteNr',
-			linehl = 'GitSignsDeleteLn',
-		},
-		changedelete = {
-			hl = 'GitSignsChange',
-			text = '│',
-			numhl = 'GitSignsChangeNr',
-			linehl = 'GitSignsChangeLn',
-		},
-	},
-	on_attach = function(bufnr)
-		local gs = package.loaded.gitsigns
+require('dirbuf').setup {
+	show_hidden = true,
+	sort_order = 'directories_first',
+	write_cmd = 'DirbufSync',
+}
 
-		local function map(mode, l, r, opts)
-			opts = opts or {}
-			opts.buffer = bufnr
-			vim.keymap.set(mode, l, r, opts)
-		end
+local ls = require('luasnip')
+require("luasnip.loaders.from_vscode").lazy_load()
 
-		-- Navigation
-		map('n', ']k', function()
-			if vim.wo.diff then return ']c' end
-			vim.schedule(function() gs.next_hunk() end)
-			return '<Ignore>'
-		end, { expr = true })
+ls.config.set_config {
+	history = true,
+	updateevents = "TextChanged,TextChangedI",
+}
 
-		map('n', '[k', function()
-			if vim.wo.diff then return '[c' end
-			vim.schedule(function() gs.prev_hunk() end)
-			return '<Ignore>'
-		end, { expr = true })
+-- Open / Next
+vim.keymap.set(
+	{ "i", "s" },
+	"<C-J>",
+	function() ls.expand_or_jump() end,
+	{ silent = true }
+)
 
-		-- Actions
-		map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-		map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-		map('n', '<leader>hS', gs.stage_buffer)
-		map('n', '<leader>hu', gs.undo_stage_hunk)
-		map('n', '<leader>hR', gs.reset_buffer)
-		map('n', '<leader>hp', gs.preview_hunk)
-		map('n', '<leader>hb', function() gs.blame_line { full = true } end)
-		map('n', '<leader>tb', gs.toggle_current_line_blame)
-		map('n', '<leader>hd', gs.diffthis)
-		map('n', '<leader>hD', function() gs.diffthis('~') end)
-		map('n', '<leader>td', gs.toggle_deleted)
+-- Prev
+vim.keymap.set(
+	{ "i", "s" },
+	"<C-K>",
+	function() ls.jump(-1) end,
+	{ silent = true }
+)
 
-		-- Text object
-		map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+-- List options
+vim.keymap.set({ "i", "s" }, "<C-L>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
 	end
-}
-
--- cmp and lsp
-local cmp = require 'cmp'
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-cmp.setup({
-	snippet = {
-		-- REQUIRED - you must specify a snippet engine
-		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-			-- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-			-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-			-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-		end,
-	},
-	window = {
-		-- completion = cmp.config.window.bordered(),
-		-- documentation = cmp.config.window.bordered(),
-	},
-	mapping = {
-		['<C-n>'] = cmp.mapping.select_next_item(),
-		['<C-p>'] = cmp.mapping.select_prev_item(),
-		['<C-b>'] = cmp.mapping.scroll_docs(-4),
-		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			-- This little snippet will confirm with tab, and if no entry is selected,
-			-- will confirm the first item. Use C-N and C-P to change selected.
-			if cmp.visible() then
-				local entry = cmp.get_selected_entry()
-				if not entry then
-					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-				else
-					cmp.confirm()
-				end
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-	},
-	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
-		{ name = 'vsnip' }, -- For vsnip users.
-		-- { name = 'luasnip' }, -- For luasnip users.
-		-- { name = 'ultisnips' }, -- For ultisnips users.
-		-- { name = 'snippy' }, -- For snippy users.
-	}, {
-		{ name = 'buffer' },
-	})
-})
-
--- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
-	sources = cmp.config.sources({
-		{ name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-	}, {
-		{ name = 'buffer' },
-	})
-})
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{ name = 'path' }
-	}, {
-		{ name = 'cmdline' }
-	})
-})
-
-
-local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<space>ee', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-	-- Enable completion triggered by <c-x><c-o>
-	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-	-- Mappings.
-	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, bufopts)
-	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-	vim.keymap.set('n', '<space>D', vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-	vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-	vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-end
-
-local nvim_lsp = require("lspconfig")
-
-nvim_lsp.gopls.setup {
-	on_attach = on_attach,
-	capabilities = capabilities
-}
-
-nvim_lsp.rust_analyzer.setup {
-	on_attach = on_attach,
-	capabilities = capabilities
-}
-
-nvim_lsp.clangd.setup {
-	on_attach = on_attach,
-	capabilities = capabilities
-}
-
-nvim_lsp.zls.setup {
-	on_attach = on_attach,
-	capabilities = capabilities
-}
-
-nvim_lsp.gdscript.setup {
-	on_attach = on_attach,
-	capabilities = capabilities
-}
-
-nvim_lsp.kotlin_language_server.setup {
-	on_attach = on_attach,
-	capabilities = capabilities
-}
-
-nvim_lsp.denols.setup {
-	on_attach = on_attach,
-	capabilities = capabilities
-}
-
--- nvim_lsp.tsserver.setup({
--- 	capabilities = capabilities,
--- 	on_attach = function(client, bufnr)
--- 		client.server_capabilities.document_formatting = false
--- 		client.server_capabilities.document_range_formatting = false
--- 		vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", {
--- 			silent = true,
--- 		})
--- 		vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspRenameFile<CR>", {
--- 			silent = true,
--- 		})
--- 		vim.api.nvim_buf_set_keymap(bufnr, "n", "go", ":TSLspImportAll<CR>", {
--- 			silent = true,
--- 		})
--- 		on_attach(client, bufnr)
--- 	end,
--- })
-
-nvim_lsp.lua_ls.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			runtime = {
-				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-				version = 'LuaJIT',
-			},
-			diagnostics = {
-				-- Get the language server to recognize the `vim` global
-				globals = { 'vim' },
-			},
-			workspace = {
-				-- Make the server aware of Neovim runtime files
-				library = vim.api.nvim_get_runtime_file("", true),
-			},
-			-- Do not send telemetry data containing a randomized but unique identifier
-			telemetry = {
-				enable = false,
-			},
-		},
-	},
-})
-
-local null_ls = require("null-ls")
-
-null_ls.setup({
-	sources = {
-		null_ls.builtins.diagnostics.shellcheck,
-		null_ls.builtins.formatting.shfmt,
-		null_ls.builtins.formatting.prettier,
-		-- haredoc,
-	},
-	on_attach = on_attach,
-	capabilities = capabilities
-})
-
-require("trouble").setup({
-	icons = false,
-	fold_open = "v", -- icon used for open folds
-	fold_closed = ">", -- icon used for closed folds
-	indent_lines = false, -- add an indent guide below the fold icons
-	signs = {
-		-- icons / text used for a diagnostic
-		error = "error",
-		warning = "warn",
-		hint = "hint",
-		information = "info"
-	},
-	use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
-})
+end, { silent = true })

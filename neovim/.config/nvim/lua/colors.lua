@@ -11,6 +11,7 @@ local M = {
 	primary       = "#" .. vim.env.PRIMARY,
 	secondary     = "#" .. vim.env.SECONDARY,
 	red           = "#" .. vim.env.RED,
+	green         = "#" .. vim.env.GREEN,
 	orange        = "#" .. vim.env.YELLOW,
 }
 
@@ -127,7 +128,7 @@ hi.WarningMsg   = { fg = M.orange, gui = "bold" }
 hi.WildMenu     = { fg = M.bg, bg = M.fg }
 hi.Folded       = { fg = M.dark_grey }
 hi.FoldColumn   = { fg = M.bg_subtle }
-hi.DiffAdd      = { fg = M.primary, bg = M.bg }
+hi.DiffAdd      = { fg = M.green, bg = M.bg }
 hi.DiffDelete   = { fg = M.red, bg = M.bg }
 hi.DiffChange   = { fg = M.orange, bg = M.bg }
 hi.DiffText     = { fg = M.fg, bg = M.bg }
@@ -152,10 +153,13 @@ hi.ColorColumn  = { bg = M.bg_subtle }
 hi.MatchParen = { fg = M.primary, bg = "", gui = "bold" }
 
 -- git-gutter
-hi.GitGutterAdd = { fg = M.primary }
-hi.GitGutterDelete = { fg = M.orange }
-hi.GitGutterChange = { fg = M.grey }
-hi.GitGutterChangeDelete = { fg = M.secondary }
+hi.MiniDiffSignAdd = { fg = M.green, gui = "bold" }
+hi.MiniDiffSignDelete = { fg = M.red, gui = "bold" }
+hi.MiniDiffSignChange = { fg = M.orange, gui = "bold" }
+hi.MiniDiffOverAdd = { fg = M.green, gui = "bold" }
+hi.MiniDiffOverChange = { fg = M.orange, gui = "bold" }
+hi.MiniDiffOverContext = { fg = M.fg, gui = "bold" }
+hi.MiniDiffOverDelete = { fg = M.red, gui = "bold" }
 
 -- lsp
 hi.DiagnosticError = { fg = M.red }
