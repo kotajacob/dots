@@ -171,6 +171,9 @@ map("n", "<space>wr", "", {
 	end,
 })
 
+-- Show git panel
+map("n", "<space>gg", ":G<CR>", snoremap)
+
 -- Show diff preview
 map("n", "ghp", "", {
 	noremap = true,

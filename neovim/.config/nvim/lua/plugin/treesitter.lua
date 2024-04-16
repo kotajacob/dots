@@ -1,0 +1,20 @@
+require('nvim-treesitter.configs').setup({
+	ensure_installed = {
+		"c",
+		"css",
+		"gdscript",
+		"glsl",
+		"go",
+		"gotmpl",
+		"hare",
+		"java",
+		"javascript",
+		"lua",
+		"query",
+		"rust",
+		"typescript",
+		"vimdoc",
+		"zig",
+	},
+	highlight = { enable = true },
+})
