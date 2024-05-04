@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=iamb
+Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="440x600" iamb
+Terminal=false
+X-MultipleArgs=false
+Type=Application
