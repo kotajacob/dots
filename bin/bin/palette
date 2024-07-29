@@ -4,14 +4,14 @@
 # env variables.
 
 # sway
-# sed "s/^set \$sc.*/set \$sc #$PRIMARY/" -i "$HOME/.config/sway/config"
-# sed "s/^set \$ic.*/set \$ic #$LIGHT_PRIMARY/" -i "$HOME/.config/sway/config"
-# sed "s/^set \$uc.*/set \$uc #$SECONDARY/" -i "$HOME/.config/sway/config"
+sed "s/^set \$sc.*/set \$sc #$FG/" -i "$HOME/.config/sway/config"
+sed "s/^set \$ic.*/set \$ic #$LIGHT_BLACK/" -i "$HOME/.config/sway/config"
+sed "s/^set \$uc.*/set \$uc #$PRIMARY/" -i "$HOME/.config/sway/config"
 
 # wob
-sed "s/^border_color =.*/border_color = $PRIMARY/" \
+sed "s/^border_color =.*/border_color = $FG/" \
 	-i "$HOME/.config/wob/wob.ini"
-sed "s/^bar_color =.*/bar_color = $PRIMARY/" \
+sed "s/^bar_color =.*/bar_color = $FG/" \
 	-i "$HOME/.config/wob/wob.ini"
 sed "s/^background_color =.*/background_color = $BG/" \
 	-i "$HOME/.config/wob/wob.ini"
@@ -55,7 +55,7 @@ sed "s/^scrollback-indicator=.*/scrollback-indicator=$BG $PRIMARY/" \
 	-i "$HOME/.config/foot/foot.ini"
 
 # dunst
-sed "s/^    frame_color = .*/    frame_color = \""#$PRIMARY"\"/" \
+sed "s/^    frame_color = .*/    frame_color = \""#$FG"\"/" \
 	-i "$HOME/.config/dunst/dunstrc"
 sed "s/^    background = .*/    background = \""#$BG"\"/" \
 	-i "$HOME/.config/dunst/dunstrc"

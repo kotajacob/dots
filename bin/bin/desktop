@@ -1,0 +1,9 @@
+#!/bin/bash
+
+selection=$(fd . /usr/share/applications | fzf)
+if [[ -n $selection ]]
+then
+	name=$(basename "$selection")
+	cp "$selection" "$HOME"/.config/dprint/
+	nvim "$HOME/.config/dprint/$name"
+fi

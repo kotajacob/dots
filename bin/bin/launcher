@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMMAND="dprint -d /home/kota/.config/dprint -p \
+COMMAND="/home/kota/.local/bin/dprint -d /home/kota/.config/dprint -p \
 	| fzf --reverse --no-scrollbar --no-separator --no-color --info inline-right"
 TMP=$(mktemp)
 
@@ -8,6 +8,6 @@ foot -o app-id="foot-float" -W 30x10 bash -c "$COMMAND > $TMP"
 
 SELECTION=$(cat "$TMP")
 echo "Name:$SELECTION" \
-	| dprint -d /home/kota/.config/dprint -p -i - -o "StripExec" \
+	| /home/kota/.local/bin/dprint -d /home/kota/.config/dprint -p -i - -o "StripExec" \
 	| ${SHELL:-"/bin/sh"} &
 rm "$TMP"
