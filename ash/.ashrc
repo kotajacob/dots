@@ -1,0 +1,123 @@
+set -o vi
+export PS1='\w '
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PAGER='less'
+export LESS='--use-color -IR'
+export SDCV_PAGER='less -FRX'
+
+export GUI=1
+export NNN_OPTS='aAcC'
+export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
+export NNN_COLORS='6666'
+export NNN_BMS="d:$HOME/docs;h:$HOME;s:$HOME/src;S:$HOME/src/kota;p:$HOME/pics;t:$HOME/tmp;m:$HOME/docs/memex/;M:$HOME/.local/share/PolyMC/instances"
+export NNN_PLUG='r:fixname;x:xdgdefault;j:autojump;p:preview-tui;d:dragdrop'
+export PF_INFO="ascii title os kernel uptime pkgs memory editor palette"
+export PCFSERVER='https://paste.nilsu.org:21/incoming'
+export FZF_DEFAULT_COMMAND='rg --files'
+export AART_VIEWER='imv'
+export LS_COLORS="$LS_COLORS:di=1;36:ex=0;35"
+export PASSWORD_STORE_ENABLE_EXTENSIONS=true
+
+export GOPATH="$HOME/.local/go"
+export GOPROXY=direct
+export NPM_PACKAGES="${HOME}/.local/npm"
+export MANPAGER='less -Dd+g -Du+b'
+export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$NPM_PACKAGES/bin:$HOME/.local/zig:$PATH"
+export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
+export MANPATH="$HOME/.local/share/man:$MANPATH"
+
+# Colors
+# Use with the palette script!
+# Note that programs which have imported
+# from the environment require a relog to
+# apply any changes.
+export FG="000000"
+export BG="ffffff"
+export BLACK="$BG"
+export RED="bc1854"
+export GREEN="769836"
+export YELLOW="e4943a"
+export BLUE="34859d"
+export MAGENTA="bc4a9b"
+export CYAN="9b70ff"
+export WHITE="$FG"
+export LIGHT_BLACK="888888"
+export LIGHT_RED="de0051"
+export LIGHT_GREEN="9ab738"
+export LIGHT_YELLOW="f8b525"
+export LIGHT_BLUE="35a0b6"
+export LIGHT_MAGENTA="e36da8"
+export LIGHT_CYAN="b78ef6"
+export LIGHT_WHITE="444444"
+export DIM_BLACK="ffffff"
+export DIM_RED="a71657"
+export DIM_GREEN="628e33"
+export DIM_YELLOW="e1752d"
+export DIM_BLUE="327195"
+export DIM_MAGENTA="a54093"
+export DIM_CYAN="794aff"
+export DIM_WHITE="000000"
+export PRIMARY="$CYAN"
+export LIGHT_PRIMARY="f7f1ff"
+export SECONDARY="$MAGENTA"
+
+## aliases
+alias xi='doas apk add'
+alias xu='doas apk update && doas apk upgrade'
+alias xs='apk search'
+alias xr='doas apk del'
+alias xls='apk info -L'
+alias xinfo='apk info'
+alias xlist='doas nvim /etc/apk/world'
+alias v='nvim'
+alias vi='nvim'
+alias vim='nvim'
+alias g='git'
+alias m='make'
+alias mc='make clean'
+alias c='clear'
+alias cdc='cd; clear'
+alias ls='ls --color=auto --group-directories-first'
+alias la='ls -lAh --color=auto --group-directories-first'
+alias l='ls -1F --color=auto --group-directories-first'
+alias ip='ip -color=auto'
+alias t='tmux'
+alias tn='tmux new -s'
+alias ta='tmux attach -t'
+alias tls='tmux ls'
+alias log='doas goaccess --log-format=CADDY'
+
+# nnn filemanager
+n ()
+{
+	# Block nesting of nnn in subshells
+	if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+		echo "nnn is already running"
+		return
+	fi
+
+	# The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
+	# To cd on quit only on ^G, remove the "export" as in:
+	#     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+	export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+	# Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+	# stty start undef
+	# stty stop undef
+	# stty lwrap undef
+	# stty lnext undef
+
+	nnn "$@"
+
+	if [ -f "$NNN_TMPFILE" ]; then
+		. "$NNN_TMPFILE"
+		rm -f "$NNN_TMPFILE" > /dev/null
+	fi
+}
+
+history ()
+{
+	search="$@"
+	grep "$search" ~/.ash_history | grep -v "history $search"
+}

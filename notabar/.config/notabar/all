@@ -7,22 +7,22 @@ txt,\n
 
 # Battery
 txt,b = 
-cmd,battery,+,-,=
+cmd,/home/kota/.local/bin/battery,+,-,=
 txt,\n
 
 # Backlight
 txt,l = 
-cmd,light
+cmd,/usr/local/bin/light
 txt,\n
 
 # Networking
 txt,n = 
-cmd,netprint,wlp166s0
+cmd,/home/kota/bin/netprint,wlan0
 txt,\n
 
 # Ocean
 txt,o = 
-cmd,tide,/home/kota/docs/Dunedin2024.csv
+cmd,/home/kota/.local/bin/tide,/home/kota/docs/Dunedin2024.csv
 txt,\n
 
 # Weather

@@ -12,36 +12,36 @@ set show-recent "5"
 map b toggle_statusbar
 
 set default-bg "#181818"
-set default-fg "#dddcd9"
+set default-fg "#DDDCD9"
 
 set index-bg "#181818"
-set index-fg "#dddcd9"
-set index-active-bg "#9b7bc5"
-set index-active-fg "#dddcd9"
+set index-fg "#DDDCD9"
+set index-active-bg "#D43949"
+set index-active-fg "#DDDCD9"
 
-set statusbar-fg "#dddcd9"
+set statusbar-fg "#DDDCD9"
 set statusbar-bg "#181818"
 
 set inputbar-bg "#181818"
-set inputbar-fg "#dddcd9"
+set inputbar-fg "#DDDCD9"
 
 set notification-bg "#181818"
-set notification-fg "#dddcd9"
+set notification-fg "#DDDCD9"
 
 set notification-error-bg "#181818"
-set notification-error-fg "#d43949"
+set notification-error-fg "#D43949"
 
 set notification-warning-bg "#181818"
-set notification-warning-fg "#d43949"
+set notification-warning-fg "#D43949"
 
-set highlight-color "#dbc495"
-set highlight-active-color "#9b7bc5"
+set highlight-color "#DBC495"
+set highlight-active-color "#D43949"
 
 set completion-bg "#181818"
-set completion-fg "#9b7bc5"
+set completion-fg "#D43949"
 
-set completion-highlight-bg "#9b7bc5"
-set completion-highlight-fg "#dddcd9"
+set completion-highlight-bg "#D43949"
+set completion-highlight-fg "#DDDCD9"
 
 set recolor-lightcolor "#181818"
-set recolor-darkcolor "#dddcd9"
+set recolor-darkcolor "#DDDCD9"

@@ -17,21 +17,21 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 # initialize jump
-eval "$(jump shell)"
+eval "$(/home/kota/.local/bin/jump shell)"
 
 ## aliases
-alias xu='sudo xbps-install -Su'
-alias xs='xbps-query -Rs'
-alias xr='sudo xbps-pkgdb -m auto'
-alias xrm='sudo xbps-remove -R'
-alias xc='sudo xbps-remove -Oo && sudo vkpurge rm all'
-alias xinfo='xbps-query -R -S'
-alias xlist='xpkg -m'
-alias doas='sudo' # why the hell is sudo part of base on void ugggg
-alias v='nice -n -10 nvim'
-alias vi='nice -n -10 nvim'
-alias vim='nice -n -10 nvim'
-alias nvim='nice -n -10 nvim'
+alias xi='doas apk add'
+alias xu='doas apk update && doas apk upgrade && flatpak update'
+alias xs='apk search'
+alias xr='doas apk del'
+alias xls='apk info -L'
+alias xinfo='apk info'
+alias xlist='doas nvim /etc/apk/world'
+alias v='nvim'
+alias vi='nvim'
+alias vim='nvim'
+alias nvim='nvim'
+alias todo='nvim TODO'
 alias g='git'
 alias gst='git status'
 alias k='kubectl'
@@ -48,17 +48,14 @@ alias tn='tmux new -s'
 alias ta='tmux attach -t'
 alias tls='tmux ls'
 alias dmesg='sudo dmesg -wH'
-alias mnt='udevil mount'
-alias umnt='udevil umount'
+alias mnt='udiskie-mount'
+alias umnt='udiskie-umount'
 alias tide='tide /home/kota/docs/Dunedin2024.csv'
 alias mail='mbsync primary'
-# alias mm="cd $HOME/docs/memex && nvim index.md"
-alias mntfog='sshfs -o allow_other,default_permissions kota@yepun:/var/fog /mnt/fog'
 alias weather='metweather forecast | column -t -l3'
 alias music='ncmpcpp'
 alias mixer='pulsemixer'
 alias alert='notify-send "command finished"'
-alias json-to-go='go-jsonschema -p main'
 
 ## functions
 go() {
@@ -107,11 +104,6 @@ n ()
 		. "$NNN_TMPFILE"
 		rm -f "$NNN_TMPFILE" > /dev/null
 	fi
-}
-
-phone ()
-{
-	command ntfy publish "$NTFY_SECRET" "$@"
 }
 
 # Emit terminal CWD for foot

@@ -36,13 +36,21 @@ require('mini.completion').setup()   -- completion and signature help
 require('mini.diff').setup()         -- show and manipulate git diffs
 require('mini.indentscope').setup()  -- indent text object with ii
 require('mini.move').setup()         -- move code with alt+hjkl
-require('mini.pairs').setup()        -- open and close pairs
 require('mini.splitjoin').setup()    -- split and join long lines
 require('mini.surround').setup()     -- sa (add), sd (delete), sr (replace)
 require('mini.trailspace').setup()   -- highlight trailing spaces
 vim.g.miniindentscope_disable = true -- disable animation
 
-require('mini.operators').setup({    -- exchange, evaluate, repeat, multiply
+require('mini.pairs').setup({
+	mappings = {
+		['`'] = false,
+	},
+})
+
+require('mini.operators').setup({ -- exchange, evaluate, repeat, multiply
+	exchange = {
+		prefix = 'cx'
+	},
 	replace = {
 		prefix = 'cr'
 	}
@@ -79,11 +87,11 @@ add({
 	},
 })
 add('stevearc/dressing.nvim')
-add('folke/trouble.nvim')
 add('elihunter173/dirbuf.nvim')
 add('rmagatti/gx-extended.nvim')
 add('L3MON4D3/LuaSnip')
 add('rafamadriz/friendly-snippets')
+add('mhartington/formatter.nvim')
 
 -- Vim script plugins
 add('tpope/vim-fugitive')
@@ -92,8 +100,10 @@ add('lervag/file-line')
 add('fatih/vim-go')
 add('lervag/wiki.vim')
 add('lervag/wiki-ft.vim')
+add('https://git.sr.ht/~jcc/vim-sway-nav')
 
 require('plugin/lsp')
+require('plugin/formatter')
 require('plugin/treesitter')
 require('plugin/telescope')
 require('plugin/dirbuf')

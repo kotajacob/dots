@@ -50,6 +50,10 @@ nvim_lsp.kotlin_language_server.setup {
 	on_attach = on_attach,
 }
 
+nvim_lsp.csharp_ls.setup {
+	on_attach = on_attach,
+}
+
 -- nvim_lsp.denols.setup {
 -- 	on_attach = on_attach,
 -- }
@@ -102,21 +106,6 @@ nvim_lsp.lua_ls.setup({
 			},
 		},
 	},
-})
-
-require("trouble").setup({
-	icons = false,
-	fold_open = "v",   -- icon used for open folds
-	fold_closed = ">", -- icon used for closed folds
-	indent_lines = false, -- add an indent guide below the fold icons
-	signs = {
-		-- icons / text used for a diagnostic
-		error = "error",
-		warning = "warn",
-		hint = "hint",
-		information = "info"
-	},
-	use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
 })
 
 require('dressing').setup({

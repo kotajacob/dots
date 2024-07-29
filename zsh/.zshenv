@@ -11,14 +11,14 @@ export LESS='--use-color -IR'
 export GUI=1
 export NNN_OPTS='aAcC'
 export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
-export NNN_COLORS='6666'
+export NNN_COLORS='1111'
 export NNN_BMS="d:$HOME/docs;h:$HOME;s:$HOME/src;S:$HOME/src/kota;p:$HOME/pics;t:$HOME/tmp;m:$HOME/docs/memex/;M:$HOME/.local/share/PolyMC/instances"
 export NNN_PLUG='r:fixname;x:xdgdefault;j:autojump;p:preview-tui;d:dragdrop'
 export PF_INFO="ascii title os kernel uptime pkgs memory editor palette"
 export PCFSERVER='https://paste.nilsu.org:21/incoming'
 export FZF_DEFAULT_COMMAND='rg --files'
 export AART_VIEWER='imv'
-export LS_COLORS="$LS_COLORS:di=1;36:ex=0;35"
+export LS_COLORS="$LS_COLORS:di=1;31:ex=0;31:ln=0;31"
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
 # Colors
@@ -26,34 +26,34 @@ export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 # Note that programs which have imported
 # from the environment require a relog to
 # apply any changes.
-export FG="000000"
-export BG="ffffff"
+export FG="DDDCD9"
+export BG="181818"
 export BLACK="$BG"
-export RED="bc1854"
-export GREEN="769836"
-export YELLOW="e4943a"
-export BLUE="34859d"
-export MAGENTA="bc4a9b"
-export CYAN="9b70ff"
+export RED="D43949"
+export GREEN="57B9AA"
+export YELLOW="DBC495"
+export BLUE="6FA1C3"
+export MAGENTA="B668A0"
+export CYAN="9B7BE5"
 export WHITE="$FG"
-export LIGHT_BLACK="888888"
-export LIGHT_RED="de0051"
-export LIGHT_GREEN="9ab738"
-export LIGHT_YELLOW="f8b525"
-export LIGHT_BLUE="35a0b6"
-export LIGHT_MAGENTA="e36da8"
-export LIGHT_CYAN="b78ef6"
-export LIGHT_WHITE="444444"
-export DIM_BLACK="ffffff"
+export LIGHT_BLACK="484848"
+export LIGHT_RED="D43949"
+export LIGHT_GREEN="57B9AA"
+export LIGHT_YELLOW="DBC495"
+export LIGHT_BLUE="6FA1C3"
+export LIGHT_MAGENTA="B668A0"
+export LIGHT_CYAN="9B7BE5"
+export LIGHT_WHITE="B7B4AE"
+export DIM_BLACK="181818"
 export DIM_RED="a71657"
 export DIM_GREEN="628e33"
 export DIM_YELLOW="e1752d"
 export DIM_BLUE="327195"
 export DIM_MAGENTA="a54093"
 export DIM_CYAN="794aff"
-export DIM_WHITE="000000"
-export PRIMARY="$CYAN"
-export LIGHT_PRIMARY="f7f1ff"
+export DIM_WHITE="DDDCD9"
+export PRIMARY="$RED"
+export LIGHT_PRIMARY="$RED"
 export SECONDARY="$MAGENTA"
 
 # NOTE: Steam, most games and other (older) binary applications might not work!
@@ -66,11 +66,15 @@ export MOZ_DBUS_REMOTE=1 # Workaround for clicking links in electron...
 export QT_QPA_PLATFORM=wayland-egl
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
-export GOPATH="$HOME/.local/go"
 # export GOPROXY=direct
 export CGO_ENABLED=1
+export CGO_CFLAGS="-D_LARGEFILE64_SOURCE"
+export GODEBUG=goindex=0
+export GOPATH="$HOME/.local/go"
+export NPM_PACKAGES="$HOME/.local"
+export npm_config_prefix="$HOME/.local"
+export NODE_PATH=$(npm root --quiet -g)
 export MANPAGER='less -Dd+g -Du+b'
-export PATH="$HOME/.nave/installed/18.19.1/bin:$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.local/zig:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.dotnet/tools:$PATH"
 export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
 export MANPATH="$HOME/.local/share/man:$MANPATH"
-export GOPRIVATE="github.com/portainer"

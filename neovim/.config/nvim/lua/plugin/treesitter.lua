@@ -2,6 +2,7 @@ require('nvim-treesitter.configs').setup({
 	ensure_installed = {
 		"c",
 		"css",
+		"c_sharp",
 		"gdscript",
 		"glsl",
 		"go",

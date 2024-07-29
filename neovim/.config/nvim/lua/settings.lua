@@ -11,7 +11,7 @@ o.cmdheight = 2
 o.scrolloff = 4
 o.sidescrolloff = 5
 o.termguicolors = true
-o.background = 'light'
+o.background = 'dark'
 
 -- Disable netrw
 g.loaded_netrwPlugin = 1
@@ -77,4 +77,3 @@ autocmd('TextYankPost', {
 
 -- Project local configs in .nvimrc or .exrc
 vim.o.exrc = true
-

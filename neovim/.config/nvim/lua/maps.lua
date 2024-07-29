@@ -90,10 +90,14 @@ map("n", "gr", "", {
 	end,
 })
 
--- Open trouble (error list)
-map("n", "<space>el", "<cmd>TroubleToggle<cr>",
-  {silent = true, noremap = true}
-)
+map("n", "<space>el", "", {
+	noremap = true,
+	callback = function()
+		require("telescope.builtin").diagnostics()
+	end,
+})
+
+map("n", "<space>w", "<C-W>", noremap)
 
 -- close a buffer
 map('n', '<Del>', ':close<CR>', noremap)
@@ -148,14 +152,17 @@ map('n', '<space>sn', '', {
 	end,
 })
 
+-- Yank current filepath
+map('n', 'y%', ':let @*=expand("%")<CR>', noremap)
+
+-- Map %% to return my current working directory
+map("c", "%%", "<C-R>=expand('%:h').'/'<cr>", snoremap)
+
 -- Repeat macros with , because @@ is too long for me lol
 map('n', ',', '@@', noremap)
 
 -- Close other windows
 map('n', '<space>o', ':only<CR>', snoremap)
-
--- Map %% to return my current working directory
-map("c", "%%", "<C-R>=expand('%:h').'/'<cr>", snoremap)
 
 -- Move between splits without C-W prefix
 map('n', '<C-j>', '<C-W><C-j>', snoremap)
@@ -164,7 +171,7 @@ map('n', '<C-l>', '<C-W><C-l>', snoremap)
 map('n', '<C-h>', '<C-W><C-h>', snoremap)
 
 -- Remove trailing whitespace
-map("n", "<space>wr", "", {
+map("n", "<space>xdw", "", {
 	noremap = true,
 	callback = function()
 		MiniTrailspace.trim()
@@ -173,6 +180,9 @@ map("n", "<space>wr", "", {
 
 -- Show git panel
 map("n", "<space>gg", ":G<CR>", snoremap)
+
+--- Git history for current file
+map('n', '<leader>gh', ':0Gclog<CR>', noremap)
 
 -- Show diff preview
 map("n", "ghp", "", {

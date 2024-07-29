@@ -10,9 +10,10 @@ font pango:Berkeley Mono Bold 9
 set $laptop eDP-1
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
-output eDP-1 scale 1.5
+output $laptop scale 1.5
+output $laptop scale_filter linear
 
-output * bg #E8DAFF solid_color
+output * bg #181818 solid_color
 
 # disable monitor after 15 minutes of inactivity
 exec swayidle -w \
@@ -48,7 +49,7 @@ bindsym $mod+Shift+Return exec nice -n -5 foot -o app-id="foot-float"
 bindsym $mod+q kill
 
 # start your launcher
-bindsym $mod+d exec launcher
+bindsym $mod+d exec /home/kota/bin/launcher
 
 # start a browser
 bindsym $mod+b exec firefox
@@ -68,7 +69,10 @@ bindsym XF86AudioRaiseVolume exec pamixer -ui 2 && pamixer --get-volume > $XDG_R
 bindsym XF86AudioLowerVolume exec pamixer -ud 2 && pamixer --get-volume > $XDG_RUNTIME_DIR/wob.sock
 bindsym XF86AudioMute exec pamixer --toggle-mute && ( [ "$(pamixer --get-mute)" = "true" ] && echo 0 > $XDG_RUNTIME_DIR/wob.sock ) || pamixer --get-volume > $XDG_RUNTIME_DIR/wob.sock
 
-# music controlls
+# music
+bindsym $mod+m exec --no-startup-id mpc toggle
+bindsym $mod+comma exec --no-startup-id mpc prev
+bindsym $mod+period exec --no-startup-id mpc next
 bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioPrev exec mpc prev
 bindsym XF86AudioPlay exec mpc toggle
@@ -80,31 +84,30 @@ bindsym Print exec grimshot --notify copy output
 bindsym Shift+Print exec grimshot --notify copy area
 
 # info notification
-bindsym $mod+Escape exec --no-startup-id notabar < /home/kota/.config/notabar/all
+bindsym $mod+Escape exec --no-startup-id /home/kota/.local/bin/notabar < /home/kota/.config/notabar/all
 
 # airplane mode
-bindsym XF86RFKill exec --no-startup-id notabar < /home/kota/.config/notabar/airplane
+bindsym XF86RFKill exec --no-startup-id /home/kota/.local/bin/notabar < /home/kota/.config/notabar/airplane
 
 # dismiss notifications
 bindsym Control+space exec --no-startup-id dunstctl close
 bindsym Control+Shift+space exec --no-startup-id dunstctl close-all
 
 # emoji selection
-bindsym $mod+o exec --no-startup-id emoji
-
-# music
-bindsym $mod+m exec --no-startup-id mpc toggle
-bindsym $mod+comma exec --no-startup-id mpc prev
-bindsym $mod+period exec --no-startup-id mpc next
+bindsym $mod+o exec --no-startup-id /home/kota/bin/emoji
 
 # exit
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 # change focus
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
+# bindsym $mod+$left focus left
+# bindsym $mod+$down focus down
+# bindsym $mod+$up focus up
+# bindsym $mod+$right focus right
+bindsym $mod+$left exec /home/kota/bin/vim-sway-nav left
+bindsym $mod+$down exec /home/kota/bin/vim-sway-nav down
+bindsym $mod+$up exec /home/kota/bin/vim-sway-nav up
+bindsym $mod+$right exec /home/kota/bin/vim-sway-nav right
 
 # move focused window
 bindsym $mod+Shift+$left move left
@@ -172,13 +175,13 @@ gaps inner 8
 smart_gaps on
 
 ### selection color
-set $sc #9b70ff
+set $sc #DDDCD9
 ### inactive color
-set $ic #f7f1ff
+set $ic #484848
 ### urgent color
-set $uc #bc4a9b
+set $uc #D43949
 ### font color
-set $fc #000000
+set $fc #DDDCD9
 
 ### class					border	back	text	indicator	child_border
 client.focused				$sc		$sc		$ic		$sc			$sc
@@ -199,15 +202,10 @@ for_window [app_id="imv"] floating enable
 for_window [app_id="imv"] resize set 640px 360px
 for_window [app_id="imv" title=".*aart.*"] resize set 360px 360px
 for_window [app_id="imv"] border pixel 3
-for_window [app_id="bemenu"] border pixel 3
 for_window [app_id="mpv"] floating enable
 for_window [app_id="mpv"] resize set 1280px 720px
 for_window [title="Firefox — Sharing Indicator"] floating enable
 for_window [title="Firefox — Sharing Indicator"] kill
-for_window [title="SL8"] floating enable
-for_window [title="WASM-4"] floating enable
-# for_window [class="^Godot$" title="Settings"] floating enable
-# for_window [instance="Godot_Engine" title="DEBUG"] floating enable
 
 # set DISPLAY variable for dbus...
 exec --no-startup-id exec dbus-update-activation-environment --all
@@ -219,18 +217,18 @@ exec --no-startup-id dunst
 exec --no-startup-id $HOME/bin/wob-daemon
 
 # start pipewire
-exec --no-startup-id pipewire
-exec --no-startup-id pipewire-pulse
+exec /usr/libexec/pipewire-launcher
 
 # start mpd
 exec --no-startup-id mpd
 
 # start syncthing
-exec --no-startup-id syncthing --no-browser
+# exec --no-startup-id syncthing --no-browser
 
 # start goimapnotify
 exec --no-startup-id goimapnotify -conf /home/kota/.config/goimapnotify/primary.conf
 
 # cursor
-seat seat0 xcursor_theme capitaine-cursors
+seat seat0 xcursor_theme capitaine-cursors 24
 exec_always gsettings set org.gnome.desktop.interface cursor-theme "capitaine-cursors"
+exec_always gsettings set org.gnome.desktop.interface cursor-size 24
