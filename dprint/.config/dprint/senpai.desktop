@@ -1,7 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=senpai
-Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="600x700" senpai
-Terminal=false
-X-MultipleArgs=false
-Type=Application

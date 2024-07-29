@@ -1,7 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=initiative
-Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="200x400" initiative-client
-Terminal=false
-X-MultipleArgs=false
-Type=Application

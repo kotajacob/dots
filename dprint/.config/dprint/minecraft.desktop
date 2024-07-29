@@ -4,7 +4,10 @@ Name=minecraft
 Comment=A custom launcher for Minecraft that allows you to easily manage multiple installations of Minecraft at once.
 Type=Application
 Terminal=false
-Exec=prismlauncher
+Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=polymc org.polymc.PolyMC
 StartupNotify=true
+Icon=org.polymc.PolyMC
 Categories=Game;
 Keywords=game;minecraft;launcher;mc;
+StartupWMClass=PolyMC
+X-Flatpak=org.polymc.PolyMC

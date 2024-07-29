@@ -1,8 +1,7 @@
 [Desktop Entry]
 Version=1.0
-Name=blender
-Exec=blender
-# Exec=/home/kota/src/blender/build_linux/bin/blender
+Name=sudachi
+Exec=sudachi
 Terminal=false
 X-MultipleArgs=false
 Type=Application

@@ -1,7 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=radio
-Exec=mpv "https://www.youtube.com/watch?v=jfKfPfyJRdk"
-Terminal=false
-X-MultipleArgs=false
-Type=Application

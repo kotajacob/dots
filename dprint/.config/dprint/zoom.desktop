@@ -1,12 +1,15 @@
 [Desktop Entry]
 Name=zoom
 Comment=Zoom Video Conference
-Exec=/usr/bin/zoom %U
-Icon=Zoom
+GenericName=Zoom Client for Linux
+Exec=/usr/bin/flatpak run --socket=session-bus --socket=system-bus --socket=wayland us.zoom.Zoom --enable-features=WaylandWindowDecorations --branch=stable --arch=x86_64 --command=zoom --file-forwarding us.zoom.Zoom @@u %U @@
+Icon=us.zoom.Zoom
 Terminal=false
 Type=Application
-Encoding=UTF-8
-Categories=Network;Application;
-StartupWMClass=zoom
+StartupNotify=true
+Categories=Network;InstantMessaging;VideoConference;Telephony;
 MimeType=x-scheme-handler/zoommtg;x-scheme-handler/zoomus;x-scheme-handler/tel;x-scheme-handler/callto;x-scheme-handler/zoomphonecall;application/x-zoom
 X-KDE-Protocols=zoommtg;zoomus;tel;callto;zoomphonecall;
+StartupWMClass=zoom
+X-Flatpak-Tags=proprietary;
+X-Flatpak=us.zoom.Zoom

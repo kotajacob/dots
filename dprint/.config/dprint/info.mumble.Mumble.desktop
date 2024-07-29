@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name=mumble
+GenericName=Voice Chat
+GenericName[de]=Sprachkonferenz
+GenericName[fr]=Chat vocal
+Comment=Open source, low-latency, high quality voice chat.
+Comment[de]=Ein Open Source Sprachkonferenzprogramm mit niedriger Latenz und hoher Qualität
+Comment[fr]=Un logiciel de chat vocal de haute qualité et de faible latence
+Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=mumble --file-forwarding info.mumble.Mumble @@u %u @@
+Icon=info.mumble.Mumble
+Terminal=false
+Type=Application
+StartupNotify=false
+StartupWMClass=mumble
+MimeType=x-scheme-handler/mumble;
+Categories=Network;Chat;Qt;
+Keywords=VoIP;Messaging;Voice Chat;Secure Communication;
+Version=1.0
+X-Flatpak=info.mumble.Mumble

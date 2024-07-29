@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=caprine
+GenericName=IM Client
+Comment=Unofficial Facebook Messenger app
+Icon=com.sindresorhus.Caprine
+Exec=/usr/bin/flatpak run --socket=session-bus --socket=system-bus --socket=wayland com.sindresorhus.Caprine --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --branch=stable --arch=x86_64 --command=caprine --file-forwarding com.sindresorhus.Caprine @@u %U @@
+StartupWMClass=caprine
+Terminal=false
+Categories=GTK;InstantMessaging;Network;
+StartupNotify=true
+X-Flatpak=com.sindresorhus.Caprine
