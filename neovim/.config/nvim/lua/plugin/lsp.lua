@@ -50,13 +50,9 @@ nvim_lsp.kotlin_language_server.setup {
 	on_attach = on_attach,
 }
 
-nvim_lsp.csharp_ls.setup {
-	on_attach = on_attach,
+nvim_lsp.omnisharp.setup {
+    cmd = { "dotnet", "/home/kota/.local/stow/omnisharp/OmniSharp.dll" }
 }
-
--- nvim_lsp.denols.setup {
--- 	on_attach = on_attach,
--- }
 
 nvim_lsp.tsserver.setup({
 	on_attach = function(client, bufnr)

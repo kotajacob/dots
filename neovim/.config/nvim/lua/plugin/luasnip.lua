@@ -88,11 +88,11 @@ ls.add_snippets("go", {
 	),
 	s(
 		"fp",
-		fmt([[fmt.Println("{}")]], { i(1) })
+		fmt([[fmt.Println({})]], { i(1) })
 	),
 	s(
 		"ff",
-		fmt([[fmt.Printf("{}")]], { i(1) })
+		fmt([[fmt.Printf({})]], { i(1) })
 	),
 	s(
 		"fv",
@@ -100,11 +100,11 @@ ls.add_snippets("go", {
 	),
 	s(
 		"lp",
-		fmt([[log.Println("{}")]], { i(1) })
+		fmt([[log.Println({})]], { i(1) })
 	),
 	s(
 		"lf",
-		fmt([[log.Printf("{}")]], { i(1) })
+		fmt([[log.Printf({})]], { i(1) })
 	),
 	s(
 		"lv",
@@ -112,14 +112,21 @@ ls.add_snippets("go", {
 	),
 	s(
 		"tp",
-		fmt([[t.Log("{}")]], { i(1) })
+		fmt([[t.Log({})]], { i(1) })
 	),
 	s(
 		"tf",
-		fmt([[t.Logf("{}")]], { i(1) })
+		fmt([[t.Logf({})]], { i(1) })
 	),
 	s(
 		"tv",
 		fmt([[log.Printf("%+v\n", {})]], { i(1) })
 	),
+})
+
+ls.add_snippets("cs", {
+	s(
+		"fp",
+		fmt([[Console.WriteLine({});]], { i(1) })
+	)
 })
