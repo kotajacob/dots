@@ -13,7 +13,7 @@ bindswitch --reload --locked lid:off output $laptop enable
 output $laptop scale 1.5
 output $laptop scale_filter linear
 
-output * bg #181818 solid_color
+output * bg #E8DAFF solid_color
 
 # disable monitor after 15 minutes of inactivity
 exec swayidle -w \
@@ -175,11 +175,11 @@ gaps inner 8
 smart_gaps on
 
 ### selection color
-set $sc #DDDCD9
+set $sc #9b70ff
 ### inactive color
-set $ic #484848
+set $ic #f7f1ff
 ### urgent color
-set $uc #D43949
+set $uc #bc4a9b
 ### font color
 set $fc #DDDCD9
 

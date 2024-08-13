@@ -11,7 +11,7 @@ o.cmdheight = 2
 o.scrolloff = 4
 o.sidescrolloff = 5
 o.termguicolors = true
-o.background = 'dark'
+o.background = 'light'
 
 -- Disable netrw
 g.loaded_netrwPlugin = 1
