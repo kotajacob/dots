@@ -6,6 +6,9 @@ set statusbar-home-tilde "true"
 # use clipboard for copying
 set selection-clipboard "clipboard"
 
+map - scroll half-down
+map = scroll half-up
+
 set show-recent "5"
 
 # hide statusbar with b
