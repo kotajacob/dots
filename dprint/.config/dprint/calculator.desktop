@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=calculator
-Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="440x600" numbat --intro-banner off
+Exec=foot -o app-id="foot-float" -o initial-window-size-pixels="440x600" fend
 Terminal=false
 X-MultipleArgs=false
 Type=Application

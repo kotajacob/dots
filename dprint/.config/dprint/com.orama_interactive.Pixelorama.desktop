@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name=pixelorama
+GenericName=2D sprite editor
+GenericName[el]=Επεξεργαστής δισδιάστατων εικόνων
+GenericName[fr]=Éditeur de sprites 2D
+GenericName[pt_BR]=Editor de sprites 2D
+GenericName[zh_CN]=2D 精灵编辑器
+Comment=Create and edit static or animated 2D sprites
+Comment[el]=Δημιουργήστε και επεξεργαστείτε στατικές ή κινούμενες δισδιάστατες εικόνες
+Comment[fr]=Créez et modifiez des sprites 2D statiques ou animées
+Comment[pt_BR]=Crie e edite sprites 2D estáticos ou animados
+Comment[zh_CN]=创建并编辑 2D 精灵图片或动画
+Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=pixelorama com.orama_interactive.Pixelorama
+Icon=com.orama_interactive.Pixelorama
+Terminal=false
+Type=Application
+Categories=Graphics;2DGraphics;RasterGraphics;
+MimeType=image/pxo;image/png;image/bmp;image/vnd.radiance;image/jpeg;image/svg+xml;image/x-tga;image/webp;
+X-Flatpak=com.orama_interactive.Pixelorama
