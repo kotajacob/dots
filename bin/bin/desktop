@@ -1,6 +1,6 @@
 #!/bin/bash
 
-selection=$(fd . /usr/share/applications | fzf)
+selection=$(fd -e desktop . /usr/share/applications /var/lib/flatpak/exports/share/applications | fzf)
 if [[ -n $selection ]]
 then
 	name=$(basename "$selection")
