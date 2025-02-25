@@ -1,0 +1,19 @@
+TodayStyle.Color = "6"
+InactiveStyle.Color = "8"
+LeftPadding = 2
+RightPadding = 1
+NoteDir = "$HOME/docs/memex/journal"
+PreviewPadding = 1
+PreviewLeftMargin = 3
+PreviewMinWidth = 40
+PreviewMaxWidth = 80
+HolidayLists = [
+	"$HOME/docs/birthdays",
+	"$HOME/.config/calendar/other",
+	"$HOME/.config/calendar/nz-holidays"
+]
+
+Keywords = [
+  { Keyword = "APPT", Color = "2" },
+  { Keyword = "TODO", Color = "2" },
+]
