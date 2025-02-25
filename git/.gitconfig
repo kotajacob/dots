@@ -50,7 +50,7 @@
 [merge]
 	conflictstyle = zdiff3
 [rerere]
-	enabled = true
+	enabled = true # reuse recorded resolutions (attempt to repeat changes in a rebase)
 [commit]
 	gpgsign = true
 	verbose = true # show diff when making a commit
