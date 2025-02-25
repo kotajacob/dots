@@ -12,6 +12,9 @@ bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
 output $laptop scale 1.5
 
+set $dock DP-1
+output $dock scale 2
+
 output * bg #E8DAFF solid_color
 
 # disable monitor after 15 minutes of inactivity
