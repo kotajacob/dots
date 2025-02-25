@@ -38,7 +38,6 @@
 	followTags = true # automatically push all local tags
 [fetch]
 	prune = true # remove local copies of remote branches if deleted on the remote
-	pruneTags = true # same for tags
 	all = true
 [pull]
 	rebase = true
