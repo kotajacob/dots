@@ -1,0 +1,3 @@
+#!/bin/sh
+
+git branch --merged | grep -Ev "(^\*|^\+|master|main|dev)" | xargs --no-run-if-empty git branch -d
