@@ -119,5 +119,5 @@ function osc7 {
 }
 add-zsh-hook -Uz chpwd osc7
 
-# add secrets
+# Secrets
 source $HOME/.zshenv-secrets
