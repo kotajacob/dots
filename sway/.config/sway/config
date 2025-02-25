@@ -236,7 +236,7 @@ exec --no-startup-id mpd
 # exec --no-startup-id syncthing --no-browser
 
 # start goimapnotify
-exec --no-startup-id goimapnotify -conf /home/kota/.config/goimapnotify/primary.conf
+# exec --no-startup-id goimapnotify -conf /home/kota/.config/goimapnotify/primary.conf
 
 # cursor
 seat seat0 xcursor_theme capitaine-cursors 24
