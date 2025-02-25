@@ -29,6 +29,8 @@
 	hard = reset --hard FETCH_HEAD
 [branch]
 	sort = -committerdate
+[tag]
+	sort = version:refname
 [push]
 	autoSetupRemote = true
 [pull]
