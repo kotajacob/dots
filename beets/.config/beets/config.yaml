@@ -8,5 +8,5 @@ paths:
   singleton: $artist/Singles/$title
   comp: Various Artists/$album%aunique{}/$track - $title
 convert:
-  never_convert_lossy_files: yes
-  extension: mp3
+  format: opus
+  album_art_maxwidth: 512
