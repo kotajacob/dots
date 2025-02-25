@@ -215,6 +215,7 @@ for_window [app_id="mpv"] floating enable
 for_window [app_id="mpv"] resize set 1280px 720px
 for_window [title="Firefox — Sharing Indicator"] floating enable
 for_window [title="Firefox — Sharing Indicator"] kill
+for_window [shell="xwayland"] title_format "[XWayland] %title"
 
 # set DISPLAY variable for dbus...
 exec --no-startup-id exec dbus-update-activation-environment --all
