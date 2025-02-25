@@ -34,7 +34,12 @@
 [tag]
 	sort = version:refname
 [push]
-	autoSetupRemote = true
+	autoSetupRemote = true # stop complaining that the remote branch doesn't exist
+	followTags = true # automatically push all local tags
+[fetch]
+	prune = true # remove local copies of remote branches if deleted on the remote
+	pruneTags = true # same for tags
+	all = true
 [pull]
 	rebase = true
 [diff]
@@ -42,6 +47,10 @@
 	colorMoved = plain # colors moved lines different than added / deleted
 	mnemonicPrefix = true # i/ (index), w/ (working), c/ (commit) instead of a/ b/
 	renames = true
+[merge]
+	conflictstyle = zdiff3
+[rerere]
+	enabled = true
 [commit]
 	gpgsign = true
 [gpg]
