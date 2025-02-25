@@ -132,6 +132,7 @@ bindsym $mod+Control+l resize grow width $distance px
 bindsym $mod+Control+x move absolute position center
 
 # switch to workspace
+bindsym $mod+a workspace back_and_forth
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
 bindsym $mod+3 workspace number 3
