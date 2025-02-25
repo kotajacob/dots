@@ -63,7 +63,5 @@
 	show = diff-highlight | less -FRX --mouse
 	diff = diff-highlight | less -FRX --mouse
 	branch = cat
-[merge]
-	conflictstyle = zdiff3
-[rerere]
-	enabled = true
+[help]
+	autocorrect = prompt # prompts you with what you meant if you typoed something
