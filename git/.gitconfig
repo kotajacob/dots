@@ -53,6 +53,7 @@
 	enabled = true
 [commit]
 	gpgsign = true
+	verbose = true # show diff when making a commit
 [gpg]
 	program = gpg2
 	format = ssh
