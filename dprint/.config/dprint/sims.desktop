@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=sims 4
+Comment=A simulation game
+Exec=env WINEPREFIX="/home/kota/.wine" wine C:\\\\users\\\\Public\\\\Desktop\\\\The\\ Sims\\ 4.lnk
+Path=/home/kota/.wine/dosdevices/c:/Program Files/The Sims 4/Game/Bin
+Icon=3BB0_TS4_x64.0
+StartupWMClass=ts4_x64.exe

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=boxes
+Exec=gnome-boxes %U
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+Icon=org.gnome.Boxes
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=GNOME;GTK;System;Development;Emulator;
+MimeType=application/x-cd-image;
+DBusActivatable=true

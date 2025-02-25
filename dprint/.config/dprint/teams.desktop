@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=teams
+Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=teams-for-linux --file-forwarding --env=ELECTRON_OZONE_PLATFORM_HINT=wayland com.github.IsmaelMartinez.teams_for_linux @@u %U @@
+Terminal=false
+Type=Application
+Icon=com.github.IsmaelMartinez.teams_for_linux
+StartupWMClass=teams-for-linux
+Comment=Unofficial Microsoft Teams client for Linux using Electron. It uses the Web App and wraps it as a standalone application using Electron.
+MimeType=x-scheme-handler/msteams;
+Categories=Chat;Network;Office;
+X-Desktop-File-Install-Version=0.27
+X-Flatpak-RenamedFrom=teams-for-linux.desktop;
+X-Flatpak=com.github.IsmaelMartinez.teams_for_linux
