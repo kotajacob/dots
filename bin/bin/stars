@@ -1,0 +1,3 @@
+#!/bin/sh
+
+GIT_TERMINAL_PROMPT=false fd -t d --exact-depth 2 . /home/kota/src/stars/ -x git -C '{}' pull
