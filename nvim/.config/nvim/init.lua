@@ -7,6 +7,8 @@ o.number = true
 o.showmode = false
 o.scrolloff = 4
 o.sidescrolloff = 5
+o.termguicolors = false
+o.background = 'dark'
 
 -- Use dirbuf instead of netrw
 g.loaded_netrwPlugin = 1
