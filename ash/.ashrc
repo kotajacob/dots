@@ -44,6 +44,7 @@ alias tn='tmux new -s'
 alias ta='tmux attach -t'
 alias tls='tmux ls'
 alias log='doas goaccess --log-format=CADDY'
+alias mm='cd $HOME/docs/memex && nvim index.md'
 
 # nnn filemanager
 n ()
