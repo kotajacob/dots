@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+
+fd . /home/kota/src/kota -t d --maxdepth 1 -x sh -c "git -C {} pull --all && git -C {} push --mirror git@github.com:kotajacob/{/}"

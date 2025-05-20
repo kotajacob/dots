@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+name="$(basename $1)"
+git -C /home/kota/src/kota clone "$1"
+
+gh repo create --public "$name"
+git -C /home/kota/src/kota/"$name" push --mirror git@github.com:kotajacob/"$name"
