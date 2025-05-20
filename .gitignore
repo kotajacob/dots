@@ -3,3 +3,4 @@ st/*.o
 nvim*/.config/nvim/undo/*
 nvim*/.config/nvim/plugin/*
 nvim*/.config/nvim/.netrwhist
+bin/bin/shrink
