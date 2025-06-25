@@ -7,6 +7,7 @@ export VISUAL='nvim'
 export PAGER='less'
 export SDCV_PAGER='less -FRX'
 export LESS='--use-color -IR'
+export GTK_CSD=0
 
 export GUI=1
 export NNN_OPTS='aAcC'
@@ -71,10 +72,12 @@ export CGO_ENABLED=1
 export CGO_CFLAGS="-D_LARGEFILE64_SOURCE"
 export GODEBUG=goindex=0
 export GOPATH="$HOME/.local/go"
-export NPM_PACKAGES="$HOME/.local"
-export npm_config_prefix="$HOME/.local"
-export NODE_PATH=$(npm root --quiet -g)
-export MANPAGER='less -Dd+g -Du+b'
+# export NPM_PACKAGES="$HOME/.local"
+# export npm_config_prefix="$HOME/.local"
+# export NODE_PATH=$(npm root --quiet -g)
+export MANPAGER='nvim +Man!'
 export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.dotnet/tools:$PATH"
 export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
 export MANPATH="$HOME/.local/share/man:$MANPATH"
+export AWS_PAGER=""
+export AWS_DEFAULT_PROFILE=sso

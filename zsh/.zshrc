@@ -2,6 +2,9 @@
 unsetopt beep nomatch menu_complete flowcontrol
 setopt appendhistory autocd extendedglob auto_menu complete_in_word always_to_end notify auto_continue
 bindkey -v
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd "^V" edit-command-line
 zstyle :compinstall filename '/home/kota/.zshrc'
 autoload -Uz compinit
 compinit
@@ -61,7 +64,8 @@ alias alert='notify-send "command finished"'
 ## functions
 go() {
     if [[ $1 == "doc" ]]; then
-        command go "$@" | less -FRX
+		shift
+        command go doc --all "$@" | less -FRX
     else
         command go "$@"
     fi
