@@ -13,7 +13,9 @@ bindswitch --reload --locked lid:off output $laptop enable
 output $laptop scale 1.5
 
 set $dock DP-1
-output $dock scale 2
+output $dock {
+	scale 2
+}
 
 output * bg #E8DAFF solid_color
 
@@ -210,6 +212,8 @@ for_window [app_id="foot-float"] floating enable
 for_window [app_id="imv"] floating enable
 for_window [app_id="imv"] resize set 640px 360px
 for_window [app_id="imv" title=".*aart.*"] resize set 360px 360px
+for_window [app_id="thunderbird" title=".*Reminder"] floating enable
+for_window [app_id="thunderbird" title=".*Reminder"] resize set 360px 360px
 for_window [app_id="imv"] border pixel 3
 for_window [app_id="mpv"] floating enable
 for_window [app_id="mpv"] resize set 1280px 720px
@@ -239,6 +243,6 @@ exec --no-startup-id mpd
 # exec --no-startup-id goimapnotify -conf /home/kota/.config/goimapnotify/primary.conf
 
 # cursor
-seat seat0 xcursor_theme capitaine-cursors 24
-exec_always gsettings set org.gnome.desktop.interface cursor-theme "capitaine-cursors"
+seat seat0 xcursor_theme capitaine-cursors-dark 24
+exec_always gsettings set org.gnome.desktop.interface cursor-theme "capitaine-cursors-dark"
 exec_always gsettings set org.gnome.desktop.interface cursor-size 24
