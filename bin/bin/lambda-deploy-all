@@ -1,0 +1,12 @@
+#!/bin/sh
+
+export AWS_PAGER=""
+# export DEPLOY_ENVS="dev-st,test-sita,test-sitb,test-ptl"
+export DEPLOY_ENVS="dev-st,test-sita,test-sitb"
+
+for dir in ~/src/one/engg-apps-cot/cmd/lambda/*/; do
+    [ -d "$dir" ] || continue
+	cd "$dir"
+	pwd
+	make deploy-multi-env >/dev/null || exit
+done
