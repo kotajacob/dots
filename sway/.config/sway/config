@@ -21,7 +21,7 @@ output * bg #E8DAFF solid_color
 
 # disable monitor after 15 minutes of inactivity
 exec swayidle -w \
-	timeout 900 'swaymsg "output * dpms off"' \
+	timeout 900 '/home/kota/.local/bin/trysleep.sh' \
 	resume 'swaymsg "output * dpms on"'
 
 
