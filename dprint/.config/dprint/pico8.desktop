@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=pico8
+Comment=Silly little games
+Type=Application
+Terminal=false
+Exec=pico8
+StartupNotify=true
+Categories=Game;
