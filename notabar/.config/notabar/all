@@ -22,7 +22,7 @@ txt,\n
 
 # Ocean
 txt,o = 
-cmd,/home/kota/.local/bin/tide,/home/kota/docs/Dunedin2024.csv
+cmd,/home/kota/.local/bin/tide,/home/kota/docs/Dunedin2025.csv
 txt,\n
 
 # Weather

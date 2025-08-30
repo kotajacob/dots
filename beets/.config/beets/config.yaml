@@ -9,4 +9,3 @@ paths:
   comp: Various Artists/$album%aunique{}/$track - $title
 convert:
   format: opus
-  album_art_maxwidth: 512

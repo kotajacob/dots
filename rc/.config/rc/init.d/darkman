@@ -1,0 +1,8 @@
+#!/sbin/openrc-run
+
+name="darkman"
+description="Control light and dark mode transitions"
+command="/usr/bin/darkman"
+command_args="run"
+supervisor=supervise-daemon
+error_log="$XDG_RUNTIME_DIR/darkman.log"

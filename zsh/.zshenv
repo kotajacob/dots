@@ -4,7 +4,7 @@ export HISTFILE=$HOME/.history
 export HISTSIZE=1000000
 export EDITOR='nvim'
 export VISUAL='nvim'
-export PAGER='less'
+export PAGER='less -FRX --mouse'
 export SDCV_PAGER='less -FRX'
 export LESS='--use-color -IR'
 export GTK_CSD=0
@@ -22,41 +22,6 @@ export AART_VIEWER='imv'
 export LS_COLORS="$LS_COLORS:di=1;36:ex=0;35"
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
-# Colors
-# Use with the palette script!
-# Note that programs which have imported
-# from the environment require a relog to
-# apply any changes.
-export FG="000000"
-export BG="ffffff"
-export BLACK="$BG"
-export RED="bc1854"
-export GREEN="769836"
-export YELLOW="e4943a"
-export BLUE="34859d"
-export MAGENTA="bc4a9b"
-export CYAN="9b70ff"
-export WHITE="$FG"
-export LIGHT_BLACK="888888"
-export LIGHT_RED="de0051"
-export LIGHT_GREEN="9ab738"
-export LIGHT_YELLOW="f8b525"
-export LIGHT_BLUE="35a0b6"
-export LIGHT_MAGENTA="e36da8"
-export LIGHT_CYAN="b78ef6"
-export LIGHT_WHITE="444444"
-export DIM_BLACK="ffffff"
-export DIM_RED="a71657"
-export DIM_GREEN="628e33"
-export DIM_YELLOW="e1752d"
-export DIM_BLUE="327195"
-export DIM_MAGENTA="a54093"
-export DIM_CYAN="794aff"
-export DIM_WHITE="000000"
-export PRIMARY="$CYAN"
-export LIGHT_PRIMARY="f7f1ff"
-export SECONDARY="$MAGENTA"
-
 # NOTE: Steam, most games and other (older) binary applications might not work!
 # Manual overrides should be used as needed.
 # https://github.com/swaywm/sway/wiki/Running-programs-natively-under-wayland
@@ -72,12 +37,14 @@ export CGO_ENABLED=1
 export CGO_CFLAGS="-D_LARGEFILE64_SOURCE"
 export GODEBUG=goindex=0
 export GOPATH="$HOME/.local/go"
+export CARGO_HOME="$HOME/.local/cargo"
 # export NPM_PACKAGES="$HOME/.local"
 # export npm_config_prefix="$HOME/.local"
 # export NODE_PATH=$(npm root --quiet -g)
 export MANPAGER='nvim +Man!'
-export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.dotnet/tools:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$CARGO_HOME/bin:$PATH"
 export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
+export XDG_DATA_DIRS="$HOME/.local/share:$XDG_DATA_DIRS"
 export MANPATH="$HOME/.local/share/man:$MANPATH"
 export AWS_PAGER=""
 export AWS_DEFAULT_PROFILE=sso

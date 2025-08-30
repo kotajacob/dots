@@ -1,6 +1,0 @@
-#!/bin/sh
-
-export AWS_PAGER=""
-
-make deploy dev-all || exit
-make deploy test-all || exit

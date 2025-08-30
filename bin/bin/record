@@ -1,3 +1,0 @@
-#/bin/sh
-date=$(date --iso-8601=seconds)
-wf-recorder -f "$HOME/vids/recording-$date.mp4" --pixel-format yuv420p

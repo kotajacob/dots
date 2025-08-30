@@ -1,0 +1,14 @@
+#!/sbin/openrc-run
+
+name="syncthing"
+description="Peer to peer file synchronization"
+command=/usr/bin/syncthing
+command_args="--no-browser"
+supervisor=supervise-daemon
+output_logger="logger -t 'syncthing' -p daemon.info"
+error_logger="logger -t 'syncthing' -p daemon.error"
+
+depend() {
+	use dns net
+	after firewall
+}

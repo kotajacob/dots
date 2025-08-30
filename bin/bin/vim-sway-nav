@@ -4,6 +4,7 @@
 # vim splits. Requires the accompanying vim plugin.
 
 dir="$1"
+timeout="${VIM_SWAY_NAV_TIMEOUT:-0.1s}"
 
 case "$dir" in
     up) ;;
@@ -39,22 +40,31 @@ get_descendant_vim_pid() {
     return 1
 }
 
+with_timeout() {
+    if [ -n "$timeout" ] && [ "$timeout" != 0 ] && command -v timeout >/dev/null 2>&1; then
+        timeout "$timeout" "$@"
+    else
+        "$@"
+    fi
+}
+
+vim_remote_expr() {
+    if [ "$program" = vim ]; then
+        with_timeout vim --servername "$servername" --remote-expr "$@"
+    elif [ "$program" = nvim ]; then
+        with_timeout nvim --headless --server "$servername" --remote-expr "$@"
+    fi
+}
+
 if focused_pid="$(swaymsg -t get_tree | jq -e '.. | select(.focused? == true).pid')"; then
     terms="$(find /dev/pts -type c -not -name ptmx | sed s#^/dev/## | tr '\n' ,)"
     if vim_pid="$(get_descendant_vim_pid "$focused_pid" "$terms")"; then
         servername_file="${XDG_RUNTIME_DIR:-/tmp}/vim-sway-nav.$vim_pid.servername"
         read -r program servername <"$servername_file"
 
-        if [ "$program" = vim ]; then
-            serverarg=--servername
-        elif [ "$program" = nvim ]; then
-            serverarg=--server
-        fi
-
-        if [ -n "$serverarg" ] && [ -n "$servername" ]; then
-            "$program" "$serverarg" "$servername" \
-                --remote-expr "VimSwayNav('$dir')" >/dev/null 2>&1 \
-                && exit 0
+        if [ -n "$servername" ]; then
+            did_nav_in_vim=$(vim_remote_expr "VimSwayNav('$dir', 1)")
+            [ "$did_nav_in_vim" = "true" ] && exit 0
         fi
     fi
 fi

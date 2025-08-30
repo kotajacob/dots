@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+
+jj git fetch
+
+# Resolves to the head commit for the trunk bookmark of the remote named origin
+# or upstream. The bookmarks main, master, and trunk are tried. If more than
+# one potential trunk commit exists, the newest one is chosen. If none of the
+# bookmarks exist, the revset evaluates to root().
+jj new 'trunk()'
