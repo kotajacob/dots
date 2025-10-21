@@ -12,7 +12,7 @@ bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
 output $laptop scale 1.5
 
-set $dock DP-2
+set $dock DP-10
 output $dock {
 	scale 2
 }
@@ -62,7 +62,7 @@ bindsym $mod+Backspace kill
 bindsym $mod+d exec /home/kota/bin/launcher
 
 # start a browser
-bindsym $mod+b exec librewolf
+bindsym $mod+b exec firefox
 
 # floating mod
 floating_modifier $mod
@@ -71,8 +71,8 @@ floating_modifier $mod
 bindsym $mod+Shift+c reload
 
 # brightness
-bindsym --locked XF86MonBrightnessDown exec /home/kota/.local/bin/lumactl set -- -2%
-bindsym --locked XF86MonBrightnessUp exec /home/kota/.local/bin/lumactl set -- +2%
+bindsym --locked XF86MonBrightnessDown exec /home/kota/.local/bin/lumactl set -- -2% && /home/kota/.local/bin/abar get light
+bindsym --locked XF86MonBrightnessUp exec /home/kota/.local/bin/lumactl set -- +2% && /home/kota/.local/bin/abar get light
 
 # volume
 bindsym XF86AudioRaiseVolume exec pamixer -ui 2
@@ -89,9 +89,6 @@ bindsym $mod+s exec grimshot --notify copy output
 bindsym $mod+Shift+s exec grimshot --notify copy area
 bindsym Print exec grimshot --notify copy output
 bindsym Shift+Print exec grimshot --notify copy area
-
-# info notification
-bindsym $mod+n exec --no-startup-id /home/kota/.local/bin/notabar < /home/kota/.config/notabar/all
 
 # airplane mode
 bindsym XF86RFKill exec --no-startup-id /home/kota/.local/bin/notabar < /home/kota/.config/notabar/airplane
@@ -210,7 +207,7 @@ set $fc #FFFFFF
 ## bar
 bar {
 	position top
-	status_command /home/kota/.local/bin/swaybar-commander
+	status_command RUST_BACKTRACE=1 /home/kota/.local/bin/abar 2> /home/kota/error.log
 	tray_output none
 	wrap_scroll yes
 	separator_symbol " "
@@ -253,7 +250,6 @@ for_window [app_id="firefox"] inhibit_idle fullscreen
 for_window [title="Firefox — Sharing Indicator"] floating enable
 for_window [title="Firefox — Sharing Indicator"] kill
 for_window [shell="xwayland"] title_format "[XWayland] %title"
-for_window [title="TETROBUST"] floating enable
 
 # set variables for dbus
 exec --no-startup-id exec dbus-update-activation-environment --all

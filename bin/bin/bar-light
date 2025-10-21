@@ -1,0 +1,4 @@
+#!/bin/sh
+text=$(lumactl get -p | head -n 1 | cut -d " " -f 2)
+
+printf '{"text": "l:%s"}\n' "$text"

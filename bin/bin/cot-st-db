@@ -1,0 +1,4 @@
+aws ssm start-session \
+    --profile sso --target i-00854c765d352ecb0 \
+    --document-name AWS-StartPortForwardingSessionToRemoteHost \
+    --parameters '{"host":["cde-st.c5qp5nof0kfz.ap-southeast-2.rds.amazonaws.com"],"portNumber":["5432"], "localPortNumber":["5433"]}'

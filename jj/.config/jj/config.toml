@@ -1,0 +1,53 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+[user]
+name = "Dakota Walsh"
+email = "kota@nilsu.org"
+
+[ui]
+merge-editor = "meld"  # Or "vscode" or "vscodium" or "kdiff3" or "vimdiff"
+default-command = "log"
+
+[aliases]
+l = ["log"]
+la = ["log", "-r", "::@"]
+e = ["edit"]
+c = ["commit"]
+n = ["new"]
+d = ["describe"]
+s = ["squash"]
+dh = ["diff"]
+dh1 = ["diff", "-r@-"]
+bc = ["bookmark", "create", "-r@-"]
+init = ["git", "init", "--colocate", "."]
+clone = ["git", "clone", "--colocate"]
+fetch = ["git", "fetch"]
+trunk = ["new", "trunk()"]
+push = ["git", "push", "--allow-new"]
+pull = ["util", "exec", "--", "jj-pull"]
+
+# Duplicate your commits from master/main up to your current parent and put
+# them in a new location.
+# This is handy if you have a dev and master branch and need to make PRs
+# against them both.
+duplicate-branch = ["duplicate", "trunk()+::@-", "--destination"]
+
+# Tug the closest ancestor bookmark up to the current revision.
+#
+# To break it down, ::@- refers to ancestors of the parent change,
+# bookmarks() refers to all changes with bookmarks, and heads() instructs to
+# only take the latest change.
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+
+[templates]
+draft_commit_description = '''
+concat(
+  coalesce(description, default_commit_description, "\n"),
+  surround(
+    "\nJJ: This commit contains the following changes:\n", "",
+    indent("JJ:     ", diff.stat(72)),
+  ),
+  "\nJJ: ignore-rest\n",
+  diff.git(),
+)
+'''

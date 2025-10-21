@@ -1,3 +1,0 @@
-[[Blocks]]
-Name = "datetime"
-Cmd = ["date", "+%F %H:%M"]

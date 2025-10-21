@@ -1,3 +1,5 @@
 # Direnv stuff
+TODO
 .autoenv.zsh
 .viminfo
+.nvim.lua

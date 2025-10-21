@@ -1,0 +1,9 @@
+#!/bin/sh
+text=$(pamixer --get-volume-human)
+
+hidden="false"
+if [ "$text" = "muted" ]; then
+	hidden="true"
+fi
+
+printf '{"text": "v:%s", "hidden": %s}\n' "$text" "$hidden"

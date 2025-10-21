@@ -1,0 +1,15 @@
+#!/bin/sh
+text=$(/home/kota/.local/bin/battery + - =)
+
+suffixes="+ -"
+percent=$text
+for suffix in $suffixes; do
+	percent=${percent%"$suffix"}
+done
+
+hidden="false"
+if [ "$percent" -gt "90" ]; then
+	hidden="true"
+fi
+
+printf '{"text": "b:%s", "hidden": %s}\n' "$text" "$hidden"

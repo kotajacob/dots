@@ -1,7 +1,6 @@
 #/bin/sh
 
-cd ~/src/one/engg-apps-cot
-git fetch --all
-git switch $1
-nvim
-git switch -
+jj fetch
+jj bookmark track $1@origin
+jj new $1
+jj diff --to @ --from master
