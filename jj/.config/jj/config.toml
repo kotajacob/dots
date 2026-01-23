@@ -23,8 +23,9 @@ init = ["git", "init", "--colocate", "."]
 clone = ["git", "clone", "--colocate"]
 fetch = ["git", "fetch"]
 trunk = ["new", "trunk()"]
-push = ["git", "push", "--allow-new"]
+push = ["git", "push"]
 pull = ["util", "exec", "--", "jj-pull"]
+blame = ["file", "annotate"]
 
 # Duplicate your commits from master/main up to your current parent and put
 # them in a new location.
@@ -38,6 +39,9 @@ duplicate-branch = ["duplicate", "trunk()+::@-", "--destination"]
 # bookmarks() refers to all changes with bookmarks, and heads() instructs to
 # only take the latest change.
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+
+[remotes.origin]
+auto-track-bookmarks = "glob:*"
 
 [templates]
 draft_commit_description = '''
