@@ -1,0 +1,32 @@
+separator_enabled = true
+separator_width = 0
+
+[[sections]]
+# v:100% or hidden
+name = "volume"
+get = "/home/kota/bin/bar-volume"
+watch = """
+pw-dump -N -m | jq --unbuffered '.[] | select(.type=="PipeWire:Interface:Device").id'"""
+click_left = 'foot -o app-id="foot-float" -o initial-window-size-pixels="800x600" pulsemixer'
+wheel_up = "pamixer -ui 2"
+wheel_down = "pamixer -ud 2"
+
+# w:meadow or hidden
+
+[[sections]]
+# b:58+ or hidden
+name = "battery"
+get = "/home/kota/bin/bar-battery"
+poll = 120000
+
+[[sections]]
+# l:100%
+name = "light"
+get = "/home/kota/bin/bar-light"
+click_left = "darkman toggle"
+
+[[sections]]
+name = "date"
+get = 'date "+%H:%M"'
+poll = 60000
+click_left = 'EDITOR=nvim foot -o app-id="foot-float" -o initial-window-size-pixels="900x600" /home/kota/.local/bin/calendar'

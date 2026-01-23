@@ -1,0 +1,22 @@
+separator_enabled = true
+separator_width = 0
+
+[[sections]]
+name = "volume"
+get = "pamixer --get-volume"
+watch = """
+pw-dump -N -m | jq --unbuffered '.[] | select(.type=="PipeWire:Interface:Device").id'"""
+click_left = 'foot -o app-id="foot-float" -o initial-window-size-pixels="800x600" pulsemixer'
+wheel_up = "pamixer -ui 2"
+wheel_down = "pamixer -ud 2"
+
+[[sections]]
+name = "battery"
+get = '/home/kota/.local/bin/battery + - ='
+poll = 120000
+
+[[sections]]
+name = "date"
+get = 'date "+%F %H:%M"'
+poll = 60000
+click_left = 'foot -o app-id="foot-float" -o initial-window-size-pixels="900x600" /home/kota/.local/bin/calendar'

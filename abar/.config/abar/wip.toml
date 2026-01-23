@@ -1,0 +1,44 @@
+padding = 1
+color_fg = "#ffffff"
+color_bg = "#575279"
+
+[[sections]]
+name = "weather"
+get = "/home/kota/bin/bar-weather"
+poll = 3600000
+
+[[sections]]
+name = "mpd"
+get = "/home/kota/bin/bar-mpd"
+watch = "pw-mon"
+click = 'foot -o app-id="foot-float" -o initial-window-size-pixels="800x740" ncmpcpp'
+
+[[sections]]
+name = "wifi"
+get = "/home/kota/bin/bar-wifi"
+watch = "hopefully there's something for this..."
+click = 'foot -o app-id="foot-float" -o initial-window-size-pixels="700x600" nmtui'
+
+[[sections]]
+name = "volume"
+get = "/home/kota/bin/bar-volume"
+watch = "pw-mon"
+click = 'foot -o app-id="foot-float" -o initial-window-size-pixels="800x600" pulsemixer'
+wheel_up = "pamixer -ui 2"
+wheel_down = "pamixer -ud 2"
+
+[[sections]]
+name = "backlight"
+get = "/home/kota/bin/bar-battery"
+click = "darkman toggle"
+
+[[sections]]
+name = "battery"
+get = "/home/kota/bin/bar-battery"
+click = "dude I should write a tui battery monitoring tool"
+
+[[sections]]
+name = "date"
+get = "date +%F %H:%M"
+poll = 60000
+click = 'foot -o app-id="foot-float" -o initial-window-size-pixels="900x600" calendar'
